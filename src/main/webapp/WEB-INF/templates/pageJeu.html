@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+    	<title>TOP RACE - Jouer</title>
+        <meta charset='utf-8'>
+        <link rel='stylesheet' href='css/pageJeu.css'>
+        <link rel="shortcut icon" href="img/logo.png">
+<script type="text/javascript">
+ 
+
+    function avancer(cse){
+        console.log("ouii");
+        var carte = document.getElementsByClassName('nbCaseDeCase'+cse);
+        for (var i =0 ; i<carte.length ; i++){
+            console.log("valueof() = "+carte[i].innerHTML);
+            console.log("valueof() = "+carte[i].getAttribute("value"));
+            window.alert("voiture "+carte[i].innerHTML+" avance de "+carte[i].getAttribute("value"));
+        }
+    }
+
+    function inverse(ID, COL){
+      var table = document.getElementById(ID);      
+      var nom = navigator.appName;
+      if (nom == 'Netscape'){
+        var detail=document.getElementsByName(COL);
+      } else {
+        var detail=getCellByName(table,COL);
+      }
+      if (detail[0].style.display == ""){
+        for(var i = 0; i < detail.length; ++i) detail[i].style.display = "none";
+      } else {
+        for(var i = 0; i < detail.length; ++i) detail[i].style.display = "";
+      }
+    }
+
+    function getCellByName(tab, nom){
+          var cols=new Array();
+          cellules=tab.getElementsByTagName("td");
+          for(var i = 0; i < cellules.length; ++i){
+              if(cellules[i].name==nom){
+                  cols[cols.length]=cellules[i];
+              }
+          }
+          return cols;
+    }
+
+    function AfficherCacher(texte) {
+        var test = document.getElementById(texte).style.display;
+        if (test == "none") {
+            document.getElementById(texte).style.display = "";
+        }
+        else {
+            document.getElementById(texte).style.display = "none";
+        }
+    }
+
+    function Cacher(texte) {
+        document.getElementById(texte).style.display = "none";
+    }
+
+    function plusUn() {
+        var elt = document.getElementById("compteur");
+        var y = elt.innerText || elt.textContent;
+        var num = parseInt(y);
+        var n = (num+1).toString();
+        var z = document.createTextNode(n);
+        elt.replaceChild(z, elt.firstChild);
+    }
+
+    function moinsUn() {
+        var elt = document.getElementById("compteur");
+        var y = elt.innerText || elt.textContent;
+        var num = parseInt(y);
+        var n = (num-1).toString();
+        var z = document.createTextNode(n);
+        elt.replaceChild(z, elt.firstChild);
+    }
+
+    function cartesTaille(){
+        var elt = document.getElementById("compteur");
+        var y = elt.innerText || elt.textContent;
+        var num = parseInt(y);
+        var taille = document.getElementById("ligneCartes");
+        var carreHaut = document.getElementById("carreHaut");
+        var carreBas = document.getElementById("carreBas");
+        var marg = document.querySelectorAll(".imagee");
+        if (num == 3) {
+            taille.style.width = "152vh";
+            console.log(carreBas.style.left);
+            carreBas.style.left = "167.1vh";
+            carreHaut.style.left = "167.1vh";
+            for (var i = 0; i < marg.length; ++i){
+                marg[i].style.margin = "0.79vh";
+            }
+        } else if (num == 2) {
+            taille.style.width = "139vh";
+            carreBas.style.left = "154.1vh";
+            carreHaut.style.left = "154.1vh";
+            for (var i = 0; i < marg.length; ++i){
+                marg[i].style.margin = "1.04vh";
+            }
+        } else if (num == 1) {
+            taille.style.width = "126vh";
+            carreBas.style.left = "141vh";
+            carreHaut.style.left = "141vh";
+            for (var i = 0; i < marg.length; ++i){
+                marg[i].style.margin = "1.32vh";
+            }
+        } else if (num == 0) {
+            taille.style.width = "113vh";
+            carreBas.style.left = "128vh";
+            carreHaut.style.left = "128vh";
+            for (var i = 0; i < marg.length; ++i){
+                marg[i].style.margin = "1.68vh";
+            }
+        }
+    }
+
+    function ACQuitter(){
+        var test = document.getElementById("quitter").style.display;
+        if (test == "none") {
+            document.getElementById("quitter").style.display = "";
+            document.getElementById("fondQuitter").style.display = "";
+            quiFaitTout('aRegles','liRegles','Règles',0);
+            quiFaitTout('aPara','liPara','Paramètres',0);
+        }
+        else {
+            document.getElementById("quitter").style.display = "none";
+            document.getElementById("fondQuitter").style.display = "none";
+            quiFaitTout('aRegles','liRegles','Règles',2);
+            quiFaitTout('aPara','liPara','Paramètres',1);
+        }
+    }
+
+    function ACPara(){
+        var test = document.getElementById("para").style.display;
+        if (test == "none") {
+            document.getElementById("para").style.display = "";
+            document.getElementById("fondPara").style.display = "";
+            quiFaitTout('aRegles','liRegles','Règles',0);
+            quiFaitTout('aQuitter','liQuitter','Quitter',0);
+        }
+        else {
+            document.getElementById("para").style.display = "none";
+            document.getElementById("fondPara").style.display = "none";
+            quiFaitTout('aRegles','liRegles','Règles',2);
+            quiFaitTout('aQuitter','liQuitter','Quitter',3);
+        }
+    }
+
+    function ACRules(){
+        var test = document.getElementById("rules").style.display;
+        if (test == "none") {
+            document.getElementById("rules").style.display = "";
+            document.getElementById("fondRules").style.display = "";
+            quiFaitTout('aPara','liPara','Paramètres',0);
+            quiFaitTout('aQuitter','liQuitter','Quitter',0);
+        }
+        else {
+            document.getElementById("rules").style.display = "none";
+            document.getElementById("fondRules").style.display = "none";
+            quiFaitTout('aPara','liPara','Paramètres',1);            
+            quiFaitTout('aQuitter','liQuitter','Quitter',3);
+        }
+    }
+
+    function quiFaitTout(supp,remp,text,nombre){
+        var aSupprimer = document.getElementById(supp);
+        aSupprimer.parentNode.removeChild(aSupprimer);
+        var aRemplacer = document.getElementById(remp);
+        var newLien = document.createElement('a');
+        var newLienText = document.createTextNode(text);
+        newLien.id = supp;
+        newLien.href = '#';
+        if (nombre == 1) {newLien.onclick = function() {Cacher("rules");ACPara();Cacher("quitter");};}
+        if (nombre == 2) {newLien.onclick = function() {Cacher("para");ACRules();Cacher("quitter");};}
+        if (nombre == 3) {newLien.onclick = function() {Cacher("para");ACQuitter();Cacher("rules");};}
+        newLien.appendChild(newLienText);
+        aRemplacer.appendChild(newLien);
+        return(newLien);
+    }
+
+    function check(){
+        var un = document.querySelectorAll(".pariUn");
+        var deux = document.querySelectorAll(".pariDeux");
+        var trois = document.querySelectorAll(".pariTrois");
+
+        var i = 0,
+            k = 0,
+            j = 0;
+
+        for (; i<6; i++){
+            un[i].addEventListener("change", function (){
+                if (document.querySelectorAll(".pariUn:checked").length > 3){
+                    this.checked = false;}
+            }, false);}
+          
+        for (; j<6; j++){
+            deux[j].addEventListener("change", function (){
+                if (document.querySelectorAll(".pariDeux:checked").length > 3){
+                  this.checked = false;}
+            }, false);}
+
+        for (; k<6; k++){
+            trois[k].addEventListener("change", function (){
+                if (document.querySelectorAll(".pariTrois:checked").length > 3){
+                  this.checked = false;}
+            }, false);}
+        }
+ 
+  </script>
+
+    </head>
+
+    <body onload="inverse('tb', 'col0');inverse('tb', 'col1');inverse('tb', 'col2');inverse('tb', 'col6');inverse('tb', 'col7');inverse('tb', 'col8');check();Cacher('fond');Cacher('fondPara');Cacher('fondRules');Cacher('rules');Cacher('para');Cacher('quitter');Cacher('fondQuitter');">
+
+<!-- HEADER -->
+    	<header>
+    <!-- HAUT -->
+    		<section class="haut">
+    			<nav class="voitureOrange"></nav>
+    			<h1>TOP RACE</h1>
+    			<nav class="voitureRouge"></nav>
+    		</section>
+
+	<!-- MENU -->
+	    	<section class="menu">
+	    		<ul>
+	    			<li id="liRegles"><a id="aRegles" href="#" onclick='Cacher("para");Cacher("quitter");ACRules();'>Règles</a></li>
+	    			<li id="liPara"><a id="aPara" href="#" onclick='Cacher("rules");Cacher("quitter");ACPara();'>Paramètres</a></li>
+	    			<li id="liQuitter"><a id="aQuitter" href="#" onclick='Cacher("rules");Cacher("para");ACQuitter();'>Quitter</a></li>
+	    		</ul>
+	    	</section>
+
+    	</header>
+
+<!-- CONTENU -->
+    	<section class="page">
+        <nav id="compteur">3</nav>
+            <nav class="fond" id="fondPara" onclick='ACPara();'></nav>
+            <nav class="fond" id="fondQuitter" onclick='ACQuitter();'></nav>
+            <nav class="fond" id="fondRules" onclick='ACRules();'></nav>
+            <nav class="fond" id="fond" onclick='ACRules();'></nav>
+            <nav id="rules">
+                <h2>Régles</h2>
+            </nav>
+            <nav id="quitter">
+                <table>
+                    <tr align="center">
+                        <td colspan="2" align="center"><h2>Voulez-vous vraiment quitter</h2></td>
+                    </tr>
+                    <tr>
+                        <td class="btnQuitter"><button type="submit"><a href="home">Quitter</a></button></td>
+                        <td align="right" class="btnQuitter"><button type="submit" onclick='ACQuitter();'>Retour au jeu</button></td>
+                    </tr>
+                </table>
+            </nav>
+            <nav id="para">
+                <h2>Changer les paramètres</h2>
+                <table>
+                    <th><h3>Volume</h3></th>
+                    <tr>
+                        <td align="right">Volume principal&nbsp;</td>
+                        <td>
+                            <form id='formulaire' method="post" enctype="text/plain" oninput="v.value=parseInt(volume.value)">
+                            <input type="range" id="volume" name="volume" min="0" max="100" value="50">
+                            <output name="v" for="volume"></output>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="right">Musique&nbsp;</td>
+                        <td>
+                            <form id='formulaire' method="post" enctype="text/plain" oninput="m.value=parseInt(musique.value)">
+                            <input type="range" id="musique" name="musique" min="0" max="100" value="50">
+                            <output name="m" for="musique"></output>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="right">Effets sonores&nbsp;</td>
+                        <td>
+                            <form id='formulaire' method="post" enctype="text/plain" oninput="e.value=parseInt(effet.value)">
+                            <input type="range" id="effet" name="effet" min="0" max="100" value="50">
+                            <output name="e" for="effet"></output>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Alerte&nbsp;</td>
+                        <td>
+                            <form id='formulaire' method="post" enctype="text/plain" oninput="a.value=parseInt(alerte.value)">
+                            <input type="range" id="alerte" name="alerte" min="0" max="100" value="50">
+                            <output name="a" for="alerte"></output>
+                            </form>
+                        </td>
+                    </tr>
+                    <th><h3>Langue</h3></th>
+                    <tr>
+                        <td align="right">Français&nbsp;</td>
+                        <td>
+                            <img src="img/france.png" width="75px">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">Anglais&nbsp;</td>
+                        <td>
+                            <img src="img/anglais.png" width="75px">
+                        </td>
+                    </tr>
+                </table>
+            </nav>
+    		<nav class="bande1"></nav>
+    		<nav class="contenu">
+    			<nav class="ligne1">
+    				<nav class="joueurs">
+						<nav class="j1">- Joueur 1</nav>
+						<nav class="j2">- Joueur 2</nav>
+						<nav class="j3">- Joueur 3</nav>
+						<nav class="j4">- Joueur 4</nav>
+						<nav class="j5">- Joueur 5</nav>
+						<nav class="j6">- Joueur 6</nav>
+    				</nav>
+    				<nav class="plateau">
+    				</nav>
+    				<nav class="plateauParis">
+                        <table id="tb">
+                            <tr>
+                                <td><button class="bouttonJaune" name="col6" onclick="inverse('tb', 'col0');
+                                                                                      inverse('tb', 'col3');
+                                                                                      inverse('tb', 'col6');
+                                                                                      plusUn();
+                                                                                      cartesTaille();">1</button>
+
+                                    <button class="bouttonRouge" name="col3" onclick="inverse('tb', 'col0');
+                                                                                      inverse('tb', 'col6');
+                                                                                      inverse('tb', 'col3');
+                                                                                      moinsUn();
+                                                                                      cartesTaille();">1</button></td>
+                                <td rowspan="3">Couleur</td>
+                                <td class="colonnePari" name="col0" rowspan="3" align="center">1er pari</td>
+                                <td class="colonnePari" name="col1" rowspan="3" align="center">2ème pari</td>
+                                <td class="colonnePari" name="col2" rowspan="3" align="center">3ème pari</td>
+                            </tr>
+                             <tr>
+                                <td><button class="bouttonJaune" name="col7" onclick="inverse('tb', 'col1');
+                                                                                      inverse('tb', 'col4');
+                                                                                      inverse('tb', 'col7');
+                                                                                      plusUn();
+                                                                                      cartesTaille();">2</button>
+                                    <button class="bouttonRouge" name="col4" onclick="inverse('tb', 'col1');
+                                                                                      inverse('tb', 'col7');
+                                                                                      inverse('tb', 'col4');
+                                                                                      moinsUn();
+                                                                                      cartesTaille();">2</button></td>
+                            </tr>
+                             <tr>
+                                <td><button class="bouttonJaune" name="col8" onclick="inverse('tb', 'col2');
+                                                                                      inverse('tb', 'col5');
+                                                                                      inverse('tb', 'col8');
+                                                                                      plusUn();
+                                                                                      cartesTaille();">3</button>
+                                    <button class="bouttonRouge" name="col5" onclick="inverse('tb', 'col2');
+                                                                                      inverse('tb', 'col8');
+                                                                                      inverse('tb', 'col5');
+                                                                                      moinsUn();
+                                                                                      cartesTaille();">3</button></td>
+                            </tr>
+                            <tr class="pariReponseJaune">
+                                <td colspan="2">Jaune</td>
+                                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="jaune1" id="jaune1" /><label for="jaune1"></label></td>
+                                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="jaune2" id="jaune2" /><label for="jaune2"></label></td>
+                                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="jaune3" id="jaune3" /><label for="jaune3"></label></td>
+                            </tr>
+                            <tr class="pariReponseBleue">
+                                <td colspan="2">Bleue</td>
+                                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="bleue1" id="bleue1" /><label for="bleue1"></label></td>
+                                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="bleue2" id="bleue2" /><label for="bleue2"></label></td>
+                                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="bleue3" id="bleue3" /><label for="bleue3"></label></td>
+                            </tr>
+                            <tr class="pariReponseRouge">
+                                <td colspan="2">Rouge</td>
+                                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="rouge1" id="rouge1" /><label for="rouge1"></label></td>
+                                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="rouge2" id="rouge2" /><label for="rouge2"></label></td>
+                                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="rouge3" id="rouge3" /><label for="rouge3"></label></td>
+                            </tr>
+                            <tr class="pariReponseViolette">
+                                <td colspan="2">Violette</td>
+                                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="violette1" id="violette1" /><label for="violette1"></label></td>
+                                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="violette2" id="violette2" /><label for="violette2"></label></td>
+                                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="violette3" id="violette3" /><label for="violette3"></label></td>
+                            </tr>
+                            <tr class="pariReponseBlanche">
+                                <td colspan="2">Blanche</td>
+                                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="blanche1" id="blanche1" /><label for="blanche1"></label></td>
+                                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="blanche2" id="blanche2" /><label for="blanche2"></label></td>
+                                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="blanche3" id="blanche3" /><label for="blanche3"></label></td>
+                            </tr>
+                            <tr class="pariReponseVerte">
+                                <td colspan="2">Verte</td>
+                                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="verte1" id="verte1" /><label for="verte1"></label></td>
+                                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="verte2" id="verte2" /><label for="verte2"></label></td>
+                                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="verte3" id="verte3" /><label for="verte3"></label></td>
+                            </tr>
+                            <tr class="pariReponse">
+                                <td colspan="2">1ère place</td>
+                                <td class="colonnePari" name="col0" align="center">9 pts</td>
+                                <td class="colonnePari" name="col1" align="center">6 pts</td>
+                                <td class="colonnePari" name="col2" align="center">3 pts</td>
+                            </tr>
+                            <tr class="pariReponse">
+                                <td colspan="2">2ème place</td>
+                                <td class="colonnePari" name="col0" align="center">6 pts</td>
+                                <td class="colonnePari" name="col1" align="center">4 pts</td>
+                                <td class="colonnePari" name="col2" align="center">2 pts</td>
+                            </tr>
+                            <tr class="pariReponse">
+                                <td colspan="2">3ème place</td>
+                                <td class="colonnePari" name="col0" align="center">3 pts</td>
+                                <td class="colonnePari" name="col1" align="center">2 pts</td>
+                                <td class="colonnePari" name="col2" align="center">1 pts</td>
+                            </tr>
+                            <tr class="pariReponse">
+                                <td colspan="2">4ème place</td>
+                                <td class="colonnePari" name="col0" align="center">0 pts</td>
+                                <td class="colonnePari" name="col1" align="center">-1 pts</td>
+                                <td class="colonnePari" name="col2" align="center">-2 pts</td>
+                            </tr>
+                            <tr class="pariReponse">
+                                <td colspan="2">5ème place</td>
+                                <td class="colonnePari" name="col0" align="center">-1 pts</td>
+                                <td class="colonnePari" name="col1" align="center">-3 pts</td>
+                                <td class="colonnePari" name="col2" align="center">-6 pts</td>
+                            </tr>
+                            <tr class="pariReponse">
+                                <td colspan="2">6ème place</td>
+                                <td class="colonnePari" name="col0" align="center">-3 pts</td>
+                                <td class="colonnePari" name="col1" align="center">-6 pts</td>
+                                <td class="colonnePari" name="col2" align="center">-9 pts</td>
+                            </tr>
+                            <tr class="pariReponse">
+                                <td colspan="2" class="vide"></td>
+                                <td class="colonnePari btnValide" name="col0" align="center">
+                                    <button type="submit" value="Valider">Valider</button>
+                                </td>
+                                <td class="colonnePari btnValide" name="col1" align="center">
+                                    <button type="submit" value="Valider">Valider</button>
+                                </td>
+                                <td class="colonnePari btnValide" name="col2" align="center">
+                                    <button type="submit" value="Valider">Valider</button>
+                                </td>
+                            </tr>
+                            </form>
+                        </table>
+    				</nav>
+    			</nav>
+
+                <nav class="carteTitre">
+                    <b> Cartes </b>
+                </nav>
+            </nav>
+
+            <nav>
+                <nav th:each="case : ${listCase}" th:text="${case.getX()+case.getY()}" th:id="${case.getX()+case.getY()}"></nav>
+            </nav>
+
+            <nav>
+                <nav th:each="nbCase : ${listNbCase}" th:text="${nbCase.couleur}" th:value="${nbCase.nbCase}" th:class="${'nbCaseDeCase'+nbCase.idCarte}"></nav>
+            </nav>
+
+            <nav class="joueurVoiture" id="joueurJaune"></nav>
+            <nav class="joueurVoiture" id="joueurViolet"></nav>
+            <nav class="joueurVoiture" id="joueurRouge"></nav>
+            <nav class="joueurVoiture" id="joueurBleu"></nav>
+            <nav class="joueurVoiture" id="joueurBlanc"></nav>
+            <nav class="joueurVoiture" id="joueurVert"></nav>
+
+            <nav id="carreHaut"></nav>
+            <nav id="carreBas"></nav>
+
+    		<nav id="ligneCartes">
+                <nav class="imagee" th:each="carte : ${listCarte}" th:style="${'background-image: url(img/cartes/'+carte.idCarte+'.png);background-size: cover;'}" th:id="${'carte'+carte.idCarte}" th:onclick="${'avancer('+carte.idCarte+');'}"></nav>
+    		</nav>
+
+    		<nav class="bande2"></nav>
+
+    		<section class="footer">
+                <p></p> <!--le footer est vide -->
+            </section>
+
+    	</section>
+
+    </body>
+
+    
+    
+</html>

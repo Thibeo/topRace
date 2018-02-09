@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+    	<title>TOP RACE - Accueil</title>
+        <meta charset='utf-8'>
+        <link rel='stylesheet' href='css/index.css'>
+        <link rel="shortcut icon" href="img/logo.png">
+        <script type="text/javascript">
+
+        function Cacher(texte) {
+            document.getElementById(texte).style.display = "none";
+        }
+
+        function Afficher(texte) {
+            document.getElementById(texte).style.display = "";
+        }
+
+        </script>
+    </head>
+
+    <body onload="Cacher('param');Cacher('regles');Cacher('jouer');Cacher('rentrerPseudo');">
+
+<!-- HEADER -->
+    	<header>
+    <!-- HAUT -->
+    		<section class="haut">
+                <nav class="voitureOrange"></nav>
+                <h1>TOP RACE</h1>
+                <nav class="voitureRouge"></nav>
+            </section>
+
+	<!-- MENU -->
+	    	<section class="menu">
+	    		<ul>
+	    			<li><a href="home" onclick="Afficher('index');Cacher('param');Cacher('regles');Cacher('jouer');Cacher('rentrerPseudo');">Accueil</a></li>
+	    			<li><a href="#" onclick="Afficher('regles');Cacher('param');Cacher('index');Cacher('jouer');Cacher('rentrerPseudo');">Règles</a></li>
+	    			<li><a href="#" onclick="Afficher('param');Cacher('regles');Cacher('index');Cacher('jouer');Cacher('rentrerPseudo');">Paramètres</a></li>
+	    			<li><a href="#" onclick="Afficher('jouer');Cacher('param');Cacher('index');Cacher('regles');Cacher('rentrerPseudo');">Jouer</a></li>
+	    		</ul>
+	    	</section>
+
+    	</header>
+
+<!-- CONTENU -->
+    	<section class="page">
+    		<nav class="bande1"></nav>
+    		<nav class="contenu">
+                <nav id="index">
+        			<h2>Vous êtes sur la page d'accueil</h2>
+        			<pre><font face="verdana">Top race est un ancien jeu de plateau traditionnel : 
+il se joue avec des pions, un plateau et surtout des feuilles. 
+Nous l'avons modernisé et remis ainsi au goût du jour.
+
+Grâce à ce site, il sera possible de jouer une partie avec 
+des personnes physiquement éloignés de nous et sans forcément 
+posséder le plateau et les éléments nécessaires au jeu.</font></pre>
+                </nav>
+                <nav id="rentrerPseudo">
+                    <nav class="fond" onclick="Afficher('jouer');Cacher('param');Cacher('index');Cacher('regles');Cacher('rentrerPseudo');">
+                    </nav>
+                    <nav class="valid">
+                        <table class="pseudo">
+                            <tr>
+                               <td>Votre pseudo pour la partie :</td>
+                               <td class="inputPseudo"><input name="nom" id="nom" type="text" size="20" maxlength="100" placeholder="Votre pseudo"/></td>
+                               <td><button type="submit" value="Valider"><a href="game">Lancer</a></button></td>
+                            </tr>
+                        </table>
+                    </nav>
+                </nav>
+                <nav id="regles">
+                    <h2>Voici les règles du jeu</h2>
+                    <p>Top race est un jeu de plateau, il se joue avec des cartes, des pions de couleurs en forme de voitures et comporte un système de paris.</p>
+                    <u>Les cartes :</u>
+                    <p>Chaque joueur a une voiture (tirée au hasard) et elles sont toutes sur la ligne de départ.</p>
+                    <p>Chaque joueur a un paquet de cartes pour faire avancer les voitures.</p>
+                    <p>Les cartes contiennent un ou plusieurs numéros et chaque numéro a une couleur.</p>
+                    <p>Exemple : le numéro 5 rouge va donc faire avancer la voiture rouge de 5 cases.</p> 
+                    <p>La voiture violette n’existant pas, la couleur violette permet de faire avancer n’importe quelle voiture choisie par le joueur. </p>
+                    <p>Les joueurs peuvent donc faire avancer plusieurs voitures en même temps, mais la voiture qui avance la première est celle dont le numéro est le plus grand.</p>
+                    <p>Il existe aussi 3 cartes permettant d’échanger les positions des voitures.</p>
+
+                    <figure class="cartes"><img src="img/cartes.png" width="400px"></figure>
+
+                    <u>Le système de paris :</u>
+                    <p>Le circuit contient plusieurs lignes jaunes qui sont des lignes de « paris ». </p>
+                    <p>Au début du jeu, chaque joueur fait un pari sur les 3 voitures qu’il pense être en tête quand la première ligne jaune sera passée par une voiture. </p>
+                    <p>(Chaque joueur a le tableau ci-dessous et met des croix dans 3 cases correspondantes aux voitures sur lesquelles il parie)</p>
+                    <p>Les paris sont donc renouvelés à chaque fois qu’une nouvelle ligne jaune est dépassée. Un nombre de points (positifs ou négatifs) et attribué en fonction du tableau.</p>
+
+                    <figure class="paris"><img src="img/paris.png" width="800px"></figure>
+
+                    <u>Ligne d’arrivée :</u>
+                    <p>Et pour finir, il y a un classement à la ligne d’arrivée.</p>
+                    <figure class="final"><img src="img/final.png" width="600px"></figure>
+                    <p>Entre la dernière ligne jaune et la ligne d’arrivée, il n’y a plus de système de pari. C’est chacun pour soi : on essaye de faire gagner NOTRE </p>
+                    <p>voiture avec les cartes qu’il nous reste. Le total des points des paris plus les points du classement à l’arrivée donne les points totaux et ainsi détermine le gagnant.</p>
+                </nav>
+                <nav id="param">
+                    <h2>Changer les paramètres</h2>
+                    <table>
+                        <th><h3>Volume</h3></th>
+                        <tr>
+                            <td align="right">Volume principal&nbsp;</td>
+                            <td>
+                                <form id='formulaire' method="post" enctype="text/plain" oninput="v.value=parseInt(volume.value)">
+                                <input type="range" id="volume" name="volume" min="0" max="100" value="50">
+                                <output name="v" for="volume"></output>
+                                </form>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="right">Musique&nbsp;</td>
+                            <td>
+                                <form id='formulaire' method="post" enctype="text/plain" oninput="m.value=parseInt(musique.value)">
+                                <input type="range" id="musique" name="musique" min="0" max="100" value="50">
+                                <output name="m" for="musique"></output>
+                                </form>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="right">Effets sonores&nbsp;</td>
+                            <td>
+                                <form id='formulaire' method="post" enctype="text/plain" oninput="e.value=parseInt(effet.value)">
+                                <input type="range" id="effet" name="effet" min="0" max="100" value="50">
+                                <output name="e" for="effet"></output>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">Alerte&nbsp;</td>
+                            <td>
+                                <form id='formulaire' method="post" enctype="text/plain" oninput="a.value=parseInt(alerte.value)">
+                                <input type="range" id="alerte" name="alerte" min="0" max="100" value="50">
+                                <output name="a" for="alerte"></output>
+                                </form>
+                            </td>
+                        </tr>
+                        <th><h3>Langue</h3></th>
+                        <tr>
+                            <td align="right">Français&nbsp;</td>
+                            <td>
+                                <img src="img/france.png" width="75px">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">Anglais&nbsp;</td>
+                            <td>
+                                <img src="img/anglais.png" width="75px">
+                            </td>
+                        </tr>
+                    </table>
+                </nav>
+                <nav id="jouer">
+                    <nav class="bloc">
+                        <h2>Rejoindre une partie</h2>
+                        <nav class="bloc1">
+                            <table>
+                                <tr>
+                                   <th><p>Nom de la partie</p></th>
+                                   <th><p>Propriétaire</p></th>
+                                   <th><p>Nombre de joueur</p></th>
+                                </tr>
+                                <tr>
+                                   <td><p>Meilleur partie du monde</p></td>
+                                   <td align="center"><p>Grosse cheville</p></td>
+                                   <td align="center"><p>5/6</p></td>
+                                   <td><button type="submit" value="Valider"><a href="#" onclick="Afficher('rentrerPseudo');Cacher('param');Cacher('index');Cacher('regles');Afficher('jouer');">Rejoindre</a></button></td>
+                                </tr>
+                                <tr >
+                                   <td><p>Hello world</p></td>
+                                   <td align="center"><p>Dieu</p></td>
+                                   <td align="center"><p>3/6</p></td>
+                                   <td><button type="submit" value="Valider"><a href="#" onclick="Afficher('rentrerPseudo');Cacher('param');Cacher('index');Cacher('regles');Afficher('jouer');">Rejoindre</a></button></td>
+                                </tr>
+                                <tr >
+                                   <td><p>Partie de coco</p></td>
+                                   <td align="center"><p>Coco</p></td>
+                                   <td align="center"><p>2/3</p></td>
+                                   <td><button type="submit" value="Valider"><a href="#" onclick="Afficher('rentrerPseudo');Cacher('param');Cacher('index');Cacher('regles');Afficher('jouer');">Rejoindre</a></button></td>
+                               </tr>
+                            </table>
+                        </nav>
+                    </nav>
+                    <nav class="bloc">
+                        <h2>Créer une partie</h2>
+                        <nav class="bloc1">
+                            <table>
+                                <form id='formulaire' method="post" enctype="text/plain">
+                                <tr>
+                                    <td>
+                                        <input name="nom" id="nom" type="text" size="40" maxlength="100" placeholder="Nom de la partie" required/> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select id="nbJoueur" name="nbJoueur">
+                                            <option value="" disabled selected>nombre de joueurs</option>
+                                            <option value="2">2 joueurs</option>
+                                            <option value="3">3 joueurs</option>
+                                            <option value="6">6 joueurs</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <td>
+                                        <input name="pseudo" id="pseudo" type="text" size="30" maxlength="50" placeholder="Votre pseudo" required/>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <td>
+                                        <select id="nbJoueur" name="nbJoueur">
+                                            <option value="" disabled selected>Votre couleur</option>
+                                            <option value="Jaune">Jaune</option>
+                                            <option value="Vert">Vert</option>
+                                            <option value="Violet">Violet</option>
+                                            <option value="Blanc">Blanc</option>
+                                            <option value="Rouge">Rouge</option>
+                                            <option value="Bleu">Bleu</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <td align="center">
+                                        <button type="submit" value="Valider">Valider</button>
+                                    </td>
+                                </tr>
+                                </form>
+                            </table>
+                        </nav>
+                    </nav>
+                </nav>
+    		</nav>
+    		<nav class="bande2"></nav>
+
+            <section class="footer">
+                <p></p> <!--le footer est vide -->
+            </section>
+    	</section>
+
+    </body>
+    
+</html>

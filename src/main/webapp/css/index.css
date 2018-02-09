@@ -1,0 +1,270 @@
+/******** Générale ********/
+html{
+    height: 100%;
+}
+
+body{
+    font-family: 'Century Gothic', Verdana, Calibri, serif; /* mise en forme de l'écrriture du body */
+    margin:0px; /* pour eviter les décalages */ 
+    padding:0px; /* pour eviter les décalages */ 
+    color: #333333; /* couleur du texte du body */
+    text-align: justify; /* retour à la ligne ainsi qu'adaptation de l'espace entre chaque mot (utilisé plutot en mode mobile) */
+    height: 100%; 
+	background-image: url(../img/fond.png);
+	background-size: cover;
+}
+
+header{
+    position: fixed;
+    width: 100%;
+    top:0%;
+	z-index: 2;
+}
+
+.haut{
+	position: fixed;
+	background-color: white;
+	height: 7vh;
+	width: 100%;
+}
+
+.haut .voitureOrange{
+	top: -0.2vh;
+	left: -27vh;
+	position: fixed;
+	width: 45vh;
+	height: 6.5vh;
+	background-image: url(../img/voitureOrange.png);
+	background-size: cover;
+	animation-name:voitureOrange;
+	animation-duration:2.5s;
+}
+
+.haut .voitureRouge{
+	top: -0.2vh;
+	right: -27vh;
+	position: fixed;
+	width: 45vh;
+	height: 6.5vh;
+	background-image: url(../img/voitureRouge.png);
+	background-size: cover;
+	animation-name:voitureRouge;
+	animation-duration:2.5s;
+}
+
+/* animation des voiture */
+@keyframes voitureOrange{
+	50% {left:35vh;}
+}
+@keyframes voitureRouge{
+	50% {right:35vh;}
+}
+
+.haut h1{
+	width: 100%;
+	position: fixed;
+	text-align: center;
+	top: -2vh;
+	font-size: 4vh;
+}
+
+.menu{
+	position: fixed;
+	width: 100%;
+	background-color: green;
+	top: 7vh;
+	padding-left: 4vh;
+}
+
+.menu ul{ 
+    margin: 0px;
+    padding: 0px;
+}
+
+.menu li{
+	list-style-type: none;
+}
+
+.menu ul li{
+	float: left;
+    position: relative;
+}
+
+.menu a {
+	display: inline-block;
+    text-decoration: none;
+}
+
+.menu ul li a{
+	padding: 3vh 4vh; 
+    color: #FFF;
+    font-size: 2vh;
+}
+
+.menu ul li:hover a{
+    padding: calc(3vh - 1vh) 4vh 3vh 4vh; /* si on change la taille de la petites barre, il faut changer le 15 = (20 - hauteur de la barre)*/
+}
+
+.menu ul li a:hover{
+	border-top: 1vh solid #BBBBBB; /* créé une petite barre de 5 x de hauteur en haut de la case "Accueil" d'une couleur grise lors du passage de la souris*/
+    background-color: rgba(220, 220, 220, 0.15);
+}
+
+.page {
+    padding-top: 16vh; /* */
+    width: 100%;
+}
+
+.contenu{
+    padding-left: 10%;
+    padding-right: 10%;
+    min-height: calc(100vh - 235px); /* 235 px = hauteur du footer + la barre menu + les margins/padding*/
+                                     /* une hauteur minimale est imposée pour que le footer se trouve toujours en bas de la page */
+}
+
+.footer{
+	bottom: 0;
+    clear: both;
+    width: 100%;
+    height: 60px;
+    padding-top: 10px;
+/*  border-top: 2px solid darkgreen;
+    background-color: forestgreen;    */
+}
+
+.footer p{
+    font-size: 13px;
+    text-align: center;
+    color: white;
+}
+
+.bande1{
+	width: 10vh;
+	position: fixed;
+	top:0.55vh;
+	left: 0px;
+	height: 100%;
+	background-image: url(../img/bande.png);
+	background-size: cover;
+	z-index: 1;
+}
+
+.bande2{
+	width: 10vh;
+	position: fixed;
+	top:0.55vh;
+	right: 0px;
+	height: 100%;
+	background-image: url(../img/bande.png);
+	background-size: cover;
+	z-index: 1;
+}
+
+
+
+/* pour le nav : règles */
+.cartes{
+	margin-left: 25%;
+}
+.paris{
+	margin-left: 10%;
+}
+.final{
+	margin-left: 20%
+}
+
+
+/* pour les navs : Jouer et rentrerPseudo */
+.bloc{
+	display: inline-block;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	margin-left: 15px;
+	margin-right: 15px;
+	vertical-align: top;
+}
+.bloc1{
+	display: inline-block;
+	background-color: silver;
+	border-radius: 8px;
+	padding: 30px;
+}
+th {
+	padding-bottom: 8px;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+th p{
+	background-color:#696969;
+	color: white;
+	padding: 5px;
+	border-radius: 5px;
+}
+td{
+	padding-bottom: 4px;
+	padding-left: 4px;
+	padding-right: 4px;
+}
+td p{
+	background-color:#9E9E9E;
+	color: white;
+	padding: 5px;
+	margin: 2px;
+	border-radius: 5px;
+}
+td button a{
+	color: #FDEE00;
+	text-decoration: none;
+
+	outline : none;
+}
+
+input[type=text] {
+    background-color: #696969;
+    color: white;
+
+}
+input::placeholder {
+  color: lightgrey;
+}
+button{
+	text-decoration: none;
+	color: #FDEE00;
+	background-color: #696969;
+	border-color:  yellow;
+	outline : none;
+}
+
+
+/* pour le nav : rentrerPseudo */
+.valid{
+	position: fixed; 
+	z-index: 120;
+	left: 50%;
+	top:50%;
+	transform: translate(-50%, -50%);
+	background-color: silver;
+	border-radius: 8px;
+	border: 2px solid #696969;
+	padding: 30px;
+}
+.fond{
+	position: fixed;
+	top :15.4vh;
+	left: 50%;
+	transform: translate(-50%, 0);
+	z-index: 100;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(251, 251, 251, 0.75);
+}
+.inputPseudo input[type=text] {
+	padding: 10px;
+    background-color: grey;
+    border-radius: 8px;
+    color: white;
+
+}
+.inputPseudo input::placeholder {
+  color: lightgrey;
+}

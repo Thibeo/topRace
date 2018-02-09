@@ -1,0 +1,518 @@
+/******** Générale ********/
+html{
+    height: 100%;
+}
+
+body{
+    font-family: 'Century Gothic', Verdana, Calibri, serif; /* mise en forme de l'écrriture du body */
+    margin:0px; /* pour eviter les décalages */ 
+    padding:0px; /* pour eviter les décalages */ 
+    color: #333333; /* couleur du texte du body */
+    text-align: justify; /* retour à la ligne ainsi qu'adaptation de l'espace entre chaque mot (utilisé plutot en mode mobile) */
+    height: 100%; 
+	background-image: url(../img/fond.png);
+	background-size: cover;
+}
+
+header{
+    position: fixed;
+    width: 100%;
+    top:0%;
+	z-index: 2;
+}
+
+.haut{
+	position: fixed;
+	background-color: white;
+	height: 7vh;
+	width: 100%;
+}
+.haut .voitureOrange{
+	top: -0.2vh;
+	left: -27vh;
+	position: fixed;
+	width: 45vh;
+	height: 6.5vh;
+	background-image: url(../img/voitureOrange.png);
+	background-size: cover;
+	animation-name:voitureOrange;
+	animation-duration:2.5s;
+}
+@keyframes voitureOrange{
+	50% {left:35vh;}
+}
+/* Mise en place de l'animation */
+@keyframes voitureRouge{
+	50% {right:35vh;}
+}
+.haut .voitureRouge{
+	top: -0.2vh;
+	right: -27vh;
+	position: fixed;
+	width: 45vh;
+	height: 6.5vh;
+	background-image: url(../img/voitureRouge.png);
+	background-size: cover;
+	animation-name:voitureRouge;
+	animation-duration:2.5s;
+}
+.haut h1{
+	width: 100%;
+	position: fixed;
+	text-align: center;
+	top: -2vh;
+	font-size: 4vh;
+}
+
+.menu{
+	position: fixed;
+	width: 100%;
+	background-color: green;
+	top: 7vh;
+	padding-left: 4vh;
+}
+.menu ul{ 
+    margin: 0px;
+    padding: 0px;
+}
+.menu li{
+	list-style-type: none;
+}
+.menu ul li{
+	float: left;
+    position: relative;
+}
+.menu a {
+	display: inline-block;
+    text-decoration: none;
+}
+.menu ul li a{
+	padding: 3vh 4vh; 
+    color: #FFF;
+    font-size: 2vh;
+}
+.menu ul li:hover a{
+    padding: calc(3vh - 1vh) 4vh 3vh 4vh; /* si on change la taille de la petites barre, il faut changer le 15 = (20 - hauteur de la barre)*/
+}
+.menu ul li a:hover{
+	border-top: 1vh solid #BBBBBB; /* créé une petite barre de 5 x de hauteur en haut de la case "Accueil" d'une couleur grise lors du passage de la souris*/
+    background-color: rgba(220, 220, 220, 0.15);
+}
+
+.page {
+    padding-top: 16vh; /* */
+    width: 100%;
+}
+.contenu{
+    padding-left: 10%;
+    padding-right: 10%;
+    min-height: calc(100vh - 235px); /* 235 px = hauteur du footer + la barre menu + les margins/padding*/
+                                     /* une hauteur minimale est imposée pour que le footer se trouve toujours en bas de la page */
+}
+.footer{
+	bottom: 0;
+    clear: both;
+    width: 100%;
+    height: 60px;
+    padding-top: 10px;
+/*  border-top: 2px solid darkgreen;
+    background-color: forestgreen;    */
+}
+.footer p{
+    font-size: 13px;
+    text-align: center;
+    color: white;
+}
+.bande1{
+	width: 10vh;
+	position: fixed;
+	top:0.55vh;
+	left: 0px;
+	height: 100%;
+	background-image: url(../img/bande.png);
+	background-size: cover;
+	z-index: 1;
+}
+.bande2{
+	width: 10vh;
+	position: fixed;
+	top:0.55vh;
+	right: 0px;
+	height: 100%;
+	background-image: url(../img/bande.png);
+	background-size: cover;
+	z-index: 1;
+}
+
+
+
+
+/* pageJeu - ligne 1 = colonne joueurs + plateau + tableau paris */
+.ligne1{
+	position: fixed;
+	top: 19vh;
+}
+/* pageJeu - Colonne Joueurs */
+.joueurs{
+	position: fixed;
+	top: 27vh;
+	left: 14vh;
+	width: 19vh;
+	background-color: #9E9E9E;
+	border-radius: 2vh;
+	border: 0.4vh solid grey;
+}
+.joueurs nav{
+	width: 13vh;
+	margin-top: 1vh;
+	margin-bottom: 1vh;
+	margin-left: 2vh;
+	border-radius: 1.3vh;
+	padding: 0.8vh;
+	font-size: 2.5vh;
+}
+.j1{
+	background-color: white;
+	color: black;
+}
+.j2{
+	background-color: #2fb129;
+	color: white;
+}
+.j3{
+	background-color: #2551d9;
+	color: white;
+}
+.j4{
+	background-color: #fb2b2b;
+	color: white;
+}
+.j5{
+	background-color: #864daf;
+	color: white;
+}
+.j6{
+	background-color: #ffd800;
+	color: white;
+}
+
+/* pageJeu - Plateau */
+.plateau{
+	position: fixed;
+	left: 45vh;
+	width: 80vh;
+	height: 52vh;
+	background-image: url(../img/plateau.png);
+    background-size: cover;
+}
+
+/* pageJeu - Tableau paris*/
+.plateauParis{
+	position: fixed;
+	right: 15vh;
+	margin-right: 3vh;
+}
+.plateauParis table{
+	border: 0.4vh solid grey;
+	border-collapse: collapse;
+}
+.plateauParis td {
+	border: 0.2vh solid grey;
+	padding: 1vh;
+	background-color: #9E9E9E;
+	font-size: 2vh;
+}
+.colonnePari {
+	width: 11vh;
+}
+tr .vide{
+	background-color: transparent;
+	border-top: 0.4vh solid grey;
+	border-right: 0.4vh solid transparent;
+	border-left: 0.4vh solid transparent;
+	border-bottom: 0.4vh solid transparent;
+}
+tr .btnValide{
+	border: 0.3vh solid grey;
+}
+.btnValide button{
+	padding: 0vh;
+	color: yellow;
+	font-size: 2vh;
+	background-color: #696969;
+	border: 0.3vh solid;
+	border-top-color: #fdee00;
+	border-left-color: #fdee00;
+	border-bottom-color: #a99f00;
+	border-right-color: #a99f00;
+	width: 8vh;
+	height: 3vh;
+	outline : none;
+}
+/* boutton pour cacher/montrer les colonnes de paris (rouge pour caché, et jaune pour montré) */
+.bouttonRouge{
+	padding: 0vh;
+	color: red;
+	font-size: 2vh;
+	background-color: #696969; 
+	border: 0.3vh solid red;
+	border-top-color: #ff0000;
+	border-left-color: #ff0000;
+	border-bottom-color: #ab0000;
+	border-right-color: #ab0000;
+	width: 5vh;
+	height: 3vh;
+	outline : none;
+}
+.bouttonJaune{
+	padding: 0vh;
+	color: yellow;
+	font-size: 2vh;
+	background-color: #696969;
+	border: 0.3vh solid;
+	border-top-color: #fdee00;
+	border-left-color: #fdee00;
+	border-bottom-color: #a99f00;
+	border-right-color: #a99f00;
+	width: 5vh;
+	height: 3vh;
+	outline : none;
+}
+.bouttonRouge:hover, .bouttonJaune:hover, .btnValide button:hover {
+	padding: 0vh;
+	color: orange;
+	font-size: 2vh;
+	background-color: #808080;
+	border: 0.3vh solid;
+	border-top-color: #ffa500;
+	border-left-color: #ffa500;
+	border-bottom-color: #ab6e00;
+	border-right-color: #ab6e00;
+  	outline : none;
+}
+.bouttonRouge:active, .bouttonJaune:active, .btnValide button:active {
+	padding: 0vh;
+	color: orange;
+	font-size: 2vh;
+	background-color: #808080;
+	border: 0.3vh solid;
+	border-top-color: #ab6e00;
+	border-left-color: #ab6e00;
+	border-bottom-color: #ffa500;
+	border-right-color: #ffa500;
+	outline : none;
+}
+.btnQuitter button{
+	text-decoration: none;
+	color: #FDEE00;
+	background-color: #696969;
+	border-color:  yellow;
+	outline : none;
+}
+button a{
+	color: #FDEE00;
+	background-color: #696969;
+	text-decoration: none;
+	border-color:  yellow;
+	outline : none;
+}
+
+/* checkbox */
+/* enlever les checkbox et afficher que les labels */
+input[type="checkbox"]{display: none;}
+input[type="checkbox"] + label::before{
+    content:"";
+    display:inline-block;
+    width:1.4vh;
+    height:1.4vh;
+    border:0.3vh solid grey;
+    border-radius: 0.5vh;
+    background:#b3b3b3;
+}
+/* mettre un background de couleur si les checkbox sont checked */
+.pariReponseJaune input[type="checkbox"]:checked + label::before{background:#ffd800;}
+.pariReponseBleue input[type="checkbox"]:checked + label::before{background:#2551d9;}
+.pariReponseRouge input[type="checkbox"]:checked + label::before{background:#fb2b2b;}
+.pariReponseViolette input[type="checkbox"]:checked + label::before{background:#864daf;}
+.pariReponseBlanche input[type="checkbox"]:checked + label::before{background:white;}
+.pariReponseVerte input[type="checkbox"]:checked + label::before{background:#2fb129;}
+/* mettre un background de couleur si les checkbox sont survolés */
+.pariReponseJaune input[type="checkbox"]:hover + label::before{background:rgba(255, 216, 0, 0.25);}
+.pariReponseBleue input[type="checkbox"]:hover + label::before{background:rgba(37, 81, 217, 0.25);}
+.pariReponseRouge input[type="checkbox"]:hover + label::before{background:rgba(251, 43, 43, 0.25);}
+.pariReponseViolette input[type="checkbox"]:hover + label::before{background:rgba(134, 77, 175, 0.25);}
+.pariReponseBlanche input[type="checkbox"]:hover + label::before{background:rgba(255, 255, 255, 0.50);}
+.pariReponseVerte input[type="checkbox"]:hover + label::before{background:rgba(47, 177, 41, 0.25);}
+/* enlever le background de couleur si les checkbox sont survolés mais qu'elles sont déjà checked */
+.pariReponseJaune input[type="checkbox"]:checked:hover + label::before{background:#ffd800;}
+.pariReponseBleue input[type="checkbox"]:checked:hover + label::before{background:#2551d9;}
+.pariReponseRouge input[type="checkbox"]:checked:hover + label::before{background:#fb2b2b;}
+.pariReponseViolette input[type="checkbox"]:checked:hover + label::before{ background:#864daf;}
+.pariReponseBlanche input[type="checkbox"]:checked:hover + label::before{background:white;}
+.pariReponseVerte input[type="checkbox"]:checked:hover + label::before{background:#2fb129;}
+/* pageJeu - carteTitre = nav pour le titre */
+.carteTitre{
+	position: fixed;
+	top:70vh;
+	left: 20vh;
+	background-color: #9E9E9E;
+	border-radius: 2vh;
+	border: 0.4vh solid grey;
+	width: 12vh;
+	height: 4vh;
+	padding-top:1vh;
+	font-size: 3vh;
+	text-align: center;
+	z-index: 2;
+}
+
+/* pageJeu - ligneCartes = nav pour les cartes */
+#ligneCartes{
+	position: fixed;
+	overflow: auto;
+	top:75vh;
+	left:14vh;
+	width: 152vh;
+	height: 19vh;
+	background-color: #9E9E9E;
+	border-radius: 2vh;
+	border: 0.4vh solid grey;
+	padding: 1vh;
+	font-size: 0; /* pour eviter les espaces indesirables des "display : inline-block" */
+}
+
+/* cartes mise en background des navs ... */
+.imagee{
+	display: inline-block;
+	width: 15vh;
+	height: 18vh;
+	margin: 0.75vh;
+}
+
+#para{
+	position: fixed;
+	top:19vh;
+	left: 14vh;
+	background-color: #9E9E9E;
+	border-radius: 2vh;
+	border: 0.4vh solid grey;
+	padding: 1vh;
+	z-index: 120;
+}
+#rules{
+	position: fixed;
+	top:19vh;
+	left: 14vh;
+	background-color: #9E9E9E;
+	border-radius: 2vh;
+	border: 0.4vh solid grey;
+	padding: 1vh;
+	z-index: 120;
+}
+#quitter{
+	position: fixed; 
+	left: 50%;
+	top:40%;
+	transform: translate(-50%, -50%);
+	background-color: #9E9E9E;
+	border-radius: 2vh;
+	border: 0.4vh solid grey;
+	padding: 1vh;
+	z-index: 120;
+}
+.fond{
+	position: fixed;
+	top :15.4vh;
+	left: 50%;
+	transform: translate(-50%, 0);
+	z-index: 100;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(251, 251, 251, 0.75);
+}
+#compteur{
+	display: none;
+	position: fixed;
+	z-index: 150;
+	font-size: 10vh;
+	color: red;
+}
+
+.joueurVoiture{
+	position: fixed;
+	width: 4.8vh;
+ 	height: 2.6vh;
+ 	z-index: 10;
+    background-size: cover;
+}
+#joueurJaune{
+	top: 62.5vh;
+ 	left: 89vh;
+ 	background-image: url(../img/joueurJaune.png);
+}
+#joueurBleu{
+ 	top: 62.5vh;
+ 	left: 94vh;
+ 	background-image: url(../img/joueurBleu.png);
+}
+#joueurVert{
+ 	top: 65vh;
+ 	left: 89vh;
+ 	background-image: url(../img/joueurVert.png);
+}
+#joueurBlanc{
+ 	top: 65vh;
+ 	left: 94vh;
+ 	background-image: url(../img/joueurBlanc.png);
+}
+#joueurViolet{
+ 	top: 67.5vh;
+ 	left: 89vh;
+ 	background-image: url(../img/joueurViolet.png);
+}
+#joueurRouge{
+ 	top: 67.5vh;
+ 	left: 94vh;
+ 	background-image: url(../img/joueurRouge.png);
+}
+
+
+#carreHaut{
+ 	position: fixed;
+ 	top: 75.3vh;
+ 	left: 167.1vh;
+ 	width: 1.75vh;
+ 	height: 2.2vh;
+ 	z-index: 99;
+ 	background-image: url(../img/carreHaut.png);
+    background-size: cover;
+}
+#carreBas{
+ 	position: fixed;
+ 	top: 94.2vh;
+ 	left: 167.1vh;
+ 	width: 1.75vh;
+ 	height: 2.2vh;
+ 	z-index: 99;
+ 	background-image: url(../img/carreBas.png);
+    background-size: cover;
+}
+::-webkit-scrollbar-track {
+      background-color: grey;
+}
+ 
+::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.2); 
+} /* this will style the thumb, ignoring the track */
+ 
+::-webkit-scrollbar-button {
+      background-color: transparent;
+} /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+ 
+::-webkit-scrollbar-corner {
+      background-color: green;
+}
+::-webkit-scrollbar {
+      width: 1.5vh;
+      height: 20vh;
+}
