@@ -5,11 +5,11 @@ html{
 
 body{
     font-family: 'Century Gothic', Verdana, Calibri, serif; /* mise en forme de l'écrriture du body */
-    margin:0px; /* pour eviter les décalages */ 
-    padding:0px; /* pour eviter les décalages */ 
+    margin:0px; /* pour eviter les décalages */
+    padding:0px; /* pour eviter les décalages */
     color: #333333; /* couleur du texte du body */
     text-align: justify; /* retour à la ligne ainsi qu'adaptation de l'espace entre chaque mot (utilisé plutot en mode mobile) */
-    height: 100%; 
+    height: 100%;
 	background-image: url(../img/fond.png);
 	background-size: cover;
 }
@@ -71,7 +71,7 @@ header{
 	top: 7vh;
 	padding-left: 4vh;
 }
-.menu ul{ 
+.menu ul{
     margin: 0px;
     padding: 0px;
 }
@@ -87,7 +87,7 @@ header{
     text-decoration: none;
 }
 .menu ul li a{
-	padding: 3vh 4vh; 
+	padding: 3vh 4vh;
     color: #FFF;
     font-size: 2vh;
 }
@@ -254,7 +254,7 @@ tr .btnValide{
 	padding: 0vh;
 	color: red;
 	font-size: 2vh;
-	background-color: #696969; 
+	background-color: #696969;
 	border: 0.3vh solid red;
 	border-top-color: #ff0000;
 	border-left-color: #ff0000;
@@ -410,7 +410,7 @@ input[type="checkbox"] + label::before{
 	z-index: 120;
 }
 #quitter{
-	position: fixed; 
+	position: fixed;
 	left: 50%;
 	top:40%;
 	transform: translate(-50%, -50%);
@@ -482,17 +482,17 @@ input[type="checkbox"] + label::before{
  	top: 75.3vh;
  	left: 167.1vh;
  	width: 1.75vh;
- 	height: 2.2vh;
+ 	height: 3vh;
  	z-index: 99;
- 	background-image: url(../img/carreHaut.png);
+	background-image: url(../img/carreHaut.png);
     background-size: cover;
 }
 #carreBas{
  	position: fixed;
- 	top: 94.2vh;
+ 	top: 93.4vh;
  	left: 167.1vh;
  	width: 1.75vh;
- 	height: 2.2vh;
+ 	height: 3vh;
  	z-index: 99;
  	background-image: url(../img/carreBas.png);
     background-size: cover;
@@ -500,19 +500,26 @@ input[type="checkbox"] + label::before{
 ::-webkit-scrollbar-track {
       background-color: grey;
 }
- 
+
 ::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.2); 
+      background-color: rgba(0, 0, 0, 0.2);
 } /* this will style the thumb, ignoring the track */
- 
+
 ::-webkit-scrollbar-button {
       background-color: transparent;
 } /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
- 
+
 ::-webkit-scrollbar-corner {
       background-color: green;
 }
 ::-webkit-scrollbar {
       width: 1.5vh;
       height: 20vh;
+}
+
+.leNbCases{
+	display: none;
+}
+.lesCases{
+	display: none;
 }
