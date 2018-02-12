@@ -1,5 +1,7 @@
 package projet100h.topRace.entities;
 
+import java.util.ArrayList;
+
 public class Case {
     private int x;
     private char y;
@@ -7,8 +9,8 @@ public class Case {
     private int top;
     private int left;
 
-    public Case(Integer x, Character y, Boolean occupee, Integer top, Integer left){
-        super();
+
+    public Case(int x, char y, boolean occupee, int top, int left){
         this.x=x;
         this.y=y;
         this.occupee=occupee;
@@ -16,19 +18,27 @@ public class Case {
         this.left=left;
     }
 
-    public Integer getX() { return x; }
-    public void setX(Integer x) { this.x = x; }
+    public int getX() { return x; }
+    public void setX(int x) { this.x = x; }
 
-    public Character getY() { return y; }
-    public void setY(Character x) { this.y = y; }
+    public char getY() { return y; }
+    public void setY(char x) { this.y = y; }
 
     public boolean isOccupee() { return occupee; }
     public void setOccupee(boolean occupee) { this.occupee = occupee; }
 
-    public Integer getTop() { return top; }
-    public void setTop(Integer top) { this.top = top; }
+    public int getTop() { return top; }
+    public void setTop(int top) { this.top = top; }
 
-    public Integer getLeft() { return left; }
-    public void setLeft(Integer left) { this.left = left; }
+    public int getLeft() { return left; }
+    public void setLeft(int left) { this.left = left; }
 
+    public void modifierOccupee() {
+        if (this.occupee == true) {
+            this.occupee = false;
+
+        } else {
+            this.occupee = true;
+        }
+    }
 }

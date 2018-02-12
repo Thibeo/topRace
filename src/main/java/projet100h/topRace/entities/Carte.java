@@ -4,13 +4,12 @@ public class Carte {
 
     private int idCarte;
 
-    public Carte(Integer idCarte){
-        super();
+    public Carte(int idCarte){
         this.idCarte=idCarte;
     }
 
-    public Integer getIdCarte() { return idCarte; }
-    public void setIdCarte(Integer idCarte) { this.idCarte = idCarte; }
+    public int getIdCarte() { return idCarte; }
+    public void setIdCarte(int idCarte) { this.idCarte = idCarte; }
 
 }
 

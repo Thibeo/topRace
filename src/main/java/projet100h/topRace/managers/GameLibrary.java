@@ -10,6 +10,7 @@ import projet100h.topRace.entities.Carte;
 import projet100h.topRace.entities.Case;
 import projet100h.topRace.entities.NbCase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameLibrary {
@@ -21,6 +22,7 @@ public class GameLibrary {
     public static GameLibrary getInstance() {
         return GameLibraryHolder.instance;
     }
+
 
     private CarteDao carteDao = new CarteDaoImpl();
     private CaseDao caseDao = new CaseDaoImpl();

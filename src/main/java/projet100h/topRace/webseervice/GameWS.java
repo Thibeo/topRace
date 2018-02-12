@@ -14,7 +14,7 @@ public class GameWS {
     @POST
     public Response postMyOpinion(@FormParam("data") int compteur){
         Gson gson = new Gson();
-        
+
         int compteur1= compteur+1;
         String compteur1Json =gson.toJson(compteur1);
         System.out.println("compteur" +compteur1Json);
