@@ -7,18 +7,9 @@
         <meta charset='utf-8'>
         <link rel='stylesheet' href='css/pageJeu.css'>
         <link rel="shortcut icon" href="img/logo.png">
+        <script type="text/javascript" src="js/game.js"></script>
 <script type="text/javascript">
- 
 
-    function avancer(cse){
-        console.log("ouii");
-        var carte = document.getElementsByClassName('nbCaseDeCase'+cse);
-        for (var i =0 ; i<carte.length ; i++){
-            console.log("valueof() = "+carte[i].innerHTML);
-            console.log("valueof() = "+carte[i].getAttribute("value"));
-            window.alert("voiture "+carte[i].innerHTML+" avance de "+carte[i].getAttribute("value"));
-        }
-    }
 
     function inverse(ID, COL){
       var table = document.getElementById(ID);      
@@ -464,11 +455,11 @@
                 </nav>
             </nav>
 
-            <nav>
+            <nav class="lesCases">
                 <nav th:each="case : ${listCase}" th:text="${case.getX()+case.getY()}" th:id="${case.getX()+case.getY()}"></nav>
             </nav>
 
-            <nav>
+            <nav class="leNbCases">
                 <nav th:each="nbCase : ${listNbCase}" th:text="${nbCase.couleur}" th:value="${nbCase.nbCase}" th:class="${'nbCaseDeCase'+nbCase.idCarte}"></nav>
             </nav>
 
