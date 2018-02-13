@@ -1,14 +1,8 @@
 package projet100h.topRace.managers;
 
-import projet100h.topRace.dao.CarteDao;
-import projet100h.topRace.dao.CaseDao;
-import projet100h.topRace.dao.NbCaseDao;
-import projet100h.topRace.dao.impl.CarteDaoImpl;
-import projet100h.topRace.dao.impl.CaseDaoImpl;
-import projet100h.topRace.dao.impl.NbCaseDaoImpl;
-import projet100h.topRace.entities.Carte;
-import projet100h.topRace.entities.Case;
-import projet100h.topRace.entities.NbCase;
+import projet100h.topRace.dao.*;
+import projet100h.topRace.dao.impl.*;
+import projet100h.topRace.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +21,8 @@ public class GameLibrary {
     private CarteDao carteDao = new CarteDaoImpl();
     private CaseDao caseDao = new CaseDaoImpl();
     private NbCaseDao nbCaseDao = new NbCaseDaoImpl();
+    private PartieCaseDao partieCaseDao = new PartieCaseDaoImpl();
+    private JoueurDao joueurDao = new JoueurDaoImpl();
 
     private GameLibrary() {
     }
@@ -36,5 +32,12 @@ public class GameLibrary {
     public List<Case> listCase() { return  caseDao.listCase(); }
 
     public List<NbCase> listNbCase() { return  nbCaseDao.listNbCase(); }
+
+
+    public Joueur getJoueur(String couleur, int idPartie){
+        List<String> list = joueurDao.getXYByCouleur(couleur,idPartie);
+        PartieCase cse = partieCaseDao.getPartieCase(Integer.parseInt(list.get(0)), list.get(2).charAt(0), idPartie);
+        return joueurDao.getJoueurByCase(couleur,idPartie,cse);
+    }
 
 }
