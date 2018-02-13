@@ -4,18 +4,25 @@ public class Joueur {
     private String nomJoueur;
     private String couleur;
     private Case caseActuelle;
+    private int idPartie;
 
-    public Joueur(String nomJoueur, String couleur, Case caseActuelle){
+    public Joueur(String nomJoueur, String couleur, Case caseActuelle, int idPartie){
         this.nomJoueur=nomJoueur;
         this.couleur=couleur;
         this.caseActuelle=caseActuelle;
+        this.idPartie=idPartie;
     }
+
+    public int getIdPartie(){ return (this.idPartie); }
+    public void setIdPartie(int idPartie) { this.idPartie = idPartie; }
+
+    public String getNomJoueur(){ return (this.nomJoueur); }
+    public void setNomJoueur(String nomJoueur) { this.nomJoueur = nomJoueur; }
 
     public String getCouleur(){ return (this.couleur); }
     public void setCouleur(String couleur) { this.couleur = couleur; }
 
     public Case getCaseActuelle(){ return (this.caseActuelle); }
-
     public void setCaseActuelle(Case caseActuelle) { this.caseActuelle = caseActuelle; }
 
 
@@ -24,7 +31,7 @@ public class Joueur {
      * permet de regarder si la case sur laquelle on arrive est une case présentant un déplacement particulier
      *
      */
-    public void deplacementException(Plateau plateau) {
+    public void deplacementException(Partie plateau) {
 
 
         if (plateau.exception(this.caseActuelle).equals("tournant a l interieur")) {
@@ -80,7 +87,7 @@ public class Joueur {
 
 
 
-    public Case deplacementSeul(Plateau plateau){
+    public Case deplacementSeul(Partie plateau){
 
         if(this.caseActuelle.getY()=='a') {
             // si la case directement devant (sur la meme ligne) est libre:
@@ -187,7 +194,7 @@ public class Joueur {
 
     }
 
-    public void deplacer(int nbreCase,Plateau plateau){
+    public void deplacer(int nbreCase,Partie plateau){
 
         for(int i=0;i<nbreCase;i++){
             System.out.println("case actuelle: x:"+ this.caseActuelle.getX()+"y: "+this.caseActuelle.getY());

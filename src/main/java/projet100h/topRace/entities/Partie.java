@@ -1,6 +1,6 @@
 package projet100h.topRace.entities;
 
-public class Plateau {
+public class Partie {
     private Case tableauCase[][];
 
 

@@ -45,14 +45,9 @@ CREATE TABLE `partie` (
 CREATE TABLE `joueur` (
   `couleurJ` varchar(6) NOT NULL,
   `nomDeJoueur`varchar(45) NOT NULL,
-  PRIMARY KEY (`couleurJ`)
-);
-
-CREATE TABLE `partieJoueur` (
-  `couleurJ` varchar(6) NOT NULL,
   `idPartie` int(11) NOT NULL,
-  KEY `couleurJ_fk` (`couleurJ`),
-  KEY `idPartie_fk` (`idPartie`),
+  `x` int(11) NOT NULL,
+  `y` char(1) NOT NULL,
   PRIMARY KEY (`couleurJ`,`idPartie`)
 );
 
