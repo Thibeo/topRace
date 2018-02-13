@@ -31,8 +31,8 @@ CREATE TABLE `cse` (
   `x` int(11) NOT NULL, /* 1,2,3,4 ... */
   `y` char(1) NOT NULL, /* a,b ou c */
   `occupee` boolean,
-  `top` int(11) NOT NULL,
-  `left` int(11) NOT NULL,
+  `top` FLOAT(11) NOT NULL,
+  `left` FLOAT(11) NOT NULL,
   PRIMARY KEY (`x`,`y`)
 );
 

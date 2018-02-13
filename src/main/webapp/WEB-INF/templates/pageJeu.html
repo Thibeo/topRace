@@ -7,9 +7,52 @@
         <meta charset='utf-8'>
         <link rel='stylesheet' href='css/pageJeu.css'>
         <link rel="shortcut icon" href="img/logo.png">
-        <script type="text/javascript" src="js/game.js"></script>
+        <script type="text/javascript" src="js/gamee.js"></script>
 <script type="text/javascript">
 
+
+    function avancer(cse){
+        var carte = document.getElementsByClassName('nbCaseDeCase'+cse); /* récupération de tout les elements ayant la classe " nbCaseDeCase + cse "
+                                                                            sachant que cse = l'ID d'une carte
+        exemple de l'html contenant la classe "nbCaseDeCase+cse"
+            <nav value="9" class="nbCaseDeCase5">Vert</nav>
+            <nav value="9" class="nbCaseDeCase6">Blanc</nav>
+            <nav value="5" class="nbCaseDeCase7">Jaune</nav>
+            <nav value="2" class="nbCaseDeCase7">Violet</nav>   fait en thymleaf grace à listeNbCase*/
+
+        for (var i =0 ; i<carte.length ; i++){ /* on parcourt carte il peut y avoir plusieur élement ayant la classe " nbCaseDeCase + cse " */
+            console.log("couleur = "+carte[i].innerHTML);             /* correspond à la couleur de la voiture */
+            console.log("nbCase = "+carte[i].getAttribute("value"));  /* correspond au nombre de cases auquel la voiture doit avancer */
+
+            var postMyOpinionRequest = new XMLHttpRequest();
+            postMyOpinionRequest.open("POST","webservices/game/test",true);
+            postMyOpinionRequest.responseType="json";
+            postMyOpinionRequest.onload = function() {
+                var answer=this.response;
+                console.log("nouvelle valeur : "+answer); /* answer est la nouvelle position sous le format "top/left" */
+                var top="";
+                var comt="";
+                for (var j=0 ; j<answer.length ; j++){  /* boucle pour separer le top et left en deux variable */
+                    if (answer[j]=="/"){
+                        top=comt;
+                        comt="";
+                    } else{
+                        comt=comt+answer[j];
+                    }
+                }
+                var left=comt;
+                console.log("top = "+top+" / left = "+left); /* on retrouve ici le top et left en 2 variables */
+                console.log("");
+
+            }
+            postMyOpinionRequest.setRequestHeader("Content-type" , "application/x-www-form-urlencoded");
+            var data= String (carte[i].getAttribute("value"))+(carte[i].innerHTML); /* on créé la variable data qui correspond a un string
+                                                                                       qui contient le nombre de case suivit de la couleur*/
+            console.log("data = "+data);
+            postMyOpinionRequest.send("data="+JSON.stringify(data));  /* et on l'envoit */
+        }
+
+    }
 
     function inverse(ID, COL){
       var table = document.getElementById(ID);      

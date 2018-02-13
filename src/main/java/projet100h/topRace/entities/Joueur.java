@@ -6,7 +6,7 @@ public class Joueur {
     private Case caseActuelle;
 
     public Joueur(String nomJoueur, String couleur, Case caseActuelle){
-
+        this.nomJoueur=nomJoueur;
         this.couleur=couleur;
         this.caseActuelle=caseActuelle;
     }
