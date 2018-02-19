@@ -1,10 +1,10 @@
 package projet100h.topRace.entities;
 
 public class Partie {
-    private Case tableauCase[][];
+    private PartieCase tableauCase[][];
 
 
-    public void setTableauCase(Case [][] tableau) {
+    public void setTableauCase(PartieCase [][] tableau) {
         this.tableauCase=tableau;
     }
 
@@ -13,7 +13,7 @@ public class Partie {
 
 
     public boolean isOccuped(int x,char y){
-        Case caseAChecke=null;
+        PartieCase caseAChecke=null;
         for(int i=0;i<this.tableauCase.length;i++){
             for(int j=0;j<this.tableauCase[1].length;j++){
                 if(i==x && y==tableauCase[x][j].getY()){
@@ -26,7 +26,7 @@ public class Partie {
     }
 
 
-    public Case getCase(int x, char y) {
+    public PartieCase getCase(int x, char y) {
         int b=0;
         if (y=='b') {
             b=1;
@@ -37,7 +37,7 @@ public class Partie {
         return this.tableauCase[x][b];
     }
 
-    public String exception(Case cse) {
+    public String exception(PartieCase cse) {
         int x=cse.getX();
         char y=cse.getY();
         if((x==4 && y=='a') || (x==12 && y=='a') || (x==24 && y=='a')) {
@@ -73,7 +73,7 @@ public class Partie {
      * permet de changer le statut de deux ou plusieurs cartes en meme temps
      *
      */
-    public void lierCasesException(Case cse) {
+    public void lierCasesException(PartieCase cse) {
         int x=cse.getX();
         char y=cse.getY();
 

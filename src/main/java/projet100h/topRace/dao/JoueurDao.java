@@ -1,9 +1,14 @@
 package projet100h.topRace.dao;
 
 import projet100h.topRace.entities.Joueur;
+import projet100h.topRace.entities.PartieCase;
+
+import java.util.List;
 
 public interface JoueurDao {
 
-    public Joueur DefinirJoueur(String couleur, int idPartie);
+    public Joueur getJoueurByCase(String couleur, int idPartie, PartieCase cse);
+
+    public List<String> getXYByCouleur(String couleur, int idPartie);
 
 }

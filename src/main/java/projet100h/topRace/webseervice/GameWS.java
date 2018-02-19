@@ -17,14 +17,7 @@ public class GameWS {
     public Response avancer(@FormParam("data") String data){
         System.out.println("avancer with data : "+data);
 
-        int nbCase = Integer.parseInt(data.substring(1, 2));
-        String voitureEnCours = data.substring(2);
-        String voiture = voitureEnCours.substring(0,voitureEnCours.length()-1);
-
-        if (nbCase == 9){nbCase=10;}
-
-        System.out.println("voiture est "+voiture+" et elle avance de "+nbCase);
-        System.out.println();
+        int idCarte = Integer.parseInt(data);
         /*Joueur joueurADeplacer = DefinirJoueur(voiture);  une fonction qui retourne un Joueur quand
                                                             on lui rentre un String qui est la couleur
         Case caseArrivee = joueurADeplacer.deplacer(nbCase);

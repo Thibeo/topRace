@@ -33,12 +33,5 @@ public class Case {
     public int getLeft() { return left; }
     public void setLeft(int left) { this.left = left; }
 
-    public void modifierOccupee() {
-        if (this.occupee == true) {
-            this.occupee = false;
 
-        } else {
-            this.occupee = true;
-        }
-    }
 }

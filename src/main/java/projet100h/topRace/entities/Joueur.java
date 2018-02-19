@@ -3,10 +3,10 @@ package projet100h.topRace.entities;
 public class Joueur {
     private String nomJoueur;
     private String couleur;
-    private Case caseActuelle;
+    private PartieCase caseActuelle;
     private int idPartie;
 
-    public Joueur(String nomJoueur, String couleur, Case caseActuelle, int idPartie){
+    public Joueur(String nomJoueur, String couleur, PartieCase caseActuelle, int idPartie){
         this.nomJoueur=nomJoueur;
         this.couleur=couleur;
         this.caseActuelle=caseActuelle;
@@ -22,8 +22,8 @@ public class Joueur {
     public String getCouleur(){ return (this.couleur); }
     public void setCouleur(String couleur) { this.couleur = couleur; }
 
-    public Case getCaseActuelle(){ return (this.caseActuelle); }
-    public void setCaseActuelle(Case caseActuelle) { this.caseActuelle = caseActuelle; }
+    public PartieCase getCaseActuelle(){ return (this.caseActuelle); }
+    public void setCaseActuelle(PartieCase caseActuelle) { this.caseActuelle = caseActuelle; }
 
 
 
@@ -87,7 +87,7 @@ public class Joueur {
 
 
 
-    public Case deplacementSeul(Partie plateau){
+    public PartieCase deplacementSeul(Partie plateau){
 
         if(this.caseActuelle.getY()=='a') {
             // si la case directement devant (sur la meme ligne) est libre:
