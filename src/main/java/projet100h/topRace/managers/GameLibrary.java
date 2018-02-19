@@ -38,7 +38,8 @@ public class GameLibrary {
         return carteDao.listDeplacementCarte(id);
     }
 
-    public void transformerStatut(Case cseActuelle, Case Ancienne, Partie partie){
+    /*
+    public void transformerStatut(PartieCase cseActuelle, Case Ancienne, Partie partie){
 
         if (partie.lierCasesException(cseActuelle).equals("sortie de tournant")){
 
@@ -60,7 +61,7 @@ public class GameLibrary {
 
 
     }
-
+*/
 
     public Joueur getJoueur(String couleur, int idPartie){
         List<String> list = joueurDao.getXYByCouleur(couleur,idPartie);
