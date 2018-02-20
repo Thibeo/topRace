@@ -32,6 +32,23 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
         return null;
     }
 
+
+    public void modifierStatut(int x, char y, int idPartie, boolean occupe){
+        String query = "UPDATE partieCase SET occupee=? WHERE x=? and y=? and idPartie=?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setBoolean(1,occupe);
+            statement.setInt(2, x);
+            statement.setString(3, String.valueOf(y));
+            statement.setInt(4, idPartie);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     @Override
     public List<PartieCase> listPartieCase(int idPartie) {
         String query = "SELECT * FROM partieCase WHERE idPartie=?";
