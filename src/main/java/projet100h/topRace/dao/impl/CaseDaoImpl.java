@@ -25,8 +25,10 @@ public class CaseDaoImpl implements CaseDao {
                                 resultSet.getInt("x"),
                                 resultSet.getString("y").charAt(0),
                                 resultSet.getBoolean("occupee"),
-                                resultSet.getInt("top"),
-                                resultSet.getInt("left")
+                                resultSet.getFloat("top"),
+                                resultSet.getFloat("left"),
+                                resultSet.getInt("rotate")
+
                         ));
             }
 
@@ -49,6 +51,8 @@ public class CaseDaoImpl implements CaseDao {
                     topLeft = String.valueOf(resultSet.getFloat("top"));
                     topLeft = topLeft + "/";
                     topLeft = topLeft + String.valueOf(resultSet.getFloat("left"));
+                    topLeft = topLeft + "+";
+                    topLeft = topLeft + String.valueOf(resultSet.getInt("rotate"));
                     return topLeft;
                 }
             }

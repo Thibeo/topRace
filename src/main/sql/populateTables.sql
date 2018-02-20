@@ -12,6 +12,50 @@ INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (0,'b',false,
 INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (0,'c',false,0,0,0);
 */
 
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (26,'a',false,25.4,99.8,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (26,'b',false,22.8,99.8,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (26,'c',false,20.3,99.8,180);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (25,'a',false,25.4,94.7,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (25,'b',false,22.8,94.7,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (25,'c',false,20.3,94.7,180);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (24,'a',false,25.4,89.3,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (24,'b',false,22.8,89.3,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (24,'c',false,20.3,89.3,180);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (23,'a',false,25.4,83.9,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (23,'b',false,22.8,83.9,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (23,'c',false,20.3,83.9,180);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (22,'a',false,25.4,78.5,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (22,'b',false,22.8,78.5,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (22,'c',false,20.3,78.5,180);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (21,'a',false,25.4,73,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (21,'b',false,22.8,73,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (21,'c',false,20.3,73,180);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (20,'a',false,25.4,67.5,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (20,'b',false,22.8,67.5,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (20,'c',false,20.3,67.5,180);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (19,'a',false,23.8,62,200);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (19,'b',false,20.3,62,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (19,'c',true,0,0,0);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (18,'a',false,22.8,56.5,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (18,'b',false,20.3,56.5,180);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (18,'c',true,0,0,0);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (17,'a',false,24.8,49.6,135);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (17,'b',false,21,50,155);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (17,'c',true,0,0,0);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (16,'a',false,0,0,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (16,'b',false,25.8,45.7,115);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (16,'c',true,0,0,0);
+
 INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (15,'a',false,31.3,48.8,70);
 INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (15,'b',false,31.3,45.3,90);
 INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (15,'c',true,0,0,0);
@@ -377,6 +421,7 @@ INSERT INTO `partieCase` (`x`, `y`, `idPartie`, `occupee`) VALUES (68, 'b', 1, F
 INSERT INTO `partieCase` (`x`, `y`, `idPartie`, `occupee`) VALUES (68, 'c', 1, FALSE);
 
 
+INSERT INTO `carte` (`idCarte`) VALUES (0); /* initialisation */
 INSERT INTO `carte` (`idCarte`) VALUES (1); /* booster */
 INSERT INTO `carte` (`idCarte`) VALUES (2); /* booster */
 INSERT INTO `carte` (`idCarte`) VALUES (3); /* booster */
@@ -397,6 +442,14 @@ INSERT INTO `carte` (`idCarte`) VALUES (17);
 INSERT INTO `carte` (`idCarte`) VALUES (18);
 INSERT INTO `carte` (`idCarte`) VALUES (19);
 INSERT INTO `carte` (`idCarte`) VALUES (20);
+
+/* initialisation */
+INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Jaune",0,0);
+INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Rouge",0,0);
+INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Violet",0,0);
+INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Bleu",0,0);
+INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Vert",0,0);
+INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Blanc",0,0);
 
 /* booster */
 INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Jaune",1,10);

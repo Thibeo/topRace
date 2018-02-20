@@ -11,7 +11,7 @@ public class CarteDaoImpl implements CarteDao{
 
     @Override
     public List<Carte> listCarte() {
-        String query = "SELECT * FROM carte";
+        String query = "SELECT * FROM carte WHERE NOT idCarte=0";
         List<Carte> listOfCarte = new ArrayList<>();
         try (
                 Connection connection = DataSourceProvider.getDataSource().getConnection();
