@@ -35,6 +35,10 @@ public class GameLibrary {
 
     public List<PartieCase> listPartieCase (int idPartie) { return partieCaseDao.listPartieCase(idPartie); }
 
+    public void changerCase(Joueur joueur, PartieCase cse) {joueurDao.changerCase(joueur, cse);}
+
+    public String getTopLeft(PartieCase cse){ return caseDao.getTopLeft(cse);}
+
     public Partie getPlateau (int idPartie){
         PartieCase tableauCase[][] = new PartieCase[69][3];
         PartieCase cse;

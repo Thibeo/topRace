@@ -53,5 +53,21 @@ public class JoueurDaoImpl implements JoueurDao {
         return null;
     }
 
+    @Override
+    public void changerCase(Joueur joueur, PartieCase cse){
+        String query1 = "UPDATE joueur SET x = ?, y = ? WHERE couleurJ = ? AND idPartie = ?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query1)) {
+            statement.setInt(1, cse.getX());
+            statement.setString(2, String.valueOf(cse.getY()));
+            statement.setString(3, joueur.getCouleur());
+            statement.setInt(4, joueur.getIdPartie());
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

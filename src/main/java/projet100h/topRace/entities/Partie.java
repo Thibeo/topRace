@@ -36,27 +36,27 @@ public class Partie {
     public String exception(PartieCase cse) {
         int x=cse.getX();
         char y=cse.getY();
-        if((x==4 && y=='a') || (x==12 && y=='a') || (x==24 && y=='a')) {
+        if((x==6 && y=='a') || (x==14 && y=='a') || (x==26 && y=='a')) {
             return "retrecissement";
-        }else if((x==8 && y=='b') || (x==17 && y=='b') || (x==43 && y=='b')) {
+        }else if((x==10 && y=='b') || (x==19 && y=='b') || (x==45 && y=='b')) {
             return "agrandissement";
         }
-        else if ((x==6 && y=='a') || (x==14 && y=='a')) {
+        else if ((x==8 && y=='a') || (x==16 && y=='a')) {
             return "tournant a l interieur";
         }
-        else if ((x==52 && y=='c') ||(x==50 && y=='c') || (x==54 && y=='c') || (x==59 && y=='c') || (x==57 && y=='c') || (x==61 && y=='c')) {
+        else if ((x==54 && y=='c') ||(x==52 && y=='c') || (x==56 && y=='c') || (x==61 && y=='c') || (x==59 && y=='c') || (x==62 && y=='c')) {
             return "dernier tournant a l'extérieur";
         }
-        else if ((x==50 && y=='a') || (x==57 && y=='a')) {
+        else if ((x==52 && y=='a') || (x==59 && y=='a')) {
             return "dernier tournant a l'interieur debut";
         }
-        else if ((x==53 && y=='a') || (x==60 && y=='a')) {
+        else if ((x==55 && y=='a') || (x==62 && y=='a')) {
             return "dernier tournant a l'interieur milieu";
         }
-        else if ((x==50 && y=='b') || (x==53 && y=='b') || (x==57 && y=='b') || (x==60 && y=='b')) {
+        else if ((x==52 && y=='b') || (x==55 && y=='b') || (x==59 && y=='b') || (x==62 && y=='b')) {
             return "dernier tournant au milieu debut";
         }
-        else if ((x==54 && y=='b') || (x==61 && y=='b')) {
+        else if ((x==56 && y=='b') || (x==63 && y=='b')) {
             return "dernier tournant au milieu milieu";
         }
         else {
@@ -74,7 +74,7 @@ public class Partie {
         char y=cse.getY();
 
         // deux premiers tournants à l'intérieur: une case équivaut à deux colonnes
-        if ((x==7 && y=='a') || (x==15 && y=='a')) {
+        if ((x==9 && y=='a') || (x==17 && y=='a')) {
             if (cse.isOccupee()==true) {
                 this.tableauCase[cse.getX()-1][0].setOccupee(true);
             }else{
@@ -83,7 +83,7 @@ public class Partie {
 
 
             // dernier tournant extérieur: une case équivaut à deux colonnes
-        }else if ((x==51 && y=='c') || (x==53 && y=='c') || (x==55 && y=='c') || (x==58 && y=='c') || (x==60 && y=='c') || (x==62 && y=='c')) {
+        }else if ((x==53 && y=='c') || (x==55 && y=='c') || (x==57 && y=='c') || (x==60 && y=='c') || (x==62 && y=='c') || (x==64 && y=='c')) {
             if (cse.isOccupee()==true) {
                 this.tableauCase[cse.getX()-1][2].setOccupee(true);
             }else{
@@ -91,7 +91,7 @@ public class Partie {
             };
             // dernier tournant milieu: une case équivaut à trois colonnes
             // entrée par la case du début:
-        }else if ((x==52 && y=='b') || (x==55 && y=='b') || (x==59 && y=='b') || (x==62 && y=='b')) {
+        }else if ((x==54 && y=='b') || (x==57 && y=='b') || (x==61 && y=='b') || (x==64 && y=='b')) {
             if (cse.isOccupee()==true) {
                 for(int i=1;i<3;i++) {
                     this.tableauCase[cse.getX()-i][1].setOccupee(true);
@@ -103,7 +103,7 @@ public class Partie {
             };
             // dernier tournant milieu: une case équivaut à trois colonnes
             //entrée par la case du mileu
-        }else if ((x==54 && y=='b') || (x==61 && y=='b')) {
+        }else if ((x==56 && y=='b') || (x==63 && y=='b')) {
             if (cse.isOccupee()==true) {
                 for(int i=-1;i<2;i++) {
                     this.tableauCase[cse.getX()+i][1].setOccupee(true);
@@ -115,7 +115,7 @@ public class Partie {
             };
             // dernier tournant intérieur: une case équivaut à six colonnes
             // entrée par une case du début:
-        }else if ((x==55 && y=='a') || (x==62 && y=='a')) {
+        }else if ((x==57 && y=='a') || (x==64 && y=='a')) {
             if (cse.isOccupee()==true) {
                 for(int i=1;i<6;i++) {
                     this.tableauCase[cse.getX()-i][0].setOccupee(true);
@@ -128,7 +128,7 @@ public class Partie {
 
             // dernier tournant intérieur: une case équivaut à six colonnes
             //entrée par une case du milieu:
-        }else if ((x==53 && y=='a') || (x==60 && y=='a')) {
+        }else if ((x==55 && y=='a') || (x==62 && y=='a')) {
             if (cse.isOccupee()==true) {
                 for(int i=-3;i<3;i++) {
                     this.tableauCase[cse.getX()+i][0].setOccupee(true);
