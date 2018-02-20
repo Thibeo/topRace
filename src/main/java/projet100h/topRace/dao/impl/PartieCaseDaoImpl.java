@@ -4,6 +4,8 @@ import projet100h.topRace.dao.PartieCaseDao;
 import projet100h.topRace.entities.PartieCase;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PartieCaseDaoImpl implements PartieCaseDao {
 
@@ -15,7 +17,7 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, x);
             statement.setString(2, String.valueOf(y));
-            statement.setInt(2, idPartie);
+            statement.setInt(3, idPartie);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     return new PartieCase(resultSet.getInt("x"),
@@ -28,6 +30,29 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public List<PartieCase> listPartieCase(int idPartie) {
+        String query = "SELECT * FROM partieCase WHERE idPartie=?";
+        List<PartieCase> listOfcases = new ArrayList<>();
+        try (
+                Connection connection = DataSourceProvider.getDataSource().getConnection();
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idPartie);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    listOfcases.add(
+                            new PartieCase(resultSet.getInt("x"),
+                                           resultSet.getString("y").charAt(0),
+                                           resultSet.getInt("idPartie"),
+                                           resultSet.getBoolean("occupee")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listOfcases;
     }
 
 }

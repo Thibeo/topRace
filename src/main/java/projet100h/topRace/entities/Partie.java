@@ -3,13 +3,9 @@ package projet100h.topRace.entities;
 public class Partie {
     private PartieCase tableauCase[][];
 
-
     public void setTableauCase(PartieCase [][] tableau) {
         this.tableauCase=tableau;
     }
-
-
-
 
 
     public boolean isOccuped(int x,char y){

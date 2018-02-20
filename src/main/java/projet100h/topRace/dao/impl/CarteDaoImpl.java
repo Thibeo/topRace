@@ -33,7 +33,7 @@ public class CarteDaoImpl implements CarteDao{
 
     // retourne une liste contenant les couleurs des voitures et le nombre de déplacements associé que la carte permet
     public List listDeplacementCarte(int id) {
-        String query = "SELECT * FROM nbcarte WHERE idCarte=? ";
+        String query = "SELECT * FROM nbCase WHERE idCarte=? ";
         List listDeplacemementCouleur = new ArrayList<>();
         try (
                 Connection connection = DataSourceProvider.getDataSource().getConnection();
