@@ -6,45 +6,83 @@ DELETE FROM partieCase;
 DELETE FROM partie;
 DELETE FROM joueur;
 
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (7,'a',false,64,56.5);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (7,'b',false,67.2,56.5);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (7,'c',false,0,0);
+/*
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (0,'a',false,0,0,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (0,'b',false,0,0,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (0,'c',false,0,0,0);
+*/
 
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (6,'a',false,62.5,62);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (6,'b',false,65,62);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (6,'c',false,67.5,62);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (15,'a',false,31.3,48.8,70);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (15,'b',false,31.3,45.3,90);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (15,'c',true,0,0,0);
 
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (5,'a',false,62.5,67.5);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (5,'b',false,65,67.5);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (5,'c',false,67.5,67.5);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (14,'a',false,36.6,50.4,90);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (14,'b',false,36.6,47.8,90);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (14,'c',false,36.6,45.1,90);
 
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (4,'a',false,62.5,72.5);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (4,'b',false,65,72.5);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (4,'c',false,67.5,72.5);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (13,'a',false,41.5,50.4,90);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (13,'b',false,41.5,47.8,90);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (13,'c',false,41.5,45.1,90);
 
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (3,'a',false,62.5,78);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (3,'b',false,65,78);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (3,'c',false,67.5,78);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (12,'a',false,46.6,50.4,90);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (12,'b',false,46.6,47.8,90);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (12,'c',false,46.6,45.1,90);
 
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (2,'a',false,62.5,82.9);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (2,'b',false,65,82.9);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (2,'c',false,67.5,82.9);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (11,'a',false,51.7,50.4,90);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (11,'b',false,51.7,47.8,90);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (11,'c',false,51.7,45.1,90);
 
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (1,'a',true,62.5,89);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (1,'b',true,65,89);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (1,'c',true,67.5,89);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (10,'a',false,56.5,49,110);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (10,'b',false,56.7,45.3,90);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (10,'c',true,0,0,0);
 
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (0,'a',true,62.5,94);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (0,'b',true,65,94);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (0,'c',true,67.5,94);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (9,'a',false,63,49.6,45);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (9,'b',false,62,45.8,65);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (9,'c',true,0,0,0);
 
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (66,'a',true,62.5,89);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (66,'b',true,65,89);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (66,'c',true,67.5,89);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (8,'a',false,0,0,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (8,'b',false,66.4,50,30);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (8,'c',true,0,0,0);
 
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (65,'a',true,62.5,94);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (65,'b',true,65,94);
-INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`) VALUES (65,'c',true,67.5,94);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (7,'a',false,64,56.5,340);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (7,'b',false,67.2,56.5,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (7,'c',true,0,0,0);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (6,'a',false,62.5,62,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (6,'b',false,65,62,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (6,'c',false,67.5,62,0);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (5,'a',false,62.5,67.5,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (5,'b',false,65,67.5,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (5,'c',false,67.5,67.5,0);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (4,'a',false,62.5,72.5,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (4,'b',false,65,72.5,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (4,'c',false,67.5,72.5,0);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (3,'a',false,62.5,78,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (3,'b',false,65,78,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (3,'c',false,67.5,78,0);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (2,'a',false,62.5,82.9,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (2,'b',false,65,82.9,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (2,'c',false,67.5,82.9,0);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (1,'a',true,62.5,89,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (1,'b',true,65,89,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (1,'c',true,67.5,89,0);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (0,'a',true,62.5,94,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (0,'b',true,65,94,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (0,'c',true,67.5,94,0);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (66,'a',false,62.5,89,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (66,'b',false,65,89,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (66,'c',false,67.5,89,0);
+
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (65,'a',false,62.5,94,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (65,'b',false,65,94,0);
+INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES (65,'c',false,67.5,94,0);
 
 INSERT INTO `typeVoiture` (`couleurV`) VALUES ("Jaune");
 INSERT INTO `typeVoiture` (`couleurV`) VALUES ("Rouge");

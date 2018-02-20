@@ -33,6 +33,7 @@ CREATE TABLE `cse` (
   `occupee` boolean,
   `top` FLOAT(11) NOT NULL,
   `left` FLOAT(11) NOT NULL,
+  `rotate` int(11) NOT NULL,
   PRIMARY KEY (`x`,`y`)
 );
 
