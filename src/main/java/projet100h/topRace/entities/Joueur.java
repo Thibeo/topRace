@@ -6,7 +6,7 @@ public class Joueur {
     private PartieCase caseActuelle;
     private int idPartie;
 
-    public Joueur(String nomJoueur, String couleur, PartieCase caseActuelle, int idPartie){
+    public Joueur(String couleur, String nomJoueur, PartieCase caseActuelle, int idPartie){
         this.nomJoueur=nomJoueur;
         this.couleur=couleur;
         this.caseActuelle=caseActuelle;
@@ -88,6 +88,7 @@ public class Joueur {
 
 
     public PartieCase deplacementSeul(Partie plateau){
+
 
         if(this.caseActuelle.getY()=='a') {
             // si la case directement devant (sur la meme ligne) est libre:
@@ -194,7 +195,9 @@ public class Joueur {
 
     }
 
-    public void deplacer(int nbreCase,Partie plateau){
+    public PartieCase deplacer(int nbreCase, Partie plateau){
+
+        PartieCase cse=null;
 
         for(int i=0;i<nbreCase;i++){
             System.out.println("case actuelle: x:"+ this.caseActuelle.getX()+"y: "+this.caseActuelle.getY());
@@ -236,9 +239,15 @@ public class Joueur {
                     }
                 }
             }else{
-                this.deplacementSeul(plateau);
+                if (i == nbreCase-1){
+                    cse = this.deplacementSeul(plateau);
+                } else{
+                    this.deplacementSeul(plateau);
+                }
             }
         }
+        System.out.println("case d'arrivé de la fonction est "+cse.getX()+","+cse.getY());
+        return cse;
     }
 
 

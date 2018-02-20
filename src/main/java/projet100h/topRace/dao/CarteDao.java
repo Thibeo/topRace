@@ -7,4 +7,6 @@ public interface CarteDao {
 
     public List<Carte> listCarte();
 
+    public List listDeplacementCarte(int id);
+
 }

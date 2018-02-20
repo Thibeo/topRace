@@ -11,4 +11,6 @@ public interface JoueurDao {
 
     public List<String> getXYByCouleur(String couleur, int idPartie);
 
+    public void changerCase(Joueur joueur, PartieCase cse);
+
 }

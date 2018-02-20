@@ -33,9 +33,40 @@ public class GameLibrary {
 
     public List<NbCase> listNbCase() { return  nbCaseDao.listNbCase(); }
 
+    public List<PartieCase> listPartieCase (int idPartie) { return partieCaseDao.listPartieCase(idPartie); }
+
+    public void changerCase(Joueur joueur, PartieCase cse) {joueurDao.changerCase(joueur, cse);}
+
+    public String getTopLeft(PartieCase cse){ return caseDao.getTopLeft(cse);}
+
+    public Partie getPlateau (int idPartie){
+        PartieCase tableauCase[][] = new PartieCase[69][3];
+        PartieCase cse;
+        List<PartieCase> listPartieCase = listPartieCase(idPartie);
+        for (int i=0 ; i< listPartieCase.size() ; i++){
+            if (listPartieCase.get(i).getY()=='a'){
+                int x = listPartieCase.get(i).getX();
+                cse=listPartieCase.get(i);
+                tableauCase[x][0]=cse;
+            }else if(listPartieCase.get(i).getY()=='b'){
+                tableauCase[listPartieCase.get(i).getX()][1]=listPartieCase.get(i);
+            }else if(listPartieCase.get(i).getY()=='c'){
+                tableauCase[listPartieCase.get(i).getX()][2]=listPartieCase.get(i);
+            }
+        }
+        Partie partie = new Partie();
+        partie.setTableauCase(tableauCase);
+        return partie;
+    }
 
     public List listDeplacementCarte(int id){
-        return carteDao.listDeplacementCarte(id);
+        return carteDao.listDeplacementCarte(id); /* < <couleurVoiture, nbCase> , <couleurVoiture, nbCase> , <couleurVoiture, nbCase> > */
+    }
+
+    public Joueur getJoueur(String couleur, int idPartie){
+        List<String> list = joueurDao.getXYByCouleur(couleur,idPartie);
+        PartieCase cse = partieCaseDao.getPartieCase(Integer.parseInt(list.get(0)), list.get(1).charAt(0), idPartie);
+        return joueurDao.getJoueurByCase(couleur,idPartie,cse);
     }
 
     /*
@@ -63,10 +94,6 @@ public class GameLibrary {
     }
 */
 
-    public Joueur getJoueur(String couleur, int idPartie){
-        List<String> list = joueurDao.getXYByCouleur(couleur,idPartie);
-        PartieCase cse = partieCaseDao.getPartieCase(Integer.parseInt(list.get(0)), list.get(2).charAt(0), idPartie);
-        return joueurDao.getJoueurByCase(couleur,idPartie,cse);
-    }
+
 
 }

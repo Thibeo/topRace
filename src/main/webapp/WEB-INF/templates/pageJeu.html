@@ -10,6 +10,11 @@
         <script type="text/javascript" src="js/gamee.js"></script>
 <script type="text/javascript">
 
+    function avancerVoiture(couleur, top, left) {
+        var voiture = document.getElementById("joueur"+couleur);
+        voiture.style.top = top+"vh";
+        voiture.style.left = left+"vh";
+    }
 
     function avancer(cse){
         var postMyOpinionRequest = new XMLHttpRequest();
@@ -17,19 +22,35 @@
         postMyOpinionRequest.responseType="json";
         postMyOpinionRequest.onload = function() {
             var answer=this.response;
-            console.log("nouvelle valeur : "+answer); /* answer est la nouvelle position sous le format "top/left" */
-            var top="";
-            var comt="";
-            for (var j=0 ; j<answer.length ; j++){  /* boucle pour separer le top et left en deux variable */
-                if (answer[j]=="/"){
-                    top=comt;
-                    comt="";
-                } else{
-                    comt=comt+answer[j];
+            console.log("answer: "+answer);
+            var longeur = parseInt(answer[0]);
+            console.log("nb changement = "+longeur);
+            var i=1;
+            for (var j=0 ; j<longeur ; j++){
+                var top="";
+                var left="";
+                var couleur="";
+                var comt="";
+                i=i+1;
+                while (answer[i]!='-'){
+                    if (answer[i]=='#'){
+                        couleur=comt;
+                        comt="";
+                        i=i+1;
+                    }else if (answer[i]=="/"){
+                        top=comt;
+                        comt="";
+                        i=i+1;
+                    }else{
+                        comt=comt+answer[i];
+                        i=i+1;
+                    }
                 }
+                left=comt;
+                console.log("la voiture qui est "+couleur+" se trouve en top = "+top+" et left = "+left);
+                avancerVoiture(couleur, top, left);
             }
-            var left=comt;
-            console.log("top = "+top+" / left = "+left); /* on retrouve ici le top et left en 2 variables */
+
             console.log("");
 
         }

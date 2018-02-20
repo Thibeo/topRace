@@ -2,6 +2,7 @@ package projet100h.topRace.dao.impl;
 
 import projet100h.topRace.dao.CaseDao;
 import projet100h.topRace.entities.Case;
+import projet100h.topRace.entities.PartieCase;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -33,6 +34,28 @@ public class CaseDaoImpl implements CaseDao {
             e.printStackTrace();
         }
         return listOfCase;
+    }
+
+    @Override
+    public String getTopLeft(PartieCase cse) {
+        String query = "SELECT * FROM cse WHERE x=? and y=?";
+        String topLeft;
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, cse.getX());
+            statement.setString(2, String.valueOf(cse.getY()));
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    topLeft = String.valueOf(resultSet.getFloat("top"));
+                    topLeft = topLeft + "/";
+                    topLeft = topLeft + String.valueOf(resultSet.getFloat("left"));
+                    return topLeft;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
