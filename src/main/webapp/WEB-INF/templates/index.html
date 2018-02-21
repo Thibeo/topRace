@@ -20,7 +20,7 @@
         </script>
     </head>
 
-    <body onload="Cacher('param');Cacher('regles');Cacher('jouer');Cacher('rentrerPseudo');">
+    <body onload="Afficher('index');Cacher('param');Cacher('regles');">
 
 <!-- HEADER -->
     	<header>
@@ -34,10 +34,10 @@
 	<!-- MENU -->
 	    	<section class="menu">
 	    		<ul>
-	    			<li><a href="home" onclick="Afficher('index');Cacher('param');Cacher('regles');Cacher('jouer');Cacher('rentrerPseudo');">Accueil</a></li>
-	    			<li><a href="#" onclick="Afficher('regles');Cacher('param');Cacher('index');Cacher('jouer');Cacher('rentrerPseudo');">Règles</a></li>
-	    			<li><a href="#" onclick="Afficher('param');Cacher('regles');Cacher('index');Cacher('jouer');Cacher('rentrerPseudo');">Paramètres</a></li>
-	    			<li><a href="#" onclick="Afficher('jouer');Cacher('param');Cacher('index');Cacher('regles');Cacher('rentrerPseudo');">Jouer</a></li>
+	    			<li><a href="home">Accueil</a></li>
+	    			<li><a href="#" onclick="Afficher('regles');Cacher('param');Cacher('index');">Règles</a></li>
+	    			<li><a href="#" onclick="Afficher('param');Cacher('regles');Cacher('index');">Paramètres</a></li>
+	    			<li><a href="jouer">Jouer</a></li>
 	    		</ul>
 	    	</section>
 
@@ -56,19 +56,6 @@ Nous l'avons modernisé et remis ainsi au goût du jour.
 Grâce à ce site, il sera possible de jouer une partie avec 
 des personnes physiquement éloignés de nous et sans forcément 
 posséder le plateau et les éléments nécessaires au jeu.</font></pre>
-                </nav>
-                <nav id="rentrerPseudo">
-                    <nav class="fond" onclick="Afficher('jouer');Cacher('param');Cacher('index');Cacher('regles');Cacher('rentrerPseudo');">
-                    </nav>
-                    <nav class="valid">
-                        <table class="pseudo">
-                            <tr>
-                               <td>Votre pseudo pour la partie :</td>
-                               <td class="inputPseudo"><input name="nom" id="nom" type="text" size="20" maxlength="100" placeholder="Votre pseudo"/></td>
-                               <td><button type="submit" value="Valider"><a href="game">Lancer</a></button></td>
-                            </tr>
-                        </table>
-                    </nav>
                 </nav>
                 <nav id="regles">
                     <h2>Voici les règles du jeu</h2>
@@ -154,85 +141,6 @@ posséder le plateau et les éléments nécessaires au jeu.</font></pre>
                             </td>
                         </tr>
                     </table>
-                </nav>
-                <nav id="jouer">
-                    <nav class="bloc">
-                        <h2>Rejoindre une partie</h2>
-                        <nav class="bloc1">
-                            <table>
-                                <tr>
-                                   <th><p>Nom de la partie</p></th>
-                                   <th><p>Propriétaire</p></th>
-                                   <th><p>Nombre de joueur</p></th>
-                                </tr>
-                                <tr>
-                                   <td><p>Meilleur partie du monde</p></td>
-                                   <td align="center"><p>Grosse cheville</p></td>
-                                   <td align="center"><p>5/6</p></td>
-                                   <td><button type="submit" value="Valider"><a href="#" onclick="Afficher('rentrerPseudo');Cacher('param');Cacher('index');Cacher('regles');Afficher('jouer');">Rejoindre</a></button></td>
-                                </tr>
-                                <tr >
-                                   <td><p>Hello world</p></td>
-                                   <td align="center"><p>Dieu</p></td>
-                                   <td align="center"><p>3/6</p></td>
-                                   <td><button type="submit" value="Valider"><a href="#" onclick="Afficher('rentrerPseudo');Cacher('param');Cacher('index');Cacher('regles');Afficher('jouer');">Rejoindre</a></button></td>
-                                </tr>
-                                <tr >
-                                   <td><p>Partie de coco</p></td>
-                                   <td align="center"><p>Coco</p></td>
-                                   <td align="center"><p>2/3</p></td>
-                                   <td><button type="submit" value="Valider"><a href="#" onclick="Afficher('rentrerPseudo');Cacher('param');Cacher('index');Cacher('regles');Afficher('jouer');">Rejoindre</a></button></td>
-                               </tr>
-                            </table>
-                        </nav>
-                    </nav>
-                    <nav class="bloc">
-                        <h2>Créer une partie</h2>
-                        <nav class="bloc1">
-                            <table>
-                                <form id='formulaire' method="post" enctype="text/plain">
-                                <tr>
-                                    <td>
-                                        <input name="nom" id="nom" type="text" size="40" maxlength="100" placeholder="Nom de la partie" required/> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <select id="nbJoueur" name="nbJoueur">
-                                            <option value="" disabled selected>nombre de joueurs</option>
-                                            <option value="2">2 joueurs</option>
-                                            <option value="3">3 joueurs</option>
-                                            <option value="6">6 joueurs</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr >
-                                    <td>
-                                        <input name="pseudo" id="pseudo" type="text" size="30" maxlength="50" placeholder="Votre pseudo" required/>
-                                    </td>
-                                </tr>
-                                <tr >
-                                    <td>
-                                        <select id="nbJoueur" name="nbJoueur">
-                                            <option value="" disabled selected>Votre couleur</option>
-                                            <option value="Jaune">Jaune</option>
-                                            <option value="Vert">Vert</option>
-                                            <option value="Violet">Violet</option>
-                                            <option value="Blanc">Blanc</option>
-                                            <option value="Rouge">Rouge</option>
-                                            <option value="Bleu">Bleu</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr >
-                                    <td align="center">
-                                        <button type="submit" value="Valider"><a href="wait">Valider</a></button>
-                                    </td>
-                                </tr>
-                                </form>
-                            </table>
-                        </nav>
-                    </nav>
                 </nav>
     		</nav>
     		<nav class="bande2"></nav>

@@ -15,7 +15,7 @@ public class DataSourceProvider {
             dataSource.setPort(3306);
             dataSource.setDatabaseName("projet100h");
             dataSource.setUser("root");
-            dataSource.setPassword("yj8bx6or");
+            dataSource.setPassword("");
         }
         return dataSource;
     }

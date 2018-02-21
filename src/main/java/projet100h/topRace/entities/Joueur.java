@@ -208,8 +208,6 @@ public class Joueur {
         PartieCase cse=null;
 
         for(int i=0;i<nbreCase;i++){
-            System.out.println("case actuelle: x:"+ this.caseActuelle.getX()+"y: "+this.caseActuelle.getY());
-            System.out.println("exception:"+ plateau.exception(this.caseActuelle));
             // si la case suivante correspond à un rétrécissement de plateau:
             if (plateau.exception(this.caseActuelle).equals("retrecissement")) {
                 // si on est en a, on ne peut pas accèder à 'b' de la colonne suivante, on ne peut que

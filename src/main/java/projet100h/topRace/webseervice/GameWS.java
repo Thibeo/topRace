@@ -29,7 +29,8 @@ public class GameWS {
             Partie plateau = GameLibrary.getInstance().getPlateau(1);
             List carte = (List) listDeplacementCarte.get(i);
             String couleur = (String) carte.get(1);
-            System.out.println("la voiture "+carte.get(1)+" se déplace de "+carte.get(0)+" case(s)");
+            int nbCases = (int) carte.get(0);
+            System.out.println("la voiture "+carte.get(1)+" se déplace de "+nbCases+" case(s)");
             Joueur joueurADeplacer = GameLibrary.getInstance().getJoueur(couleur,1);
             System.out.println("couleur du joueur = "+joueurADeplacer.getCouleur());
             System.out.println("sa case actuelle est : "+joueurADeplacer.getCaseActuelle().getX()+","+joueurADeplacer.getCaseActuelle().getY());
@@ -38,7 +39,7 @@ public class GameWS {
                 System.out.println(answer2);
                 answer=answer+"-"+joueurADeplacer.getCouleur()+"#"+answer2;
             } else {
-                PartieCase caseArrivee = joueurADeplacer.deplacer((Integer) carte.get(0), plateau);
+                PartieCase caseArrivee = joueurADeplacer.deplacer(nbCases, plateau);
                 System.out.println("caseArrivee = " + caseArrivee.getX() + "," + caseArrivee.getY());
                 GameLibrary.getInstance().changerCase(joueurADeplacer, caseArrivee);
                 String answer2 = GameLibrary.getInstance().getTopLeft(caseArrivee);
