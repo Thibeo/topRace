@@ -192,14 +192,10 @@ public class Joueur {
             }
 
         }
-
         // lorsque l'on arrive sur une case reliée aux autres:
         plateau.lierCasesException(this.caseActuelle);
-
-
         // pour gerer les exceptions dues aux entrées de tournants:
         this.deplacementException(plateau);
-
 
 
         return this.caseActuelle;
@@ -215,7 +211,6 @@ public class Joueur {
             System.out.println("exception:"+ plateau.exception(this.caseActuelle));
             // si la case suivante correspond à un rétrécissement de plateau:
             if (plateau.exception(this.caseActuelle).equals("retrecissement")) {
-
                 // si on est en a, on ne peut pas accèder à 'b' de la colonne suivante, on ne peut que
                 //rester sur la ligne 'a':
                 if (plateau.isOccuped(this.caseActuelle.getX()+1,'a')==false){
@@ -240,6 +235,9 @@ public class Joueur {
                     plateau.getCase(this.caseActuelle.getX()+1, 'b').modifierOccupee();
                     this.caseActuelle.modifierOccupee();
                     this.setCaseActuelle(plateau.getCase(this.caseActuelle.getX()+1,'b'));
+                    if (i == nbreCase-1){
+                        cse = this.caseActuelle;
+                    }
                     // si la case 'a' de la colonne suivante est libre, alors on regarde si la case 'a' de la colonne actuelle
                     // est libre. Si oui, on va dessus pour pouvoir, le tour d'après, accéder à la case 'a' de la colonne suivante
                 }else if (plateau.isOccuped(this.caseActuelle.getX()+1,'a')==false){
@@ -251,7 +249,10 @@ public class Joueur {
                 }
             }else{
                     this.deplacementSeul(plateau);
+                }
 
+            if (i == nbreCase-1){
+                cse = this.caseActuelle;
             }
         }
         partieCaseDao.modifierStatut(Ancienne,false);

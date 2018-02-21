@@ -6,16 +6,18 @@ public class Case {
     private int x;
     private char y;
     private boolean occupee;
-    private int top;
-    private int left;
+    private float top;
+    private float left;
+    private int rotate;
 
 
-    public Case(int x, char y, boolean occupee, int top, int left){
+    public Case(int x, char y, boolean occupee, float top, float left, int rotate){
         this.x=x;
         this.y=y;
         this.occupee=occupee;
         this.top=top;
         this.left=left;
+        this.rotate=rotate;
     }
 
     public int getX() { return x; }
@@ -27,11 +29,11 @@ public class Case {
     public boolean isOccupee() { return occupee; }
     public void setOccupee(boolean occupee) { this.occupee = occupee; }
 
-    public int getTop() { return top; }
-    public void setTop(int top) { this.top = top; }
+    public float getTop() { return top; }
+    public void setTop(float top) { this.top = top; }
 
-    public int getLeft() { return left; }
-    public void setLeft(int left) { this.left = left; }
+    public float getLeft() { return left; }
+    public void setLeft(float left) { this.left = left; }
 
 
 }

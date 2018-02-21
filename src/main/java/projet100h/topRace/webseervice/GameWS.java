@@ -33,14 +33,21 @@ public class GameWS {
             Joueur joueurADeplacer = GameLibrary.getInstance().getJoueur(couleur,1);
             System.out.println("couleur du joueur = "+joueurADeplacer.getCouleur());
             System.out.println("sa case actuelle est : "+joueurADeplacer.getCaseActuelle().getX()+","+joueurADeplacer.getCaseActuelle().getY());
-            PartieCase caseArrivee = joueurADeplacer.deplacer((Integer) carte.get(0), plateau);
-            System.out.println("caseArrivee = "+caseArrivee.getX()+","+caseArrivee.getY());
-            GameLibrary.getInstance().changerCase(joueurADeplacer, caseArrivee);
-            String answer2 = GameLibrary.getInstance().getTopLeft(caseArrivee);
-            System.out.println(answer2);
-            answer=answer+"-"+joueurADeplacer.getCouleur()+"#"+answer2;
+            if (idCarte==0){
+                String answer2 = GameLibrary.getInstance().getTopLeft(joueurADeplacer.getCaseActuelle());
+                System.out.println(answer2);
+                answer=answer+"-"+joueurADeplacer.getCouleur()+"#"+answer2;
+            } else {
+                PartieCase caseArrivee = joueurADeplacer.deplacer((Integer) carte.get(0), plateau);
+                System.out.println("caseArrivee = " + caseArrivee.getX() + "," + caseArrivee.getY());
+                GameLibrary.getInstance().changerCase(joueurADeplacer, caseArrivee);
+                String answer2 = GameLibrary.getInstance().getTopLeft(caseArrivee);
+                System.out.println(answer2);
+                answer = answer + "-" + joueurADeplacer.getCouleur() + "#" + answer2;
+            }
         }
         answer=answer+"-";
+        System.out.println(answer);
         return Response.ok().entity(gsonService.toJson(answer)).build();
     }
 }

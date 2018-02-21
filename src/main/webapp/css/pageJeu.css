@@ -446,33 +446,33 @@ input[type="checkbox"] + label::before{
     background-size: cover;
 }
 #joueurJaune{
-	top: 62.5vh;
- 	left: 89vh;
+	top: 0vh;
+ 	left: 0vh;
  	background-image: url(../img/joueurJaune.png);
 }
 #joueurBleu{
- 	top: 62.5vh;
- 	left: 94vh;
+ 	top: 0vh;
+ 	left: 0vh;
  	background-image: url(../img/joueurBleu.png);
 }
 #joueurVert{
- 	top: 65vh;
- 	left: 89vh;
+ 	top: 0vh;
+ 	left: 0vh;
  	background-image: url(../img/joueurVert.png);
 }
 #joueurBlanc{
- 	top: 65vh;
- 	left: 94vh;
+ 	top: 0vh;
+ 	left: 0vh;
  	background-image: url(../img/joueurBlanc.png);
 }
 #joueurViolet{
- 	top: 67.5vh;
- 	left: 89vh;
+ 	top: 0vh;
+ 	left: 0vh;
  	background-image: url(../img/joueurViolet.png);
 }
 #joueurRouge{
- 	top: 67.5vh;
- 	left: 94vh;
+ 	top: 0vh;
+ 	left: 0vh;
  	background-image: url(../img/joueurRouge.png);
 }
 
