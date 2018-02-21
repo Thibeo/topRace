@@ -260,6 +260,7 @@ public class Joueur {
         GameLibrary.getInstance().modifierCaseException(ancienne,false);
         GameLibrary.getInstance().modifierCaseException(cse,true);
         System.out.println("case d'arrivé de la fonction est "+cse.getX()+","+cse.getY());
+
         return cse;
     }
 
