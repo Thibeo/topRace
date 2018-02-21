@@ -41,7 +41,7 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
             statement.setInt(2, cse.getX());
             statement.setString(3, String.valueOf(cse.getY()));
             statement.setInt(4, cse.getIdPartie());
-
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

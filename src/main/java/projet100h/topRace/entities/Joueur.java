@@ -258,6 +258,7 @@ public class Joueur {
         partieCaseDao.modifierStatut(Ancienne,false);
         partieCaseDao.modifierStatut(cse,true);
         System.out.println("case d'arrivé de la fonction est "+cse.getX()+","+cse.getY());
+
         return cse;
     }
 
