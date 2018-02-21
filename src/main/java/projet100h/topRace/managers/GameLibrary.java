@@ -71,6 +71,93 @@ public class GameLibrary {
 
 
 
+    public void modifierCaseException(PartieCase cse,boolean occupee) {
+        int x=cse.getX();
+        char y=cse.getY();
+        int idPartie=cse.getIdPartie();
+
+
+        // deux premiers tournants à l'intérieur: une case équivaut à deux colonnes
+        if ((x==9 && y=='a') || (x==17 && y=='a')) {
+            PartieCase cseAutre=new PartieCase(x-1,'a',idPartie,true);
+            if (occupee==true) {
+                partieCaseDao.modifierStatut(cseAutre,true);
+            }else{
+                partieCaseDao.modifierStatut(cseAutre,false);
+            };
+
+            // dernier tournant extérieur: une case équivaut à deux colonnes
+        }else if ((x==53 && y=='c') || (x==55 && y=='c') || (x==57 && y=='c') || (x==60 && y=='c') || (x==62 && y=='c') || (x==64 && y=='c')) {
+            PartieCase cseAutre=new PartieCase(x-1,'c',idPartie,true);
+            if (cse.isOccupee()==true) {
+                partieCaseDao.modifierStatut(cseAutre,true);
+            }else{
+                partieCaseDao.modifierStatut(cseAutre,false);
+            };
+            // dernier tournant milieu: une case équivaut à trois colonnes
+            // entrée par la case du début:
+        }else if ((x==54 && y=='b') || (x==57 && y=='b') || (x==61 && y=='b') || (x==64 && y=='b')) {
+            if (cse.isOccupee()==true) {
+                for(int i=1;i<3;i++) {
+                    PartieCase cseAutre=new PartieCase(x-i,'b',idPartie,true);
+                    partieCaseDao.modifierStatut(cseAutre,true);
+                }
+
+            }else{
+                for(int i=1;i<3;i++) {
+                    PartieCase cseAutre=new PartieCase(x-i,'b',idPartie,true);
+                    partieCaseDao.modifierStatut(cseAutre,false);
+                }
+            };
+            // dernier tournant milieu: une case équivaut à trois colonnes
+            //entrée par la case du mileu
+        }else if ((x==56 && y=='b') || (x==63 && y=='b')) {
+            if (cse.isOccupee()==true) {
+                for(int i=-1;i<2;i++) {
+                    PartieCase cseAutre=new PartieCase(x+i,'b',idPartie,true);
+                    partieCaseDao.modifierStatut(cseAutre,true);
+                }
+            }else{
+                for(int i=-1;i<2;i++) {
+                    PartieCase cseAutre=new PartieCase(x+i,'b',idPartie,true);
+                    partieCaseDao.modifierStatut(cseAutre,false);
+                }
+            };
+            // dernier tournant intérieur: une case équivaut à six colonnes
+            // entrée par une case du début:
+        }else if ((x==57 && y=='a') || (x==64 && y=='a')) {
+            if (cse.isOccupee()==true) {
+                for(int i=1;i<6;i++) {
+                    PartieCase cseAutre=new PartieCase(x-i,'a',idPartie,true);
+                    partieCaseDao.modifierStatut(cseAutre,true);
+                }
+            }else{
+                for(int i=1;i<6;i++) {
+                    PartieCase cseAutre=new PartieCase(x-i,'a',idPartie,true);
+                    partieCaseDao.modifierStatut(cseAutre,false);
+                }
+            };
+
+            // dernier tournant intérieur: une case équivaut à six colonnes
+            //entrée par une case du milieu:
+        }else if ((x==55 && y=='a') || (x==62 && y=='a')) {
+            if (cse.isOccupee()==true) {
+                for(int i=-3;i<3;i++) {
+                    PartieCase cseAutre=new PartieCase(x+i,'a',idPartie,true);
+                    partieCaseDao.modifierStatut(cseAutre,true);
+                }
+            }else{
+                for(int i=-3;i<3;i++) {
+                    PartieCase cseAutre=new PartieCase(x+i,'a',idPartie,true);
+                    partieCaseDao.modifierStatut(cseAutre,false);
+                }
+            };
+        }
+        partieCaseDao.modifierStatut(cse,occupee);
+
+    }
+
+
 
 
 }
