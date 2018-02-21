@@ -2,6 +2,7 @@ package projet100h.topRace.entities;
 
 import projet100h.topRace.dao.PartieCaseDao;
 import projet100h.topRace.dao.impl.PartieCaseDaoImpl;
+import projet100h.topRace.managers.GameLibrary;
 
 public class Joueur {
     private String nomJoueur;
@@ -9,7 +10,7 @@ public class Joueur {
     private PartieCase caseActuelle;
     private int idPartie;
 
-    private PartieCaseDao partieCaseDao = new PartieCaseDaoImpl();
+
 
 
 
@@ -203,7 +204,7 @@ public class Joueur {
     }
 
     public PartieCase deplacer(int nbreCase, Partie plateau){
-        PartieCase Ancienne=this.caseActuelle;
+        PartieCase ancienne=this.caseActuelle;
         PartieCase cse=null;
 
         for(int i=0;i<nbreCase;i++){
@@ -255,8 +256,9 @@ public class Joueur {
                 cse = this.caseActuelle;
             }
         }
-        partieCaseDao.modifierStatut(Ancienne,false);
-        partieCaseDao.modifierStatut(cse,true);
+
+        GameLibrary.getInstance().modifierCaseException(ancienne,false);
+        GameLibrary.getInstance().modifierCaseException(cse,true);
         System.out.println("case d'arrivé de la fonction est "+cse.getX()+","+cse.getY());
         return cse;
     }
