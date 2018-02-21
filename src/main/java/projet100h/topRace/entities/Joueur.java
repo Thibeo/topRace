@@ -1,10 +1,17 @@
 package projet100h.topRace.entities;
 
+import projet100h.topRace.dao.PartieCaseDao;
+import projet100h.topRace.dao.impl.PartieCaseDaoImpl;
+
 public class Joueur {
     private String nomJoueur;
     private String couleur;
     private PartieCase caseActuelle;
     private int idPartie;
+
+    private PartieCaseDao partieCaseDao = new PartieCaseDaoImpl();
+
+
 
     public Joueur(String couleur, String nomJoueur, PartieCase caseActuelle, int idPartie){
         this.nomJoueur=nomJoueur;
@@ -185,10 +192,14 @@ public class Joueur {
             }
 
         }
+
         // lorsque l'on arrive sur une case reliée aux autres:
         plateau.lierCasesException(this.caseActuelle);
+
+
         // pour gerer les exceptions dues aux entrées de tournants:
         this.deplacementException(plateau);
+
 
 
         return this.caseActuelle;
@@ -196,7 +207,7 @@ public class Joueur {
     }
 
     public PartieCase deplacer(int nbreCase, Partie plateau){
-
+        PartieCase Ancienne=this.caseActuelle;
         PartieCase cse=null;
 
         for(int i=0;i<nbreCase;i++){
@@ -239,13 +250,12 @@ public class Joueur {
                     }
                 }
             }else{
-                if (i == nbreCase-1){
-                    cse = this.deplacementSeul(plateau);
-                } else{
                     this.deplacementSeul(plateau);
-                }
+
             }
         }
+        partieCaseDao.modifierStatut(Ancienne,false);
+        partieCaseDao.modifierStatut(cse,true);
         System.out.println("case d'arrivé de la fonction est "+cse.getX()+","+cse.getY());
         return cse;
     }

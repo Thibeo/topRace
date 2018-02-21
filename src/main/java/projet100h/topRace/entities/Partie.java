@@ -85,8 +85,10 @@ public class Partie {
         if ((x==9 && y=='a') || (x==17 && y=='a')) {
             if (cse.isOccupee()==true) {
                 this.tableauCase[cse.getX()-1][0].setOccupee(true);
+                partieCaseDao.modifierStatut(cse,true);
             }else{
                 this.tableauCase[cse.getX()-1][0].setOccupee(false);
+                partieCaseDao.modifierStatut(cse,true);
             };
 
 
@@ -94,10 +96,10 @@ public class Partie {
         }else if ((x==53 && y=='c') || (x==55 && y=='c') || (x==57 && y=='c') || (x==60 && y=='c') || (x==62 && y=='c') || (x==64 && y=='c')) {
             if (cse.isOccupee()==true) {
                 this.tableauCase[cse.getX()-1][2].setOccupee(true);
-                partieCaseDao.modifierStatut(cse.getX()-1,'c',1,true);
+                partieCaseDao.modifierStatut(cse,true);
             }else{
                 this.tableauCase[cse.getX()-1][2].setOccupee(false);
-               partieCaseDao.modifierStatut(cse.getX()-1,'c',1,false);
+               partieCaseDao.modifierStatut(cse,false);
             };
             // dernier tournant milieu: une case équivaut à trois colonnes
             // entrée par la case du début:
@@ -105,12 +107,13 @@ public class Partie {
             if (cse.isOccupee()==true) {
                 for(int i=1;i<3;i++) {
                     this.tableauCase[cse.getX()-i][1].setOccupee(true);
-                    partieCaseDao.modifierStatut(cse.getX()-i,'b',1,true);
+                    partieCaseDao.modifierStatut(cse,true);
                 }
+
             }else{
                 for(int i=1;i<3;i++) {
                     this.tableauCase[cse.getX()-i][1].setOccupee(false);
-                    partieCaseDao.modifierStatut(cse.getX()-i,'c',1,false);
+                    partieCaseDao.modifierStatut(cse,false);
                 }
             };
             // dernier tournant milieu: une case équivaut à trois colonnes
@@ -119,12 +122,12 @@ public class Partie {
             if (cse.isOccupee()==true) {
                 for(int i=-1;i<2;i++) {
                     this.tableauCase[cse.getX()+i][1].setOccupee(true);
-                    partieCaseDao.modifierStatut(cse.getX()+i,'b',1,true);
+                    partieCaseDao.modifierStatut(cse,true);
                 }
             }else{
                 for(int i=-1;i<2;i++) {
                     this.tableauCase[cse.getX()+i][1].setOccupee(false);
-                   partieCaseDao.modifierStatut(cse.getX()+i,'b',1,false);
+                   partieCaseDao.modifierStatut(cse,false);
                 }
             };
             // dernier tournant intérieur: une case équivaut à six colonnes
@@ -133,12 +136,12 @@ public class Partie {
             if (cse.isOccupee()==true) {
                 for(int i=1;i<6;i++) {
                     this.tableauCase[cse.getX()-i][0].setOccupee(true);
-                    partieCaseDao.modifierStatut(cse.getX()-i,'a',1,true);
+                    partieCaseDao.modifierStatut(cse,true);
                 }
             }else{
                 for(int i=1;i<6;i++) {
                     this.tableauCase[cse.getX()-i][0].setOccupee(false);
-                    partieCaseDao.modifierStatut(cse.getX()-i,'a',1,false);
+                    partieCaseDao.modifierStatut(cse,false);
                 }
             };
 
@@ -148,12 +151,12 @@ public class Partie {
             if (cse.isOccupee()==true) {
                 for(int i=-3;i<3;i++) {
                     this.tableauCase[cse.getX()+i][0].setOccupee(true);
-                    partieCaseDao.modifierStatut(cse.getX()+i,'a',1,true);
+                    partieCaseDao.modifierStatut(cse,true);
                 }
             }else{
                 for(int i=-3;i<3;i++) {
                     this.tableauCase[cse.getX()+i][0].setOccupee(false);
-                    partieCaseDao.modifierStatut(cse.getX()+i,'a',1,false);
+                    partieCaseDao.modifierStatut(cse,false);
                 }
             };
         }
