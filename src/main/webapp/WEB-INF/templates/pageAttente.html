@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>TOP RACE - Attente</title>
+    <meta charset='utf-8'>
+    <link rel='stylesheet' href='css/pageAttente.css'>
+    <link rel="shortcut icon" href="img/logo.png">
+
+    <script type="text/javascript">
+        var signe1 = -1;
+
+        var clignotementFading = function(){
+            var obj1 = document.getElementById('LblClignotant1');
+            var obj2 = document.getElementById('LblClignotant2');
+            var obj3 = document.getElementById('LblClignotant3');
+
+            if (obj1.style.opacity >= 0.96){
+                signe1 = -1;
+            }
+            if (obj1.style.opacity <= 0.04){
+                signe1 = 1;
+            }
+
+            obj3.style.opacity = 1 - (obj1.style.opacity * 1) - (signe1 * 0.04);
+            obj1.style.opacity = (obj1.style.opacity * 1) + (signe1 * 0.04);
+            obj2.style.opacity = 0.5 ;
+
+
+        };
+
+        // mise en place de l appel de la fonction toutes les 0.085 secondes
+        // Pour arrêter le clignotement : clearInterval(periode);
+        periode = setInterval(clignotementFading, 85 );
+    </script>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <!-- HAUT -->
+    <section class="haut">
+        <nav class="voitureOrange"></nav>
+        <h1>TOP RACE</h1>
+        <nav class="voitureRouge"></nav>
+    </section>
+
+    <!-- MENU -->
+    <section class="menu">
+        <ul>
+            <li><a href="index.html" onclick="Afficher('index');Cacher('param');Cacher('regles');Cacher('jouer');Cacher('rentrerPseudo');">Accueil</a></li>
+            <li><a href="#" onclick="Afficher('regles');Cacher('param');Cacher('index');Cacher('jouer');Cacher('rentrerPseudo');">Règles</a></li>
+            <li><a href="#" onclick="Afficher('param');Cacher('regles');Cacher('index');Cacher('jouer');Cacher('rentrerPseudo');">Paramètres</a></li>
+            <li><a href="#" onclick="Afficher('jouer');Cacher('param');Cacher('index');Cacher('regles');Cacher('rentrerPseudo');">Jouer</a></li>
+        </ul>
+    </section>
+
+</header>
+
+<!-- CONTENU -->
+
+<section class="page">
+    <nav class="bande1"></nav>
+    <nav class="contenu">
+        <nav id="jouer">
+            <nav class="bloc">
+                <h2>En attente de joueurs <label id="LblClignotant1">.</label><label id="LblClignotant2">.</label><label id="LblClignotant3">.</label></h2>
+                <nav class="bloc1">
+                    <table>
+                        <tr>
+                            <th><p>La partie de Bob le brico</p></th>
+                            <th></th>
+                            <th><p>Couleur</p></th>
+                            <th><button>Quitter</button></th>
+                        </tr>
+                        <tr>
+                            <td><p>Bob</p></td>
+                            <td align="center"><p>Propriétaire</p></td>
+                            <td align="center"><p>Jaune</p></td>
+                        </tr>
+                        <tr >
+                            <td><p>Jack</p></td>
+                            <td align="center"><p>J2</p></td>
+                            <td align="center"><p>Violet</p></td>
+                        </tr>
+                        <tr >
+                            <td><p>Coco</p></td>
+                            <td align="center"><p>J3</p></td>
+                            <td align="center"><p>Blanc</p></td>
+                        </tr>
+                    </table>
+                </nav>
+            </nav>
+        </nav>
+    </nav>
+    <nav class="bande2"></nav>
+
+    <section class="footer">
+        <p></p> <!--le footer est vide -->
+    </section>
+</section>
+
+</body>
+
+</html>
