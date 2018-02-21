@@ -69,30 +69,7 @@ public class GameLibrary {
         return joueurDao.getJoueurByCase(couleur,idPartie,cse);
     }
 
-    /*
-    public void transformerStatut(PartieCase cseActuelle, Case Ancienne, Partie partie){
 
-        if (partie.lierCasesException(cseActuelle).equals("sortie de tournant")){
-
-        }else if (partie.lierCasesException(cseActuelle).equals("sortie dernier tournant exterieur")){
-
-        }else if (partie.lierCasesException(cseActuelle).equals("sortie dernier tournant milieu")){
-
-        }else if (partie.lierCasesException(cseActuelle).equals("sortie dernier tournant interieur")){
-
-        }else if (partie.lierCasesException(cseActuelle).equals("rien")){
-
-        }
-
-
-
-
-        partie.lierCasesException(Ancienne);
-
-
-
-    }
-*/
 
 
 

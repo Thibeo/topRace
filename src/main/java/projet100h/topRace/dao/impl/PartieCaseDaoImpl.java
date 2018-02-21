@@ -33,14 +33,14 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
     }
 
 
-    public void modifierStatut(int x, char y, int idPartie, boolean occupe){
+    public void modifierStatut(PartieCase cse,boolean occupe){
         String query = "UPDATE partieCase SET occupee=? WHERE x=? and y=? and idPartie=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setBoolean(1,occupe);
-            statement.setInt(2, x);
-            statement.setString(3, String.valueOf(y));
-            statement.setInt(4, idPartie);
+            statement.setInt(2, cse.getX());
+            statement.setString(3, String.valueOf(cse.getY()));
+            statement.setInt(4, cse.getIdPartie());
 
         } catch (SQLException e) {
             e.printStackTrace();
