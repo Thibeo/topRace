@@ -23,17 +23,21 @@ public class GameLibrary {
     private NbCaseDao nbCaseDao = new NbCaseDaoImpl();
     private PartieCaseDao partieCaseDao = new PartieCaseDaoImpl();
     private JoueurDao joueurDao = new JoueurDaoImpl();
+    private PartieDao partieDao = new PartieDaoImpl();
 
-    private GameLibrary() {
-    }
+    private GameLibrary() { }
 
+    // toutes les listes :
     public List<Carte> listCarte() { return  carteDao.listCarte(); }
-
     public List<Case> listCase() { return  caseDao.listCase(); }
-
     public List<NbCase> listNbCase() { return  nbCaseDao.listNbCase(); }
-
     public List<PartieCase> listPartieCase (int idPartie) { return partieCaseDao.listPartieCase(idPartie); }
+    public List listPartie(){
+        return partieDao.listPartie(); /* < <1, "partie de bob", "bob" , "5/6"> , <2, "best party"> , <3, "partie pour le fun"> > */
+    }
+    public List listDeplacementCarte(int id){
+        return carteDao.listDeplacementCarte(id); /* < <couleurVoiture, nbCase> , <couleurVoiture, nbCase> , <couleurVoiture, nbCase> > */
+    }
 
     public void changerCase(Joueur joueur, PartieCase cse) {joueurDao.changerCase(joueur, cse);}
 
@@ -59,9 +63,7 @@ public class GameLibrary {
         return partie;
     }
 
-    public List listDeplacementCarte(int id){
-        return carteDao.listDeplacementCarte(id); /* < <couleurVoiture, nbCase> , <couleurVoiture, nbCase> , <couleurVoiture, nbCase> > */
-    }
+
 
     public Joueur getJoueur(String couleur, int idPartie){
         List<String> list = joueurDao.getXYByCouleur(couleur,idPartie);
