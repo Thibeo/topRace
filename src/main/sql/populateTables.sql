@@ -432,16 +432,6 @@ INSERT INTO `carte` (`idCarte`) VALUES (7);
 INSERT INTO `carte` (`idCarte`) VALUES (8);
 INSERT INTO `carte` (`idCarte`) VALUES (9);
 INSERT INTO `carte` (`idCarte`) VALUES (10);
-INSERT INTO `carte` (`idCarte`) VALUES (11);
-INSERT INTO `carte` (`idCarte`) VALUES (12);
-INSERT INTO `carte` (`idCarte`) VALUES (13);
-INSERT INTO `carte` (`idCarte`) VALUES (14);
-INSERT INTO `carte` (`idCarte`) VALUES (15);
-INSERT INTO `carte` (`idCarte`) VALUES (16);
-INSERT INTO `carte` (`idCarte`) VALUES (17);
-INSERT INTO `carte` (`idCarte`) VALUES (18);
-INSERT INTO `carte` (`idCarte`) VALUES (19);
-INSERT INTO `carte` (`idCarte`) VALUES (20);
 
 /* LES CARTES */
 
