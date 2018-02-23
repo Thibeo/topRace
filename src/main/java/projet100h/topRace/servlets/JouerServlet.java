@@ -17,6 +17,12 @@ public class JouerServlet extends GenericServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
+
+        // punaise de commentaire de mince à la nul...
+        // creer une partie:
+
+
+
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         templateEngine.process("jouer", context, resp.getWriter());
     }
