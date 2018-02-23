@@ -39,7 +39,7 @@ public class Joueur {
      * permet de regarder si la case sur laquelle on arrive est une case présentant un déplacement particulier
      *
      */
-    public void deplacementException(Partie plateau) {
+    public void deplacementException(Plateau plateau) {
 
 
         if (plateau.exception(this.caseActuelle).equals("tournant a l interieur")) {
@@ -95,7 +95,7 @@ public class Joueur {
 
 
 
-    public PartieCase deplacementSeul(Partie plateau){
+    public PartieCase deplacementSeul(Plateau plateau){
 
 
         if(this.caseActuelle.getY()=='a') {
@@ -203,7 +203,7 @@ public class Joueur {
 
     }
 
-    public PartieCase deplacer(int nbreCase, Partie plateau){
+    public PartieCase deplacer(int nbreCase, Plateau plateau){
         PartieCase ancienne=this.caseActuelle;
         PartieCase cse=null;
 
@@ -260,6 +260,42 @@ public class Joueur {
         System.out.println("case d'arrivé de la fonction est "+cse.getX()+","+cse.getY());
 
         return cse;
+    }
+
+
+    public void deplacementOptimise(Plateau plateau, int nbreCase){
+        int x=this.caseActuelle.getX();
+        char y=this.caseActuelle.getY();
+        boolean bloqueC=false;
+        boolean bloqueA=false;
+        int caseBloquanteCX=0;
+        char caseBloquanteCY='a';
+        int caseBloquanteAX = 0;
+        char caseBloquanteAY ='a';
+        for (int i=1;i<nbreCase;i++){
+            if(plateau.getCase(x+i,'b').isOccupee()==false){
+                this.deplacementSeul(plateau);
+
+        }else {
+                if (plateau.getCase(x+i,'a').isOccupee()==false){
+                    this.deplacementSeul(plateau);
+                }else { caseBloquanteAX = x + i;
+                        caseBloquanteAY = 'a';
+                        for(int j=1;j<nbreCase;j++){
+                            if(plateau.getCase(x+i,'c').isOccupee()==true) {
+                                caseBloquanteCX = x + i;
+                                caseBloquanteCY = 'c';
+                                bloqueC = true;
+                            }
+                        }
+                }
+            }
+
+        }if (bloqueC==true){
+            if(caseBloquanteCX>caseBloquanteAX){
+
+            }
+        }
     }
 
 
