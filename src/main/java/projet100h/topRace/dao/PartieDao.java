@@ -6,4 +6,6 @@ public interface PartieDao {
 
     public List listPartie();
 
+    public List<Integer> nbDeJoueur();
+
 }

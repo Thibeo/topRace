@@ -38,6 +38,30 @@ public class GameLibrary {
     public List listDeplacementCarte(int id){
         return carteDao.listDeplacementCarte(id); /* < <couleurVoiture, nbCase> , <couleurVoiture, nbCase> , <couleurVoiture, nbCase> > */
     }
+    public List<Integer> nbDeJoueur() {
+        List<Integer> listJoueur = partieDao.nbDeJoueur(); // liste des idPartie de tous les joueurs
+        List listFinal = new ArrayList<>(); //creation de la liste final qui sera composé de liste intermediaire
+        int idPartie = listJoueur.get(0); //idPartie est initialisé au 1er element de listJoueur
+        int compteur = 1; //vu qu'on a initialisé l'idPartie avec le 1er element de lisJoueur, on met le compteur a 1
+        for (int i = 1 ; i < listJoueur.size() ; i++){
+            if (listJoueur.get(i) == idPartie){ //si l'element actuelle de la liste est égale a idPartie
+                compteur=compteur+1; // on augmente le compteur
+            } else {
+                List listIntermediaire = new ArrayList<>();
+                listIntermediaire.add(idPartie); //sinon on met <idPartie, nbJoueurPrésent> dans une liste
+                listIntermediaire.add(compteur);
+                listFinal.add(listIntermediaire); // puis on ajoute cette liste a la liste finale
+                idPartie=listJoueur.get(i); // et on reinitialise l'idPartie et le compteur
+                compteur=1;
+            }
+        }
+        List listIntermediaire = new ArrayList<>();
+        listIntermediaire.add(idPartie);
+        listIntermediaire.add(compteur);
+        listFinal.add(listIntermediaire);
+
+        return listFinal; // resultat = < <1,5>, <2,1>, <3,6> >    ( de type  < idpartie , nb de joueur présent Dans la partie > )
+    }
 
     public void changerCase(Joueur joueur, PartieCase cse) {joueurDao.changerCase(joueur, cse);}
 

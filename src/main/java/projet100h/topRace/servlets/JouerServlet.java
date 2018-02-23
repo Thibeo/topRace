@@ -23,6 +23,9 @@ public class JouerServlet extends GenericServlet {
         List listofPartie = GameLibrary.getInstance().listPartie();
         context.setVariable("listPartie", listofPartie);
 
+        List listNbJoueur = GameLibrary.getInstance().nbDeJoueur();
+        context.setVariable("listNbJoueur", listNbJoueur);
+
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         templateEngine.process("jouer", context, resp.getWriter());
     }

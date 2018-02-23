@@ -135,7 +135,7 @@ INSERT INTO `typeVoiture` (`couleurV`) VALUES ("Bleu");
 INSERT INTO `typeVoiture` (`couleurV`) VALUES ("Vert");
 INSERT INTO `typeVoiture` (`couleurV`) VALUES ("Blanc");
 
-INSERT INTO `partie` (`idPartie`, `nomDePartie`) VALUES (1, 'partie1test');
+INSERT INTO `partie` (`idPartie`, `nomDePartie`, `nomDeProprio`) VALUES (1, 'partie1test', 'proprioEstBob');
 
 INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Jaune", "BobJaune", 1, 1, 'a');
 INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Vert", "BobVert", 1, 1, 'b');

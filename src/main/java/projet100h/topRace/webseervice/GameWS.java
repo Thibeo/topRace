@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import projet100h.topRace.entities.Joueur;
 import projet100h.topRace.entities.Partie;
 import projet100h.topRace.entities.PartieCase;
+import projet100h.topRace.entities.Plateau;
 import projet100h.topRace.managers.GameLibrary;
 
 import javax.ws.rs.FormParam;
@@ -26,7 +27,7 @@ public class GameWS {
         List listDeplacementCarte = GameLibrary.getInstance().listDeplacementCarte(idCarte);
         String answer = String.valueOf(listDeplacementCarte.size());
         for (int i=0 ; i<listDeplacementCarte.size() ; i++){
-            Partie plateau = GameLibrary.getInstance().getPlateau(1);
+            Plateau plateau = GameLibrary.getInstance().getPlateau(1);
             List carte = (List) listDeplacementCarte.get(i);
             String couleur = (String) carte.get(1);
             int nbCases = (int) carte.get(0);

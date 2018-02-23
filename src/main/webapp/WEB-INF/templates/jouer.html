@@ -155,23 +155,20 @@
                             <th><p>Propriétaire</p></th>
                             <th><p>Nombre de joueur</p></th>
                         </tr>
-                        <tr>
-                            <td><p>Meilleur partie du monde</p></td>
-                            <td align="center"><p>Grosse cheville</p></td>
-                            <td align="center"><p>5/6</p></td>
-                            <td><button type="submit" value="Valider"><a href="#" onclick="Afficher('rentrerPseudo');Cacher('param');Cacher('regles');Afficher('jouer');">Rejoindre</a></button></td>
-                        </tr>
-                        <tr >
-                            <td><p>Hello world</p></td>
-                            <td align="center"><p>Dieu</p></td>
-                            <td align="center"><p>3/6</p></td>
-                            <td><button type="submit" value="Valider"><a href="#" onclick="Afficher('rentrerPseudo');Cacher('param');Cacher('regles');Afficher('jouer');">Rejoindre</a></button></td>
-                        </tr>
-                        <tr >
-                            <td><p>Partie de coco</p></td>
-                            <td align="center"><p>Coco</p></td>
-                            <td align="center"><p>2/3</p></td>
-                            <td><button type="submit" value="Valider"><a href="#" onclick="Afficher('rentrerPseudo');Cacher('param');Cacher('regles');Afficher('jouer');">Rejoindre</a></button></td>
+
+                        <tr th:each="list : ${listNbJoueur}">
+                            <td><p th:each="partie : ${listPartie}"
+                                   th:if="${list.get(0) == partie.idPartie  && list.get(1) != 6 }"
+                                   th:text="${partie.nomDeProprio}">Meilleur partie du monde</p></td>
+
+                            <td align="center"><p th:each="partie : ${listPartie}"
+                                                  th:if="${list.get(0) == partie.idPartie && list.get(1) != 6}"
+                                                  th:text="${partie.nomDePartie}">Grosse cheville</p></td>
+
+                            <td align="center"><p th:if="${list.get(1) != 6}"
+                                                  th:text="${list.get(1)+'/6'}">5/6</p></td>
+
+                            <td th:if="${list.get(1) != 6}"><button type="submit" value="Valider"><a href="#" onclick="Afficher('rentrerPseudo');Cacher('param');Cacher('regles');Afficher('jouer');">Rejoindre</a></button></td>
                         </tr>
                     </table>
                 </nav>
