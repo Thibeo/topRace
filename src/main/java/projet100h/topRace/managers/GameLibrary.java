@@ -43,7 +43,7 @@ public class GameLibrary {
 
     public String getTopLeft(PartieCase cse){ return caseDao.getTopLeft(cse);}
 
-    public Partie getPlateau (int idPartie){
+    public Plateau getPlateau (int idPartie){
         PartieCase tableauCase[][] = new PartieCase[69][3];
         PartieCase cse;
         List<PartieCase> listPartieCase = listPartieCase(idPartie);
@@ -58,9 +58,9 @@ public class GameLibrary {
                 tableauCase[listPartieCase.get(i).getX()][2]=listPartieCase.get(i);
             }
         }
-        Partie partie = new Partie();
-        partie.setTableauCase(tableauCase);
-        return partie;
+        Plateau plateau = new Plateau();
+        plateau.setTableauCase(tableauCase);
+        return plateau;
     }
 
 
