@@ -114,8 +114,6 @@ public class Joueur {
                 // pour checker si la case sur laquelle on est correspond à un tournant ou une autre case "exception"
                 //et ainsi adapter la caseActuelle de la voiture en fonction
 
-                //coucou
-
 
                 // sinon regarder si la case b de la colonne suivante est libre:
             }else if (plateau.isOccuped(this.caseActuelle.getX()+1,'b')==false) {
