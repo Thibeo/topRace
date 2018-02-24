@@ -1,6 +1,5 @@
 package projet100h.topRace.managers;
 
-import com.sun.java.swing.plaf.windows.TMSchema;
 import projet100h.topRace.dao.*;
 import projet100h.topRace.dao.impl.*;
 import projet100h.topRace.entities.*;
@@ -186,9 +185,9 @@ public class GameLibrary {
 
 
 // fonction crer partie (permet de rentrer une nouvelle partie dans la base de données:
-
+    /*
     public void creerPartie(Partie partie){
         partie
     }
-
+    */
 }

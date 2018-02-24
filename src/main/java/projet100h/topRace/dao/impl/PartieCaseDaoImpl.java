@@ -9,6 +9,34 @@ import java.util.List;
 
 public class PartieCaseDaoImpl implements PartieCaseDao {
 
+    @Override
+    public void creationPartieCase(int idPartie){
+        String query = "SELECT * FROM cse";
+        try (   Connection connection = DataSourceProvider.getDataSource().getConnection();
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query)
+        ) {
+            while (resultSet.next()) {
+                int x = resultSet.getInt("x");
+                char y = resultSet.getString("y").charAt(0);
+                boolean occupee = resultSet.getBoolean("occupee");
+                String query1 = "INSERT INTO `partieCase` (`x`, `y`, `idPartie`, `occupee`) VALUES (?, ?, ?, ?);";
+                try (Connection connection2 = DataSourceProvider.getDataSource().getConnection();
+                     PreparedStatement statement2 = connection2.prepareStatement(query1)) {
+                    statement2.setInt(1, x);
+                    statement2.setString(2, String.valueOf(y));
+                    statement2.setInt(3, idPartie);
+                    statement2.setBoolean(4,occupee);
+                    statement2.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public PartieCase getPartieCase(int x, char y, int idPartie){

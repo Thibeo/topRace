@@ -33,7 +33,7 @@ public class GameServlet extends GenericServlet {
         templateEngine.process("pageJeu", context, resp.getWriter());
     }
 
-
+    /*
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // GET PARAMETERS
@@ -68,5 +68,5 @@ public class GameServlet extends GenericServlet {
             req.getSession().setAttribute("errorMessage", errorMessage);
             resp.sendRedirect("contact");
         }
-    }
+    }*/
 }
