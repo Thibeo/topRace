@@ -95,7 +95,7 @@ public class GameLibrary {
         return joueurDao.getJoueurByCase(couleur,idPartie,cse);
     }
 
-
+    public void creationPartieCase(int idPartie){ partieCaseDao.creationPartieCase(idPartie);}
 
     public void modifierCaseException(PartieCase cse,boolean occupee) {
         int x=cse.getX();
