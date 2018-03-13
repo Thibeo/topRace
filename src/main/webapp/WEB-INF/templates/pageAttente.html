@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
 
 <head>
     <title>TOP RACE - Attente</title>
     <meta charset='utf-8'>
     <link rel='stylesheet' href='css/pageAttente.css'>
+    <link rel='stylesheet' href='css/menu.css'> <!-- style du menu, du body, et du background -->
+    <link rel='stylesheet' href='css/rulesParaQuitt.css'> <!-- style des div #rules et #para -->
+    <link rel='stylesheet' href='css/scrollBar.css'> <!-- style de la scrollbar -->
     <link rel="shortcut icon" href="img/logo.png">
+    <script type="text/javascript" src="js/rulesParaQuitt.js"></script>
 
     <script type="text/javascript">
         var signe1 = -1;
@@ -34,268 +38,60 @@
         // Pour arrêter le clignotement : clearInterval(periode);
         periode = setInterval(clignotementFading, 50 );
 
-        function AfficherCacher(texte) {
-            var test = document.getElementById(texte).style.display;
-            if (test == "none") {
-                document.getElementById(texte).style.display = "";
-            }
-            else {
-                document.getElementById(texte).style.display = "none";
-            }
-        }
-
-        function Cacher(texte) {
-            document.getElementById(texte).style.display = "none";
-        }
-
-        function ACQuitter(){
-            var test = document.getElementById("quitter").style.display;
-            if (test == "none") {
-                document.getElementById("quitter").style.display = "";
-                document.getElementById("fondQuitter").style.display = "";
-                quiFaitTout('aRegles','liRegles','Règles',0);
-                quiFaitTout('aPara','liPara','Paramètres',0);
-                quiFaitTout('aQuitterAccueil','liQuitterAccueil','Accueil',0);
-            }
-            else {
-                document.getElementById("quitter").style.display = "none";
-                document.getElementById("fondQuitter").style.display = "none";
-                quiFaitTout('aRegles','liRegles','Règles',2);
-                quiFaitTout('aPara','liPara','Paramètres',1);
-                quiFaitTout('aQuitterAccueil','liQuitterAccueil','Accueil',4);
-            }
-        }
-
-        function ACQuitterAccueil(){
-            var test = document.getElementById("quitterAccueil").style.display;
-            if (test == "none") {
-                document.getElementById("quitterAccueil").style.display = "";
-                document.getElementById("fondQuitterAccueil").style.display = "";
-                quiFaitTout('aRegles','liRegles','Règles',0);
-                quiFaitTout('aPara','liPara','Paramètres',0);
-                quiFaitTout('aQuitter','liQuitter','Quitter',0);
-            }
-            else {
-                document.getElementById("quitterAccueil").style.display = "none";
-                document.getElementById("fondQuitterAccueil").style.display = "none";
-                quiFaitTout('aRegles','liRegles','Règles',2);
-                quiFaitTout('aPara','liPara','Paramètres',1);
-                quiFaitTout('aQuitter','liQuitter','Quitter',3);
-            }
-        }
-
-        function ACPara(){
-            var test = document.getElementById("para").style.display;
-            if (test == "none") {
-                document.getElementById("para").style.display = "";
-                document.getElementById("fondPara").style.display = "";
-                quiFaitTout('aRegles','liRegles','Règles',0);
-                quiFaitTout('aQuitter','liQuitter','Quitter',0);
-                quiFaitTout('aQuitterAccueil','liQuitterAccueil','Accueil',0);
-            }
-            else {
-                document.getElementById("para").style.display = "none";
-                document.getElementById("fondPara").style.display = "none";
-                quiFaitTout('aRegles','liRegles','Règles',2);
-                quiFaitTout('aQuitter','liQuitter','Quitter',3);
-                quiFaitTout('aQuitterAccueil','liQuitterAccueil','Accueil',4);
-            }
-        }
-
-        function ACRules(){
-            var test = document.getElementById("rules").style.display;
-            if (test == "none") {
-                document.getElementById("rules").style.display = "";
-                document.getElementById("fondRules").style.display = "";
-                quiFaitTout('aPara','liPara','Paramètres',0);
-                quiFaitTout('aQuitter','liQuitter','Quitter',0);
-                quiFaitTout('aQuitterAccueil','liQuitterAccueil','Accueil',0);
-            }
-            else {
-                document.getElementById("rules").style.display = "none";
-                document.getElementById("fondRules").style.display = "none";
-                quiFaitTout('aPara','liPara','Paramètres',1);
-                quiFaitTout('aQuitter','liQuitter','Quitter',3);
-                quiFaitTout('aQuitterAccueil','liQuitterAccueil','Accueil',4);
-            }
-        }
-
-        function quiFaitTout(supp,remp,text,nombre){
-            var aSupprimer = document.getElementById(supp);
-            aSupprimer.parentNode.removeChild(aSupprimer);
-            var aRemplacer = document.getElementById(remp);
-            var newLien = document.createElement('a');
-            var newLienText = document.createTextNode(text);
-            newLien.id = supp;
-            newLien.href = '#';
-            if (nombre == 1) {newLien.onclick = function() {Cacher("rules");ACPara();Cacher("quitter");Cacher("quitterAccueil");};}
-            if (nombre == 2) {newLien.onclick = function() {Cacher("para");ACRules();Cacher("quitter");Cacher("quitterAccueil");};}
-            if (nombre == 3) {newLien.onclick = function() {Cacher("para");ACQuitter();Cacher("rules");Cacher("quitterAccueil");};}
-            if (nombre == 4) {newLien.onclick = function() {Cacher("para");ACQuitterAccueil();Cacher("rules");Cacher("quitter");};}
-            newLien.appendChild(newLienText);
-            aRemplacer.appendChild(newLien);
-            return(newLien);
-        }
 
     </script>
 
-</head>
+    </head>
 
-<body onload="Cacher('fond');Cacher('fondPara');Cacher('fondRules');Cacher('rules');Cacher('para');Cacher('quitter');Cacher('quitterAccueil');Cacher('fondQuitter');Cacher('fondQuitterAccueil');">
+    <body onload="Cacher('fondPara');Cacher('fondRules');Cacher('rules');Cacher('para');Cacher('quitter');Cacher('fondQuitter');">
 
 <!-- HEADER -->
-<header>
-    <!-- HAUT -->
-    <section class="haut">
-        <nav class="voitureOrange"></nav>
-        <h1>TOP RACE</h1>
-        <nav class="voitureRouge"></nav>
-    </section>
-
-    <!-- MENU -->
-    <section class="menu">
-        <ul>
-            <li id="liQuitterAccueil"><a id="aQuitterAccueil" href="#" onclick='Cacher("rules");Cacher("para");Cacher("quitter");ACQuitterAccueil();'>Accueil</a></li>
-            <li id="liRegles"><a id="aRegles" href="#" onclick='Cacher("para");Cacher("quitterAccueil");Cacher("quitter");ACRules();'>Règles</a></li>
-            <li id="liPara"><a id="aPara" href="#" onclick='Cacher("rules");Cacher("quitterAccueil");Cacher("quitter");ACPara();'>Paramètres</a></li>
-            <li id="liQuitter"><a id="aQuitter" href="#" onclick='Cacher("rules");Cacher("quitterAccueil");Cacher("para");ACQuitter();'>Quitter</a></li>
-        </ul>
-    </section>
-
-</header>
+        <header th:replace="~{fragments::header}"></header>
 
 <!-- CONTENU -->
 
-<section class="page">
-    <nav class="fond" id="fondPara" onclick='ACPara();'></nav>
-    <nav class="fond" id="fondQuitter" onclick='ACQuitter();'></nav>
-    <nav class="fond" id="fondQuitterAccueil" onclick='ACQuitterAccueil();'></nav>
-    <nav class="fond" id="fondRules" onclick='ACRules();'></nav>
-    <nav class="fond" id="fond" onclick='ACRules();'></nav>
-    <nav id="rules">
-        <button class="x" onclick='ACRules();'>X</button>
-        <h2>Régles</h2>
-    </nav>
-    <nav id="quitterAccueil">
-        <table>
-            <tr align="center">
-                <td colspan="2" align="center"><h2>Voulez-vous vraiment retourner a l'accueil</h2></td>
-            </tr>
-            <tr>
-                <td class="btnQuitter"><button type="submit"><a href="home">Aller à l'acceuil</a></button></td>
-                <td align="right" class="btnQuitter"><button type="submit" onclick='ACQuitterAccueil();'>Retour à l'attente</button></td>
-            </tr>
-        </table>
-    </nav>
-    <nav id="quitter">
-        <table>
-            <tr align="center">
-                <td colspan="2" align="center"><h2>Voulez-vous vraiment quitter</h2></td>
-            </tr>
-            <tr>
-                <td class="btnQuitter"><button type="submit"><a href="home">Quitter l'attente</a></button></td>
-                <td align="right" class="btnQuitter"><button type="submit" onclick='ACQuitter();'>Retour à l'attente</button></td>
-            </tr>
-        </table>
-    </nav>
-    <nav id="para">
-        <button class="x" onclick='ACPara();'>X</button>
-        <h2>Changer les paramètres</h2>
-        <table>
-            <th><h3>Volume</h3></th>
-            <tr>
-                <td align="right">Volume principal&nbsp;</td>
-                <td>
-                    <form id='formulaire2' method="post" enctype="text/plain" oninput="v.value=parseInt(volume.value)">
-                        <input type="range" id="volume" name="volume" min="0" max="100" value="50">
-                        <output name="v" for="volume"></output>
-                    </form>
-                </td>
-            </tr>
-
-            <tr>
-                <td align="right">Musique&nbsp;</td>
-                <td>
-                    <form id='formulaire3' method="post" enctype="text/plain" oninput="m.value=parseInt(musique.value)">
-                        <input type="range" id="musique" name="musique" min="0" max="100" value="50">
-                        <output name="m" for="musique"></output>
-                    </form>
-                </td>
-            </tr>
-
-            <tr>
-                <td align="right">Effets sonores&nbsp;</td>
-                <td>
-                    <form id='formulaire4' method="post" enctype="text/plain" oninput="e.value=parseInt(effet.value)">
-                        <input type="range" id="effet" name="effet" min="0" max="100" value="50">
-                        <output name="e" for="effet"></output>
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <td align="right">Alerte&nbsp;</td>
-                <td>
-                    <form id='formulaire' method="post" enctype="text/plain" oninput="a.value=parseInt(alerte.value)">
-                        <input type="range" id="alerte" name="alerte" min="0" max="100" value="50">
-                        <output name="a" for="alerte"></output>
-                    </form>
-                </td>
-            </tr>
-            <th><h3>Langue</h3></th>
-            <tr>
-                <td align="right">Français&nbsp;</td>
-                <td>
-                    <img src="img/france.png" width="75px">
-                </td>
-            </tr>
-            <tr>
-                <td align="right">Anglais&nbsp;</td>
-                <td>
-                    <img src="img/anglais.png" width="75px">
-                </td>
-            </tr>
-        </table>
-    </nav>
-    <nav class="bande1"></nav>
-    <nav class="contenu">
-        <nav id="jouer">
-            <nav class="bloc">
-                <h2>En attente de joueurs <label id="LblClignotant1">.</label><label id="LblClignotant2">.</label><label id="LblClignotant3">.</label></h2>
-                <nav class="bloc1">
-                    <table>
-                        <tr>
-                            <th><p>La partie de Bob le brico</p></th>
-                            <th></th>
-                            <th><p>Couleur</p></th>
-                            <th><button>Quitter</button></th>
-                        </tr>
-                        <tr>
-                            <td><p>Bob</p></td>
-                            <td align="center"><p>Propriétaire</p></td>
-                            <td align="center"><p>Jaune</p></td>
-                        </tr>
-                        <tr >
-                            <td><p>Jack</p></td>
-                            <td align="center"><p>J2</p></td>
-                            <td align="center"><p>Violet</p></td>
-                        </tr>
-                        <tr >
-                            <td><p>Coco</p></td>
-                            <td align="center"><p>J3</p></td>
-                            <td align="center"><p>Blanc</p></td>
-                        </tr>
-                    </table>
+        <section class="page">
+            <div th:replace="~{fragments::rulesParaQuitt}"></div>
+            <nav class="bande1"></nav>
+            <nav class="contenu">
+                <nav id="jouer">
+                    <nav class="bloc">
+                        <h2>En attente de joueurs <label id="LblClignotant1">.</label><label id="LblClignotant2">.</label><label id="LblClignotant3">.</label></h2>
+                        <nav class="bloc1">
+                            <table>
+                                <tr>
+                                    <th><p>La partie de Bob le brico</p></th>
+                                    <th></th>
+                                    <th><p>Couleur</p></th>
+                                    <th><button onclick='ACQuitter();'>Quitter</button></th>
+                                </tr>
+                                <tr>
+                                    <td><p>Bob</p></td>
+                                    <td align="center"><p>Propriétaire</p></td>
+                                    <td align="center"><p>Jaune</p></td>
+                                </tr>
+                                <tr >
+                                    <td><p>Jack</p></td>
+                                    <td align="center"><p>J2</p></td>
+                                    <td align="center"><p>Violet</p></td>
+                                </tr>
+                                <tr >
+                                    <td><p>Coco</p></td>
+                                    <td align="center"><p>J3</p></td>
+                                    <td align="center"><p>Blanc</p></td>
+                                </tr>
+                            </table>
+                        </nav>
+                    </nav>
                 </nav>
             </nav>
-        </nav>
-    </nav>
-    <nav class="bande2"></nav>
+            <nav class="bande2"></nav>
 
-    <section class="footer">
-        <p></p> <!--le footer est vide -->
-    </section>
-</section>
+            <section class="footer">
+                <p></p> <!--le footer est vide -->
+            </section>
+        </section>
 
-</body>
+    </body>
 
 </html>

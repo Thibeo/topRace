@@ -77,9 +77,9 @@ public class GameWS {
                 answer=answer+"-";
                 System.out.println(answer);
                 return Response.ok().entity(gsonService.toJson(answer)).build();
-            } else {
+            } else if (idCarte == 31 || idCarte == 32 || idCarte == 33 || idCarte == 34 || idCarte == 35 || idCarte == 36){
                 List listDeplacementCarte = GameLibrary.getInstance().listDeplacementCarte(idCarte);
-                String answer = String.valueOf(listDeplacementCarte.size()+1);
+                String answer = "2";
                 Plateau plateau = GameLibrary.getInstance().getPlateau(1);
                 Joueur joueurADeplacer = GameLibrary.getInstance().getJoueur(couleur,1);
                 PartieCase caseArrivee = joueurADeplacer.deplacer(5, plateau);
@@ -87,7 +87,30 @@ public class GameWS {
                 String answer2 = GameLibrary.getInstance().getTopLeft(caseArrivee);
                 System.out.println(answer2);
                 answer = answer + "-" + joueurADeplacer.getCouleur() + "#" + answer2;
-                for (int i=0 ; i<listDeplacementCarte.size() ; i++){
+                // avancer des 2 cases en fonction de l'idCartes
+                Plateau plateau2 = GameLibrary.getInstance().getPlateau(1);
+                List carte = (List) listDeplacementCarte.get(0);
+                String couleur2 = (String) carte.get(1);
+                int nbCases = (int) carte.get(0);
+                System.out.println("la voiture "+carte.get(1)+" se déplace de "+nbCases+" case(s)");
+                Joueur joueurADeplacer2 = GameLibrary.getInstance().getJoueur(couleur2,1);
+                System.out.println("couleur du joueur = "+joueurADeplacer2.getCouleur());
+                System.out.println("sa case actuelle est : "+joueurADeplacer2.getCaseActuelle().getX()+","+joueurADeplacer2.getCaseActuelle().getY());
+                PartieCase caseArrivee2 = joueurADeplacer2.deplacer(nbCases, plateau2);
+                System.out.println("caseArrivee = " + caseArrivee2.getX() + "," + caseArrivee2.getY());
+                GameLibrary.getInstance().changerCase(joueurADeplacer2, caseArrivee2);
+                String answer3 = GameLibrary.getInstance().getTopLeft(caseArrivee2);
+                System.out.println(answer3);
+                answer = answer + "-" + joueurADeplacer2.getCouleur() + "#" + answer3;
+
+                answer=answer+"-";
+                System.out.println(answer);
+                return Response.ok().entity(gsonService.toJson(answer)).build();
+            } else if (idCarte == 41 || idCarte == 42 || idCarte == 43 || idCarte == 44 || idCarte == 45 || idCarte == 46){
+                List listDeplacementCarte = GameLibrary.getInstance().listDeplacementCarte(idCarte);
+                String answer = "4";
+                // avancer des 6 et 4 cases en fonction de l'idCartes
+                for (int i =0; i<2; i++){
                     Plateau plateau2 = GameLibrary.getInstance().getPlateau(1);
                     List carte = (List) listDeplacementCarte.get(i);
                     String couleur2 = (String) carte.get(1);
@@ -103,9 +126,36 @@ public class GameWS {
                     System.out.println(answer3);
                     answer = answer + "-" + joueurADeplacer2.getCouleur() + "#" + answer3;
                 }
+                // avancé des noirs
+                Plateau plateau = GameLibrary.getInstance().getPlateau(1);
+                Joueur joueurADeplacer = GameLibrary.getInstance().getJoueur(couleur,1);
+                PartieCase caseArrivee = joueurADeplacer.deplacer(2, plateau);
+                GameLibrary.getInstance().changerCase(joueurADeplacer, caseArrivee);
+                String answer2 = GameLibrary.getInstance().getTopLeft(caseArrivee);
+                System.out.println(answer2);
+                answer = answer + "-" + joueurADeplacer.getCouleur() + "#" + answer2;
+                // avancer des 1 cases en fonction de l'idCartes
+                Plateau plateau2 = GameLibrary.getInstance().getPlateau(1);
+                List carte = (List) listDeplacementCarte.get(2);
+                String couleur2 = (String) carte.get(1);
+                int nbCases = (int) carte.get(0);
+                System.out.println("la voiture "+carte.get(1)+" se déplace de "+nbCases+" case(s)");
+                Joueur joueurADeplacer2 = GameLibrary.getInstance().getJoueur(couleur2,1);
+                System.out.println("couleur du joueur = "+joueurADeplacer2.getCouleur());
+                System.out.println("sa case actuelle est : "+joueurADeplacer2.getCaseActuelle().getX()+","+joueurADeplacer2.getCaseActuelle().getY());
+                PartieCase caseArrivee2 = joueurADeplacer2.deplacer(nbCases, plateau2);
+                System.out.println("caseArrivee = " + caseArrivee2.getX() + "," + caseArrivee2.getY());
+                GameLibrary.getInstance().changerCase(joueurADeplacer2, caseArrivee2);
+                String answer3 = GameLibrary.getInstance().getTopLeft(caseArrivee2);
+                System.out.println(answer3);
+                answer = answer + "-" + joueurADeplacer2.getCouleur() + "#" + answer3;
+
                 answer=answer+"-";
                 System.out.println(answer);
                 return Response.ok().entity(gsonService.toJson(answer)).build();
+            } else {
+                System.out.println("error = idCarte non défini");
+                return null;
             }
 
         }

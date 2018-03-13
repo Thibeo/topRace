@@ -15,7 +15,8 @@ DELETE FROM joueur;
 INSERT INTO `carte` (`idCarte`) VALUES (0) , (1), (2), (3), (4), (5), (6), (7), (8),
                                             (11),(12),(13),(14),(15),(16),
                                             (21),(22),(23),(24),(25),(26),(27),(28),(29),
-                                            (31),(32),(33),(34),(35),(36);
+                                            (31),(32),(33),(34),(35),(36),
+                                            (41),(42),(43),(44),(45),(46);
 
 /* carte 0, pour recupérer la position actuelle des joueurs */
 INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Jaune",0,0),("Rouge",0,0),("Violet",0,0),("Bleu",0,0),("Vert",0,0),("Blanc",0,0);
@@ -28,6 +29,13 @@ INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Jaune",7,5),("Vi
 
 /* cartes : 6 - 4 - 2 - 1 */
 INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Bleu",8,6),("Blanc",8,4),("Vert",8,2),("Rouge",8,1);
+/* cartes : 6 - 4 - 2 noir - 1 */
+INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Bleu",41,6),("Blanc",41,4),("Jaune",41,1);
+INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Jaune",42,6),("Bleu",42,4),("Blanc",42,1);
+INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Blanc",43,6),("Jaune",43,4),("Bleu",43,1);
+INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Violet",44,6),("Vert",44,4),("Rouge",44,1);
+INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Vert",45,6),("Rouge",45,4),("Violet",45,1);
+INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Rouge",46,6),("Violet",46,4),("Vert",46,1);
 
 /* cartes : 6 - 5 - 4 - 3 - 2 - 1 */
 INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ("Vert",11,6),("Violet",11,5),("Blanc",11,4),("Jaune",11,3),("Bleu",11,2),("Rouge",11,1);

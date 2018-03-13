@@ -166,6 +166,9 @@ header{
 .cartes{
 	margin-left: 25%;
 }
+.cartes img{
+	margin: 20px;
+}
 .paris{
 	margin-left: 10%;
 }

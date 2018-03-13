@@ -1,158 +1,15 @@
-/******** Générale ********/
-html{
-    height: 100%;
-}
-
-body{
-    font-family: 'Century Gothic', Verdana, Calibri, serif; /* mise en forme de l'écrriture du body */
-    margin:0px; /* pour eviter les décalages */
-    padding:0px; /* pour eviter les décalages */
-    color: #333333; /* couleur du texte du body */
-    text-align: justify; /* retour à la ligne ainsi qu'adaptation de l'espace entre chaque mot (utilisé plutot en mode mobile) */
-    height: 100%;
-	background-image: url(../img/fond.png);
-	background-size: cover;
-}
-
-header{
-    position: fixed;
-    width: 100%;
-    top:0%;
-	z-index: 2;
-}
-
-.haut{
-	position: fixed;
-	background-color: white;
-	height: 7vh;
-	width: 100%;
-}
-.haut .voitureOrange{
-	top: -0.2vh;
-	left: -27vh;
-	position: fixed;
-	width: 45vh;
-	height: 6.5vh;
-	background-image: url(../img/voitureOrange.png);
-	background-size: cover;
-	animation-name:voitureOrange;
-	animation-duration:2.5s;
-}
-@keyframes voitureOrange{
-	50% {left:35vh;}
-}
-/* Mise en place de l'animation */
-@keyframes voitureRouge{
-	50% {right:35vh;}
-}
-.haut .voitureRouge{
-	top: -0.2vh;
-	right: -27vh;
-	position: fixed;
-	width: 45vh;
-	height: 6.5vh;
-	background-image: url(../img/voitureRouge.png);
-	background-size: cover;
-	animation-name:voitureRouge;
-	animation-duration:2.5s;
-}
-.haut h1{
-	width: 100%;
-	position: fixed;
-	text-align: center;
-	top: -2vh;
-	font-size: 4vh;
-}
-
-.menu{
-	position: fixed;
-	width: 100%;
-	background-color: green;
-	top: 7vh;
-	padding-left: 4vh;
-}
-.menu ul{
-    margin: 0px;
-    padding: 0px;
-}
-.menu li{
-	list-style-type: none;
-}
-.menu ul li{
-	float: left;
-    position: relative;
-}
-.menu a {
-	display: inline-block;
-    text-decoration: none;
-}
-.menu ul li a{
-	padding: 3vh 4vh;
-    color: #FFF;
-    font-size: 2vh;
-}
-.menu ul li:hover a{
-    padding: calc(3vh - 1vh) 4vh 3vh 4vh; /* si on change la taille de la petites barre, il faut changer le 15 = (20 - hauteur de la barre)*/
-}
-.menu ul li a:hover{
-	border-top: 1vh solid #BBBBBB; /* créé une petite barre de 5 x de hauteur en haut de la case "Accueil" d'une couleur grise lors du passage de la souris*/
-    background-color: rgba(220, 220, 220, 0.15);
-}
-
-.page {
-    padding-top: 16vh; /* */
-    width: 100%;
-}
-.contenu{
-    padding-left: 10%;
-    padding-right: 10%;
-    min-height: calc(100vh - 235px); /* 235 px = hauteur du footer + la barre menu + les margins/padding*/
-                                     /* une hauteur minimale est imposée pour que le footer se trouve toujours en bas de la page */
-}
-.footer{
-	bottom: 0;
-    clear: both;
-    width: 100%;
-    height: 60px;
-    padding-top: 10px;
-/*  border-top: 2px solid darkgreen;
-    background-color: forestgreen;    */
-}
-.footer p{
-    font-size: 13px;
-    text-align: center;
-    color: white;
-}
-.bande1{
-	width: 10vh;
-	position: fixed;
-	top:0.55vh;
-	left: 0px;
-	height: 100%;
-	background-image: url(../img/bande.png);
-	background-size: cover;
-	z-index: 1;
-}
-.bande2{
-	width: 10vh;
-	position: fixed;
-	top:0.55vh;
-	right: 0px;
-	height: 100%;
-	background-image: url(../img/bande.png);
-	background-size: cover;
-	z-index: 1;
-}
-
-
-
-
-/* pageJeu - ligne 1 = colonne joueurs + plateau + tableau paris */
+/* ligne 1 = colonne joueurs + plateau + tableau paris */
 .ligne1{
 	position: fixed;
 	top: 19vh;
 }
-/* pageJeu - Colonne Joueurs */
+
+
+/* ----------------------------- */
+/* --- Affichage des joueurs --- */
+/* ----------------------------- */
+
+/* Colonne Joueurs */
 .joueurs{
 	position: fixed;
 	top: 27vh;
@@ -196,7 +53,9 @@ header{
 	color: white;
 }
 
-/* pageJeu - Plateau */
+/* --------------- */
+/* --- plateau --- */
+/* --------------- */
 .plateau{
 	position: fixed;
 	left: 45vh;
@@ -206,7 +65,9 @@ header{
     background-size: cover;
 }
 
-/* pageJeu - Tableau paris*/
+/* --------------------- */
+/* --- tableau paris --- */
+/* --------------------- */
 .plateauParis{
 	position: fixed;
 	right: 15vh;
@@ -350,7 +211,23 @@ input[type="checkbox"] + label::before{
 .pariReponseViolette input[type="checkbox"]:checked:hover + label::before{ background:#864daf;}
 .pariReponseBlanche input[type="checkbox"]:checked:hover + label::before{background:white;}
 .pariReponseVerte input[type="checkbox"]:checked:hover + label::before{background:#2fb129;}
-/* pageJeu - carteTitre = nav pour le titre */
+
+/* compteur caché pour savoir combien de colonne on été sélectionner */
+#compteur{
+	display: none;
+	position: fixed;
+	z-index: 150;
+	font-size: 10vh;
+	color: red;
+}
+
+
+
+/* -------------- */
+/* --- Cartes --- */
+/* -------------- */
+
+/* carteTitre = nav pour le titre */
 .carteTitre{
 	position: fixed;
 	top:70vh;
@@ -366,7 +243,7 @@ input[type="checkbox"] + label::before{
 	z-index: 2;
 }
 
-/* pageJeu - ligneCartes = nav pour les cartes */
+/* ligneCartes = nav pour les cartes */
 #ligneCartes{
 	position: fixed;
 	overflow: auto;
@@ -388,48 +265,33 @@ input[type="checkbox"] + label::before{
 	height: 18vh;
 	margin: 0.75vh;
 }
+/* images pour cacher les trous des scolls barres */
+#carreHaut{
+	position: fixed;
+	top: 75.3vh;
+	left: 167.1vh;
+	width: 1.75vh;
+	height: 2.5vh;
+	z-index: 99;
+	background-image: url(../img/carreHaut.png);
+	background-size: cover;
+}
+#carreBas{
+	position: fixed;
+	top: 93.4vh;
+	left: 167.1vh;
+	width: 1.75vh;
+	height: 3vh;
+	z-index: 99;
+	background-image: url(../img/carreBas.png);
+	background-size: cover;
+}
 
-#para{
-	position: fixed;
-	top:19vh;
-	left: 14vh;
-	background-color: #9E9E9E;
-	border-radius: 2vh;
-	border: 0.4vh solid grey;
-	padding: 1vh;
-	z-index: 120;
-}
-#rules{
-	position: fixed;
-	top:19vh;
-	left: 14vh;
-	background-color: #9E9E9E;
-	border-radius: 2vh;
-	border: 0.4vh solid grey;
-	padding: 1vh;
-	z-index: 120;
-}
-#quitter{
-	position: fixed;
-	left: 50%;
-	top:40%;
-	transform: translate(-50%, -50%);
-	background-color: #9E9E9E;
-	border-radius: 2vh;
-	border: 0.4vh solid grey;
-	padding: 1vh;
-	z-index: 120;
-}
-.fond{
-	position: fixed;
-	top :15.4vh;
-	left: 50%;
-	transform: translate(-50%, 0);
-	z-index: 100;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(251, 251, 251, 0.75);
-}#choixCartes{
+
+/* ----------------------------------- */
+/* --- Choix pour les cartes noirs --- */
+/* ----------------------------------- */
+#choixCartes{
 	 position: fixed;
 	 top:25vh;
 	 left: 75vh;
@@ -485,13 +347,10 @@ input[type="radio"] + label::before{
 	padding-bottom: 15px;
 }
 
-#compteur{
-	display: none;
-	position: fixed;
-	z-index: 150;
-	font-size: 10vh;
-	color: red;
-}
+
+/* ----------------------------- */
+/* --- Affichage des voitures --- */
+/* ----------------------------- */
 
 .joueurVoiture{
 	position: fixed;
@@ -532,49 +391,29 @@ input[type="radio"] + label::before{
 }
 
 
-#carreHaut{
- 	position: fixed;
- 	top: 75.3vh;
- 	left: 167.1vh;
- 	width: 1.75vh;
- 	height: 3vh;
- 	z-index: 99;
-	background-image: url(../img/carreHaut.png);
-    background-size: cover;
-}
-#carreBas{
- 	position: fixed;
- 	top: 93.4vh;
- 	left: 167.1vh;
- 	width: 1.75vh;
- 	height: 3vh;
- 	z-index: 99;
- 	background-image: url(../img/carreBas.png);
-    background-size: cover;
-}
-::-webkit-scrollbar-track {
-      background-color: grey;
+/* ----------------------------- */
+/* --- css de la div quitter --- */
+/* ----------------------------- */
+
+#quitter{
+	position: fixed;
+	left: 50%;
+	top:40%;
+	transform: translate(-50%, -50%);
+	background-color: #9E9E9E;
+	border-radius: 2vh;
+	border: 0.4vh solid grey;
+	padding: 1vh;
+	z-index: 120;
 }
 
-::-webkit-scrollbar-thumb {
-      background-color: rgba(0, 0, 0, 0.2);
-} /* this will style the thumb, ignoring the track */
 
-::-webkit-scrollbar-button {
-      background-color: transparent;
-} /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
-
-::-webkit-scrollbar-corner {
-      background-color: green;
-}
-::-webkit-scrollbar {
-      width: 1.5vh;
-      height: 20vh;
-}
-
-.leNbCases{
-	display: none;
-}
-.lesCases{
-	display: none;
+button{
+	margin-left: 20px;
+	text-decoration: none;
+	color: #FDEE00;
+	font-size: 18px;
+	background-color: #696969;
+	border-color:  yellow;
+	outline : none;
 }

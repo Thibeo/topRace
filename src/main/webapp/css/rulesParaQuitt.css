@@ -1,0 +1,87 @@
+/* ---------------------------- */
+/* --- Régles et paramètres --- */
+/* ---------------------------- */
+
+/* fond pour mettre en valeur les div*/
+.fond{
+    position: fixed;
+    top :15.4vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(251, 251, 251, 0.75);
+}
+/* X est le bouton pour fermer les div */
+.x{
+    font-size: 15px;
+    float: right;
+}
+/* on met un padding pour crée un espace entre les titres et le boutton X */
+#para h2, #rules h2, #quitter  h2{
+    padding-top: 8px;
+}
+
+
+/* ------------------ */
+/* --- Paramètres --- */
+/* ------------------ */
+#para{
+    position: fixed;
+    top:19vh;
+    left: 14vh;
+    background-color: #9E9E9E;
+    border-radius: 2vh;
+    border: 0.4vh solid grey;
+    padding: 1vh;
+    z-index: 120;
+}
+
+
+/* -------------- */
+/* --- Régles --- */
+/* -------------- */
+
+/* css de la div des régles */
+#rulesScorll{
+    position: fixed;
+    overflow: auto;
+    top:19vh;
+    left: 14vh;
+    width: 170vh;
+    height: 70vh;
+    background-color: #9E9E9E;
+    border-radius: 2vh;
+    border: 0.4vh solid grey;
+    padding: 3vh;
+    z-index: 120;
+}
+
+/* decalages des images pour les mettres au centre de la div */
+#rulesScorll .cartes{ margin-left: 25%; }
+#rulesScorll .cartes img{ margin: 20px; }
+#rulesScorll .paris{ margin-left: 10%; }
+#rulesScorll .final{ margin-left: 20%; }
+
+/* images pour cacher les trous des scolls barres */
+#carreHaut2{
+    position: fixed;
+    top: 19.2vh;
+    left: 189.1vh;
+    width: 1.75vh;
+    height: 2.5vh;
+    z-index: 125;
+    background-image: url(../img/carreHaut.png);
+    background-size: cover;
+}
+#carreBas2{
+    position: fixed;
+    top: 92vh;
+    left: 189.1vh;
+    width: 1.75vh;
+    height: 3.5vh;
+    z-index: 125;
+    background-image: url(../img/carreBas.png);
+    background-size: cover;
+}
