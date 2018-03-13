@@ -55,14 +55,14 @@
                 document.getElementById("fondQuitter").style.display = "";
                 quiFaitTout('aRegles','liRegles','Règles',0);
                 quiFaitTout('aPara','liPara','Paramètres',0);
-                quiFaitTout('aQuitterAccueil','liQuitterAccueil','QuitterAccueil',0);
+                quiFaitTout('aQuitterAccueil','liQuitterAccueil','Accueil',0);
             }
             else {
                 document.getElementById("quitter").style.display = "none";
                 document.getElementById("fondQuitter").style.display = "none";
                 quiFaitTout('aRegles','liRegles','Règles',2);
                 quiFaitTout('aPara','liPara','Paramètres',1);
-                quiFaitTout('aQuitterAccueil','liQuitterAccueil','QuitterAccueil',4);
+                quiFaitTout('aQuitterAccueil','liQuitterAccueil','Accueil',4);
             }
         }
 
@@ -91,14 +91,14 @@
                 document.getElementById("fondPara").style.display = "";
                 quiFaitTout('aRegles','liRegles','Règles',0);
                 quiFaitTout('aQuitter','liQuitter','Quitter',0);
-                quiFaitTout('aQuitterAccueil','liQuitterAccueil','QuitterAccueil',0);
+                quiFaitTout('aQuitterAccueil','liQuitterAccueil','Accueil',0);
             }
             else {
                 document.getElementById("para").style.display = "none";
                 document.getElementById("fondPara").style.display = "none";
                 quiFaitTout('aRegles','liRegles','Règles',2);
                 quiFaitTout('aQuitter','liQuitter','Quitter',3);
-                quiFaitTout('aQuitterAccueil','liQuitterAccueil','QuitterAccueil',4);
+                quiFaitTout('aQuitterAccueil','liQuitterAccueil','Accueil',4);
             }
         }
 
@@ -109,14 +109,14 @@
                 document.getElementById("fondRules").style.display = "";
                 quiFaitTout('aPara','liPara','Paramètres',0);
                 quiFaitTout('aQuitter','liQuitter','Quitter',0);
-                quiFaitTout('aQuitterAccueil','liQuitterAccueil','QuitterAccueil',0);
+                quiFaitTout('aQuitterAccueil','liQuitterAccueil','Accueil',0);
             }
             else {
                 document.getElementById("rules").style.display = "none";
                 document.getElementById("fondRules").style.display = "none";
                 quiFaitTout('aPara','liPara','Paramètres',1);
                 quiFaitTout('aQuitter','liQuitter','Quitter',3);
-                quiFaitTout('aQuitterAccueil','liQuitterAccueil','QuitterAccueil',4);
+                quiFaitTout('aQuitterAccueil','liQuitterAccueil','Accueil',4);
             }
         }
 
@@ -173,6 +173,7 @@
     <nav class="fond" id="fondRules" onclick='ACRules();'></nav>
     <nav class="fond" id="fond" onclick='ACRules();'></nav>
     <nav id="rules">
+        <button class="x" onclick='ACRules();'>X</button>
         <h2>Régles</h2>
     </nav>
     <nav id="quitterAccueil">
@@ -181,7 +182,7 @@
                 <td colspan="2" align="center"><h2>Voulez-vous vraiment retourner a l'accueil</h2></td>
             </tr>
             <tr>
-                <td class="btnQuitter"><button type="submit"><a href="home">Quitter</a></button></td>
+                <td class="btnQuitter"><button type="submit"><a href="home">Aller à l'acceuil</a></button></td>
                 <td align="right" class="btnQuitter"><button type="submit" onclick='ACQuitterAccueil();'>Retour à l'attente</button></td>
             </tr>
         </table>
@@ -192,19 +193,20 @@
                 <td colspan="2" align="center"><h2>Voulez-vous vraiment quitter</h2></td>
             </tr>
             <tr>
-                <td class="btnQuitter"><button type="submit"><a href="home">Quitter</a></button></td>
+                <td class="btnQuitter"><button type="submit"><a href="home">Quitter l'attente</a></button></td>
                 <td align="right" class="btnQuitter"><button type="submit" onclick='ACQuitter();'>Retour à l'attente</button></td>
             </tr>
         </table>
     </nav>
     <nav id="para">
+        <button class="x" onclick='ACPara();'>X</button>
         <h2>Changer les paramètres</h2>
         <table>
             <th><h3>Volume</h3></th>
             <tr>
                 <td align="right">Volume principal&nbsp;</td>
                 <td>
-                    <form id='formulaire' method="post" enctype="text/plain" oninput="v.value=parseInt(volume.value)">
+                    <form id='formulaire2' method="post" enctype="text/plain" oninput="v.value=parseInt(volume.value)">
                         <input type="range" id="volume" name="volume" min="0" max="100" value="50">
                         <output name="v" for="volume"></output>
                     </form>
@@ -214,7 +216,7 @@
             <tr>
                 <td align="right">Musique&nbsp;</td>
                 <td>
-                    <form id='formulaire' method="post" enctype="text/plain" oninput="m.value=parseInt(musique.value)">
+                    <form id='formulaire3' method="post" enctype="text/plain" oninput="m.value=parseInt(musique.value)">
                         <input type="range" id="musique" name="musique" min="0" max="100" value="50">
                         <output name="m" for="musique"></output>
                     </form>
@@ -224,7 +226,7 @@
             <tr>
                 <td align="right">Effets sonores&nbsp;</td>
                 <td>
-                    <form id='formulaire' method="post" enctype="text/plain" oninput="e.value=parseInt(effet.value)">
+                    <form id='formulaire4' method="post" enctype="text/plain" oninput="e.value=parseInt(effet.value)">
                         <input type="range" id="effet" name="effet" min="0" max="100" value="50">
                         <output name="e" for="effet"></output>
                     </form>

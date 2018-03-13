@@ -195,16 +195,6 @@ button{
     outline : none;
 }
 
-#LblClignotant1{
-    opacity: 1;
-}
-#LblClignotant2{
-    opacity: 0.5;
-}
-#LblClignotant3{
-    opacity: 0;
-}
-
 
 #para{
     position: fixed;
@@ -215,6 +205,13 @@ button{
     border: 0.4vh solid grey;
     padding: 1vh;
     z-index: 120;
+}
+#para h2, #rules h2{
+    padding-top: 5px;
+}
+.x{
+    font-size: 15px;
+    float: right;
 }
 #rules{
     position: fixed;
@@ -227,15 +224,15 @@ button{
     z-index: 120;
 }
 #quitter{
-     position: fixed;
-     left: 50%;
-     top:40%;
-     transform: translate(-50%, -50%);
-     background-color: #9E9E9E;
-     border-radius: 2vh;
-     border: 0.4vh solid grey;
-     padding: 1vh;
-     z-index: 120;
+    position: fixed;
+    left: 50%;
+    top:40%;
+    transform: translate(-50%, -50%);
+    background-color: #9E9E9E;
+    border-radius: 2vh;
+    border: 0.4vh solid grey;
+    padding: 1vh;
+    z-index: 120;
 }
 #quitterAccueil{
     position: fixed;
@@ -258,4 +255,28 @@ button{
     height: 100%;
     background-color: rgba(251, 251, 251, 0.75);
 }
+.btnQuitter button{
+    text-decoration: none;
+    color: #FDEE00;
+    background-color: #696969;
+    border-color:  yellow;
+    outline : none;
+}
+button a{
+    color: #FDEE00;
+    background-color: #696969;
+    text-decoration: none;
+    border-color:  yellow;
+    outline : none;
+}
 
+
+#LblClignotant1{
+    opacity: 1;
+}
+#LblClignotant2{
+    opacity: 0.5;
+}
+#LblClignotant3{
+    opacity: 0;
+}

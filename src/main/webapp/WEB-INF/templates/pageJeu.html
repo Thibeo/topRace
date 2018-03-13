@@ -18,51 +18,97 @@
     }
 
     function avancer(cse){
-        var postMyOpinionRequest = new XMLHttpRequest();
-        postMyOpinionRequest.open("POST","webservices/game/test",true);
-        postMyOpinionRequest.responseType="json";
-        postMyOpinionRequest.onload = function() {
-            var answer=this.response;
-            console.log("answer: "+answer);
-            var longeur = parseInt(answer[0]);
-            console.log("nb changement = "+longeur);
-            var i=1;
-            for (var j=0 ; j<longeur ; j++){
-                var top="";
-                var left="";
-                var couleur="";
-                var rotate="";
-                var comt="";
-                i=i+1;
-                while (answer[i]!='-'){
-                    if (answer[i]=='#'){
-                        couleur=comt;
-                        comt="";
-                        i=i+1;
-                    }else if (answer[i]=="/"){
-                        top=comt;
-                        comt="";
-                        i=i+1;
-                    }else if (answer[i]=="+"){
-                        left=comt;
-                        comt="";
-                        i=i+1;
-                    }else{
-                        comt=comt+answer[i];
-                        i=i+1;
+        if (cse != 27 && cse != 28 && cse != 29 && cse != 31 && cse != 32 && cse != 33 && cse != 34 && cse != 35 && cse != 36) {
+            var postMyOpinionRequest = new XMLHttpRequest();
+            postMyOpinionRequest.open("POST", "webservices/game/test", true);
+            postMyOpinionRequest.responseType = "json";
+            postMyOpinionRequest.onload = function () {
+                var answer = this.response;
+                console.log("answer: " + answer);
+                var longeur = parseInt(answer[0]);
+                console.log("nb changement = " + longeur);
+                var i = 1;
+                for (var j = 0; j < longeur; j++) {
+                    var top = "";
+                    var left = "";
+                    var couleur = "";
+                    var rotate = "";
+                    var comt = "";
+                    i = i + 1;
+                    while (answer[i] != '-') {
+                        if (answer[i] == '#') {
+                            couleur = comt;
+                            comt = "";
+                            i = i + 1;
+                        } else if (answer[i] == "/") {
+                            top = comt;
+                            comt = "";
+                            i = i + 1;
+                        } else if (answer[i] == "+") {
+                            left = comt;
+                            comt = "";
+                            i = i + 1;
+                        } else {
+                            comt = comt + answer[i];
+                            i = i + 1;
+                        }
                     }
+                    rotate = comt;
+                    console.log("la voiture qui est " + couleur + " se trouve en top = " + top + " et left = " + left);
+                    avancerVoiture(couleur, top, left, rotate);
                 }
-                rotate=comt;
-                console.log("la voiture qui est "+couleur+" se trouve en top = "+top+" et left = "+left);
-                avancerVoiture(couleur, top, left, rotate);
-            }
 
-            console.log("");
+                console.log("");
+
+            }
+            postMyOpinionRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            postMyOpinionRequest.send("data=" + JSON.stringify(cse));
+            /* et on l'envoit */
+        } else {
+            var eltIdCartes = document.getElementById("idCarte");
+            var idCart = document.createTextNode(cse);
+            eltIdCartes.replaceChild(idCart, eltIdCartes.firstChild);
+            var eltLaCarte = document.getElementById("imgLaCarte");
+            var bkgd = "url(img/cartes/"+cse+".png)";
+            eltLaCarte.style.backgroundImage= bkgd;
+            if (cse == 31){ console.log("disable");document.getElementById("jaune").disabled = true; }
+            if (cse == 32){ document.getElementById("rouge").disabled = true; }
+            if (cse == 33){ document.getElementById("violette").disabled = true; }
+            if (cse == 34){ document.getElementById("bleue").disabled = true; }
+            if (cse == 35){ document.getElementById("verte").disabled = true; }
+            if (cse == 36){ document.getElementById("blanche").disabled = true; }
+
+            AfficherCacher("choixCartes");
+            AfficherCacher("fondChoixCartes");
+        }
+
+    }
+
+    function choixCartes() {
+        var bool = false;
+        var elems = document.getElementsByName("couleurCarte");
+        for (i = 0; i < elems.length; i++) {
+                if (elems[i].checked) {
+                    bool = true;
+                }
 
         }
-        postMyOpinionRequest.setRequestHeader("Content-type" , "application/x-www-form-urlencoded");
-        postMyOpinionRequest.send("data="+JSON.stringify(cse));  /* et on l'envoit */
-
+        if (bool == true){
+            var couleur = document.fromChoixCarte.couleurCarte.value;
+            console.log("couleur choisie = "+couleur);
+            var eltIdCartes = document.getElementById("idCarte");
+            var idCartes = eltIdCartes.innerText || eltIdCartes.textContent;
+            console.log("id carte = "+idCartes);
+            for (i = 0; i < elems.length; i++) {
+                elems[i].checked = false;
+                elems[i].disabled = false;
+            }
+            AfficherCacher("choixCartes");
+            AfficherCacher("fondChoixCartes");
+            avancer(idCartes+couleur);
+        }else{
+            alert("tu doit choisis une couleur !");
+        }
     }
 
     function inverse(ID, COL){
@@ -259,7 +305,7 @@
 
     </head>
 
-    <body onload="inverse('tb', 'col0');inverse('tb', 'col1');inverse('tb', 'col2');inverse('tb', 'col6');inverse('tb', 'col7');inverse('tb', 'col8');check();Cacher('fond');Cacher('fondPara');Cacher('fondRules');Cacher('rules');Cacher('para');Cacher('quitter');Cacher('fondQuitter');avancer(0);">
+    <body onload="inverse('tb', 'col0');inverse('tb', 'col1');inverse('tb', 'col2');inverse('tb', 'col6');inverse('tb', 'col7');inverse('tb', 'col8');check();Cacher('choixCartes');Cacher('fond');Cacher('fondChoixCartes');Cacher('fondPara');Cacher('fondRules');Cacher('rules');Cacher('para');Cacher('quitter');Cacher('fondQuitter');avancer(0);">
 
 <!-- HEADER -->
     	<header>
@@ -287,7 +333,47 @@
             <nav class="fond" id="fondPara" onclick='ACPara();'></nav>
             <nav class="fond" id="fondQuitter" onclick='ACQuitter();'></nav>
             <nav class="fond" id="fondRules" onclick='ACRules();'></nav>
+            <nav class="fond" id="fondChoixCartes"></nav>
             <nav class="fond" id="fond" onclick='ACRules();'></nav>
+            <nav id="choixCartes">
+                <p id="idCarte" style="visibility: hidden;position:fixed;">0</p>
+                <h2 style="text-align: center; margin-bottom: 0px;">Choix de la couleur de la voiture</h2>
+                <h2 style="text-align: center; margin-top: 0px;">à faire avancer de 5 cases</h2>
+                <p style="text-align: center; margin-bottom: 0px;">(Vous ne pouvez pas choisir une</p>
+                <p style="text-align: center; margin-top: 0px;">couleur déjà présente sur la carte)</p>
+                <form name='fromChoixCarte'><table align="center" style="margin-top: 40px">
+                        <tr class="choixJaune">
+                            <td style="color:#ffd800;font-weight: bold;font-size: 22px;">Jaune</td>
+                            <td align="center"><input type="radio" name="couleurCarte" value="Jaune" id="jaune" /><label for="jaune"></label></td>
+                            <td align="center" class="laCarte">Votre carte :</td>
+                        </tr>
+                        <tr class="choixBleue">
+                            <td style="color:#2551d9;font-weight: bold;font-size: 22px;">Bleue</td>
+                            <td align="center"><input type="radio" name="couleurCarte" value="Bleu" id="bleue" /><label for="bleue"></label></td>
+                            <td rowspan="5" id="laCarte" class="laCarte"><nav id="imgLaCarte" class="imagee" style="background-image: url(img/cartes/1.png);background-size: cover;'}"></nav></td>
+                        </tr>
+                        <tr class="choixRouge">
+                            <td style="color:#fb2b2b;font-weight: bold;font-size: 22px;">Rouge</td>
+                            <td align="center"><input type="radio" name="couleurCarte" value="Rouge" id="rouge" /><label for="rouge"></label></td>
+                        </tr>
+                        <tr class="choixViolette">
+                            <td style="color:#864daf;font-weight: bold;font-size: 22px;">Violette</td>
+                            <td align="center"><input type="radio" name="couleurCarte" value="Violet" id="violette" /><label for="violette"></label></td>
+                        </tr>
+                        <tr class="choixBlanche">
+                            <td style="color:white;font-weight: bold;font-size: 22px;">Blanche</td>
+                            <td align="center"><input type="radio" name="couleurCarte" value="Blanc" id="blanche" /><label for="blanche"></label></td>
+                        </tr>
+                        <tr class="choixVerte">
+                            <td style="color:#2fb129;font-weight: bold;font-size: 22px;">Verte</td>
+                            <td align="center"><input type="radio" name="couleurCarte" value="Vert" id="verte" /><label for="verte"></label></td>
+                        </tr>
+                        <tr class="choixBoutton">
+                            <td class="btnChoix btnLaCarte" colspan="3" align="center"><button type="button" onclick="choixCartes()">Valider</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </nav>
             <nav id="rules">
                 <h2>Régles</h2>
             </nav>
