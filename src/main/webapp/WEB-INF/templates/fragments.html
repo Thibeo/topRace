@@ -33,7 +33,7 @@
 <!-- rulesParaQuitt -->
 <!-- -------------- -->
 
-        <div th:fragment="rulesParaQuitt">
+        <div th:fragment="rulesParaQuitt(texteQuitter)" class="rulesParaQuitt">
             <nav class="fond" id="fondPara" onclick='ACPara();'></nav>
             <nav class="fond" id="fondQuitter" onclick='ACQuitter();'></nav>
             <nav class="fond" id="fondRules" onclick='ACRules();'></nav>
@@ -80,12 +80,12 @@
                     <tr align="center">
                         <td colspan="2" align="center">
                             <button class="x" onclick='ACQuitter();'>X</button>
-                            <h2>Voulez-vous vraiment quitter</h2>
+                            <h2 th:text="${'Voulez-vous vraiment quitter '+texteQuitter}"></h2>
                         </td>
                     </tr>
                     <tr>
-                        <td class="btnQuitter"><button type="submit"><a href="home">Quitter l'attente</a></button></td>
-                        <td align="right" class="btnQuitter"><button type="submit" onclick='ACQuitter();'>Retour à l'attente</button></td>
+                        <td class="btnQuitter"><button type="submit"><a href="home" th:text="${'Quitter '+texteQuitter}"></a></button></td>
+                        <td align="right" class="btnQuitter"><button type="submit" onclick='ACQuitter();' th:text="${'Retour à '+texteQuitter}"></button></td>
                     </tr>
                 </table>
             </nav>

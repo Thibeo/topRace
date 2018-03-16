@@ -11,6 +11,9 @@ function AfficherCacher(texte) {
 function Cacher(texte) {
     document.getElementById(texte).style.display = "none";
 }
+function Afficher(texte) {
+    document.getElementById(texte).style.display = "block";
+}
 
 function ACQuitter(){
     var test = document.getElementById("quitter").style.display;

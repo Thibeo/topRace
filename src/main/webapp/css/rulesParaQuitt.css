@@ -1,6 +1,6 @@
-/* ---------------------------- */
-/* --- Régles et paramètres --- */
-/* ---------------------------- */
+/* ------------------------------------- */
+/* --- Régles, paramètres et quitter --- */
+/* ------------------------------------- */
 
 /* fond pour mettre en valeur les div*/
 .fond{
@@ -18,8 +18,18 @@
     font-size: 15px;
     float: right;
 }
+/* sytle des boutton x*/
+.rulesParaQuitt button{
+    margin-left: 20px;
+    text-decoration: none;
+    color: #FDEE00;
+    font-size: 18px;
+    background-color: #696969;
+    border-color:  yellow;
+    outline : none;
+}
 /* on met un padding pour crée un espace entre les titres et le boutton X */
-#para h2, #rules h2, #quitter  h2{
+#para h2, #rules h2, #quitter  h2, #tutoPrez h2{
     padding-top: 8px;
 }
 
@@ -84,4 +94,21 @@
     z-index: 125;
     background-image: url(../img/carreBas.png);
     background-size: cover;
+}
+
+
+/* --------------- */
+/* --- quitter --- */
+/* --------------- */
+
+#quitter{
+    position: fixed;
+    left: 50%;
+    top:40%;
+    transform: translate(-50%, -50%);
+    background-color: #9E9E9E;
+    border-radius: 2vh;
+    border: 0.4vh solid grey;
+    padding: 1vh;
+    z-index: 120;
 }

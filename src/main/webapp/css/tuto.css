@@ -1,0 +1,61 @@
+#tutoPrez{
+    position: fixed;
+    top: 40vh;
+    left: 47vh;
+    padding: 1vh;
+    background-color: #9E9E9E;
+    border-radius: 2vh;
+    border: 0.4vh solid grey;
+    z-index: 1000;
+}
+#tutoPrez button, #tutoTouSElmt button{
+    text-decoration: none;
+    color: #FDEE00;
+    font-size: 18px;
+    background-color: #696969;
+    border-color:  yellow;
+    outline : none;
+}
+#tutoParis button{
+     text-decoration: none;
+     color: #FDEE00;
+     font-size: 18px;
+     background-color: #696969;
+     border-color:  yellow;
+     outline : none;
+}
+#tutoParis .next{
+    margin-top:-4vh;
+}
+#tutoTouSElmt{
+    position: fixed;
+    top: 25vh;
+    left: 126vh;
+    width: 42vh;
+    padding: 1vh;
+    background-color: #9E9E9E;
+    border-radius: 2vh;
+    border: 0.4vh solid grey;
+    z-index: 1000;
+}
+#tutoParis{
+    position: fixed;
+    top: 75vh;
+    left: 14vh;
+    right: 14vh ;
+    padding: 1vh;
+    background-color: #9E9E9E;
+    border-radius: 2vh;
+    border: 0.4vh solid grey;
+    z-index: 1000;
+}
+
+#ligneJaune{
+    position: fixed;
+    left: 46vh;
+    top: 35vh;
+    width: 8vh;
+    height: 1.66vh;
+    background-image: url(../img/ligneJaune.png);
+    background-size: cover;
+}

@@ -105,6 +105,15 @@ INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("
 INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Blanc", "BobBlanc", 1, 0, 'b');
 INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Rouge", "BobRouge", 1, 0, 'c');
 
+
+INSERT INTO `partie` (`idPartie`, `nomDePartie`, `nomDeProprio`) VALUES (2, 'partie2test', 'proprioEstBob2');
+
+INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Jaune", "Bob2Jaune", 2, 1, 'a');
+INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Vert", "Bob2Vert", 2, 1, 'b');
+INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Violet", "Bob2Violet", 2, 1, 'c');
+INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Bleu", "Bob2Bleu", 2, 0, 'a');
+INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Blanc", "Bob2Blanc", 2, 0, 'b');
+
 INSERT INTO `partieCase` (`x`, `y`, `idPartie`, `occupee`) VALUES (0, 'a', 1, TRUE);
 INSERT INTO `partieCase` (`x`, `y`, `idPartie`, `occupee`) VALUES (0, 'b', 1, TRUE);
 INSERT INTO `partieCase` (`x`, `y`, `idPartie`, `occupee`) VALUES (0, 'c', 1, TRUE);
