@@ -69,6 +69,7 @@ header{
     position: fixed;
     width: 45vh;
     height: 6.5vh;
+    z-index: 121;
     background-image: url(../img/voitureOrange.png);
     background-size: cover;
     animation-name:voitureOrange;
@@ -85,6 +86,7 @@ header{
     top: -0.2vh;
     right: -27vh;
     position: fixed;
+    z-index: 121;
     width: 45vh;
     height: 6.5vh;
     background-image: url(../img/voitureRouge.png);

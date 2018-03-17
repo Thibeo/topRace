@@ -12,6 +12,7 @@
     <link rel='stylesheet' href='css/scrollBar.css'> <!-- style de la scrollbar -->
     <link rel="shortcut icon" href="img/logo.png">
     <script type="text/javascript" src="js/rulesParaQuitt.js"></script>
+    <script type="text/javascript" src="js/tuto.js"></script>
     <script type="text/javascript">
 
         function avancerVoiture(couleur, top, left, rotate) {
@@ -165,60 +166,6 @@
             return cols;
         }
 
-        function fermerTableau() {
-            if (document.getElementById("titreCol0").style.display != "none"){
-                inverse('tb', 'col0');
-                inverse('tb', 'col6');
-                inverse('tb', 'col3');
-            }
-            if (document.getElementById("titreCol1").style.display != "none"){
-                inverse('tb', 'col1');
-                inverse('tb', 'col7');
-                inverse('tb', 'col4');
-            }
-            if (document.getElementById("titreCol2").style.display != "none"){
-                inverse('tb', 'col2');
-                inverse('tb', 'col8');
-                inverse('tb', 'col5');
-            }
-        }
-
-        function ouvrirTableau() {
-            if (document.getElementById("titreCol0").style.display != ""){
-                inverse('tb', 'col0');
-                inverse('tb', 'col6');
-                inverse('tb', 'col3');
-            }
-            if (document.getElementById("titreCol1").style.display != ""){
-                inverse('tb', 'col1');
-                inverse('tb', 'col7');
-                inverse('tb', 'col4');
-            }
-            if (document.getElementById("titreCol2").style.display != ""){
-                inverse('tb', 'col2');
-                inverse('tb', 'col8');
-                inverse('tb', 'col5');
-            }
-        }
-
-
-        var clignotement = function(){
-            if (document.getElementById('ligneJaune').style.visibility=='visible'){
-                document.getElementById('ligneJaune').style.visibility='hidden';
-            }
-            else{
-                document.getElementById('ligneJaune').style.visibility='visible';
-            }
-        };
-        periode = setInterval(clignotement, 800);
-
-        function zindex(id,index){
-            if (id == 'col0'){
-                document.getElementsByTagName(id).style.zIndex = index;
-            } else{
-                document.getElementById(id).style.zIndex = index;
-            }
-        }
 
         function check(){
             var un = document.querySelectorAll(".pariUn");
@@ -252,8 +199,24 @@
 
 </head>
 
-<body onload="inverse('tb', 'col0');inverse('tb', 'col1');inverse('tb', 'col2');inverse('tb', 'col6');inverse('tb', 'col7');inverse('tb', 'col8');check();Cacher('choixCartes');Cacher('fondChoixCartes');Cacher('fondPara');Cacher('fondRules');Cacher('rules');Cacher('para');Cacher('quitter');Cacher('fondQuitter');
-Cacher('tutoTouSElmt');Cacher('tutoPlateau');Cacher('tutoParis');Cacher('tutoPari2');Cacher('tutoPari3');Cacher('ligneJaune');avancer(0);">
+<body onload="  inverse('tb', 'col0');inverse('tb', 'col1');
+                inverse('tb', 'col2');inverse('tb', 'col6');
+                inverse('tb', 'col7');inverse('tb', 'col8');
+                check();avancer(0);
+                Cacher('choixCartes');Cacher('fondChoixCartes');
+                Cacher('fondPara');Cacher('fondRules');Cacher('rules');
+                Cacher('para');Cacher('quitter');Cacher('fondQuitter');
+                Cacher('tutoTouSElmt');Cacher('tutoPlateau');
+                Cacher('tutoParis');Cacher('tutoPari2');
+                Cacher('tutoPari3');Cacher('ligneJaune');
+                Cacher('fondTuto1');Cacher('fondTuto2');
+                zindex('joueurJaune',1);
+                zindex('joueurViolet',1);
+                zindex('joueurBleu',1);
+                zindex('joueurRouge',1);
+                zindex('joueurBlanc',1);
+                zindex('joueurVert',1);
+                Cacher('fondNoir');"> <!-- à laisser en dernier -->
 
 <!-- HEADER -->
 <header th:replace="~{fragments::header}"></header>
@@ -455,29 +418,52 @@ Cacher('tutoTouSElmt');Cacher('tutoPlateau');Cacher('tutoParis');Cacher('tutoPar
 <!-- id des nav :fondTuto,tutoTouSElmt(tutoNomPartieJoueurs,tutoPlateau,tutoCarte) -->
 
     <nav class="fond" id="fondTuto"></nav>
+    <nav id="fondNoir"></nav>
+    <nav id="tutoInclicable"></nav>
+    <nav id="fondTuto1"></nav>
+    <nav id="fondTuto2"></nav>
 
     <nav id="tutoPrez">
-        <button class="x" onclick='Cacher("fondTuto");Cacher("tutoPrez")'>X</button>
+        <button class="x" onclick=' Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
+                                    Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
+                                    Cacher("tutoPrez");
+                                    Cacher("tutoTouSElmt");Cacher("tutoPlateau");Cacher("tutoCarte");
+                                    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoPari3");
+                                    Cacher("ligneJaune");
+                                    zindex("nomPartie",1);zindex("joueurs",1);zindex("plateau",0);
+                                    zindex("ligneCartes",1);zindex("carteTitre",2);zindex("carreHaut",2);zindex("carreBas",2);
+                                    zindex("joueurJaune",1);zindex("joueurViolet",1);zindex("joueurBleu",1);
+                                    zindex("joueurRouge",1);zindex("joueurBlanc",1);zindex("joueurVert",1);
+                                    fermerTableau();animationPariSortie();'>
+            X
+        </button>
         <h2>Tutoriel (1/7)</h2>
         <p>Bienvenue dans le tutoriel pour apprendre à utiliser l’interface du jeu top race.</p>
-        <p>Il vous est possible de quitter le tutoriel à tout moment en appuyant sur le bouton <button onclick='Cacher("fondTuto");Cacher("tutoPrez")'>X</button> en haut à droite</p>
+        <p>Il vous est possible de quitter le tutoriel à tout moment en appuyant sur le bouton <button>X</button> en haut à droite</p>
         <p>Dans un premier temps nous allons nous familiariser avec tous les éléments présents sur la page.</p>
-        <button class="x" onclick='Cacher("tutoPrez");zindex("nomPartie",10000);zindex("joueurs",10000);Afficher("tutoTouSElmt");Afficher("tutoNomPartieJoueurs");Cacher("tutoPlateau");Cacher("tutoCarte");'>Next</button>
+        <button class="x" onclick=' Cacher("tutoPrez");
+                                    zindex("nomPartie",10000);
+                                    zindex("joueurs",10000);
+                                    Afficher("tutoTouSElmt");
+                                    Afficher("tutoNomPartieJoueurs");
+                                    Cacher("tutoPlateau");
+                                    Cacher("tutoCarte");'>
+            Next
+        </button>
     </nav>
 
     <nav id="tutoTouSElmt">
-        <button class="x" onclick=' Cacher("fondTuto");
-                                    zindex("ligneCartes",1);
-                                    zindex("carreHaut",2);
-                                    zindex("carreBas",2);
-                                    zindex("carteTitre",2);
-                                    zindex("nomPartie",1);
-                                    zindex("joueurs",1);
-                                    zindex("plateau",1);
-                                    Afficher("tutoNomPartieJoueurs");
-                                    Cacher("tutoTouSElmt");
-                                    Cacher("tutoPlateau");
-                                    Cacher("tutoCarte");'>
+        <button class="x" onclick=' Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
+                                    Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
+                                    Cacher("tutoPrez");
+                                    Cacher("tutoTouSElmt");Cacher("tutoPlateau");Cacher("tutoCarte");
+                                    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoPari3");
+                                    Cacher("ligneJaune");
+                                    zindex("nomPartie",1);zindex("joueurs",1);zindex("plateau",0);
+                                    zindex("ligneCartes",1);zindex("carteTitre",2);zindex("carreHaut",2);zindex("carreBas",2);
+                                    zindex("joueurJaune",1);zindex("joueurViolet",1);zindex("joueurBleu",1);
+                                    zindex("joueurRouge",1);zindex("joueurBlanc",1);zindex("joueurVert",1);
+                                    fermerTableau();animationPariSortie();'>
             X
         </button>
         <nav id="tutoNomPartieJoueurs">
@@ -515,9 +501,9 @@ Cacher('tutoTouSElmt');Cacher('tutoPlateau');Cacher('tutoParis');Cacher('tutoPar
                                         zindex("joueurBlanc",1);
                                         zindex("joueurVert",1);
                                         zindex("ligneCartes",10000);
-                                        zindex("carreHaut",10000);
-                                        zindex("carreBas",10000);
-                                        zindex("carteTitre",10000);'>
+                                        zindex("carreHaut",10001);
+                                        zindex("carreBas",10001);
+                                        zindex("carteTitre",10001);'>
                 Next
             </button>
         </nav>
@@ -545,24 +531,30 @@ Cacher('tutoTouSElmt');Cacher('tutoPlateau');Cacher('tutoParis');Cacher('tutoPar
     </nav>
 
     <nav id="tutoParis">
-        <button class="x" onclick=' Cacher("fondTuto");
-                                    Afficher("tutoPari1");
-                                    Cacher("tutoParis");
-                                    Cacher("tutoPari2");
-                                    Cacher("tutoPari3");
-                                    fermerTableau();'>
+        <button class="x" onclick=' Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
+                                    Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
+                                    Cacher("tutoPrez");
+                                    Cacher("tutoTouSElmt");Cacher("tutoPlateau");Cacher("tutoCarte");
+                                    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoPari3");
+                                    Cacher("ligneJaune");
+                                    zindex("nomPartie",1);zindex("joueurs",1);zindex("plateau",0);
+                                    zindex("ligneCartes",1);zindex("carteTitre",2);zindex("carreHaut",2);zindex("carreBas",2);
+                                    zindex("joueurJaune",1);zindex("joueurViolet",1);zindex("joueurBleu",1);
+                                    zindex("joueurRouge",1);zindex("joueurBlanc",1);zindex("joueurVert",1);
+                                    fermerTableau();animationPariSortie();'>
             X
         </button>
         <nav id="tutoPari1">
             <h2>Tutoriel (5/7)</h2>
-            <p>Le sytème de paris est la base du jeu. C'est grâce aux paris que vous gagnez des points</p>
-            <p>Il y a 3 paris à faire au total</p>
+            <p>Le sytème de paris est la base du jeu. C'est grâce aux paris que vous gagnez des points. Il y a 3 paris à faire au total</p>
+            <p>Cliquer sur les boutons <button class="bouttonJaune">1</button> <button class="bouttonRouge">2</button> <button class="bouttonJaune">3</button> pour afficher ou cahcher les paris 1,2 et 3</p>
             <button class="x next" onclick=' Cacher("tutoPari1");
                                         Afficher("tutoPari2");
-                                        zindex("plateauParis",1);
                                         Afficher("ligneJaune");
                                         zindex("ligneJaune",10000);
-                                        zindex("col0",10000);'>
+                                        zindex("plateauParis",10000);
+                                        Afficher("fondTuto1");Afficher("fondTuto2");
+                                        animationPariEntree();'>
                 Next
             </button>
         </nav>
@@ -576,7 +568,9 @@ Cacher('tutoTouSElmt');Cacher('tutoPlateau');Cacher('tutoParis');Cacher('tutoPar
                                         Afficher("tutoPari3");
                                         Cacher("ligneJaune");
                                         zindex("ligneJaune",-10);
-                                        zindex("col0",1);'>
+                                        Cacher("fondTuto1");Cacher("fondTuto2");
+                                        zindex("plateauParis",1);
+                                        animationPariSortie();'>
                 Next
             </button>
         </nav>
@@ -584,12 +578,19 @@ Cacher('tutoTouSElmt');Cacher('tutoPlateau');Cacher('tutoParis');Cacher('tutoPar
             <h2>Tutoriel (7/7)</h2>
             <p>Une fois la dernière ligne jaune dépassé, c'est du chacun pour soi. Le but est de faire arriver sa voiture en première.</p>
             <p>Un nombre de points est aussi ajouté en fonction du classement finale. le joueur ayant le plus de point gagne la partie !</p>
-            <button class="x next" onclick=' Cacher("fondTuto");
-                                    Afficher("tutoPari1");
-                                    Cacher("tutoParis");
-                                    Cacher("tutoPari2");
-                                    Cacher("tutoPari3");
-                                    fermerTableau();'>Start !</button> <!-- !!mettre le onClick!! -->
+            <button class="x" onclick=' Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
+                                    Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
+                                    Cacher("tutoPrez");
+                                    Cacher("tutoTouSElmt");Cacher("tutoPlateau");Cacher("tutoCarte");
+                                    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoPari3");
+                                    Cacher("ligneJaune");
+                                    zindex("nomPartie",1);zindex("joueurs",1);zindex("plateau",0);
+                                    zindex("ligneCartes",1);zindex("carteTitre",2);zindex("carreHaut",2);zindex("carreBas",2);
+                                    zindex("joueurJaune",1);zindex("joueurViolet",1);zindex("joueurBleu",1);
+                                    zindex("joueurRouge",1);zindex("joueurBlanc",1);zindex("joueurVert",1);
+                                    fermerTableau();animationPariSortie();'>
+                Start !
+            </button>
         </nav>
     </nav>
 

@@ -6,7 +6,7 @@
     background-color: #9E9E9E;
     border-radius: 2vh;
     border: 0.4vh solid grey;
-    z-index: 1000;
+    z-index: 10003;
 }
 #tutoPrez button, #tutoTouSElmt button{
     text-decoration: none;
@@ -36,7 +36,7 @@
     background-color: #9E9E9E;
     border-radius: 2vh;
     border: 0.4vh solid grey;
-    z-index: 1000;
+    z-index: 10003;
 }
 #tutoParis{
     position: fixed;
@@ -47,7 +47,7 @@
     background-color: #9E9E9E;
     border-radius: 2vh;
     border: 0.4vh solid grey;
-    z-index: 1000;
+    z-index: 10003;
 }
 
 #ligneJaune{
@@ -58,4 +58,41 @@
     height: 1.66vh;
     background-image: url(../img/ligneJaune.png);
     background-size: cover;
+}
+#tutoInclicable{
+    position: fixed;
+    top:0vh;
+    left:0vh;
+    right: 0vh;
+    bottom: 0vh;
+    z-index: 10002;
+    background-color: transparent;
+}
+#fondTuto1{
+    position: fixed;
+    top :19vh;
+    left:134vh;
+    width:18vh;
+    height:53.2vh;
+    z-index: 10001;
+    background-color: rgba(251, 251, 251, 0.75);
+}
+#fondTuto2{
+    position: fixed;
+    top :19vh;
+    right: 18vh;
+    width:26.5vh;
+    height:53.2vh;
+    z-index: 10001;
+    background-color: rgba(251, 251, 251, 0.75);
+}
+#fondNoir{
+    position: fixed;
+    top :15.4vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000000000;
+    width: 100%;
+    height: 100%;
+    background-color: black;
 }

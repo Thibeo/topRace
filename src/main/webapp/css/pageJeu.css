@@ -17,6 +17,7 @@
 	background-color: #9E9E9E;
 	border-radius: 2vh;
 	border: 0.4vh solid grey;
+	font-size: 3vh;
 }
 #nomPartie p{
 	margin: 0;
@@ -381,31 +382,37 @@ input[type="radio"] + label::before{
 #joueurJaune{
 	top: 0vh;
  	left: 0vh;
+	z-index: -1;
  	background-image: url(../img/joueurJaune.png);
 }
 #joueurBleu{
  	top: 0vh;
  	left: 0vh;
+	z-index: -1;
  	background-image: url(../img/joueurBleu.png);
 }
 #joueurVert{
  	top: 0vh;
  	left: 0vh;
+	z-index: -1;
  	background-image: url(../img/joueurVert.png);
 }
 #joueurBlanc{
  	top: 0vh;
  	left: 0vh;
+	z-index: -1;
  	background-image: url(../img/joueurBlanc.png);
 }
 #joueurViolet{
  	top: 0vh;
  	left: 0vh;
+	z-index: -1;
  	background-image: url(../img/joueurViolet.png);
 }
 #joueurRouge{
  	top: 0vh;
  	left: 0vh;
+	z-index: -1;
  	background-image: url(../img/joueurRouge.png);
 }
 
