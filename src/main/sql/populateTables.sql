@@ -89,7 +89,12 @@ INSERT INTO `cse` (`x`,`y`,`occupee`,`top`,`left`,`rotate`) VALUES
 /* ------------ LES VOITURES ------------ */
 /* -------------------------------------- */
 
-INSERT INTO `typeVoiture` (`couleurV`) VALUES ("Jaune"),("Rouge"),("Violet"),("Bleu"),("Vert"),("Blanc");
+INSERT INTO `typeVoiture` (`couleurV`,x,y) VALUES ("Jaune",1,'a');
+INSERT INTO `typeVoiture` (`couleurV`,x,y) VALUES ("Rouge",0,'c');
+INSERT INTO `typeVoiture` (`couleurV`,x,y) VALUES ("Violet",1,'c');
+INSERT INTO `typeVoiture` (`couleurV`,x,y) VALUES ("Bleu",0,'a');
+INSERT INTO `typeVoiture` (`couleurV`,x,y) VALUES ("Vert",1,'b');
+INSERT INTO `typeVoiture` (`couleurV`,x,y) VALUES ("Blanc",0,'b');
 
 
 /* ------------------------------------------------ */

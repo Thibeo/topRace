@@ -10,6 +10,8 @@ DROP TABLE carteJoueur;
 
 CREATE TABLE `typeVoiture` (
   `couleurV` varchar(6) NOT NULL,
+  `x` int(11) NOT NULL, /* 1,2,3,4 ... */
+  `y` char(1) NOT NULL, /* a,b ou c */
   PRIMARY KEY (`couleurV`)
 );
 

@@ -24,6 +24,8 @@ public class GameLibrary {
     private PartieCaseDao partieCaseDao = new PartieCaseDaoImpl();
     private JoueurDao joueurDao = new JoueurDaoImpl();
     private PartieDao partieDao = new PartieDaoImpl();
+    private TypeVoitureDao voitureDao = new TypeVoitureDaoImpl();
+
 
     private GameLibrary() { }
 
@@ -184,10 +186,26 @@ public class GameLibrary {
     }
 
 
-// fonction crer partie (permet de rentrer une nouvelle partie dans la base de données:
-    /*
-    public void creerPartie(Partie partie){
-        partie
+    //fonction crer partie (permet de rentrer une nouvelle partie dans la base de données:
+
+    public Partie creerPartie(Partie partie){
+        return (partieDao.createPartie(partie));
     }
-    */
+
+    // fonction creerJoueur (permet de rentrer un nouveau joueur dans la base de données:
+
+    public void creerJoueur(Joueur joueur){ joueurDao.createJoueur(joueur); }
+
+    // fonction retournant la liste des couleurs des différentes voitures:
+
+    public ArrayList listCouleur(){
+        return (voitureDao.listeCouleur());
+    }
+
+    //fonction retournant l'id correspondant à la partie dont le nom est rentré en parametre:
+
+    public int getIdPartie(String nom){ return(partieDao.getIdPartieByName(nom)); }
+
+
+
 }

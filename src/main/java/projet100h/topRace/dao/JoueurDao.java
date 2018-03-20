@@ -13,4 +13,6 @@ public interface JoueurDao {
 
     public void changerCase(Joueur joueur, PartieCase cse);
 
+    public void createJoueur(Joueur joueur);
+
 }
