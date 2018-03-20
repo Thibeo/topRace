@@ -91,8 +91,8 @@ public class JouerServlet extends GenericServlet {
                 Integer idPartie=null;
                 String pseudoJoueur=null;
 
-                idPartie = Integer.parseInt(req.getParameter("idPartie"));
                 pseudoJoueur = req.getParameter("nomPseudo");
+                idPartie = Integer.parseInt(req.getParameter("idPartie"));
 
                 Random rand2 = new Random();
                 int nombreAleatoire2 = rand2.nextInt(5 - 0 + 1);

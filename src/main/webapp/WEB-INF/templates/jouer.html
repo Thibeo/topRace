@@ -10,29 +10,18 @@
     <script type="text/javascript">
 
         function Cacher(texte) {
+            console.log(texte+" a cachzer");
             document.getElementById(texte).style.display = "none";
         }
 
         function Afficher(texte) {
             document.getElementById(texte).style.display = "";
         }
-        function AfficherPseudo(idPartie,texte){
-            document.getElementById(texte).style.display = "";
-            console.log('Le nom de la partie est : '+idPartie);
-            var input=document.createElement("input");
-            input.setAttribute("id","idPartie");
-            input.setAttribute("name","idPartie");
-            input.setAttribute("value",idPartie);
-            //var td=document.createElement("td");
-            var td=document.getElementById("td");
-            var trr=document.getElementById("trr");
-            console.log(trr);
-            //var table=document.getElementById("table");
-            td.appendChild(input);
-            //trr.appendChild(td);
-            //table.appendChild(trr);
-            //Cacher(nomPartie);
-            document.getElementById("idPartie").style.display ="none";
+        function AfficherPseudo(idPartie){
+            document.getElementById("idPartie").style.display = "inline-block";
+            document.getElementById("idPartie").value = idPartie;
+            document.getElementById("idPartie").style.display = "none";
+
         }
 
     </script>
@@ -73,9 +62,9 @@
                     <form method="post">
                         <tr id="trr">
                             <td>Votre pseudo pour la partie :</td>
-                            <td class="inputPseudo"><input name="nomPseudo" id="nomPseudo" type="text" size="20" maxlength="100" placeholder="Votre pseudo"/></td>
-                            <td id="td" style="display: none"></td>
-                            <td><input type="submit" name="action" value="Valider"/></td>
+                            <td class="inputPseudo"><input name="nomPseudo" id="nomPseudo" type="text" size="20" maxlength="100" placeholder="Votre pseudo" required/></td>
+                            <td id="td"><input name="idPartie" id="idPartie" type="text" value="0"/></td>
+                            <td><input type="submit" name="action" value="Valider" onclick="Afficher('idPartie');"/></td>
                         </tr>
                     </form>
                 </table>
@@ -111,68 +100,7 @@
         </nav>
         <nav id="param">
             <h2>Changer les paramètres</h2>
-            <table>
-                <th><h3>Volume</h3></th>
-                <tr>
-                    <td align="right">Volume principal&nbsp;</td>
-                    <!--
-                    <td>
-                        <form id='formulaire' method="post" enctype="text/plain" oninput="v.value=parseInt(volume.value)">
-                            <input type="range" id="volume" name="volume" min="0" max="100" value="50">
-                            <output name="v" for="volume"></output>
-                        </form>
-                    </td>
-                    !-->
-                </tr>
 
-                <tr>
-                    <td align="right">Musique&nbsp;</td>
-                    <!--
-                    <td>
-                        <form id='formulaire' method="post" enctype="text/plain" oninput="m.value=parseInt(musique.value)">
-                            <input type="range" id="musique" name="musique" min="0" max="100" value="50">
-                            <output name="m" for="musique"></output>
-                        </form>
-                    </td>
-                    !-->
-                </tr>
-
-                <tr>
-                    <td align="right">Effets sonores&nbsp;</td>
-                    <!--
-                    <td>
-                        <form id='formulaire' method="post" enctype="text/plain" oninput="e.value=parseInt(effet.value)">
-                            <input type="range" id="effet" name="effet" min="0" max="100" value="50">
-                            <output name="e" for="effet"></output>
-                        </form>
-                    </td>
-                    !-->
-                </tr>
-                <tr>
-                    <td align="right">Alerte&nbsp;</td>
-                    <!--
-                    <td>
-                        <form id='formulaire' method="post" enctype="text/plain" oninput="a.value=parseInt(alerte.value)">
-                            <input type="range" id="alerte" name="alerte" min="0" max="100" value="50">
-                            <output name="a" for="alerte"></output>
-                        </form>
-                    </td>
-                    !-->
-                </tr>
-                <th><h3>Langue</h3></th>
-                <tr>
-                    <td align="right">Français&nbsp;</td>
-                    <td>
-                        <img src="img/france.png" width="75px">
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right">Anglais&nbsp;</td>
-                    <td>
-                        <img src="img/anglais.png" width="75px">
-                    </td>
-                </tr>
-            </table>
         </nav>
         <nav id="jouer">
             <nav class="bloc">
@@ -199,7 +127,7 @@
                                 <td align="center"><p th:if="${list.get(1) != 6}"
                                                       th:text="${list.get(1)+'/6'}">5/6</p></td>
 
-                                <td th:if="${list.get(1) != 6}"><button type="submit" value="Rejoindre partie"> <a href="#" th:onclick="'AfficherPseudo(\''+${list.get(0)}+'\',\''+rentrerPseudo+'\');Cacher('+param+');Cacher('+regles+');Afficher('+jouer+');'">Rejoindre</a></button></td>
+                                <td th:if="${list.get(1) != 6}"><button type="submit" value="Rejoindre partie"> <a href="#" th:onclick="'AfficherPseudo(\''+${list.get(0)}+'\');Afficher(\''+rentrerPseudo+'\');Cacher(\''+param+'\');Cacher(\''+regles+'\');Afficher(\''+jouer+'\');'">Rejoindre</a></button></td>
                             </tr>
 
                     </table>
