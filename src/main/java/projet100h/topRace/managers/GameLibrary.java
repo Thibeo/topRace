@@ -24,7 +24,7 @@ public class GameLibrary {
     private PartieCaseDao partieCaseDao = new PartieCaseDaoImpl();
     private JoueurDao joueurDao = new JoueurDaoImpl();
     private PartieDao partieDao = new PartieDaoImpl();
-    private TypeVoitureDao voitureDao = new TypeVoitureDaoImpl();
+    //private TypeVoitureDao voitureDao = new TypeVoitureDaoImpl();
 
 
     private GameLibrary() { }
@@ -185,7 +185,7 @@ public class GameLibrary {
 
     }
 
-
+/*
     //fonction crer partie (permet de rentrer une nouvelle partie dans la base de données:
 
     public Partie creerPartie(Partie partie){
@@ -206,6 +206,6 @@ public class GameLibrary {
 
     public int getIdPartie(String nom){ return(partieDao.getIdPartieByName(nom)); }
 
-
+*/
 
 }

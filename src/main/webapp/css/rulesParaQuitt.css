@@ -29,8 +29,8 @@
     outline : none;
 }
 /* on met un padding pour crée un espace entre les titres et le boutton X */
-#para h2, #rules h2, #quitter  h2, #tutoPrez h2{
-    padding-top: 8px;
+#para h2, #rules h2, #quitter  h2, #tutoPrez h2, #tutoTouSElmt h2, #tutoParis h2{
+    padding-top: 0.8vh;
 }
 
 

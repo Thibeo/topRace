@@ -399,6 +399,11 @@
     <nav class="joueurVoiture" id="joueurBlanc"></nav>
     <nav class="joueurVoiture" id="joueurVert"></nav>
 
+<!-- div pour les comptes-à-rebour -->
+    <nav id="navCompteur" onclick="duree='30';compteurPari();">
+        il reste <span id="compteur">90</span> secondes
+    </nav>
+
 <!-- nav pour titre de la nav carte -->
     <nav id="carteTitre">
         <b> Cartes </b>
@@ -563,7 +568,7 @@
             <p>Le premier pari se fait dès le début du jeu.
                 Chaque joueur pari sur les 3 voitures qu'il pense voir en tête dès que la 1er ligne jaune sera dépassée par une voiture.
                 Une fois celle-ci dépassée, le jeu se met en pause, un nombre de points vous est attibué en fonction des voitures sur lesquelles vous avez pariez.
-                Il faut donc à présent faire le deuxième paris etc ...</p>
+                Il faut donc à présent faire le deuxième paris etc ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
             <button class="x next" onclick=' Cacher("tutoPari2");
                                         Afficher("tutoPari3");
                                         Cacher("ligneJaune");
@@ -578,7 +583,7 @@
             <h2>Tutoriel (7/7)</h2>
             <p>Une fois la dernière ligne jaune dépassé, c'est du chacun pour soi. Le but est de faire arriver sa voiture en première.</p>
             <p>Un nombre de points est aussi ajouté en fonction du classement finale. le joueur ayant le plus de point gagne la partie !</p>
-            <button class="x" onclick=' Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
+            <button class="x next" onclick=' Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
                                     Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
                                     Cacher("tutoPrez");
                                     Cacher("tutoTouSElmt");Cacher("tutoPlateau");Cacher("tutoCarte");

@@ -233,15 +233,6 @@ input[type="checkbox"] + label::before{
 .pariReponseBlanche input[type="checkbox"]:checked:hover + label::before{background:white;}
 .pariReponseVerte input[type="checkbox"]:checked:hover + label::before{background:#2fb129;}
 
-/* compteur caché pour savoir combien de colonne on été sélectionner */
-#compteur{
-	display: none;
-	position: fixed;
-	z-index: 150;
-	font-size: 10vh;
-	color: red;
-}
-
 
 /* -------------- */
 /* --- Cartes --- */
@@ -368,9 +359,9 @@ input[type="radio"] + label::before{
 }
 
 
-/* ----------------------------- */
+/* ------------------------------ */
 /* --- Affichage des voitures --- */
-/* ----------------------------- */
+/* ------------------------------ */
 
 .joueurVoiture{
 	position: fixed;
@@ -416,3 +407,18 @@ input[type="radio"] + label::before{
  	background-image: url(../img/joueurRouge.png);
 }
 
+
+/* ----------------------------------- */
+/* --- compteur // compte à rebour --- */
+/* ----------------------------------- */
+
+#navCompteur{
+	position: fixed;
+	top:37.7vh;
+	left: 84vh;
+	background-color: #9E9E9E;
+	border-radius: 1vh;
+	border: 0.4vh solid red;
+	padding: 0.5vh;
+	z-index: 120;
+}

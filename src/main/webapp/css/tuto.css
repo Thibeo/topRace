@@ -1,4 +1,5 @@
 #tutoPrez{
+    font-size: 2vh;
     position: fixed;
     top: 40vh;
     left: 47vh;
@@ -9,25 +10,37 @@
     z-index: 10003;
 }
 #tutoPrez button, #tutoTouSElmt button{
+    font-size: 2vh;
+
+    padding-bottom: 0.2vh;
+    padding-top: 0.2vh;
+    padding-left: 0.6vh;
+    padding-right: 0.6vh;
     text-decoration: none;
     color: #FDEE00;
-    font-size: 18px;
     background-color: #696969;
     border-color:  yellow;
+    border-width: 0.3vh;
     outline : none;
 }
 #tutoParis button{
+     font-size: 2vh;
+    padding-bottom: 0.2vh;
+    padding-top: 0.2vh;
+    padding-left: 0.6vh;
+    padding-right: 0.6vh;
      text-decoration: none;
      color: #FDEE00;
-     font-size: 18px;
      background-color: #696969;
      border-color:  yellow;
+     border-width: 0.3vh;
      outline : none;
 }
 #tutoParis .next{
     margin-top:-4vh;
 }
 #tutoTouSElmt{
+    font-size: 2vh;
     position: fixed;
     top: 25vh;
     left: 126vh;
@@ -39,6 +52,7 @@
     z-index: 10003;
 }
 #tutoParis{
+    font-size: 2vh;
     position: fixed;
     top: 75vh;
     left: 14vh;
@@ -71,18 +85,18 @@
 #fondTuto1{
     position: fixed;
     top :19vh;
-    left:134vh;
-    width:18vh;
-    height:53.2vh;
+    right:57.5vh;
+    width:18.3vh;
+    height:54.2vh;
     z-index: 10001;
     background-color: rgba(251, 251, 251, 0.75);
 }
 #fondTuto2{
     position: fixed;
     top :19vh;
-    right: 18vh;
-    width:26.5vh;
-    height:53.2vh;
+    right: 17.9vh;
+    width:26.6vh;
+    height:54.2vh;
     z-index: 10001;
     background-color: rgba(251, 251, 251, 0.75);
 }
