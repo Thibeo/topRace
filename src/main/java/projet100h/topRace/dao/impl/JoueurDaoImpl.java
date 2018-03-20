@@ -3,6 +3,7 @@ package projet100h.topRace.dao.impl;
 import projet100h.topRace.dao.JoueurDao;
 import projet100h.topRace.entities.Case;
 import projet100h.topRace.entities.Joueur;
+import projet100h.topRace.entities.Partie;
 import projet100h.topRace.entities.PartieCase;
 
 import java.sql.*;
@@ -65,6 +66,24 @@ public class JoueurDaoImpl implements JoueurDao {
             statement.executeUpdate();
         }
         catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public void createJoueur(Joueur joueur){
+        String query = "INSERT INTO joueur(couleurJ,nomDeJoueur,idPartie,x,y) VALUES(?,?,?,?,?)";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1,joueur.getCouleur());
+            statement.setString(2,joueur.getNomJoueur());
+            statement.setInt(3,joueur.getIdPartie());
+            statement.setInt(4,joueur.getCaseActuelle().getX());
+            statement.setString(5,String.valueOf(joueur.getCaseActuelle().getY()));
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
