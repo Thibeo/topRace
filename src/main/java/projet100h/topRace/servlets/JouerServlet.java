@@ -38,7 +38,7 @@ public class JouerServlet extends GenericServlet {
         templateEngine.process("jouer", context, resp.getWriter());
     }
 
-    /*protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String action = req.getParameter("action");
 
@@ -125,5 +125,5 @@ public class JouerServlet extends GenericServlet {
                 }
             break;
         }
-    }*/
+    }
 }
