@@ -15,4 +15,6 @@ public interface JoueurDao {
 
     public void createJoueur(Joueur joueur);
 
+    public List listOfJoueur(int idPartie);
+
 }

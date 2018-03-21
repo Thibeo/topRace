@@ -34,8 +34,10 @@ public class GameLibrary {
     public List<Case> listCase() { return  caseDao.listCase(); }
     public List<NbCase> listNbCase() { return  nbCaseDao.listNbCase(); }
     public List<PartieCase> listPartieCase (int idPartie) { return partieCaseDao.listPartieCase(idPartie); }
+    public Partie getPartieById(int idPartie){ return partieDao.getPartieById(idPartie); }
+    public List<Joueur> listOfJoueur(int idPartie){ return joueurDao.listOfJoueur(idPartie); }
     public List listPartie(){
-        return partieDao.listPartie(); /* < <1, "partie de bob", "bob" , "5/6"> , <2, "best party"> , <3, "partie pour le fun"> > */
+        return partieDao.listPartie(); /* < <2, "best party"> , <3, "partie pour le fun"> > */
     }
     public List listDeplacementCarte(int id){
         return carteDao.listDeplacementCarte(id); /* < <couleurVoiture, nbCase> , <couleurVoiture, nbCase> , <couleurVoiture, nbCase> > */
@@ -187,19 +189,40 @@ public class GameLibrary {
 
 
     //fonction crer partie (permet de rentrer une nouvelle partie dans la base de données:
-
     public Partie creerPartie(Partie partie){
         return (partieDao.createPartie(partie));
     }
 
     // fonction creerJoueur (permet de rentrer un nouveau joueur dans la base de données:
-
     public void creerJoueur(Joueur joueur){ joueurDao.createJoueur(joueur); }
 
     // fonction retournant la liste des couleurs des différentes voitures:
-
     public ArrayList listCouleur(){
         return (voitureDao.listeCouleur());
+    }
+
+    // fonction retournant la liste des couleurs des différentes voitures déjà présentent sur la partie placé en paramètre
+    public ArrayList listCouleurIdPartie(Integer idPartie){
+        ArrayList listCouleurIdPartie = voitureDao.listeCouleurIdPartie(idPartie);
+        ArrayList listCouleur = voitureDao.listeCouleur();
+        ArrayList listCouleurFinal = new ArrayList<>();
+        for (int i = 0 ; i < listCouleur.size() ; i++){
+            boolean jeSuisDansLaListe = false;
+            int positionOuJeSuis = i;
+            for (int j = 0 ; j < listCouleurIdPartie.size() ; j++){
+                if (listCouleurIdPartie.get(j).equals( ( (List) listCouleur.get(i) ).get(2))){
+                   jeSuisDansLaListe = true;
+                }
+            }
+            if (jeSuisDansLaListe == false) {
+                ArrayList list = new ArrayList<>();
+                list.add( ( (List) listCouleur.get(positionOuJeSuis) ).get(0));
+                list.add( ( (List) listCouleur.get(positionOuJeSuis) ).get(1));
+                list.add( ( (List) listCouleur.get(positionOuJeSuis) ).get(2));
+                listCouleurFinal.add(list);
+            }
+        }
+        return (listCouleurFinal);
     }
 
     //fonction retournant l'id correspondant à la partie dont le nom est rentré en parametre:

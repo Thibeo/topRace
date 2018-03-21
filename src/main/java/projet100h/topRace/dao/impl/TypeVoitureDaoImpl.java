@@ -12,14 +12,14 @@ import java.util.List;
 public class TypeVoitureDaoImpl implements TypeVoitureDao {
 
 
-    public ArrayList listeCouleur(){
+    public ArrayList listeCouleur() {
         String query = "SELECT * FROM typeVoiture";
         ArrayList listCouleur = new ArrayList<>();
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    ArrayList list= new ArrayList<>();
+                    ArrayList list = new ArrayList<>();
                     list.add(resultSet.getInt("x"));
                     list.add(resultSet.getString("y"));
                     list.add(resultSet.getString("couleurV"));
@@ -27,6 +27,25 @@ public class TypeVoitureDaoImpl implements TypeVoitureDao {
 
                 }
 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listCouleur;
+
+    }
+
+    public ArrayList listeCouleurIdPartie(int idPartie){
+        String query = "SELECT * FROM joueur WHERE idPartie=?";
+        ArrayList listCouleur = new ArrayList<>();
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idPartie);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    listCouleur.add(resultSet.getString("couleurJ"));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

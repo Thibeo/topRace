@@ -89,4 +89,28 @@ public class JoueurDaoImpl implements JoueurDao {
     }
 
 
+    public List listOfJoueur(int idPartie){
+        String query = "SELECT * FROM joueur WHERE idPartie=?";
+        PartieCase partieCse = null;
+        List<Joueur> list = new ArrayList<>();
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idPartie);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    list.add(
+                        new Joueur(
+                            resultSet.getString("couleurJ"),
+                            resultSet.getString("nomDeJoueur"),
+                            partieCse,
+                            resultSet.getInt("idPartie")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
 }

@@ -14,4 +14,6 @@ public interface PartieDao {
 
     public int getIdPartieByName(String nomPartie);
 
+    public Partie getPartieById(int idPartie);
+
 }

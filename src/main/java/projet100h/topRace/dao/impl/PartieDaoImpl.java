@@ -88,7 +88,23 @@ public class PartieDaoImpl implements PartieDao{
         return 0;
     }
 
-
+    public Partie getPartieById(int idPartie){
+        String query = "SELECT * FROM partie WHERE idPartie=?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idPartie);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return (new Partie(resultSet.getInt("idPartie"),
+                            resultSet.getString("nomDeProprio"),
+                            resultSet.getString("nomDePartie")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
 

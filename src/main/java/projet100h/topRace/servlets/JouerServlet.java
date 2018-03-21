@@ -94,16 +94,29 @@ public class JouerServlet extends GenericServlet {
                 pseudoJoueur = req.getParameter("nomPseudo");
                 idPartie = Integer.parseInt(req.getParameter("idPartie"));
 
-                Random rand2 = new Random();
-                int nombreAleatoire2 = rand2.nextInt(5 - 0 + 1);
                 ArrayList listeCouleur2= new ArrayList();
-                listeCouleur2=GameLibrary.getInstance().listCouleur();
-                ArrayList listeCaracteristique2=new ArrayList();
-                listeCaracteristique2 = (ArrayList) listeCouleur2.get(nombreAleatoire2);
-                int positionnX= (int) listeCaracteristique2.get(0);
-                String positionnYString= (String) listeCaracteristique2.get(1);
-                char positionnY=positionnYString.charAt(0);
-                String couleur2= (String) listeCaracteristique2.get(2);
+                listeCouleur2=GameLibrary.getInstance().listCouleurIdPartie(idPartie);
+
+                int positionnX = 99;
+                char positionnY = 'z';
+                String couleur2 = "orange";
+
+                if (listeCouleur2.size() > 1){
+                    ArrayList listeCaracteristique2 = (ArrayList) listeCouleur2.get(0);
+                    positionnX = (int) listeCaracteristique2.get(0);
+                    String positionnYString = (String) listeCaracteristique2.get(1);
+                    positionnY = positionnYString.charAt(0);
+                    couleur2 = (String) listeCaracteristique2.get(2);
+                }else {
+                    Random rand2 = new Random();
+                    int nombreAleatoire2 = rand2.nextInt((listeCouleur2.size() - 1) - 0 + 1); //list.size -1
+                    ArrayList listeCaracteristique2 = new ArrayList();
+                    listeCaracteristique2 = (ArrayList) listeCouleur2.get(nombreAleatoire2);
+                    positionnX = (int) listeCaracteristique2.get(0);
+                    String positionnYString = (String) listeCaracteristique2.get(1);
+                    positionnY = positionnYString.charAt(0);
+                    couleur2 = (String) listeCaracteristique2.get(2);
+                }
 
 
 

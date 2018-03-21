@@ -65,20 +65,11 @@
                                     <th><p>Couleur</p></th>
                                     <th><button onclick='ACQuitter();'>Quitter</button></th>
                                 </tr>
-                                <tr>
-                                    <td><p>Bob</p></td>
-                                    <td align="center"><p>Propriétaire</p></td>
-                                    <td align="center"><p>Jaune</p></td>
-                                </tr>
-                                <tr >
-                                    <td><p>Jack</p></td>
-                                    <td align="center"><p>J2</p></td>
-                                    <td align="center"><p>Violet</p></td>
-                                </tr>
-                                <tr >
-                                    <td><p>Coco</p></td>
-                                    <td align="center"><p>J3</p></td>
-                                    <td align="center"><p>Blanc</p></td>
+                                <tr th:each="joueur : ${listOfJoueur}">
+                                    <td><p th:text="${joueur.nomJoueur}"></p></td>
+                                    <td align="center"><p th:if="${joueur.nomJoueur == PartieById.nomDeProprio}"
+                                                          th:text="${'Propriétaire'}"></p></td>
+                                    <td align="center"><p th:text="${joueur.couleur}"></p></td>
                                 </tr>
                             </table>
                         </nav>
