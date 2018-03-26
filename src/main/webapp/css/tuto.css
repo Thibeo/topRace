@@ -7,7 +7,7 @@
     background-color: #9E9E9E;
     border-radius: 2vh;
     border: 0.4vh solid grey;
-    z-index: 10003;
+    z-index: 100000;
 }
 #tutoPrez button, #tutoTouSElmt button{
     font-size: 2vh;
@@ -49,7 +49,7 @@
     background-color: #9E9E9E;
     border-radius: 2vh;
     border: 0.4vh solid grey;
-    z-index: 10003;
+    z-index: 100000;
 }
 #tutoParis{
     font-size: 2vh;
@@ -61,7 +61,7 @@
     background-color: #9E9E9E;
     border-radius: 2vh;
     border: 0.4vh solid grey;
-    z-index: 10003;
+    z-index: 100000;
 }
 
 #ligneJaune{
@@ -79,7 +79,7 @@
     left:0vh;
     right: 0vh;
     bottom: 0vh;
-    z-index: 10002;
+    z-index: 10008;
     background-color: transparent;
 }
 #fondTuto1{
@@ -88,7 +88,7 @@
     right:57.5vh;
     width:18.3vh;
     height:54.2vh;
-    z-index: 10001;
+    z-index: 10008;
     background-color: rgba(251, 251, 251, 0.75);
 }
 #fondTuto2{
@@ -97,7 +97,7 @@
     right: 17.9vh;
     width:26.6vh;
     height:54.2vh;
-    z-index: 10001;
+    z-index: 10008;
     background-color: rgba(251, 251, 251, 0.75);
 }
 #fondNoir{

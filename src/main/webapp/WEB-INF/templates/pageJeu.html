@@ -13,6 +13,7 @@
     <link rel="shortcut icon" href="img/logo.png">
     <script type="text/javascript" src="js/rulesParaQuitt.js"></script>
     <script type="text/javascript" src="js/tuto.js"></script>
+    <script type="text/javascript" src="js/banderole.js"></script>
     <script type="text/javascript">
 
         function avancerVoiture(couleur, top, left, rotate) {
@@ -206,17 +207,10 @@
                 Cacher('choixCartes');Cacher('fondChoixCartes');
                 Cacher('fondPara');Cacher('fondRules');Cacher('rules');
                 Cacher('para');Cacher('quitter');Cacher('fondQuitter');
-                Cacher('tutoTouSElmt');Cacher('tutoPlateau');
-                Cacher('tutoParis');Cacher('tutoPari2');
-                Cacher('tutoPari3');Cacher('ligneJaune');
-                Cacher('fondTuto1');Cacher('fondTuto2');
-                zindex('joueurJaune',1);
-                zindex('joueurViolet',1);
-                zindex('joueurBleu',1);
-                zindex('joueurRouge',1);
-                zindex('joueurBlanc',1);
-                zindex('joueurVert',1);
-                Cacher('fondNoir');"> <!-- à laisser en dernier -->
+                fermerTuto();Afficher('fondTuto');Afficher('tutoPrez');Afficher('tutoInclicable');
+                Cacher('fondNoir');
+                creationCompteur('le début de la partie commence dans ', 6, ' secondes');
+                compteur('début de la partie');"> <!-- à laisser en dernier -->
 
 <!-- HEADER -->
 <header th:replace="~{fragments::header}"></header>
@@ -277,7 +271,7 @@
 
 <!-- nav afficher le nom des joueuers -->
     <nav id="joueurs">
-        <nav class="jBlanc">- Joueur 1</nav>
+        <nav class="jBlanc" onclick="ouvrirTuto();">- Joueur 1</nav>
         <nav class="jVert">- Joueur 2</nav>
         <nav class="jBleu">- Joueur 3</nav>
         <nav class="jRouge">- Joueur 4</nav>
@@ -399,10 +393,6 @@
     <nav class="joueurVoiture" id="joueurBlanc"></nav>
     <nav class="joueurVoiture" id="joueurVert"></nav>
 
-<!-- div pour les comptes-à-rebour -->
-    <nav id="navCompteur" onclick="duree='30';compteurPari();">
-        il reste <span id="compteur">90</span> secondes
-    </nav>
 
 <!-- nav pour titre de la nav carte -->
     <nav id="carteTitre">
@@ -429,17 +419,7 @@
     <nav id="fondTuto2"></nav>
 
     <nav id="tutoPrez">
-        <button class="x" onclick=' Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
-                                    Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
-                                    Cacher("tutoPrez");
-                                    Cacher("tutoTouSElmt");Cacher("tutoPlateau");Cacher("tutoCarte");
-                                    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoPari3");
-                                    Cacher("ligneJaune");
-                                    zindex("nomPartie",1);zindex("joueurs",1);zindex("plateau",0);
-                                    zindex("ligneCartes",1);zindex("carteTitre",2);zindex("carreHaut",2);zindex("carreBas",2);
-                                    zindex("joueurJaune",1);zindex("joueurViolet",1);zindex("joueurBleu",1);
-                                    zindex("joueurRouge",1);zindex("joueurBlanc",1);zindex("joueurVert",1);
-                                    fermerTableau();animationPariSortie();'>
+        <button class="x" onclick='fermerTuto();'>
             X
         </button>
         <h2>Tutoriel (1/7)</h2>
@@ -447,8 +427,8 @@
         <p>Il vous est possible de quitter le tutoriel à tout moment en appuyant sur le bouton <button>X</button> en haut à droite</p>
         <p>Dans un premier temps nous allons nous familiariser avec tous les éléments présents sur la page.</p>
         <button class="x" onclick=' Cacher("tutoPrez");
-                                    zindex("nomPartie",10000);
-                                    zindex("joueurs",10000);
+                                    zindex("nomPartie",10007);
+                                    zindex("joueurs",10007);
                                     Afficher("tutoTouSElmt");
                                     Afficher("tutoNomPartieJoueurs");
                                     Cacher("tutoPlateau");
@@ -458,17 +438,7 @@
     </nav>
 
     <nav id="tutoTouSElmt">
-        <button class="x" onclick=' Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
-                                    Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
-                                    Cacher("tutoPrez");
-                                    Cacher("tutoTouSElmt");Cacher("tutoPlateau");Cacher("tutoCarte");
-                                    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoPari3");
-                                    Cacher("ligneJaune");
-                                    zindex("nomPartie",1);zindex("joueurs",1);zindex("plateau",0);
-                                    zindex("ligneCartes",1);zindex("carteTitre",2);zindex("carreHaut",2);zindex("carreBas",2);
-                                    zindex("joueurJaune",1);zindex("joueurViolet",1);zindex("joueurBleu",1);
-                                    zindex("joueurRouge",1);zindex("joueurBlanc",1);zindex("joueurVert",1);
-                                    fermerTableau();animationPariSortie();'>
+        <button class="x" onclick='fermerTuto();'>
             X
         </button>
         <nav id="tutoNomPartieJoueurs">
@@ -480,13 +450,13 @@
                                         Afficher("tutoPlateau");
                                         zindex("nomPartie",1);
                                         zindex("joueurs",1);
-                                        zindex("plateau",10000);
-                                        zindex("joueurJaune",100001);
-                                        zindex("joueurViolet",100001);
-                                        zindex("joueurBleu",100001);
-                                        zindex("joueurRouge",100001);
-                                        zindex("joueurBlanc",100001);
-                                        zindex("joueurVert",100001);'>
+                                        zindex("plateau",10007);
+                                        zindex("joueurJaune",100007);
+                                        zindex("joueurViolet",100007);
+                                        zindex("joueurBleu",100007);
+                                        zindex("joueurRouge",100007);
+                                        zindex("joueurBlanc",100007);
+                                        zindex("joueurVert",100007);'>
                 Next
             </button>
         </nav>
@@ -505,10 +475,10 @@
                                         zindex("joueurRouge",1);
                                         zindex("joueurBlanc",1);
                                         zindex("joueurVert",1);
-                                        zindex("ligneCartes",10000);
-                                        zindex("carreHaut",10001);
-                                        zindex("carreBas",10001);
-                                        zindex("carteTitre",10001);'>
+                                        zindex("ligneCartes",10007);
+                                        zindex("carreHaut",10007);
+                                        zindex("carreBas",10007);
+                                        zindex("carteTitre",10007);'>
                 Next
             </button>
         </nav>
@@ -527,7 +497,7 @@
                                         zindex("carreHaut",2);
                                         zindex("carreBas",2);
                                         zindex("carteTitre",2);
-                                        zindex("plateauParis",10000);
+                                        zindex("plateauParis",10007);
                                         Afficher("tutoParis");
                                         ouvrirTableau();'>
                 Next
@@ -536,17 +506,7 @@
     </nav>
 
     <nav id="tutoParis">
-        <button class="x" onclick=' Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
-                                    Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
-                                    Cacher("tutoPrez");
-                                    Cacher("tutoTouSElmt");Cacher("tutoPlateau");Cacher("tutoCarte");
-                                    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoPari3");
-                                    Cacher("ligneJaune");
-                                    zindex("nomPartie",1);zindex("joueurs",1);zindex("plateau",0);
-                                    zindex("ligneCartes",1);zindex("carteTitre",2);zindex("carreHaut",2);zindex("carreBas",2);
-                                    zindex("joueurJaune",1);zindex("joueurViolet",1);zindex("joueurBleu",1);
-                                    zindex("joueurRouge",1);zindex("joueurBlanc",1);zindex("joueurVert",1);
-                                    fermerTableau();animationPariSortie();'>
+        <button class="x" onclick='fermerTuto();'>
             X
         </button>
         <nav id="tutoPari1">
@@ -556,8 +516,8 @@
             <button class="x next" onclick=' Cacher("tutoPari1");
                                         Afficher("tutoPari2");
                                         Afficher("ligneJaune");
-                                        zindex("ligneJaune",10000);
-                                        zindex("plateauParis",10000);
+                                        zindex("ligneJaune",10007);
+                                        zindex("plateauParis",10007);
                                         Afficher("fondTuto1");Afficher("fondTuto2");
                                         animationPariEntree();'>
                 Next
@@ -583,22 +543,20 @@
             <h2>Tutoriel (7/7)</h2>
             <p>Une fois la dernière ligne jaune dépassé, c'est du chacun pour soi. Le but est de faire arriver sa voiture en première.</p>
             <p>Un nombre de points est aussi ajouté en fonction du classement finale. le joueur ayant le plus de point gagne la partie !</p>
-            <button class="x next" onclick=' Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
-                                    Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
-                                    Cacher("tutoPrez");
-                                    Cacher("tutoTouSElmt");Cacher("tutoPlateau");Cacher("tutoCarte");
-                                    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoPari3");
-                                    Cacher("ligneJaune");
-                                    zindex("nomPartie",1);zindex("joueurs",1);zindex("plateau",0);
-                                    zindex("ligneCartes",1);zindex("carteTitre",2);zindex("carreHaut",2);zindex("carreBas",2);
-                                    zindex("joueurJaune",1);zindex("joueurViolet",1);zindex("joueurBleu",1);
-                                    zindex("joueurRouge",1);zindex("joueurBlanc",1);zindex("joueurVert",1);
-                                    fermerTableau();animationPariSortie();'>
+            <button class="x next" onclick='fermerTuto();'>
                 Start !
             </button>
         </nav>
     </nav>
 
+<!-- -------------------------- -->
+<!-- les banderoles et compteur -->
+<!-- -------------------------- -->
+<!-- div pour les comptes-à-rebour -->
+    <nav id="navCompteur"></nav>
+
+<!-- div pour que tout soit incliquable -->
+    <nav id="compteurInclicable"></nav>
 
 
     <section class="footer">
@@ -608,7 +566,5 @@
 </section>
 
 </body>
-
-
 
 </html>
