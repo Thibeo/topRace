@@ -2,7 +2,7 @@ package projet100h.topRace.webseervice;
 
 import com.google.gson.Gson;
 import projet100h.topRace.entities.Joueur;
-import projet100h.topRace.entities.PariJsonAnswer;
+import projet100h.topRace.entities.Pari;
 import projet100h.topRace.entities.PartieCase;
 import projet100h.topRace.entities.Plateau;
 import projet100h.topRace.managers.GameLibrary;
@@ -11,7 +11,9 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Path("/game")
 public class GameWS {
@@ -164,10 +166,12 @@ public class GameWS {
     @POST
     @Path("/parier")
     public Response parier(@FormParam("data") String data ){
-        System.out.println("data = "+data);
+        System.out.println("data envoyé dans le GameWS au @Path(\"/parier\") = "+data);
 
-        PariJsonAnswer pariJsonAnswer = gsonService.fromJson(data, PariJsonAnswer.class);
+        // transformation du string data en class grâce au JSON
+        Pari pariJsonAnswer = gsonService.fromJson(data, Pari.class);
 
+        // on recupère les variables
         int numeroPari = pariJsonAnswer.getNumeroPari();
         boolean jaune = pariJsonAnswer.isJaune();
         boolean bleue = pariJsonAnswer.isBleue();
@@ -176,12 +180,92 @@ public class GameWS {
         boolean blanche = pariJsonAnswer.isBlanche();
         boolean verte = pariJsonAnswer.isVerte();
 
-        String answer ="bhhhhooo";
+        String answer=null;
+        int compteur = 0;
+        //on regarde qu'il y ai bien 3 paris
+        if (jaune == false){ compteur++; }
+        if (bleue == false){ compteur++; }
+        if (rouge == false){ compteur++; }
+        if (violette == false){ compteur++; }
+        if (blanche == false){ compteur++; }
+        if (verte == false){ compteur++; }
 
+        if (compteur != 3){
+            answer = "error1"; //le pari n'est pas complet
+        } else {
+            boolean existe = GameLibrary.getInstance().pariExiste(1,"Vert", numeroPari);
+            if (existe == true){
+                answer = "error2"; //le pari est déjà effectué
+            } else {
+                GameLibrary.getInstance().ajoutPari(1,"Vert", numeroPari, jaune, bleue, rouge, violette, blanche, verte);
+                answer = "succeed"; // tout s'est bien passé
+            }
+        }
+        System.out.println("réponse retourné après le @Path(\"/parier\") du GameWS = "+answer);
+        System.out.println();
         return Response.ok().entity(gsonService.toJson(answer)).build();
 
-
-
-
     }
+
+    @POST
+    @Path("/checkPari")
+    public Response checkPari(@FormParam("data") int data ){
+        System.out.println("data envoyé dans le GameWS au @Path(\"/checkPari\") = "+data);
+        String answer=null;
+        boolean existe = GameLibrary.getInstance().pariExiste(1,"Vert", data);
+        if (existe == true){
+            answer = "le pari a bien été envoyé";
+        } else { //faire une pari aléatoir pour le joueur
+            List<Integer> listAlea = new ArrayList<Integer>();
+            Random rand = new Random();
+            int nombreAleatoire1 = rand.nextInt(5 - 0 + 1);
+            listAlea.add(nombreAleatoire1);
+            while (listAlea.size()<3){
+                int nombreAleatoire2 = rand.nextInt(5 - 0 + 1);
+                if (!listAlea.contains(nombreAleatoire2)){
+                    listAlea.add(nombreAleatoire2);
+                }
+            }
+            System.out.println(listAlea);
+            boolean jaune = false; boolean bleue = false; boolean rouge = false; boolean violette = false; boolean blanche = false; boolean verte = false;
+            for (int i = 0 ; i < 3 ; i ++){
+                if(listAlea.get(i) == 1){ jaune=true ;}
+                else if (listAlea.get(i) == 2){ bleue=true ;}
+                else if (listAlea.get(i) == 3){ rouge=true ;}
+                else if (listAlea.get(i) == 4){ violette=true ;}
+                else if (listAlea.get(i) == 5){ blanche=true ;}
+                else if (listAlea.get(i) == 0){ verte=true ;}
+            }
+            GameLibrary.getInstance().ajoutPari(1,"Vert", data, jaune, bleue, rouge, violette, blanche, verte);
+            boolean existe2 = GameLibrary.getInstance().pariExiste(1,"Vert", data);
+            if (existe2 == true) {
+                answer = "un pari aléatoire a été effectué";
+            }else{
+                answer= "error1";
+            }
+        }
+
+        System.out.println("réponse retourné après le @Path(\"/checkPari\") du GameWS = "+answer);
+        System.out.println();
+        return Response.ok().entity(gsonService.toJson(answer)).build();
+    }
+
+    @POST
+    @Path("/getPari")
+    public Response getPari(@FormParam("data") int data ){
+        System.out.println("data envoyé dans le GameWS au @Path(\"/checkPari\") = "+data);
+        String answer=null;
+        boolean existe = GameLibrary.getInstance().pariExiste(1,"Vert", data);
+        if (existe == true){
+            answer = GameLibrary.getInstance().getPari(1,"Vert", data);
+        } else { //faire une pari aléatoir pour le joueur
+            answer = "pas de pari effectué";
+        }
+
+
+        System.out.println("réponse retourné après le @Path(\"/checkPari\") du GameWS = "+answer);
+        System.out.println();
+        return Response.ok().entity(gsonService.toJson(answer)).build();
+    }
+
 }

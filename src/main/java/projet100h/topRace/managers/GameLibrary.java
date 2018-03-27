@@ -25,6 +25,7 @@ public class GameLibrary {
     private JoueurDao joueurDao = new JoueurDaoImpl();
     private PartieDao partieDao = new PartieDaoImpl();
     private TypeVoitureDao voitureDao = new TypeVoitureDaoImpl();
+    private PariDao pariDao = new PariDaoImpl();
 
 
     private GameLibrary() { }
@@ -68,6 +69,12 @@ public class GameLibrary {
     }
 
     public void changerCase(Joueur joueur, PartieCase cse) {joueurDao.changerCase(joueur, cse);}
+
+    public void ajoutPari(int idPartie, String couleurJ, int numeroPari, boolean jaune, boolean bleue, boolean rouge, boolean violette, boolean blanche, boolean verte){pariDao.ajoutPari(idPartie, couleurJ, numeroPari, jaune, bleue, rouge, violette, blanche, verte);}
+
+    public boolean pariExiste(int idPartie, String couleurJ, int numeroPari){return pariDao.pariExiste(idPartie, couleurJ, numeroPari);}
+
+    public String getPari(int idPartie, String couleurJ, int numeroPari){return pariDao.getPari(idPartie,couleurJ,numeroPari);}
 
     public String getTopLeft(PartieCase cse){ return caseDao.getTopLeft(cse);}
 

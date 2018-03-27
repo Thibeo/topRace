@@ -1,6 +1,6 @@
 package projet100h.topRace.entities;
 
-public class PariJsonAnswer {
+public class Pari {
     private int numeroPari;
     private boolean jaune;
     private boolean bleue;
@@ -9,7 +9,7 @@ public class PariJsonAnswer {
     private boolean blanche;
     private boolean verte;
 
-    public PariJsonAnswer(int numeroPari, boolean jaune, boolean bleue, boolean rouge, boolean violette, boolean blanche, boolean verte) {
+    public Pari(int numeroPari, boolean jaune, boolean bleue, boolean rouge, boolean violette, boolean blanche, boolean verte) {
         this.numeroPari = numeroPari;
         this.jaune = jaune;
         this.bleue = bleue;

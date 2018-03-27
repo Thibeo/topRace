@@ -6,7 +6,22 @@ DROP TABLE partie;
 DROP TABLE joueur;
 DROP TABLE partieCase;
 DROP TABLE carteJoueur;
+DROP TABLE pari;
 
+CREATE TABLE `pari` (
+  `idPartie` int(11) NOT NULL,
+  `couleurJ` varchar(6) NOT NULL,
+  `numeroPari` int(11) NOT NULL,
+  `jaune` boolean,
+  `bleue` boolean,
+  `rouge` boolean,
+  `violette` boolean,
+  `blanche` boolean,
+  `verte` boolean,
+  KEY `idPartie_fk` (`idPartie`),
+  KEY `couleurJ_fk` (`couleurJ`),
+  PRIMARY KEY (`idPartie`,`couleurJ`,`numeroPari`)
+);
 
 CREATE TABLE `typeVoiture` (
   `couleurV` varchar(6) NOT NULL,

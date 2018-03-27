@@ -43,7 +43,7 @@ var clignotement = function(){
         document.getElementById('ligneJaune').style.visibility='visible';
     }
 };
-periode = setInterval(clignotement, 500);
+periode = 0;
 
 function zindex(id,index){
     if (id == 'col0'){

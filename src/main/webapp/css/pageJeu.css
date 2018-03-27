@@ -310,7 +310,7 @@ input[type="checkbox"] + label::before{
 	 border-radius: 2vh;
 	 border: 0.4vh solid grey;
 	 padding: 1vh;
-	 z-index: 120;
+	 z-index: 10007;
  }
 input[type="radio"]{display: none;}
 input[type="radio"] + label::before{

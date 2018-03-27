@@ -5,6 +5,7 @@ DELETE FROM cse;
 DELETE FROM partieCase;
 DELETE FROM partie;
 DELETE FROM joueur;
+DELETE FROM pari;
 
 
 /* ------------------------------------ */
