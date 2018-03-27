@@ -2,7 +2,7 @@ package projet100h.topRace.webseervice;
 
 import com.google.gson.Gson;
 import projet100h.topRace.entities.Joueur;
-import projet100h.topRace.entities.Partie;
+import projet100h.topRace.entities.PariJsonAnswer;
 import projet100h.topRace.entities.PartieCase;
 import projet100h.topRace.entities.Plateau;
 import projet100h.topRace.managers.GameLibrary;
@@ -19,7 +19,7 @@ public class GameWS {
     private Gson gsonService = new Gson();
 
     @POST
-    @Path("/test")
+    @Path("/avancer")
     public Response avancer(@FormParam("data") String data){
         System.out.println("idCarte = "+data);
         boolean bool = false;
@@ -159,5 +159,29 @@ public class GameWS {
             }
 
         }
+    }
+
+    @POST
+    @Path("/parier")
+    public Response parier(@FormParam("data") String data ){
+        System.out.println("data = "+data);
+
+        PariJsonAnswer pariJsonAnswer = gsonService.fromJson(data, PariJsonAnswer.class);
+
+        int numeroPari = pariJsonAnswer.getNumeroPari();
+        boolean jaune = pariJsonAnswer.isJaune();
+        boolean bleue = pariJsonAnswer.isBleue();
+        boolean rouge = pariJsonAnswer.isRouge();
+        boolean violette = pariJsonAnswer.isViolette();
+        boolean blanche = pariJsonAnswer.isBlanche();
+        boolean verte = pariJsonAnswer.isVerte();
+
+        String answer ="bhhhhooo";
+
+        return Response.ok().entity(gsonService.toJson(answer)).build();
+
+
+
+
     }
 }

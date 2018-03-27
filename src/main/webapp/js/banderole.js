@@ -20,7 +20,11 @@ function compteur(textFinal){
     } else if (s == -1 ){
         document.getElementById('navCompteur').innerHTML="";
         document.getElementById('navCompteur').style.display="none";
-        fermerTuto();
+        if (textFinal == 'début de la partie' ){
+            creationCompteur('Vous avez ', 30, ' secondes pour valider votre 1er pari');
+            window.setTimeout("compteur('Pari envoyé !');",999);
+            fermerTuto();
+        }
     } else {
         compteur.innerHTML=s;
         window.setTimeout("compteur('"+textFinal+"');",999);
@@ -39,17 +43,3 @@ function creationCompteur(texte1, temps, texte2) {
     eltParent.appendChild(document.createTextNode(texte2)); // le texte qui apparait après le compteur
     console.log(eltParent);
 }
-
-/*
-
-    var eltParent = document.createElement('navCompteur');
-    eltParent.style.position = "fixed";
-    eltParent.style.top = "9vh";
-    eltParent.style.left = "50%";
-    eltParent.style.transform = "translate(-50%, 0)";
-    eltParent.style.backgroundColor = "#9E9E9E";
-    eltParent.style.borderRadius = "1vh";
-    eltParent.style.border = "0.4vh solid red";
-    eltParent.style.padding = "0.5vh";
-    eltParent.style.zIndex = "120";
- */

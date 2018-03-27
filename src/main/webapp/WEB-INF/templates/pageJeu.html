@@ -27,7 +27,7 @@
             if (cse != 27 && cse != 28 && cse != 29 && cse != 31 && cse != 32 && cse != 33 && cse != 34 && cse != 35 && cse != 36
                 && cse != 41 && cse != 42 && cse != 43 && cse != 44 && cse != 45 && cse != 46) {
                 var postMyOpinionRequest = new XMLHttpRequest();
-                postMyOpinionRequest.open("POST", "webservices/game/test", true);
+                postMyOpinionRequest.open("POST", "webservices/game/avancer", true);
                 postMyOpinionRequest.responseType = "json";
                 postMyOpinionRequest.onload = function () {
                     var answer = this.response;
@@ -106,6 +106,32 @@
                 AfficherCacher("fondChoixCartes");
             }
 
+        }
+
+        function parier(idPari){
+            if (idPari>0 && idPari<4) {
+                var data = {};
+                var postMyOpinionRequest = new XMLHttpRequest();
+                postMyOpinionRequest.open("POST", "webservices/game/parier", true);
+                postMyOpinionRequest.responseType = "json";
+                postMyOpinionRequest.onload = function () {
+                    var answer = this.response;
+                    console.log(answer);
+                }
+                data.idPari = idPari;
+                data.jaune = document.getElementById("jaune" + idPari).checked;
+                data.bleue = document.getElementById("bleue" + idPari).checked;
+                data.rouge = document.getElementById("rouge" + idPari).checked;
+                data.violette = document.getElementById("violette" + idPari).checked;
+                data.blanche = document.getElementById("blanche" + idPari).checked;
+                data.verte = document.getElementById("verte" + idPari).checked;
+                console.log(data);
+                postMyOpinionRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                postMyOpinionRequest.send("data=" + JSON.stringify(data));
+                /* et on l'envoit */
+            } else {
+                console.log("l'idPari n'est pas bon");
+            }
         }
 
         function choixCartes() {
@@ -209,7 +235,7 @@
                 Cacher('para');Cacher('quitter');Cacher('fondQuitter');
                 fermerTuto();Afficher('fondTuto');Afficher('tutoPrez');Afficher('tutoInclicable');
                 Cacher('fondNoir');
-                creationCompteur('le début de la partie commence dans ', 6, ' secondes');
+                creationCompteur('le début de la partie commence dans ',5 , ' secondes');
                 compteur('début de la partie');"> <!-- à laisser en dernier -->
 
 <!-- HEADER -->
@@ -321,59 +347,58 @@
             </tr>
             <tr class="pariReponseJaune">
                 <td colspan="2">Jaune</td>
-                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="jaune1" id="jaune1" /><label for="jaune1"></label></td>
-                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="jaune2" id="jaune2" /><label for="jaune2"></label></td>
-                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="jaune3" id="jaune3" /><label for="jaune3"></label></td>
+                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="jaune1" value="jaune1" id="jaune1" /><label for="jaune1"></label></td>
+                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="jaune2" value="jaune2" id="jaune2" /><label for="jaune2"></label></td>
+                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="jaune3" value="jaune3" id="jaune3" /><label for="jaune3"></label></td>
             </tr>
             <tr class="pariReponseBleue">
                 <td colspan="2">Bleue</td>
-                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="bleue1" id="bleue1" /><label for="bleue1"></label></td>
-                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="bleue2" id="bleue2" /><label for="bleue2"></label></td>
-                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="bleue3" id="bleue3" /><label for="bleue3"></label></td>
+                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="bleue1" value="bleue1" id="bleue1" /><label for="bleue1"></label></td>
+                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="bleue2" value="bleue2" id="bleue2" /><label for="bleue2"></label></td>
+                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="bleue3" value="bleue3" id="bleue3" /><label for="bleue3"></label></td>
             </tr>
             <tr class="pariReponseRouge">
                 <td colspan="2">Rouge</td>
-                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="rouge1" id="rouge1" /><label for="rouge1"></label></td>
-                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="rouge2" id="rouge2" /><label for="rouge2"></label></td>
-                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="rouge3" id="rouge3" /><label for="rouge3"></label></td>
+                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="rouge1" value="rouge1" id="rouge1" /><label for="rouge1"></label></td>
+                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="rouge2" value="rouge2" id="rouge2" /><label for="rouge2"></label></td>
+                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="rouge3" value="rouge3" id="rouge3" /><label for="rouge3"></label></td>
             </tr>
             <tr class="pariReponseViolette">
                 <td colspan="2">Violette</td>
-                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="violette1" id="violette1" /><label for="violette1"></label></td>
-                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="violette2" id="violette2" /><label for="violette2"></label></td>
-                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="violette3" id="violette3" /><label for="violette3"></label></td>
+                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="violette1" value="violette1" id="violette1" /><label for="violette1"></label></td>
+                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="violette2" value="violette2" id="violette2" /><label for="violette2"></label></td>
+                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="violette3" value="violette3" id="violette3" /><label for="violette3"></label></td>
             </tr>
             <tr class="pariReponseBlanche">
                 <td colspan="2">Blanche</td>
-                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="blanche1" id="blanche1" /><label for="blanche1"></label></td>
-                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="blanche2" id="blanche2" /><label for="blanche2"></label></td>
-                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="blanche3" id="blanche3" /><label for="blanche3"></label></td>
+                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="blanche1" value="blanche1" id="blanche1" /><label for="blanche1"></label></td>
+                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="blanche2" value="blanche2" id="blanche2" /><label for="blanche2"></label></td>
+                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="blanche3" value="blanche3" id="blanche3" /><label for="blanche3"></label></td>
             </tr>
             <tr class="pariReponseVerte">
                 <td colspan="2">Verte</td>
-                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="verte1" id="verte1" /><label for="verte1"></label></td>
-                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="verte2" id="verte2" /><label for="verte2"></label></td>
-                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="verte3" id="verte3" /><label for="verte3"></label></td>
+                <td class="colonnePari" name="col0" align="center"><input class="pariUn" type="checkbox" name="verte1" value="verte1" id="verte1" /><label for="verte1"></label></td>
+                <td class="colonnePari" name="col1" align="center"><input class="pariDeux" type="checkbox" name="verte2" value="verte2" id="verte2" /><label for="verte2"></label></td>
+                <td class="colonnePari" name="col2" align="center"><input class="pariTrois" type="checkbox" name="verte3" value="verte3" id="verte3" /><label for="verte3"></label></td>
             </tr>
             <tr class="totalPoints">
-                <td colspan="2">Total points = 10</td>
-                <td class="colonnePari" name="col0" align="center">5</td>
-                <td class="colonnePari" name="col1" align="center">5</td>
+                <td colspan="2">Total points</td>
+                <td class="colonnePari" name="col0" align="center">-</td>
+                <td class="colonnePari" name="col1" align="center">-</td>
                 <td class="colonnePari" name="col2" align="center">-</td>
             </tr>
             <tr class="pariReponse">
                 <td colspan="2" class="vide"></td>
                 <td class="colonnePari btnValide" name="col0" align="center">
-                    <button type="submit" value="Valider">Valider</button>
+                    <button  type="submit" name="btnPari" onclick="parier(1);">Valider</button>
                 </td>
                 <td class="colonnePari btnValide" name="col1" align="center">
-                    <button type="submit" value="Valider">Valider</button>
+                    <button  type="submit" name="btnPari" onclick="parier(2);">Valider</button>
                 </td>
                 <td class="colonnePari btnValide" name="col2" align="center">
-                    <button type="submit" value="Valider">Valider</button>
+                    <button  type="submit" name="btnPari" onclick="parier(3);">Valider</button>
                 </td>
             </tr>
-            </form>
         </table>
     </nav>
 
