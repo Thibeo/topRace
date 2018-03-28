@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,12 +20,16 @@ public class WaitingServlet extends GenericServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        Integer idPartie = (Integer) session.getAttribute("sessionIdPartie");
+
+
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        List<Joueur> listOfJoueur = GameLibrary.getInstance().listOfJoueur(2); // a remplacer par l'idPartie !!!!
+        List<Joueur> listOfJoueur = GameLibrary.getInstance().listOfJoueur(idPartie);
         context.setVariable("listOfJoueur", listOfJoueur);
 
-        Partie PartieById = GameLibrary.getInstance().getPartieById(2); // a remplacer par l'idPartie !!!!
+        Partie PartieById = GameLibrary.getInstance().getPartieById(idPartie);
         context.setVariable("PartieById", PartieById);
 
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());

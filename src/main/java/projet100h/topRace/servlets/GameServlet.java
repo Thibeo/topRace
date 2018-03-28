@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.*;
@@ -18,6 +19,11 @@ public class GameServlet extends GenericServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        HttpSession session = req.getSession();
+        Integer idPartie = (Integer) session.getAttribute("sessionPartie");
+        String nomJoueur= (String) session.getAttribute("sessionNomJoueur");
+
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         List<Case> listCase = GameLibrary.getInstance().listCase();

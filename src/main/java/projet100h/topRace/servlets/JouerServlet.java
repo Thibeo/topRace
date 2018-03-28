@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -39,6 +40,7 @@ public class JouerServlet extends GenericServlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 
         String action = req.getParameter("action");
 
@@ -72,15 +74,27 @@ public class JouerServlet extends GenericServlet {
 
                 Joueur newJoueur = new Joueur(couleur,nomDEProprio,caseActuelle,createdPartie.getIdPartie());
                 GameLibrary.getInstance().creerJoueur(newJoueur);
+
+                // pour "ouvrir" une session correspondant à la partie:
+                HttpSession session = req.getSession();
+                //String sessionpartie = "sessionpartie";
+                session.setAttribute("sessionIdPartie", createdPartie.getIdPartie());
+                session.setAttribute("sessionNomJoueur",nomDEProprio);
+
+
                 try {
 
                     // REDIRIGE VERS LA PAGE D'ATTENTE
                     resp.sendRedirect("wait");
+                    session.removeAttribute("error");
+                    req.setAttribute("sessionIdPartie", createdPartie.getIdPartie());
+                    req.setAttribute("sessionNomJoueur", nomDEProprio);
+
+
                 } catch (IllegalArgumentException e) {
+
                     String errorMessage = e.getMessage();
-
                     req.getSession().setAttribute("errorMessage", errorMessage);
-
                     resp.sendRedirect("jouer");
                 }
             break;
@@ -101,7 +115,7 @@ public class JouerServlet extends GenericServlet {
                 char positionnY = 'z';
                 String couleur2 = "orange";
 
-                if (listeCouleur2.size() > 1){
+                if (listeCouleur2.size() < 2){
                     ArrayList listeCaracteristique2 = (ArrayList) listeCouleur2.get(0);
                     positionnX = (int) listeCaracteristique2.get(0);
                     String positionnYString = (String) listeCaracteristique2.get(1);
@@ -125,11 +139,20 @@ public class JouerServlet extends GenericServlet {
                 Joueur newJoueur2 = new Joueur(couleur2,pseudoJoueur,caseActuelle2,idPartie);
                 GameLibrary.getInstance().creerJoueur(newJoueur2);
 
+                // pour "ouvrir" une session correspondant à la partie:
+                HttpSession sessionn = req.getSession();
+                //String sessionpartie = "sessionpartie";
+                sessionn.setAttribute("sessionIdPartie", idPartie);
+                sessionn.setAttribute("sessionNomJoueur",pseudoJoueur);
+
 
                 try {
 
                     // REDIRIGE VERS LA PAGE D'ATTENTE
+                    sessionn.removeAttribute("error");
                     resp.sendRedirect("wait");
+                    req.setAttribute("sessionIdPartie", idPartie);
+                    req.setAttribute("sessionNomJoueur", pseudoJoueur);
 
                 } catch (IllegalArgumentException e) {
                     String errorMessage = e.getMessage();
