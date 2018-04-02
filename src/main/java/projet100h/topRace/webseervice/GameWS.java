@@ -177,9 +177,6 @@ public class GameWS {
         int idPartie = jsooon.getIdPartie();
         String couleurJ = jsooon.getCouleur();
         String data = jsooon.getData();
-        System.out.println("data envoyé dans le GameWS au @Path(\"/parier\") : idPartie = "+idPartie);
-        System.out.println("data envoyé dans le GameWS au @Path(\"/parier\") : couleurJ = "+couleurJ);
-        System.out.println("data envoyé dans le GameWS au @Path(\"/parier\") : data = "+data);
 
         // transformation du string data en class grâce au JSON
         Pari pariJsonAnswer = gsonService.fromJson(data, Pari.class);
@@ -191,8 +188,6 @@ public class GameWS {
         boolean violette = pariJsonAnswer.isViolette();
         boolean blanche = pariJsonAnswer.isBlanche();
         boolean verte = pariJsonAnswer.isVerte();
-
-        System.out.println("num pari = "+numeroPari+" // jaune = "+jaune+" // bleue = "+bleue);
 
         String answer=null;
         int compteur = 0;
@@ -276,7 +271,7 @@ public class GameWS {
     @POST
     @Path("/getPari")
     public Response getPari(@FormParam("data") String data1 ){
-
+        System.out.println("data envoyé dans le GameWS au @Path(\"/getPari\") = "+data1);
         JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
 
         // on recupère les variables
@@ -300,5 +295,7 @@ public class GameWS {
         System.out.println();
         return Response.ok().entity(gsonService.toJson(answer)).build();
     }
+
+
 
 }

@@ -16,4 +16,5 @@ public interface PartieDao {
 
     public Partie getPartieById(int idPartie);
 
+    public void changeEtat(int idPartie, int etat);
 }

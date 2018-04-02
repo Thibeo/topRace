@@ -186,10 +186,9 @@
                 Cacher('fondPara');Cacher('fondRules');Cacher('rules');
                 Cacher('para');Cacher('quitter');Cacher('fondQuitter');
                 fermerTuto();Afficher('fondTuto');Afficher('tutoPrez');Afficher('tutoInclicable');
-                Cacher('fondNoir');
-                creationCompteur('le début de la partie commence dans ',120 , ' secondes');
+                creationCompteur('le début de la partie commence dans ',5 , ' secondes');
                 compteur('début de la partie');
-                getPari(1);getPari(2);getPari(3);
+                Cacher('fondNoir');
 "> <!-- à laisser en dernier -->
 
 <!-- HEADER -->
@@ -443,9 +442,9 @@
         <nav id="tutoPlateau">
             <h2>Tutoriel (3/7)</h2>
             <p>Ici se trouve le plateau</p>
-            <p>On peut y voire les 6 voitures</p>
+            <p>On peut y voir les 6 voitures</p>
             <p>sur la ligne de départ, que vous</p>
-            <p>allez faire avancer grace au carte</p>
+            <p>allez faire avancer grâce aux cartes</p>
             <button class="x" onclick=' Cacher("tutoPlateau");
                                         Afficher("tutoCarte");
                                         zindex("plateau",0);
@@ -467,7 +466,7 @@
             <p>En parlant des cartes :</p>
             <p>Voici les cartes à votre disposition</p>
             <p>Chaque joueurs à des cartes differentes</p>
-            <p>Les cartes avec des voitures noir font</p>
+            <p>Les cartes avec des voitures noires font</p>
             <p>avancer la voiture de votre choix</p>
             <button class="x" onclick=' Cacher("tutoCarte");
                                         Afficher("tutoNomPartieJoueurs");
@@ -492,7 +491,7 @@
         <nav id="tutoPari1">
             <h2>Tutoriel (5/7)</h2>
             <p>Le sytème de paris est la base du jeu. C'est grâce aux paris que vous gagnez des points. Il y a 3 paris à faire au total</p>
-            <p>Cliquer sur les boutons <button class="bouttonJaune">1</button> <button class="bouttonRouge">2</button> <button class="bouttonJaune">3</button> pour afficher ou cahcher les paris 1,2 et 3</p>
+            <p>Cliquer sur les boutons <button class="bouttonJaune">1</button> <button class="bouttonRouge">2</button> <button class="bouttonJaune">3</button> pour afficher ou cacher les paris 1,2 et 3</p>
             <button class="x next" onclick=' Cacher("tutoPari1");
                                         Afficher("tutoPari2");
                                         Afficher("ligneJaune");
@@ -507,8 +506,8 @@
         <nav id="tutoPari2">
             <h2>Tutoriel (6/7)</h2>
             <p>Le premier pari se fait dès le début du jeu.
-                Chaque joueur pari sur les 3 voitures qu'il pense voir en tête dès que la 1er ligne jaune sera dépassée par une voiture.
-                Une fois celle-ci dépassée, le jeu se met en pause, un nombre de points vous est attibué en fonction des voitures sur lesquelles vous avez pariez.
+                Chaque joueur parie sur les 3 voitures qu'il pense voir en tête dès que la 1er ligne jaune sera dépassée par une voiture.
+                Une fois celle-ci dépassée, le jeu se met en pause, un nombre de points vous est attibué en fonction des voitures sur lesquelles vous avez parié.
                 Il faut donc à présent faire le deuxième paris etc ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
             <button class="x next" onclick=' Cacher("tutoPari2");
                                         Afficher("tutoPari3");
@@ -523,7 +522,7 @@
         </nav>
         <nav id="tutoPari3">
             <h2>Tutoriel (7/7)</h2>
-            <p>Une fois la dernière ligne jaune dépassé, c'est du chacun pour soi. Le but est de faire arriver sa voiture en première.</p>
+            <p>Une fois la dernière ligne jaune dépassée, c'est du chacun pour soi. Le but est de faire arriver sa voiture en première.</p>
             <p>Un nombre de points est aussi ajouté en fonction du classement finale. le joueur ayant le plus de point gagne la partie !</p>
             <button class="x next" onclick='fermerTuto();'>
                 Start !

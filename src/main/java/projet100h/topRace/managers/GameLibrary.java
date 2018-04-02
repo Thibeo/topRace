@@ -40,9 +40,8 @@ public class GameLibrary {
     public List listPartie(){
         return partieDao.listPartie(); /* < <2, "best party"> , <3, "partie pour le fun"> > */
     }
-    public List listDeplacementCarte(int id){
-        return carteDao.listDeplacementCarte(id); /* < <couleurVoiture, nbCase> , <couleurVoiture, nbCase> , <couleurVoiture, nbCase> > */
-    }
+    public List listDeplacementCarte(int id){ return carteDao.listDeplacementCarte(id);}/* < <couleurVoiture, nbCase> , <couleurVoiture, nbCase> , <couleurVoiture, nbCase> > */
+
     public List<Integer> nbDeJoueur() {
         List<Integer> listJoueur = partieDao.nbDeJoueur(); // liste des idPartie de tous les joueurs
         List listFinal = new ArrayList<>(); //creation de la liste final qui sera composé de liste intermediaire
@@ -69,6 +68,8 @@ public class GameLibrary {
     }
 
     public void changerCase(Joueur joueur, PartieCase cse) {joueurDao.changerCase(joueur, cse);}
+
+    public void changeEtat(int idPartie, int etat){partieDao.changeEtat(idPartie,etat);}
 
     public void ajoutPari(int idPartie, String couleurJ, int numeroPari, boolean jaune, boolean bleue, boolean rouge, boolean violette, boolean blanche, boolean verte){pariDao.ajoutPari(idPartie, couleurJ, numeroPari, jaune, bleue, rouge, violette, blanche, verte);}
 

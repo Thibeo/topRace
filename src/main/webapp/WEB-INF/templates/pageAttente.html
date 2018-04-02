@@ -31,19 +31,36 @@
             obj1.style.opacity = (obj1.style.opacity * 1) + (signe1 * 0.04);
             obj2.style.opacity = 0.5 ;
 
-
         };
 
         // mise en place de l appel de la fonction toutes les 0.085 secondes
         // Pour arrêter le clignotement : clearInterval(periode);
         periode = setInterval(clignotementFading, 50 );
 
+        function rechargement(){
+            var request = new XMLHttpRequest();
+            var data = document.getElementById("idPartiee").innerText || document.getElementById("idPartiee").textContent;
+            request.open("POST", "webservices/wait/charg", true);
+            request.responseType = "json";
+            request.onload = function () {
+                var answer = this.response;
+                console.log(answer);
+                if (answer == "start"){
+                    document.getElementById("recharg").submit();
+                }
+                window.setTimeout("rechargement();",1000);
+            }
+            console.log(data);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send("data=" + JSON.stringify(data));
+
+        }
 
     </script>
 
     </head>
 
-    <body onload="Cacher('fondPara');Cacher('fondRules');Cacher('rules');Cacher('para');Cacher('quitter');Cacher('fondQuitter');">
+    <body onload="Cacher('fondPara');Cacher('fondRules');Cacher('rules');Cacher('para');Cacher('quitter');Cacher('fondQuitter');rechargement();">
 
 <!-- HEADER -->
         <header th:replace="~{fragments::header}"></header>
@@ -73,13 +90,13 @@
                                         th:text="${joueur.nomJoueur}">
                                     </p>
                                     </td>
-                                    <td align="center"><p th:if="${joueur.nomJoueur == PartieById.nomDeProprio}"
+                                    <td align="center"><p th:if="${joueur.couleur == PartieById.couleurDeProprio}"
                                                           th:text="${'Propriétaire'}"></p></td>
                                     <td align="center"><p th:text="${joueur.couleur}"></p></td>
                                 </tr>
                             </table>
                         </nav>
-                        <nav th:if="${PartieById.nomDeProprio == nomJ}" class="bloc">
+                        <nav th:each="joueur : ${listOfJoueur}" th:if="${joueur.couleur == PartieById.couleurDeProprio && joueur.nomJoueur == nomJ}" class="bloc">
                             <form method="post">
                                 <input type="HIDDEN" name="nomJoueur" id="nomJoueur" th:value="${nomJ}"/>
                                 <input type="HIDDEN" name="idPartie" id="idPartie" th:value="${PartieById.idPartie}"/>
@@ -90,6 +107,14 @@
                     </nav>
                 </nav>
             </nav>
+            <!-- section pour idPartie -->
+            <section id="idPartiee" style="display: none" th:text="${PartieById.idPartie}">1</section>
+
+            <form id="recharg" method="post" style="visibility: hidden;">
+                <input type="HIDDEN" name="nomJoueur" id="nomJoueur" th:value="${nomJ}"/>
+                <input type="HIDDEN" name="idPartie" id="idPartie" th:value="${PartieById.idPartie}"/>
+            </form>
+
             <nav class="bande2"></nav>
 
             <section class="footer">

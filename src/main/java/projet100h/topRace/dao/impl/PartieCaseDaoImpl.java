@@ -60,7 +60,7 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
         return null;
     }
 
-
+    @Override
     public void modifierStatut(PartieCase cse,boolean occupe){
         String query = "UPDATE partieCase SET occupee=? WHERE x=? and y=? and idPartie=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();

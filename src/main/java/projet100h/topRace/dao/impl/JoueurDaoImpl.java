@@ -1,5 +1,6 @@
 package projet100h.topRace.dao.impl;
 
+import jdk.nashorn.internal.scripts.JO;
 import projet100h.topRace.dao.JoueurDao;
 import projet100h.topRace.entities.Case;
 import projet100h.topRace.entities.Joueur;
@@ -111,6 +112,31 @@ public class JoueurDaoImpl implements JoueurDao {
         }
         return list;
     }
+
+/*
+    @Override
+    public Joueur deleteJoueur (String couleurJ, int idPartie){
+        String query = "DELETE FROM `recette`  WHERE idRecette=?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idRecette);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        String query2 = "DELETE FROM `ingredientsrecette`  WHERE idRecette=?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query2)) {
+            statement.setInt(1, idRecette);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }*/
 
 
 }

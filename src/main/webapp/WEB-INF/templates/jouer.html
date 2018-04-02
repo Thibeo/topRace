@@ -116,11 +116,11 @@
                             <tr th:each="list : ${listNbJoueur}">
                                 <td><p th:each="partie : ${listPartie}"
                                        th:if="${list.get(0) == partie.idPartie  && list.get(1) != 6 }"
-                                       th:text="${partie.nomDeProprio}">Meilleur partie du monde</p></td>
+                                       th:text="${partie.nomDePartie}">Meilleur partie du monde</p></td>
 
                                 <td align="center"><p th:each="partie : ${listPartie}"
                                                       th:if="${list.get(0) == partie.idPartie && list.get(1) != 6}"
-                                                      th:text="${partie.nomDePartie}">Grosse cheville</p></td>
+                                                      th:text="${partie.couleurDeProprio}">Grosse cheville</p></td>
 
                                 <td align="center"><p th:if="${list.get(1) != 6}"
                                                       th:text="${list.get(1)+'/6'}">5/6</p></td>

@@ -57,7 +57,8 @@ CREATE TABLE `cse` (
 CREATE TABLE `partie` (
   `idPartie` int(11) NOT NULL AUTO_INCREMENT,
   `nomDePartie`varchar(45) NOT NULL,
-  `nomDeProprio`varchar(45) NOT NULL,
+  `couleurDeProprio`varchar(45) NOT NULL,
+  `etat` int(11) NOT NULL,
   PRIMARY KEY (`idPartie`)
 );
 

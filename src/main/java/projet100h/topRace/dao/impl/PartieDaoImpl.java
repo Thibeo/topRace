@@ -12,6 +12,7 @@ import java.util.List;
 
 public class PartieDaoImpl implements PartieDao{
 
+    @Override
     public List listPartie(){
         String query = "SELECT * FROM partie";
         List<Partie> listOfPartie = new ArrayList<>();
@@ -24,7 +25,8 @@ public class PartieDaoImpl implements PartieDao{
                     listOfPartie.add(
                             new Partie(resultSet.getInt("idPartie"),
                                     resultSet.getString("nomDePartie"),
-                                    resultSet.getString("nomDeProprio"))
+                                    resultSet.getString("couleurDeProprio"),
+                                    resultSet.getInt("etat"))
                     );
             }
 
@@ -34,6 +36,7 @@ public class PartieDaoImpl implements PartieDao{
         return listOfPartie;
     }
 
+    @Override
     public List<Integer> nbDeJoueur(){
         String query = "SELECT * FROM joueur";
         List<Integer> listOfNbJoueur = new ArrayList<>();
@@ -52,12 +55,14 @@ public class PartieDaoImpl implements PartieDao{
         return listOfNbJoueur;
     }
 
+    @Override
     public Partie createPartie(Partie partie){
-        String query = "INSERT INTO partie(nomDePartie, nomDeProprio) VALUES(?, ?)";
+        String query = "INSERT INTO partie(nomDePartie, couleurDeProprio, etat) VALUES(?, ?, ?)";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
              PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1,partie.getNomDePartie());
-            statement.setString(2,partie.getNomDeProprio());
+            statement.setString(2,partie.getCouleurDeProprio());
+            statement.setInt(3,partie.getEtat());
             statement.executeUpdate();
             try (ResultSet ids = statement.getGeneratedKeys()) {
                 if(ids.next()) {
@@ -72,6 +77,7 @@ public class PartieDaoImpl implements PartieDao{
         return null;
     }
 
+    @Override
     public int getIdPartieByName(String nomPartie){
         String query = "SELECT idPartie FROM partie WHERE nomDePartie=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -88,6 +94,7 @@ public class PartieDaoImpl implements PartieDao{
         return 0;
     }
 
+    @Override
     public Partie getPartieById(int idPartie){
         String query = "SELECT * FROM partie WHERE idPartie=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -96,14 +103,29 @@ public class PartieDaoImpl implements PartieDao{
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     return (new Partie(resultSet.getInt("idPartie"),
-                            resultSet.getString("nomDeProprio"),
-                            resultSet.getString("nomDePartie")));
+                            resultSet.getString("nomDePartie"),
+                            resultSet.getString("couleurDeProprio"),
+                            resultSet.getInt("etat")));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void changeEtat(int idPartie, int etat){
+        String query = "UPDATE partie SET etat=? WHERE idPartie = ?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, etat);
+            statement.setInt(2, idPartie);
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 
