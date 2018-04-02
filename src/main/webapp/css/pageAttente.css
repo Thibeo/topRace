@@ -1,7 +1,9 @@
 /* ------------------------------------------- */
 /* --- div et table des joueurs en attente --- */
 /* ------------------------------------------- */
-
+.active{
+    border: 0.4vh solid black;
+}
 .bloc{
     display: inline-block;
     margin-top: 30px;

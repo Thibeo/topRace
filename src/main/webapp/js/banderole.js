@@ -23,7 +23,7 @@ function compteur(textFinal){
         document.getElementById('navCompteur').innerHTML="";
         document.getElementById('navCompteur').style.display="none";
         if (textFinal == 'début de la partie' ){
-            creationCompteur('Vous avez ', 15, ' secondes pour valider votre 1er pari');
+            creationCompteur('Vous avez ', 31, ' secondes pour valider votre 1er pari');
             document.getElementById("btnPari1").onclick = function(){parier(1);};
             window.setTimeout("compteur('Pari envoyé !');",999);
             fermerTuto();

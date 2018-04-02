@@ -60,18 +60,32 @@
                         <nav class="bloc1">
                             <table>
                                 <tr>
-                                    <th><p>La partie de Bob le brico</p></th>
+                                    <th><p th:text="${PartieById.nomDePartie}">La partie de Bob le brico</p></th>
                                     <th></th>
                                     <th><p>Couleur</p></th>
                                     <th><button onclick='ACQuitter();'>Quitter</button></th>
                                 </tr>
                                 <tr th:each="joueur : ${listOfJoueur}">
-                                    <td><p th:text="${joueur.nomJoueur}"></p></td>
+                                    <td><p  th:if="${joueur.nomJoueur == nomJ}"
+                                            th:class="${'active'}"
+                                            th:text="${joueur.nomJoueur}"></p>
+                                    <p th:if="${joueur.nomJoueur != nomJ}"
+                                        th:text="${joueur.nomJoueur}">
+                                    </p>
+                                    </td>
                                     <td align="center"><p th:if="${joueur.nomJoueur == PartieById.nomDeProprio}"
                                                           th:text="${'Propriétaire'}"></p></td>
                                     <td align="center"><p th:text="${joueur.couleur}"></p></td>
                                 </tr>
                             </table>
+                        </nav>
+                        <nav th:if="${PartieById.nomDeProprio == nomJ}" class="bloc">
+                            <form method="post">
+                                <input type="HIDDEN" name="nomJoueur" id="nomJoueur" th:value="${nomJ}"/>
+                                <input type="HIDDEN" name="idPartie" id="idPartie" th:value="${PartieById.idPartie}"/>
+                                <input type="submit" name="action" value="Lancer la partie"/>
+                            </form>
+
                         </nav>
                     </nav>
                 </nav>

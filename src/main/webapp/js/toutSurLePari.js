@@ -27,13 +27,10 @@ function parier(idPari){
                 verrte.disabled = "disabled";
             }
         }
-        data.numeroPari = idPari;
-        data.jaune = jaunne.checked;
-        data.bleue = bleuue.checked;
-        data.rouge = roouge.checked;
-        data.violette = violettte.checked;
-        data.blanche = blanchee.checked;
-        data.verte = verrte.checked;
+        var dat = '{"numeroPari":"'+idPari+'","jaune":"'+jaunne.checked+'","bleue":"'+bleuue.checked+'","rouge":"'+roouge.checked+'","violette":"'+violettte.checked+'","blanche":"'+blanchee.checked+'","verte":"'+verrte.checked+'"}';
+        data.data= dat;
+        data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
+        data.idPartie = document.getElementById("idPartie").innerText || document.getElementById("idPartie").textContent;
         console.log(data);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send("data=" + JSON.stringify(data));
@@ -71,8 +68,12 @@ function checkPari(idPari){
             window.setTimeout("compteur('"+textFinal+"');",2999);
             getPari(1);
         }
+        var data = {};
+        data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
+        data.idPartie = document.getElementById("idPartie").innerText || document.getElementById("idPartie").textContent;
+        data.data = idPari;
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send("data=" + JSON.stringify(idPari));
+        request.send("data=" + JSON.stringify(data));
         /* et on l'envoit */
     } else {
         console.log("l'idPari n'est pas bon");
@@ -153,8 +154,12 @@ function getPari(idPari){
                 console.log("pas de pari effectuer");
             }
         };
+        var data = {};
+        data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
+        data.idPartie = document.getElementById("idPartie").innerText || document.getElementById("idPartie").textContent;
+        data.data = idPari;
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send("data=" + JSON.stringify(idPari));
+        request.send("data=" + JSON.stringify(data));
         /* et on l'envoit */
     } else {
         console.log("l'idPari n'est pas bon");

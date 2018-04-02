@@ -22,9 +22,13 @@ public class WaitingServlet extends GenericServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         Integer idPartie = (Integer) session.getAttribute("sessionIdPartie");
+        String nomJoueur= (String) session.getAttribute("sessionNomJoueur");
 
+        System.out.println("idPartie = "+idPartie+" // nomJoueur = "+nomJoueur);
 
         WebContext context = new WebContext(req, resp, req.getServletContext());
+
+        context.setVariable("nomJ", nomJoueur);
 
         List<Joueur> listOfJoueur = GameLibrary.getInstance().listOfJoueur(idPartie);
         context.setVariable("listOfJoueur", listOfJoueur);
@@ -34,5 +38,36 @@ public class WaitingServlet extends GenericServlet {
 
         TemplateEngine templateEngine = createTemplateEngine(req.getServletContext());
         templateEngine.process("pageAttente", context, resp.getWriter());
+    }
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Integer idPartie = null;
+        String pseudoJoueur = null;
+
+        pseudoJoueur = req.getParameter("nomJoueur");
+        idPartie = Integer.parseInt(req.getParameter("idPartie"));
+
+        // pour "ouvrir" une session correspondant à la partie:
+        HttpSession session = req.getSession();
+        //String sessionpartie = "sessionpartie";
+        session.setAttribute("sessionIdPartie", idPartie);
+        session.setAttribute("sessionNomJoueur",pseudoJoueur);
+
+
+        try {
+
+            // REDIRIGE VERS LA PAGE D'ATTENTE
+            resp.sendRedirect("game");
+            session.removeAttribute("error");
+            req.setAttribute("sessionIdPartie", idPartie);
+            req.setAttribute("sessionNomJoueur", pseudoJoueur);
+
+
+        } catch (IllegalArgumentException e) {
+
+            String errorMessage = e.getMessage();
+            req.getSession().setAttribute("errorMessage", errorMessage);
+            resp.sendRedirect("wait");
+        }
+
     }
 }

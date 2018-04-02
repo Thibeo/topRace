@@ -27,10 +27,13 @@
         function avancer(cse){
             if (cse != 27 && cse != 28 && cse != 29 && cse != 31 && cse != 32 && cse != 33 && cse != 34 && cse != 35 && cse != 36
                 && cse != 41 && cse != 42 && cse != 43 && cse != 44 && cse != 45 && cse != 46) {
-                var postMyOpinionRequest = new XMLHttpRequest();
-                postMyOpinionRequest.open("POST", "webservices/game/avancer", true);
-                postMyOpinionRequest.responseType = "json";
-                postMyOpinionRequest.onload = function () {
+                var request = new XMLHttpRequest();
+                var data = {};
+                data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
+                data.idPartie = document.getElementById("idPartie").innerText || document.getElementById("idPartie").textContent;
+                request.open("POST", "webservices/game/avancer", true);
+                request.responseType = "json";
+                request.onload = function () {
                     var answer = this.response;
                     console.log("answer: " + answer);
                     var longeur = parseInt(answer[0]);
@@ -65,12 +68,12 @@
                         console.log("la voiture qui est " + couleur + " se trouve en top = " + top + " et left = " + left);
                         avancerVoiture(couleur, top, left, rotate);
                     }
-
                     console.log("");
 
                 }
-                postMyOpinionRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                postMyOpinionRequest.send("data=" + JSON.stringify(cse));
+                data.data=cse;
+                request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                request.send("data=" + JSON.stringify(data));
                 /* et on l'envoit */
             } else {
                 var eltIdCartes = document.getElementById("idCarte");
@@ -184,7 +187,7 @@
                 Cacher('para');Cacher('quitter');Cacher('fondQuitter');
                 fermerTuto();Afficher('fondTuto');Afficher('tutoPrez');Afficher('tutoInclicable');
                 Cacher('fondNoir');
-                creationCompteur('le début de la partie commence dans ',5 , ' secondes');
+                creationCompteur('le début de la partie commence dans ',120 , ' secondes');
                 compteur('début de la partie');
                 getPari(1);getPari(2);getPari(3);
 "> <!-- à laisser en dernier -->
@@ -247,24 +250,19 @@
     <nav class="bande2"></nav>
 
 <!-- nav afficher le nom des joueuers -->
-    <nav id="joueurs">
-        <nav class="jBlanc" onclick="ouvrirTuto();">- Joueur 1</nav>
-        <nav class="jVert">- Joueur 2</nav>
-        <nav class="jBleu">- Joueur 3</nav>
-        <nav class="jRouge">- Joueur 4</nav>
-        <nav class="jViolet">- Joueur 5</nav>
-        <nav class="jJaune">- Joueur 6</nav>
+    <nav id="joueurs" >
+        <nav th:each="joueur : ${listOfJoueur}" th:class="${'j'+joueur.couleur}" th:text="${joueur.nomJoueur}"></nav>
     </nav>
 
 <!-- section pour idPartie -->
-    <section id="idPartie" style="display: none">1</section>
+    <section id="idPartie" style="display: none" th:text="${PartieById.idPartie}">1</section>
 
 <!-- section pour couleurJ -->
-    <section id="couleurJ" style="display: none">Vert</section>
+    <section id="couleurJ" style="display: none" th:each="joujou : ${listOfJoueur}" th:if="${joujou.nomJoueur == nomJ}" th:text="${joujou.couleur}">Vert</section>
 
 <!-- nav pour le nom de la partie -->
     <nav id="nomPartie">
-        <p>Nom de la partie</p>
+        <p th:text="${PartieById.nomDePartie}">Nom de la partie</p>
     </nav>
 
 <!-- nav pour le tableau de paris a effectuer -->

@@ -21,10 +21,20 @@ public class GameServlet extends GenericServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-        Integer idPartie = (Integer) session.getAttribute("sessionPartie");
+        Integer idPartie = (Integer) session.getAttribute("sessionIdPartie");
         String nomJoueur= (String) session.getAttribute("sessionNomJoueur");
 
+        System.out.println("idPartie = "+idPartie+" // nomJoueur = "+nomJoueur);
+
         WebContext context = new WebContext(req, resp, req.getServletContext());
+
+        context.setVariable("nomJ", nomJoueur);
+
+        Partie PartieById = GameLibrary.getInstance().getPartieById(idPartie);
+        context.setVariable("PartieById", PartieById);
+
+        List<Joueur> listOfJoueur = GameLibrary.getInstance().listOfJoueur(idPartie);
+        context.setVariable("listOfJoueur", listOfJoueur);
 
         List<Case> listCase = GameLibrary.getInstance().listCase();
         context.setVariable("listCase", listCase);
