@@ -69,7 +69,7 @@ public class GameLibrary {
 
     public void changerCase(Joueur joueur, PartieCase cse) {joueurDao.changerCase(joueur, cse);}
 
-    public void changeEtat(int idPartie, int etat){partieDao.changeEtat(idPartie,etat);}
+    public void changeEtat(int idPartie, String etat){partieDao.changeEtat(idPartie,etat);}
 
     public void ajoutPari(int idPartie, String couleurJ, int numeroPari, boolean jaune, boolean bleue, boolean rouge, boolean violette, boolean blanche, boolean verte){pariDao.ajoutPari(idPartie, couleurJ, numeroPari, jaune, bleue, rouge, violette, blanche, verte);}
 
@@ -106,6 +106,8 @@ public class GameLibrary {
         PartieCase cse = partieCaseDao.getPartieCase(Integer.parseInt(list.get(0)), list.get(1).charAt(0), idPartie);
         return joueurDao.getJoueurByCase(couleur,idPartie,cse);
     }
+
+    public void deleteJoueur (String couleurJ, int idPartie){ joueurDao.deleteJoueur(couleurJ, idPartie);}
 
     public void creationPartieCase(int idPartie){ partieCaseDao.creationPartieCase(idPartie);}
 

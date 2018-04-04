@@ -26,7 +26,7 @@ public class PartieDaoImpl implements PartieDao{
                             new Partie(resultSet.getInt("idPartie"),
                                     resultSet.getString("nomDePartie"),
                                     resultSet.getString("couleurDeProprio"),
-                                    resultSet.getInt("etat"))
+                                    resultSet.getString("etat"))
                     );
             }
 
@@ -62,7 +62,7 @@ public class PartieDaoImpl implements PartieDao{
              PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1,partie.getNomDePartie());
             statement.setString(2,partie.getCouleurDeProprio());
-            statement.setInt(3,partie.getEtat());
+            statement.setString(3,partie.getEtat());
             statement.executeUpdate();
             try (ResultSet ids = statement.getGeneratedKeys()) {
                 if(ids.next()) {
@@ -105,7 +105,7 @@ public class PartieDaoImpl implements PartieDao{
                     return (new Partie(resultSet.getInt("idPartie"),
                             resultSet.getString("nomDePartie"),
                             resultSet.getString("couleurDeProprio"),
-                            resultSet.getInt("etat")));
+                            resultSet.getString("etat")));
                 }
             }
         } catch (SQLException e) {
@@ -115,11 +115,11 @@ public class PartieDaoImpl implements PartieDao{
     }
 
     @Override
-    public void changeEtat(int idPartie, int etat){
+    public void changeEtat(int idPartie, String etat){
         String query = "UPDATE partie SET etat=? WHERE idPartie = ?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, etat);
+            statement.setString(1, etat);
             statement.setInt(2, idPartie);
             statement.executeUpdate();
         }

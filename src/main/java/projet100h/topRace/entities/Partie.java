@@ -4,10 +4,10 @@ public class Partie {
     Integer idPartie;
     String nomDePartie;
     String couleurDeProprio;
-    int etat;
+    String etat;
 
 
-    public Partie(Integer idPartie,String nomPartie, String couleurDeProprio, int etat){
+    public Partie(Integer idPartie,String nomPartie, String couleurDeProprio, String etat){
         this.nomDePartie=nomPartie;
         this.idPartie=idPartie;
         this.couleurDeProprio=couleurDeProprio;
@@ -23,6 +23,6 @@ public class Partie {
     public String getCouleurDeProprio() { return couleurDeProprio; }
     public void setCouleurDeProprio(String couleurDeProprio) { this.couleurDeProprio = couleurDeProprio; }
 
-    public int getEtat() { return etat; }
-    public void setEtat(int etat) { this.etat = etat; }
+    public String getEtat() { return etat; }
+    public void setEtat(String etat) { this.etat = etat; }
 }

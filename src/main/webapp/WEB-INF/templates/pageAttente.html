@@ -37,6 +37,23 @@
         // Pour arrêter le clignotement : clearInterval(periode);
         periode = setInterval(clignotementFading, 50 );
 
+        function quitter() {
+            var request = new XMLHttpRequest();
+            var data = {};
+            data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
+            data.idPartie = document.getElementById("idPartiee").innerText || document.getElementById("idPartiee").textContent;
+            data.data = "null";
+            request.open("POST", "webservices/wait/quitt", true);
+            request.responseType = "json";
+            request.onload = function () {
+                var answer = this.response;
+                console.log(answer);
+            }
+            console.log(data);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send("data=" + JSON.stringify(data));
+        }
+
         function rechargement(){
             var request = new XMLHttpRequest();
             var data = document.getElementById("idPartiee").innerText || document.getElementById("idPartiee").textContent;
@@ -53,7 +70,6 @@
             console.log(data);
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send("data=" + JSON.stringify(data));
-
         }
 
     </script>
@@ -78,7 +94,6 @@
                             <table>
                                 <tr>
                                     <th><p th:text="${PartieById.nomDePartie}">La partie de Bob le brico</p></th>
-                                    <th></th>
                                     <th><p>Couleur</p></th>
                                     <th><button onclick='ACQuitter();'>Quitter</button></th>
                                 </tr>
@@ -90,9 +105,9 @@
                                         th:text="${joueur.nomJoueur}">
                                     </p>
                                     </td>
+                                    <td align="center"><p th:text="${joueur.couleur}"></p></td>
                                     <td align="center"><p th:if="${joueur.couleur == PartieById.couleurDeProprio}"
                                                           th:text="${'Propriétaire'}"></p></td>
-                                    <td align="center"><p th:text="${joueur.couleur}"></p></td>
                                 </tr>
                             </table>
                         </nav>
@@ -102,13 +117,14 @@
                                 <input type="HIDDEN" name="idPartie" id="idPartie" th:value="${PartieById.idPartie}"/>
                                 <input type="submit" name="action" value="Lancer la partie"/>
                             </form>
-
                         </nav>
                     </nav>
                 </nav>
             </nav>
             <!-- section pour idPartie -->
             <section id="idPartiee" style="display: none" th:text="${PartieById.idPartie}">1</section>
+            <!-- section pour couleurJ -->
+            <section id="couleurJ" style="display: none" th:each="joujou : ${listOfJoueur}" th:if="${joujou.nomJoueur == nomJ}" th:text="${joujou.couleur}">Vert</section>
 
             <form id="recharg" method="post" style="visibility: hidden;">
                 <input type="HIDDEN" name="nomJoueur" id="nomJoueur" th:value="${nomJ}"/>

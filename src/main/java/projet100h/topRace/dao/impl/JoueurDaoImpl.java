@@ -113,30 +113,56 @@ public class JoueurDaoImpl implements JoueurDao {
         return list;
     }
 
-/*
+
     @Override
-    public Joueur deleteJoueur (String couleurJ, int idPartie){
-        String query = "DELETE FROM `recette`  WHERE idRecette=?";
+    public void deleteJoueur (String couleurJ, int idPartie){
+        String query = "SELECT * FROM `partie`  WHERE idPartie=?";
+        String couleurProprio="";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, idRecette);
-            statement.executeUpdate();
-
+            statement.setInt(1, idPartie);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    couleurProprio = resultSet.getString("couleurDeProprio");
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        if (couleurJ.equals(couleurProprio) || couleurJ==couleurProprio){ // si le joueur est le propriétaire
+            String query2 = "DELETE FROM `partie`  WHERE idPartie=?"; // on supprime la partie
+            try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+                 PreparedStatement statement = connection.prepareStatement(query2)) {
+                statement.setInt(1, idPartie);
+                statement.executeUpdate();
 
-        String query2 = "DELETE FROM `ingredientsrecette`  WHERE idRecette=?";
-        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement(query2)) {
-            statement.setInt(1, idRecette);
-            statement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+            String query3 = "DELETE FROM `joueur`  WHERE idPartie=?"; // et tous les joueurs
+            try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+                 PreparedStatement statement = connection.prepareStatement(query3)) {
+                statement.setInt(1, idPartie);
+                statement.executeUpdate();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            String query3 = "DELETE FROM `joueur`  WHERE couleurJ=?"; // sinon on supprime que le joueur
+            try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+                 PreparedStatement statement = connection.prepareStatement(query3)) {
+                statement.setString(1, couleurJ);
+                statement.executeUpdate();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-        return null;
-    }*/
+
+    }
 
 
 }

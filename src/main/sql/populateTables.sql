@@ -102,7 +102,7 @@ INSERT INTO `typeVoiture` (`couleurV`,x,y) VALUES ("Blanc",0,'b');
 /* données qui sont sencées se créées toutes seules */
 /* ------------------------------------------------ */
 
-INSERT INTO `partie` (`idPartie`, `nomDePartie`, `couleurDeProprio`, `etat`) VALUES (1, 'partie1test', 'Bleu',0);
+INSERT INTO `partie` (`idPartie`, `nomDePartie`, `couleurDeProprio`, `etat`) VALUES (1, 'partie1test', 'Bleu','attente');
 
 INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Jaune", "BobJaune", 1, 1, 'a');
 INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Vert", "BobVert", 1, 1, 'b');

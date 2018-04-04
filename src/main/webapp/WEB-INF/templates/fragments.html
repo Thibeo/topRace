@@ -84,7 +84,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="btnQuitter"><button type="submit"><a href="home" th:text="${'Quitter '+texteQuitter}"></a></button></td>
+                        <td class="btnQuitter"><button type="submit"><a href="home" th:text="${'Quitter '+texteQuitter}" onclick="quitter();"></a></button></td>
                         <td align="right" class="btnQuitter"><button type="submit" onclick='ACQuitter();' th:text="${'Retour à '+texteQuitter}"></button></td>
                     </tr>
                 </table>

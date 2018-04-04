@@ -67,7 +67,7 @@ public class JouerServlet extends GenericServlet {
                 String couleur= (String) listeCaracteristique.get(2);
 
                 // CREER PARTIE
-                Partie newPartie = new Partie(null,nomDEProprio,couleur,0);
+                Partie newPartie = new Partie(null,nomDEProprio,couleur,"attente");
                 Partie createdPartie = GameLibrary.getInstance().creerPartie(newPartie);
 
                 PartieCase caseActuelle=new PartieCase(positionX,positionY,createdPartie.getIdPartie(),true);

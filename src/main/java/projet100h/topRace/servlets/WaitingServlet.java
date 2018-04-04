@@ -60,7 +60,7 @@ public class WaitingServlet extends GenericServlet {
             session.removeAttribute("error");
             req.setAttribute("sessionIdPartie", idPartie);
             req.setAttribute("sessionNomJoueur", pseudoJoueur);
-            GameLibrary.getInstance().changeEtat(idPartie,1);
+            GameLibrary.getInstance().changeEtat(idPartie,"lancerTuto");
 
 
         } catch (IllegalArgumentException e) {

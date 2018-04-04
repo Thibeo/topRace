@@ -1,6 +1,7 @@
 package projet100h.topRace.webseervice;
 
 import com.google.gson.Gson;
+import projet100h.topRace.entities.JsonCreatedClass;
 import projet100h.topRace.entities.Partie;
 import projet100h.topRace.managers.GameLibrary;
 
@@ -17,21 +18,48 @@ public class WaitingWS {
     @POST
     @Path("/charg")
     public Response rechargement(@FormParam("data") String data1){
-        System.out.println("data envoyé dans le WaitingWS au @Path(\"/charg\") = "+data1);
         int data = Integer.parseInt(data1.substring(1,2));
 
         Partie partie = GameLibrary.getInstance().getPartieById(data);
-        int etat = partie.getEtat();
+        String etat = partie.getEtat();
         String answer;
 
-        if (etat !=0){
+        if (!etat.equals("attente") || etat == "attente"){
             answer="start";
         } else{
             answer="wait";
         }
 
+
+
+        return Response.ok().entity(gsonService.toJson(answer)).build();
+    }
+
+    @POST
+    @Path("/quitt")
+    public Response quitter(@FormParam("data") String data1){
+        System.out.println("data envoyé dans le GameWS au @Path(\"/getPari\") = "+data1);
+        JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
+
+        // on recupère les variables
+        int idPartie = jsooon.getIdPartie();
+        String couleurJ = jsooon.getCouleur();
+
+        String answer="";
+
+        try {
+            GameLibrary.getInstance().deleteJoueur(couleurJ,idPartie);
+            answer = "Le joueur "+couleurJ+" a bien quitter la partie "+String.valueOf(idPartie);
+        }
+        catch (Exception e) {
+            System.out.println("le joueur n'a pas été supprimer");
+            answer = "Error supprimer joueur";
+        }
+
+
         System.out.println("réponse retourné après le @Path(\"/charg\") du WaitingWS = "+answer);
         System.out.println();
         return Response.ok().entity(gsonService.toJson(answer)).build();
     }
+
 }

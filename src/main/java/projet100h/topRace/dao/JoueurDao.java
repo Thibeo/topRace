@@ -17,4 +17,6 @@ public interface JoueurDao {
 
     public List listOfJoueur(int idPartie);
 
+    public void deleteJoueur (String couleurJ, int idPartie);
+
 }
