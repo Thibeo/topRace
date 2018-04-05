@@ -180,6 +180,7 @@ public class GameWS {
 
         // transformation du string data en class grâce au JSON
         Pari pariJsonAnswer = gsonService.fromJson(data, Pari.class);
+
         // on recupère les variables
         int numeroPari = pariJsonAnswer.getNumeroPari();
         boolean jaune = pariJsonAnswer.isJaune();
@@ -201,13 +202,23 @@ public class GameWS {
 
         if (compteur != 3){
             answer = "error1"; //le pari n'est pas complet
+            System.out.println("error2");
+            System.out.println();
         } else {
-            boolean existe = GameLibrary.getInstance().pariExiste(idPartie,couleurJ, numeroPari);
-            if (existe == true){
-                answer = "error2"; //le pari est déjà effectué
-            } else {
-                GameLibrary.getInstance().ajoutPari(idPartie,couleurJ, numeroPari, jaune, bleue, rouge, violette, blanche, verte);
-                answer = "succeed"; // tout s'est bien passé
+            try {
+                boolean existe = GameLibrary.getInstance().pariExiste(idPartie, couleurJ, numeroPari);
+                if (existe == true) {
+                    answer = "error2"; //le pari est déjà effectué
+                    System.out.println("error2");
+                    System.out.println();
+                } else {
+                    GameLibrary.getInstance().ajoutPari(idPartie, couleurJ, numeroPari, jaune, bleue, rouge, violette, blanche, verte);
+                    answer = "succeed"; // tout s'est bien passé
+                }
+            }catch (Exception e) {
+                answer = "error4";
+                System.out.println("error4");
+                System.out.println();
             }
         }
         System.out.println("réponse retourné après le @Path(\"/parier\") du GameWS = "+answer);
@@ -226,41 +237,67 @@ public class GameWS {
         int idPartie = jsooon.getIdPartie();
         String couleurJ = jsooon.getCouleur();
         String data2 = jsooon.getData();
-
         int data = Integer.parseInt(data2);
 
-        String answer=null;
-        boolean existe = GameLibrary.getInstance().pariExiste(idPartie,couleurJ, data);
-        if (existe == true){
-            answer = "le pari a bien été envoyé";
-        } else { //faire une pari aléatoir pour le joueur
-            List<Integer> listAlea = new ArrayList<Integer>();
-            Random rand = new Random();
-            int nombreAleatoire1 = rand.nextInt(5 - 0 + 1);
-            listAlea.add(nombreAleatoire1);
-            while (listAlea.size()<3){
-                int nombreAleatoire2 = rand.nextInt(5 - 0 + 1);
-                if (!listAlea.contains(nombreAleatoire2)){
-                    listAlea.add(nombreAleatoire2);
+        // on créé un réponse
+        String answer;
+
+        try {
+            boolean existe = GameLibrary.getInstance().pariExiste(idPartie,couleurJ, data); // on verifie que le pari existe
+
+            if (existe == true){
+                answer = "le pari a bien été envoyé";
+            } else { //faire un pari aléatoire pour le joueur
+                try {
+                    List<Integer> listAlea = new ArrayList<Integer>();
+                    Random rand = new Random();
+                    int nombreAleatoire1 = rand.nextInt(5 - 0 + 1);
+                    listAlea.add(nombreAleatoire1);
+                    while (listAlea.size()<3){
+                        int nombreAleatoire2 = rand.nextInt(5 - 0 + 1);
+                        if (!listAlea.contains(nombreAleatoire2)){
+                            listAlea.add(nombreAleatoire2);
+                        }
+                    }
+                    boolean jaune = false; boolean bleue = false; boolean rouge = false; boolean violette = false; boolean blanche = false; boolean verte = false;
+                    for (int i = 0 ; i < 3 ; i ++){
+                        if(listAlea.get(i) == 1){ jaune=true ;}
+                        else if (listAlea.get(i) == 2){ bleue=true ;}
+                        else if (listAlea.get(i) == 3){ rouge=true ;}
+                        else if (listAlea.get(i) == 4){ violette=true ;}
+                        else if (listAlea.get(i) == 5){ blanche=true ;}
+                        else if (listAlea.get(i) == 0){ verte=true ;}
+                    }
+                    try {
+                        GameLibrary.getInstance().ajoutPari(idPartie,couleurJ, data, jaune, bleue, rouge, violette, blanche, verte);
+                        try {
+                            boolean existe2 = GameLibrary.getInstance().pariExiste(idPartie, couleurJ, data);
+                            if (existe2 == true) {
+                                answer = "un pari aléatoire a été effectué";
+                            } else {
+                                answer = "error1";
+                            }
+                        }catch (Exception e) {
+                            answer = "error4";
+                            System.out.println("error4");
+                            System.out.println();
+                        }
+                    }catch (Exception e) {
+                        answer = "error6";
+                        System.out.println("error6");
+                        System.out.println();
+                    }
+                }catch (Exception e) {
+                    answer = "error3";
+                    System.out.println("error3");
+                    System.out.println();
                 }
             }
-            System.out.println(listAlea);
-            boolean jaune = false; boolean bleue = false; boolean rouge = false; boolean violette = false; boolean blanche = false; boolean verte = false;
-            for (int i = 0 ; i < 3 ; i ++){
-                if(listAlea.get(i) == 1){ jaune=true ;}
-                else if (listAlea.get(i) == 2){ bleue=true ;}
-                else if (listAlea.get(i) == 3){ rouge=true ;}
-                else if (listAlea.get(i) == 4){ violette=true ;}
-                else if (listAlea.get(i) == 5){ blanche=true ;}
-                else if (listAlea.get(i) == 0){ verte=true ;}
-            }
-            GameLibrary.getInstance().ajoutPari(idPartie,couleurJ, data, jaune, bleue, rouge, violette, blanche, verte);
-            boolean existe2 = GameLibrary.getInstance().pariExiste(idPartie,couleurJ, data);
-            if (existe2 == true) {
-                answer = "un pari aléatoire a été effectué";
-            }else{
-                answer= "error1";
-            }
+        }
+        catch (Exception e) {
+            answer = "error4";
+            System.out.println("error4");
+            System.out.println();
         }
 
         System.out.println("réponse retourné après le @Path(\"/checkPari\") du GameWS = "+answer);
@@ -278,17 +315,26 @@ public class GameWS {
         int idPartie = jsooon.getIdPartie();
         String couleurJ = jsooon.getCouleur();
         String data2 = jsooon.getData();
-
         int data = Integer.parseInt(data2);
 
-        System.out.println("data envoyé dans le GameWS au @Path(\"/checkPari\") = "+data);
-        String answer=null;
-        boolean existe = GameLibrary.getInstance().pariExiste(idPartie,couleurJ, data);
-        if (existe == true){
-            answer = GameLibrary.getInstance().getPari(idPartie,couleurJ, data);
-        } else { //faire une pari aléatoir pour le joueur
-            answer = "pas de pari effectué";
+        // on créé la réponse
+        String answer;
+
+        try {
+            boolean existe = GameLibrary.getInstance().pariExiste(idPartie,couleurJ, data);
+            // on verifie qu'un pari a bien été effectuer
+            if (existe == true){ // soit oui, dans ce cas la on le récupère
+                answer = GameLibrary.getInstance().getPari(idPartie,couleurJ, data);
+            } else {
+                answer = "pas de pari effectué";
+            }
         }
+        catch (Exception e) {
+            answer = "error4";
+            System.out.println("error4");
+            System.out.println();
+        }
+
 
 
         System.out.println("réponse retourné après le @Path(\"/checkPari\") du GameWS = "+answer);
@@ -296,6 +342,70 @@ public class GameWS {
         return Response.ok().entity(gsonService.toJson(answer)).build();
     }
 
+    @POST
+    @Path("/lastAct")
+    public Response derniereAction(@FormParam("data") String data1 ){
+        System.out.println("data envoyé dans le GameWS au @Path(\"/act\") = "+data1);
+        JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
 
+        // on recupère les variables
+        int idPartie = jsooon.getIdPartie();
+        String couleurJ = jsooon.getCouleur();
+        String data = jsooon.getData();
+
+        // on créé la réponse
+        String answer;
+
+        // puis on change l'action du joueur dans la BDD, et on revois une réponse positive si cela fonctionne
+        try {
+            GameLibrary.getInstance().changerDernierAction(idPartie, couleurJ, data);
+            answer = "succeed"; // tout s'est bien passé
+        }
+        catch (Exception e) {
+            answer = "error5";
+            System.out.println("error5");
+            System.out.println();
+        }
+
+        System.out.println("réponse retourné après le @Path(\"/act\") du GameWS = "+answer);
+        System.out.println();
+        return Response.ok().entity(gsonService.toJson(answer)).build();
+    }
+
+    @POST
+    @Path("/finishAct")
+    public Response ActionFinie(@FormParam("data") String data1 ){
+        System.out.println("data envoyé dans le GameWS au @Path(\"/finishAct\") = "+data1);
+        JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
+
+        // on recupère les variables
+        int idPartie = jsooon.getIdPartie();
+        String couleurJ = jsooon.getCouleur();
+        String data = jsooon.getData();
+
+        // on créé la réponse
+        String answer;
+
+        Boolean finie;
+
+        // puis on change l'action du joueur dans la BDD, et on revois une réponse positive si cela fonctionne
+        try {
+            finie = GameLibrary.getInstance().actionFinieParTousJoueurs(idPartie,data);
+            if (finie==true){
+                answer = "true"; // oui l'action est finie par tout les joueurs
+            } else {
+                answer = "false";// non l'action n'est pas finie par tout les joueurs
+            }
+        }
+        catch (Exception e) {
+            answer = "error9";
+            System.out.println("error9");
+            System.out.println();
+        }
+
+        System.out.println("réponse retourné après le @Path(\"/finishAct\") du GameWS = "+answer);
+        System.out.println();
+        return Response.ok().entity(gsonService.toJson(answer)).build();
+    }
 
 }

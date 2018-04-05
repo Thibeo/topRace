@@ -20,17 +20,22 @@ public class WaitingWS {
     public Response rechargement(@FormParam("data") String data1){
         int data = Integer.parseInt(data1.substring(1,2));
 
-        Partie partie = GameLibrary.getInstance().getPartieById(data);
-        String etat = partie.getEtat();
         String answer;
+        String etat="";
 
-        if (!etat.equals("attente") || etat == "attente"){
-            answer="start";
-        } else{
-            answer="wait";
+        try{
+            Partie partie = GameLibrary.getInstance().getPartieById(data);
+            etat = partie.getEtat();
+            if (!etat.equals("attente") || etat == "attente"){
+                answer="start";
+            } else{
+                answer="wait";
+            }
+        }catch (Exception e) {
+            System.out.println("error8");
+            System.out.println();
+            answer = "error8";
         }
-
-
 
         return Response.ok().entity(gsonService.toJson(answer)).build();
     }
@@ -50,10 +55,10 @@ public class WaitingWS {
         try {
             GameLibrary.getInstance().deleteJoueur(couleurJ,idPartie);
             answer = "Le joueur "+couleurJ+" a bien quitter la partie "+String.valueOf(idPartie);
-        }
-        catch (Exception e) {
-            System.out.println("le joueur n'a pas été supprimer");
-            answer = "Error supprimer joueur";
+        } catch (Exception e) {
+            System.out.println("error6");
+            System.out.println();
+            answer = "error6";
         }
 
 

@@ -67,9 +67,11 @@ public class GameLibrary {
         return listFinal; // resultat = < <1,5>, <2,1>, <3,6> >    ( de type  < idpartie , nb de joueur présent Dans la partie > )
     }
 
-    public void changerCase(Joueur joueur, PartieCase cse) {joueurDao.changerCase(joueur, cse);}
+    public void changerCase(Joueur joueur, PartieCase cse) {joueurDao.changerCase(joueur, cse);} // change la case actuelle du joueur dans la BDD
+    public void changeEtat(int idPartie, String etat){partieDao.changeEtat(idPartie,etat);} // change l'état de la partie dans la BDD
+    public void changerDernierAction(int idPartie, String couleurJ, String action){joueurDao.changerDernierAction(idPartie,couleurJ,action);} // change la dernière action d'un joueur dans la BDD
 
-    public void changeEtat(int idPartie, String etat){partieDao.changeEtat(idPartie,etat);}
+    public boolean actionFinieParTousJoueurs(int idPartie, String action){return joueurDao.actionFinieParTousJoueurs(idPartie,action);} // retourne si oui ou non, l'action en parametre a été effectué par tout les joueurs
 
     public void ajoutPari(int idPartie, String couleurJ, int numeroPari, boolean jaune, boolean bleue, boolean rouge, boolean violette, boolean blanche, boolean verte){pariDao.ajoutPari(idPartie, couleurJ, numeroPari, jaune, bleue, rouge, violette, blanche, verte);}
 

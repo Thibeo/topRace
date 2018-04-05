@@ -9,16 +9,14 @@ public class Joueur {
     private String couleur;
     private PartieCase caseActuelle;
     private int idPartie;
+    private String derniereAction;
 
-
-
-
-
-    public Joueur(String couleur, String nomJoueur, PartieCase caseActuelle, int idPartie){
+    public Joueur(String couleur, String nomJoueur, PartieCase caseActuelle, int idPartie, String derniereAction){
         this.nomJoueur=nomJoueur;
         this.couleur=couleur;
         this.caseActuelle=caseActuelle;
         this.idPartie=idPartie;
+        this.derniereAction=derniereAction;
     }
 
     public int getIdPartie(){ return (this.idPartie); }
@@ -33,12 +31,13 @@ public class Joueur {
     public PartieCase getCaseActuelle(){ return (this.caseActuelle); }
     public void setCaseActuelle(PartieCase caseActuelle) { this.caseActuelle = caseActuelle; }
 
-
+    public String getDerniereAction() { return derniereAction; }
+    public void setDerniereAction(String derniereAction) { this.derniereAction = derniereAction; }
 
     /* s'applique sur un plateau
-     * permet de regarder si la case sur laquelle on arrive est une case présentant un déplacement particulier
-     *
-     */
+         * permet de regarder si la case sur laquelle on arrive est une case présentant un déplacement particulier
+         *
+         */
     public void deplacementException(Plateau plateau) {
 
 

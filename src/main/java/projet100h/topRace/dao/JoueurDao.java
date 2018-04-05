@@ -19,4 +19,8 @@ public interface JoueurDao {
 
     public void deleteJoueur (String couleurJ, int idPartie);
 
+    public void changerDernierAction(int idPartie, String couleurJ, String action);
+
+    public boolean actionFinieParTousJoueurs(int idPartie, String action);
+
 }

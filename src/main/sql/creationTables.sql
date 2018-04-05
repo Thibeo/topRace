@@ -68,6 +68,7 @@ CREATE TABLE `joueur` (
   `idPartie` int(11) NOT NULL,
   `x` int(11) NOT NULL,
   `y` char(1) NOT NULL,
+  `derniereAction`varchar(45) NOT NULL,
   PRIMARY KEY (`couleurJ`,`idPartie`)
 );
 

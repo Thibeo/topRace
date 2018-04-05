@@ -14,6 +14,7 @@
     <script type="text/javascript" src="js/rulesParaQuitt.js"></script>
     <script type="text/javascript" src="js/tuto.js"></script>
     <script type="text/javascript" src="js/banderole.js"></script>
+    <script type="text/javascript" src="js/derniereAction.js"></script>
     <script type="text/javascript" src="js/toutSurLePari.js"></script>
     <script type="text/javascript">
 
@@ -195,18 +196,7 @@
 
 </head>
 
-<body onload="  inverse('tb', 'col0');inverse('tb', 'col1');
-                inverse('tb', 'col2');inverse('tb', 'col6');
-                inverse('tb', 'col7');inverse('tb', 'col8');
-                check();avancer(0);
-                Cacher('choixCartes');Cacher('fondChoixCartes');
-                Cacher('fondPara');Cacher('fondRules');Cacher('rules');
-                Cacher('para');Cacher('quitter');Cacher('fondQuitter');
-                fermerTuto();Afficher('fondTuto');Afficher('tutoPrez');Afficher('tutoInclicable');
-                creationCompteur('le début de la partie commence dans ',5 , ' secondes');
-                compteur('début de la partie');
-                Cacher('fondNoir');
-"> <!-- à laisser en dernier -->
+<body onload="LeOnload();">
 
 <!-- HEADER -->
 <header th:replace="~{fragments::header}"></header>
