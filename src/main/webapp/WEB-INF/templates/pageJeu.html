@@ -23,6 +23,7 @@
             voiture.style.top = top+"vh";
             voiture.style.left = left+"vh";
             voiture.style.transform = "rotate("+rotate+"deg)";
+            voiture.style.backgroundColor
         }
 
         function quitter() {
@@ -133,7 +134,7 @@
         function choixCartes() {
             var bool = false;
             var elems = document.getElementsByName("couleurCarte");
-            for (i = 0; i < elems.length; i++) {
+            for (var i = 0; i < elems.length; i++) {
                 if (elems[i].checked) {
                     bool = true;
                 }
@@ -145,7 +146,7 @@
                 var eltIdCartes = document.getElementById("idCarte");
                 var idCartes = eltIdCartes.innerText || eltIdCartes.textContent;
                 console.log("id carte = "+idCartes);
-                for (i = 0; i < elems.length; i++) {
+                for (var i = 0; i < elems.length; i++) {
                     elems[i].checked = false;
                     elems[i].disabled = false;
                 }

@@ -27,12 +27,15 @@ function compteur(textFinal){
             creationCompteur('Vous avez ', 31, ' secondes pour valider votre 1er pari');// on va créer un nouveau compteur
             document.getElementById("btnPari1").onclick = function(){parier(1);}; // on va permettre a l'utilisateur de parier
             window.setTimeout("compteur('Pari 1 envoyé !');",999); // on lance le compteur
+            disableCarte();
             fermerTuto(); // et on ferme le tutoriel si il est encore ouvert
         }
     } else {
         if (s>=3){ // si le temps restant est supperieur a 4 secondes
             if (textFinal == 'début de la partie' ){
                 ActionFinie("fermerTuto",'début de la partie');
+            } else if (textFinal == 'Pari 1 envoyé !'){
+                ActionFinie("pari1Effectue",'Pari 1 envoyé !');
             }
         }
         compteur.innerHTML=s;
@@ -51,4 +54,14 @@ function creationCompteur(texte1, temps, texte2) {
     eltParent.appendChild(newElt); // le compteur
     eltParent.appendChild(document.createTextNode(texte2)); // le texte qui apparait après le compteur
     console.log(eltParent);
+}
+
+function disableCarte() {
+    var ligneCartes = document.getElementById('ligneCartes');
+    ligneCartes.style.pointerEvents = 'none';
+
+}
+function enableCarte() {
+    var ligneCartes = document.getElementById('ligneCartes');
+        ligneCartes.style.pointerEvents = 'auto';
 }

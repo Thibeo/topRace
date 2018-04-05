@@ -202,7 +202,7 @@ public class GameWS {
 
         if (compteur != 3){
             answer = "error1"; //le pari n'est pas complet
-            System.out.println("error2");
+            System.out.println("error1");
             System.out.println();
         } else {
             try {
@@ -404,6 +404,42 @@ public class GameWS {
         }
 
         System.out.println("réponse retourné après le @Path(\"/finishAct\") du GameWS = "+answer);
+        System.out.println();
+        return Response.ok().entity(gsonService.toJson(answer)).build();
+    }
+
+    @POST
+    @Path("/getEtat") // en cours ....
+    public Response getEtat(@FormParam("data") String data1 ){
+        System.out.println("data envoyé dans le GameWS au @Path(\"/getEtat\") = "+data1);
+        JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
+
+        // on recupère les variables
+        int idPartie = jsooon.getIdPartie();
+        String couleurJ = jsooon.getCouleur();
+        String data = jsooon.getData();
+
+        // on créé la réponse
+        String answer;
+
+        String etat="";
+
+        // puis on recupère l'état actuelle de la partie
+        try {
+            //etat = GameLibrary.getInstance()
+            if (etat==couleurJ){
+                answer = "true"; // oui c'est au tour de ce joueur
+            } else {
+                answer = "false";// non ce n'est pas au tour de ce joueur
+            }
+        }
+        catch (Exception e) {
+            answer = "error10";
+            System.out.println("error10");
+            System.out.println();
+        }
+
+        System.out.println("réponse retourné après le @Path(\"/getEtat\") du GameWS = "+answer);
         System.out.println();
         return Response.ok().entity(gsonService.toJson(answer)).build();
     }

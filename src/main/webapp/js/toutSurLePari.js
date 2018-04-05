@@ -25,6 +25,8 @@ function parier(idPari){
                 violettte.disabled = "disabled";
                 blanchee.disabled = "disabled";
                 verrte.disabled = "disabled";
+                alert("Le pari "+idPari+" a bien été effectué");
+                derniereAction("pari1Effectue");
             }
         }
         var dat = '{"numeroPari":"'+idPari+'","jaune":"'+jaunne.checked+'","bleue":"'+bleuue.checked+'","rouge":"'+roouge.checked+'","violette":"'+violettte.checked+'","blanche":"'+blanchee.checked+'","verte":"'+verrte.checked+'"}';
@@ -66,7 +68,7 @@ function checkPari(idPari){
             newElt.style.display = "none";
             eltParent.appendChild(newElt); // le compteur
             window.setTimeout("compteur('"+textFinal+"');",2999);
-            getPari(1);
+            getPari(idPari);
         }
         var data = {};
         data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;

@@ -5,7 +5,7 @@ function derniereAction(txt) {
     request.responseType = "json";
     request.onload = function () {
         var answer = this.response;
-        console.log(answer+" = to change derniereAction");
+        console.log(answer+" à mettre l'état "+txt);
     }
     data.data= txt;
     data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
@@ -26,13 +26,14 @@ function ActionFinie(txt, texteFinal) {
         if (answer == "true"){
             if (texteFinal == 'début de la partie'){
                 document.getElementById('compteur').innerHTML=1;
+            } else if (texteFinal == 'Pari 1 envoyé !'){
+                document.getElementById('compteur').innerHTML=1;
             }
         }
     }
     data.data= txt;
     data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
     data.idPartie = document.getElementById("idPartie").innerText || document.getElementById("idPartie").textContent;
-    console.log(data);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send("data=" + JSON.stringify(data));
 }
