@@ -67,9 +67,12 @@ public class GameWS {
             System.out.println(answer);
             return Response.ok().entity(gsonService.toJson(answer)).build();
         } else {
+            System.out.println("je suis dans le else");
             int fin = data.length();
-            int idCarte = Integer.parseInt(data.substring(1,3));
-            String couleur = data.substring(3,fin-1);
+            System.out.println(data.substring(0,2));
+            int idCarte = Integer.parseInt(data.substring(0,2));
+            System.out.println(data.substring(2,fin));
+            String couleur = data.substring(2,fin);
             System.out.println("la voiture "+couleur+" et l'idCartes "+idCarte);
             if (idCarte == 27 || idCarte == 28 || idCarte == 29){
                 String answer = "1";
@@ -409,9 +412,8 @@ public class GameWS {
     }
 
     @POST
-    @Path("/getEtat") // en cours ....
+    @Path("/getEtat")
     public Response getEtat(@FormParam("data") String data1 ){
-        System.out.println("data envoyé dans le GameWS au @Path(\"/getEtat\") = "+data1);
         JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
 
         // on recupère les variables
@@ -422,12 +424,13 @@ public class GameWS {
         // on créé la réponse
         String answer;
 
-        String etat="";
+        String etat;
 
         // puis on recupère l'état actuelle de la partie
         try {
-            //etat = GameLibrary.getInstance()
-            if (etat==couleurJ){
+            etat = GameLibrary.getInstance().getEtat(idPartie);
+            String joueurCouleur = "joueur"+couleurJ;
+            if (etat==joueurCouleur || etat.equals(joueurCouleur)){
                 answer = "true"; // oui c'est au tour de ce joueur
             } else {
                 answer = "false";// non ce n'est pas au tour de ce joueur
@@ -439,7 +442,48 @@ public class GameWS {
             System.out.println();
         }
 
-        System.out.println("réponse retourné après le @Path(\"/getEtat\") du GameWS = "+answer);
+        return Response.ok().entity(gsonService.toJson(answer)).build();
+    }
+
+    @POST
+    @Path("/changeEtat")
+    public Response changeEtat(@FormParam("data") String data1 ){
+        System.out.println("data envoyé dans le GameWS au @Path(\"/changeEtat\") = "+data1);
+        JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
+
+        // on recupère les variables
+        int idPartie = jsooon.getIdPartie();
+        String couleurJ = jsooon.getCouleur();
+        String data = jsooon.getData();
+
+        // on créé la réponse
+        String answer;
+
+        String etat;
+
+        // puis on recupère l'état actuelle de la partie
+        try {
+            if(couleurJ=="Bleu" || couleurJ.equals("Bleu")){
+                GameLibrary.getInstance().changeEtat(idPartie,"joueurBlanc");
+            }else if(couleurJ=="Blanc" || couleurJ.equals("Blanc")){
+                GameLibrary.getInstance().changeEtat(idPartie,"joueurViolet");
+            }else if(couleurJ=="Violet" || couleurJ.equals("Violet")){
+                GameLibrary.getInstance().changeEtat(idPartie,"joueurVert");
+            }else if(couleurJ=="Vert" || couleurJ.equals("Vert")){
+                GameLibrary.getInstance().changeEtat(idPartie,"joueurRouge");
+            }else if(couleurJ=="Rouge" || couleurJ.equals("Rouge")){
+                GameLibrary.getInstance().changeEtat(idPartie,"joueurJaune");
+            }else if(couleurJ=="Jaune" || couleurJ.equals("Jaune")){
+                GameLibrary.getInstance().changeEtat(idPartie,"joueurBleu");
+            }
+            answer="succeed";
+        }
+        catch (Exception e) {
+            answer = "error12";
+            System.out.println("error12");
+            System.out.println();
+        }
+        System.out.println("réponse retourné après le @Path(\"/changeEtat\") du GameWS = "+answer);
         System.out.println();
         return Response.ok().entity(gsonService.toJson(answer)).build();
     }

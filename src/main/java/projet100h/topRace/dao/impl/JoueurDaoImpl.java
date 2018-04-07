@@ -130,7 +130,7 @@ public class JoueurDaoImpl implements JoueurDao {
 
 
     public List listOfJoueur(int idPartie){
-        String query = "SELECT * FROM joueur WHERE idPartie=?";
+        String query = "SELECT * FROM joueur WHERE idPartie=? ORDER BY couleurJ DESC";
         PartieCase partieCse = null;
         List<Joueur> list = new ArrayList<>();
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();

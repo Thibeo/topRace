@@ -43,6 +43,28 @@
             request.send("data=" + JSON.stringify(data));
         }
 
+        function choixCarte(cse){
+            var hi= confirm("voulez-vous jouer cette carte ?");
+            if (hi== true){
+                if (cse != 27 && cse != 28 && cse != 29 && cse != 31 && cse != 32 && cse != 33 && cse != 34 && cse != 35 && cse != 36
+                    && cse != 41 && cse != 42 && cse != 43 && cse != 44 && cse != 45 && cse != 46) {
+                    disableCarte();
+                    avancer(cse);
+                    changeEtat();
+                    var eltParent = document.getElementById('navCompteur'); // puis on va modifier tout le compteur pour afficher le texte
+                    eltParent.innerHTML = 'Carte jouée';
+                    var newElt = document.createElement("span"); //on crée le span (qui sert de compteur)
+                    newElt.id = "compteur"; //on met son id
+                    newElt.innerHTML = 0; // le temps du compteur
+                    newElt.style.display = "none"; // on le cache
+                    eltParent.appendChild(newElt); // le compteur
+                    window.setTimeout("compteur('" + 'Carte jouée' + "');", 2999);
+                }else{
+                    avancer(cse);
+                }
+            }
+        }
+
         function avancer(cse){
             if (cse != 27 && cse != 28 && cse != 29 && cse != 31 && cse != 32 && cse != 33 && cse != 34 && cse != 35 && cse != 36
                 && cse != 41 && cse != 42 && cse != 43 && cse != 44 && cse != 45 && cse != 46) {
@@ -159,6 +181,16 @@
                 AfficherCacher("choixCartes");
                 AfficherCacher("fondChoixCartes");
                 avancer(idCartes+couleur);
+                disableCarte();
+                changeEtat();
+                var eltParent = document.getElementById('navCompteur'); // puis on va modifier tout le compteur pour afficher le texte
+                eltParent.innerHTML = 'Carte jouée';
+                var newElt = document.createElement("span"); //on crée le span (qui sert de compteur)
+                newElt.id = "compteur"; //on met son id
+                newElt.innerHTML = 0; // le temps du compteur
+                newElt.style.display = "none"; // on le cache
+                eltParent.appendChild(newElt); // le compteur
+                window.setTimeout("compteur('" + 'Carte jouée' + "');", 2999);
             }else{
                 alert("tu dois choisir une couleur !");
             }
@@ -265,7 +297,7 @@
     <section id="idPartie" style="display: none" th:text="${PartieById.idPartie}">1</section>
 
 <!-- section pour couleurJ -->
-    <section id="couleurJ" style="display: none" th:each="joujou : ${listOfJoueur}" th:if="${joujou.nomJoueur == nomJ}" th:text="${joujou.couleur}">Vert</section>
+    <section id="couleurJ" style="display: none" th:text="${couleurJoueurr}">Vert</section>
 
 <!-- nav pour le nom de la partie -->
     <nav id="nomPartie">
@@ -391,7 +423,7 @@
 
 <!-- nav pour les images des cartes du joueurs -->
     <nav id="ligneCartes">
-        <nav class="imagee" th:each="carte : ${listCarte}" th:style="${'background-image: url(img/cartes/'+carte.idCarte+'.png);background-size: cover;'}" th:id="${'carte'+carte.idCarte}" th:onclick="${'avancer('+carte.idCarte+');'}"></nav>
+        <nav class="imagee" th:each="carte : ${listCarte}" th:style="${'background-image: url(img/cartes/'+carte.idCarte+'.png);background-size: cover;'}" th:id="${'carte'+carte.idCarte}" th:onclick="${'choixCarte('+carte.idCarte+');'}"></nav>
     </nav>
 
 <!-- ------- -->

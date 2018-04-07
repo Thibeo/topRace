@@ -128,6 +128,23 @@ public class PartieDaoImpl implements PartieDao{
         }
     }
 
-
+    @Override
+    public String getEtat(int idPartie){
+        String query = "SELECT * FROM partie WHERE idPartie=?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idPartie);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("etat");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("error101");
+            System.out.println();
+        }
+        return "error101";
+    }
 
 }

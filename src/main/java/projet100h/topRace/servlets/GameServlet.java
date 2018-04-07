@@ -23,6 +23,7 @@ public class GameServlet extends GenericServlet {
         HttpSession session = req.getSession();
         Integer idPartie = (Integer) session.getAttribute("sessionIdPartie");
         String nomJoueur= (String) session.getAttribute("sessionNomJoueur");
+        String couleurJoueur ="";
 
         System.out.println("idPartie = "+idPartie+" // nomJoueur = "+nomJoueur);
 
@@ -39,7 +40,15 @@ public class GameServlet extends GenericServlet {
         List<Case> listCase = GameLibrary.getInstance().listCase();
         context.setVariable("listCase", listCase);
 
-        List<Carte> listCarte = GameLibrary.getInstance().listCarte();
+        for (int i = 0 ; i < listOfJoueur.size() ; i++){
+            if (listOfJoueur.get(i).getNomJoueur().equals(nomJoueur)){
+                couleurJoueur=listOfJoueur.get(i).getCouleur();
+            }
+        }
+
+        context.setVariable("couleurJoueurr", couleurJoueur);
+
+        List<CarteJoueur> listCarte = GameLibrary.getInstance().getCarteJoueur(idPartie,couleurJoueur);
         context.setVariable("listCarte", listCarte);
 
         List<NbCase> listNbCase = GameLibrary.getInstance().listNbCase();

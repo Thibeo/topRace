@@ -55,12 +55,15 @@ public class WaitingServlet extends GenericServlet {
 
         try {
 
+            GameLibrary.getInstance().repartitionCarteJoueur(idPartie);
+
             // REDIRIGE VERS LA PAGE DE JEU
             resp.sendRedirect("game");
             session.removeAttribute("error");
             req.setAttribute("sessionIdPartie", idPartie);
             req.setAttribute("sessionNomJoueur", pseudoJoueur);
             GameLibrary.getInstance().changeEtat(idPartie,"lancerTuto");
+
 
 
         } catch (IllegalArgumentException e) {

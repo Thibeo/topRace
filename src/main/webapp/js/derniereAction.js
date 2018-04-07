@@ -37,3 +37,39 @@ function ActionFinie(txt, texteFinal) {
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     request.send("data=" + JSON.stringify(data));
 }
+
+function getEtat() {
+    var data = {};
+    var request = new XMLHttpRequest();
+    request.open("POST", "webservices/game/getEtat", true);
+    request.responseType = "json";
+    request.onload = function () {
+        var answer = this.response;
+        console.log(answer);
+        if (answer == "true"){
+            document.getElementById('compteur').innerHTML=1;
+
+        }
+    }
+    data.data= "";
+    data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
+    data.idPartie = document.getElementById("idPartie").innerText || document.getElementById("idPartie").textContent;
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.send("data=" + JSON.stringify(data));
+}
+
+function changeEtat() {
+    var data = {};
+    var request = new XMLHttpRequest();
+    request.open("POST", "webservices/game/changeEtat", true);
+    request.responseType = "json";
+    request.onload = function () {
+        var answer = this.response;
+        console.log(answer+" de changer l'état de la partie");
+    }
+    data.data= "";
+    data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
+    data.idPartie = document.getElementById("idPartie").innerText || document.getElementById("idPartie").textContent;
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.send("data=" + JSON.stringify(data));
+}

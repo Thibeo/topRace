@@ -6,6 +6,7 @@ import projet100h.topRace.entities.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GameLibrary {
 
@@ -26,6 +27,7 @@ public class GameLibrary {
     private PartieDao partieDao = new PartieDaoImpl();
     private TypeVoitureDao voitureDao = new TypeVoitureDaoImpl();
     private PariDao pariDao = new PariDaoImpl();
+    private CarteJoueurDao carteJoueurDao = new CarteJoueurDaoImpl();
 
 
     private GameLibrary() { }
@@ -41,6 +43,7 @@ public class GameLibrary {
         return partieDao.listPartie(); /* < <2, "best party"> , <3, "partie pour le fun"> > */
     }
     public List listDeplacementCarte(int id){ return carteDao.listDeplacementCarte(id);}/* < <couleurVoiture, nbCase> , <couleurVoiture, nbCase> , <couleurVoiture, nbCase> > */
+    public List<CarteJoueur> getCarteJoueur(int idPartie, String couleurJ){return carteJoueurDao.getCarteJoueur(idPartie,couleurJ);}
 
     public List<Integer> nbDeJoueur() {
         List<Integer> listJoueur = partieDao.nbDeJoueur(); // liste des idPartie de tous les joueurs
@@ -78,7 +81,7 @@ public class GameLibrary {
     public boolean pariExiste(int idPartie, String couleurJ, int numeroPari){return pariDao.pariExiste(idPartie, couleurJ, numeroPari);}
 
     public String getPari(int idPartie, String couleurJ, int numeroPari){return pariDao.getPari(idPartie,couleurJ,numeroPari);}
-
+    public String getEtat(int idPartie){return partieDao.getEtat(idPartie);}
     public String getTopLeft(PartieCase cse){ return caseDao.getTopLeft(cse);}
 
     public Plateau getPlateau (int idPartie){
@@ -100,7 +103,6 @@ public class GameLibrary {
         plateau.setTableauCase(tableauCase);
         return plateau;
     }
-
 
 
     public Joueur getJoueur(String couleur, int idPartie){
@@ -242,5 +244,50 @@ public class GameLibrary {
     public int getIdPartie(String nom){ return(partieDao.getIdPartieByName(nom)); }
 
 
+
+    public void repartitionCarteJoueur(int idPartie){
+        List<Carte> listofCarte = listCarte(); // on recupère toutes les cartes
+        int compteurNbCoup = 0; // compteur créé pour les test
+        int compteur = 1; // on crèè un compteur qui va distribuer les carte a chaque joueur
+        int taille = listofCarte.size(); // on récupère la taille de la liste pour la boucle
+        for (int i = 0 ; i < taille ; i++){ // on va faire autant de fois qu'il y a de carte la boucle ci dessous
+            Random rand = new Random();
+            int nombreAleatoire = rand.nextInt((listofCarte.size() - 1) - 0 + 1); // on créé un nombra aléatoire compris entre 0 et le nombre de cartes restante -1
+            if (compteur==1){ // puis en fonction du compteur on va ajouter une carte au joueur, chacun a son tour
+                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(),idPartie,"Bleu",false ));
+                listofCarte.remove(nombreAleatoire); // puis on enlève la carte de la liste
+                compteurNbCoup++;
+            } else if (compteur==2){
+                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(),idPartie,"Blanc",false ));
+                listofCarte.remove(nombreAleatoire);
+                compteurNbCoup++;
+            } else if (compteur==3){
+                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(),idPartie,"Vert",false ));
+                listofCarte.remove(nombreAleatoire);
+                compteurNbCoup++;
+            } else if (compteur==4){
+                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(),idPartie,"Rouge",false ));
+                listofCarte.remove(nombreAleatoire);
+                compteurNbCoup++;
+            } else if (compteur==5){
+                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(),idPartie,"Jaune",false ));
+                listofCarte.remove(nombreAleatoire);
+                compteurNbCoup++;
+            } else if (compteur==6){
+                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(),idPartie,"Violet",false ));
+                listofCarte.remove(nombreAleatoire);
+                compteurNbCoup++;
+            }
+            if (compteur != 6){ // une fois fini on va augmenté le compteur pour passer au joueur suivant
+                compteur++;
+            }else{ // et si c'est le 6ème joueur, on va revenir au premier
+                compteur=1;
+            }
+        }
+        System.out.println("/////////////////////////////////////////////////");
+        System.out.println("il y a eu "+compteurNbCoup+" distribution de carte");
+        System.out.println("/////////////////////////////////////////////////");
+
+    }
 
 }

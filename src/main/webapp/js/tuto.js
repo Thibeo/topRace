@@ -106,7 +106,7 @@ function LeOnload(){
     Cacher('fondPara');Cacher('fondRules');Cacher('rules');
     Cacher('para');Cacher('quitter');Cacher('fondQuitter');
 
-    creationCompteur('le début de la partie commence dans ',30 , ' secondes');
+    creationCompteur('le début de la partie commence dans ',5 , ' secondes');
     compteur('début de la partie');
 
     inverse('tb', 'col0');inverse('tb', 'col1');

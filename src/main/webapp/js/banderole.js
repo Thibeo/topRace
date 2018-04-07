@@ -17,7 +17,28 @@ function compteur(textFinal){
             eltParent.appendChild(newElt); // le compteur
             window.setTimeout("compteur('"+textFinal+"');",2999);
         } else if (textFinal == 'Pari 1 envoyé !'){
-            checkPari(1); // si le pari est le 1er pari, on applique la fonction check pari
+            checkPari(1); // si le pari est le 1er pari, on applique la fonction check pari 1
+        } else if (textFinal == 'A vous de jouer'){
+            var eltParent = document.getElementById('navCompteur'); // puis on va modifier tout le compteur pour afficher le texte
+            eltParent.innerHTML=textFinal;
+            var newElt = document.createElement("span"); //on crée le span (qui sert de compteur)
+            newElt.id = "compteur"; //on met son id
+            newElt.innerHTML = s.toString(); // le temps du compteur
+            newElt.style.display = "none"; // on le cache
+            eltParent.appendChild(newElt); // le compteur
+            enableCarte();
+            window.setTimeout("compteur('"+textFinal+"');",2999);
+        } else if (textFinal == 'Carte jouée'){
+            var eltParent = document.getElementById('navCompteur'); // puis on va modifier tout le compteur pour afficher le texte
+            eltParent.innerHTML='Une carte aléatoire a été jouée';
+            //créer un fonction pour jouer une carte aléatoirement
+            var newElt = document.createElement("span"); //on crée le span (qui sert de compteur)
+            newElt.id = "compteur"; //on met son id
+            newElt.innerHTML = s.toString(); // le temps du compteur
+            newElt.style.display = "none"; // on le cache
+            eltParent.appendChild(newElt); // le compteur
+            window.setTimeout("compteur('"+'Une carte aléatoire a été jouée'+"');",2999);
+            changeEtat();
         }
     } else if (s == -1 ){
         console.log("si je suis la"); // si le compteur = -1
@@ -29,6 +50,12 @@ function compteur(textFinal){
             window.setTimeout("compteur('Pari 1 envoyé !');",999); // on lance le compteur
             disableCarte();
             fermerTuto(); // et on ferme le tutoriel si il est encore ouvert
+        } else if (textFinal == 'Pari reçu !' || textFinal == 'Un pari aléatoire a été éffectué' || textFinal=='Carte jouée' || textFinal=='Une carte aléatoire a été jouée'){
+            creationCompteur('En attente de votre tour', 999, '');// on va créer un nouveau compteur
+            window.setTimeout("compteur('A vous de jouer');",999); // on lance le compteur
+        } else if (textFinal == 'A vous de jouer'){
+            creationCompteur('Vous avez ', 31, ' secondes pour jouer une carte');// on va créer un nouveau compteur
+            window.setTimeout("compteur('Carte jouée');",999); // on lance le compteur
         }
     } else {
         if (s>=3){ // si le temps restant est supperieur a 4 secondes
@@ -36,6 +63,8 @@ function compteur(textFinal){
                 ActionFinie("fermerTuto",'début de la partie');
             } else if (textFinal == 'Pari 1 envoyé !'){
                 ActionFinie("pari1Effectue",'Pari 1 envoyé !');
+            } else if (textFinal == 'A vous de jouer'){
+                getEtat();
             }
         }
         compteur.innerHTML=s;

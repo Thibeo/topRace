@@ -53,7 +53,7 @@ function checkPari(idPari){
             console.log("réponse : "+answer);
             var textFinal = "";
             if (answer == "le pari a bien été envoyé"){
-                textFinal = 'Pari envoyé !';
+                textFinal = 'Pari reçu !';
             } else if (answer == "un pari aléatoire a été effectué"){
                 textFinal = 'Un pari aléatoire a été éffectué';
             } else {
