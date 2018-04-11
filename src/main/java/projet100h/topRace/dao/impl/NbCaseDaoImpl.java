@@ -29,6 +29,8 @@ public class NbCaseDaoImpl implements NbCaseDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error220");
         }
         return listOfCarte;
     }

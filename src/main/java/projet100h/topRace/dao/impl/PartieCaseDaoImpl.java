@@ -30,11 +30,14 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
                     statement2.executeUpdate();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    System.out.println("error225");
                 }
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error224");
         }
     }
 
@@ -56,6 +59,8 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error226");
         }
         return null;
     }
@@ -72,6 +77,8 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error227");
         }
 
 
@@ -93,10 +100,14 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
                                            resultSet.getInt("idPartie"),
                                            resultSet.getBoolean("occupee")));
                 }
+            }catch (SQLException e) {
+                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("");
+        System.out.println("error228");
         return listOfcases;
     }
 

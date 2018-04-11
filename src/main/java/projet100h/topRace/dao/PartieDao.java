@@ -10,6 +10,8 @@ public interface PartieDao {
 
     public List<Integer> nbDeJoueur();
 
+    public int nbDeJoueurIdPartie(int idPartie);
+
     public Partie createPartie(Partie partie);
 
     public int getIdPartieByName(String nomPartie);

@@ -16,6 +16,7 @@
     <script type="text/javascript" src="js/banderole.js"></script>
     <script type="text/javascript" src="js/derniereAction.js"></script>
     <script type="text/javascript" src="js/toutSurLePari.js"></script>
+    <script type="text/javascript" src="js/confirmAlert.js"></script>
     <script type="text/javascript">
 
         function avancerVoiture(couleur, top, left, rotate) {
@@ -36,37 +37,16 @@
             request.responseType = "json";
             request.onload = function () {
                 var answer = this.response;
-                console.log(answer);
+
             }
-            console.log(data);
+
             request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             request.send("data=" + JSON.stringify(data));
         }
 
-        function choixCarte(cse){
-            var hi= confirm("voulez-vous jouer cette carte ?");
-            if (hi== true){
-                if (cse != 27 && cse != 28 && cse != 29 && cse != 31 && cse != 32 && cse != 33 && cse != 34 && cse != 35 && cse != 36
-                    && cse != 41 && cse != 42 && cse != 43 && cse != 44 && cse != 45 && cse != 46) {
-                    disableCarte();
-                    avancer(cse);
-                    changeEtat();
-                    var eltParent = document.getElementById('navCompteur'); // puis on va modifier tout le compteur pour afficher le texte
-                    eltParent.innerHTML = 'Carte jouée';
-                    var newElt = document.createElement("span"); //on crée le span (qui sert de compteur)
-                    newElt.id = "compteur"; //on met son id
-                    newElt.innerHTML = 0; // le temps du compteur
-                    newElt.style.display = "none"; // on le cache
-                    eltParent.appendChild(newElt); // le compteur
-                    window.setTimeout("compteur('" + 'Carte jouée' + "');", 2999);
-                }else{
-                    avancer(cse);
-                }
-            }
-        }
-
         function avancer(cse){
-            if (cse != 27 && cse != 28 && cse != 29 && cse != 31 && cse != 32 && cse != 33 && cse != 34 && cse != 35 && cse != 36
+            console.log("avancer("+cse+")");
+            if (cse != 61 && cse != 62 && cse != 63 && cse != 64 && cse != 65 && cse != 66  && cse != 31 && cse != 32 && cse != 33 && cse != 34 && cse != 35 && cse != 36
                 && cse != 41 && cse != 42 && cse != 43 && cse != 44 && cse != 45 && cse != 46) {
                 var request = new XMLHttpRequest();
                 var data = {};
@@ -76,9 +56,7 @@
                 request.responseType = "json";
                 request.onload = function () {
                     var answer = this.response;
-                    console.log("answer: " + answer);
                     var longeur = parseInt(answer[0]);
-                    console.log("nb changement = " + longeur);
                     var i = 1;
                     for (var j = 0; j < longeur; j++) {
                         var top = "";
@@ -106,11 +84,8 @@
                             }
                         }
                         rotate = comt;
-                        console.log("la voiture qui est " + couleur + " se trouve en top = " + top + " et left = " + left);
                         avancerVoiture(couleur, top, left, rotate);
-                    }
-                    console.log("");
-
+                    };
                 }
                 data.data=cse;
                 request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -154,6 +129,7 @@
 
 
         function choixCartes() {
+            console.log("choixCartes");
             var bool = false;
             var elems = document.getElementsByName("couleurCarte");
             for (var i = 0; i < elems.length; i++) {
@@ -164,10 +140,8 @@
             }
             if (bool == true){
                 var couleur = document.fromChoixCarte.couleurCarte.value;
-                console.log("couleur choisie = "+couleur);
                 var eltIdCartes = document.getElementById("idCarte");
                 var idCartes = eltIdCartes.innerText || eltIdCartes.textContent;
-                console.log("id carte = "+idCartes);
                 for (var i = 0; i < elems.length; i++) {
                     elems[i].checked = false;
                     elems[i].disabled = false;
@@ -180,19 +154,22 @@
                 document.getElementById("verteTexte").style.textDecoration = "none";
                 AfficherCacher("choixCartes");
                 AfficherCacher("fondChoixCartes");
+                derniereAction("carte"+idCartes);
+                document.getElementById('carte'+idCartes).style.display = "none";
                 avancer(idCartes+couleur);
                 disableCarte();
-                changeEtat();
-                var eltParent = document.getElementById('navCompteur'); // puis on va modifier tout le compteur pour afficher le texte
-                eltParent.innerHTML = 'Carte jouée';
-                var newElt = document.createElement("span"); //on crée le span (qui sert de compteur)
-                newElt.id = "compteur"; //on met son id
-                newElt.innerHTML = 0; // le temps du compteur
-                newElt.style.display = "none"; // on le cache
-                eltParent.appendChild(newElt); // le compteur
-                window.setTimeout("compteur('" + 'Carte jouée' + "');", 2999);
+                changeEtat("rien");
+                 var eltParent = document.getElementById('navCompteur');
+                 eltParent.innerHTML='Carte jouée';
+                 var newElt = document.createElement("span"); //on crée le span (qui sert de compteur)
+                 newElt.id = "compteur"; //on met son id
+                 newElt.innerHTML = "0"; // le temps du compteur
+                 newElt.style.display = "none";
+                 eltParent.appendChild(newElt); // le compteur
+                 console.log(" je suis lancé depuis choixCartes");
+                 window.setTimeout("compteur('" + 'Carte jouée' + "');", 2999);
             }else{
-                alert("tu dois choisir une couleur !");
+                bulleAlert("tu dois choisir une couleur !");
             }
         }
 
@@ -222,6 +199,9 @@
             return cols;
         }
 
+        function classActive(coul){
+            document.getElementById(coul).classList.add("active");
+        }
 
 
 
@@ -229,7 +209,7 @@
 
 </head>
 
-<body onload="LeOnload();">
+<body th:onload="${'classActive(\''+couleurJoueurr+'\');LeOnload();'}">
 
 <!-- HEADER -->
 <header th:replace="~{fragments::header}"></header>
@@ -289,9 +269,15 @@
     <nav class="bande2"></nav>
 
 <!-- nav afficher le nom des joueuers -->
-    <nav id="joueurs" >
-        <nav th:each="joueur : ${listOfJoueur}" th:class="${'j'+joueur.couleur}" th:text="${joueur.nomJoueur}"></nav>
+    <nav id="joueurs">
+       <nav th:each="joueur : ${listOfJoueur}" th:id="${joueur.couleur}" th:class="${'j'+joueur.couleur}" th:text="${joueur.nomJoueur}"></nav>
     </nav>
+
+<!-- affichage de la fleche rouge -->
+    <section id="flecheRouge"></section>
+
+<!-- affichage de la derniere carte joué par un joueur -->
+    <section id="lastCarte"></section>
 
 <!-- section pour idPartie -->
     <section id="idPartie" style="display: none" th:text="${PartieById.idPartie}">1</section>
@@ -384,13 +370,13 @@
             <tr class="pariReponse">
                 <td colspan="2" class="vide"></td>
                 <td class="colonnePari btnValide" name="col0" align="center">
-                    <button  type="submit" id="btnPari1" name="btnPari" onclick="console.log('test');">Valider</button>
+                    <button id="btnPari1" onclick="console.log('test');">Valider</button>
                 </td>
                 <td class="colonnePari btnValide" name="col1" align="center">
-                    <button  type="submit" id="btnPari2" name="btnPari" onclick="console.log('test');">Valider</button>
+                    <button id="btnPari2" onclick="console.log('test');">Valider</button>
                 </td>
                 <td class="colonnePari btnValide" name="col2" align="center">
-                    <button  type="submit" id="btnPari3" name="btnPari" onclick="console.log('test');">Valider</button>
+                    <button id="btnPari3" onclick="console.log('test');">Valider</button>
                 </td>
             </tr>
         </table>
@@ -417,13 +403,45 @@
     <nav id="carteTitre">
         <b> Cartes </b>
     </nav>
-<!-- nav pour les images des coins de la scrollbar de la div "ligneCartes" -->
-    <nav id="carreHaut"></nav>
-    <nav id="carreBas"></nav>
 
 <!-- nav pour les images des cartes du joueurs -->
     <nav id="ligneCartes">
-        <nav class="imagee" th:each="carte : ${listCarte}" th:style="${'background-image: url(img/cartes/'+carte.idCarte+'.png);background-size: cover;'}" th:id="${'carte'+carte.idCarte}" th:onclick="${'choixCarte('+carte.idCarte+');'}"></nav>
+        <nav class="imagee" th:each="carte : ${listCarte}" th:style="${'background-image: url(img/cartes/'+carte.idCarte+'.png);background-size: cover;'}" th:id="${'carte'+carte.idCarte}" th:onclick="${'ConfirmChoixCartes('+carte.idCarte+');'}"></nav>
+    </nav>
+
+<!-- section de l'alert -->
+    <nav id="fondbulleAlert" onclick='bulleAlert("fermer");'></nav>
+    <section id="bulleAlert">
+        <button class="x" onclick='bulleAlert("fermer");'>
+            X
+        </button>
+        <h2>Alerte</h2>
+        <p id="bulleAlertTexte"></p>
+    </section>
+
+<!-- -->
+    <nav id="fondConfirmChoixCartes" onclick='ConfirmChoixCartes("fermer");'></nav>
+    <nav id="confirmChoixCartes">
+        <button class="x" onclick='ConfirmChoixCartes("fermer");'>
+            X
+        </button>
+        <p id="idConfirmChoixCartes" style="visibility: hidden;position:fixed;">0</p>
+        <h2 style="text-align: center; margin-bottom: 0px;">Voulez-vous jouer cette carte ?</h2>
+        <table align="center">
+            <tr>
+                <td colspan="2">
+                    <section class="imagee" id="laCarteConfirm"  style="background-image: url(img/cartes/1.png);background-size: cover;'}"></section>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick='ConfirmChoixCartes("fermer");'>Non</button>
+                </td>
+                <td>
+                    <button onclick='ConfirmChoixCartes("fermer");suiteDeChoixCarte();'>Oui</button>
+                </td>
+            </tr>
+        </table>
     </nav>
 
 <!-- ------- -->
@@ -495,8 +513,6 @@
                                         zindex("joueurBlanc",1);
                                         zindex("joueurVert",1);
                                         zindex("ligneCartes",10007);
-                                        zindex("carreHaut",10007);
-                                        zindex("carreBas",10007);
                                         zindex("carteTitre",10007);'>
                 Next
             </button>
@@ -513,8 +529,6 @@
                                         Cacher("tutoTouSElmt");
                                         Afficher("tutoParis");
                                         zindex("ligneCartes",1);
-                                        zindex("carreHaut",2);
-                                        zindex("carreBas",2);
                                         zindex("carteTitre",2);
                                         zindex("plateauParis",10007);
                                         Afficher("tutoParis");

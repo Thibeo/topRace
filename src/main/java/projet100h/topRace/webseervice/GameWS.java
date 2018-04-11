@@ -40,6 +40,7 @@ public class GameWS {
         if (bool == true){
             int idCarte = Integer.parseInt(data);
             List listDeplacementCarte = GameLibrary.getInstance().listDeplacementCarte(idCarte);
+            GameLibrary.getInstance().utilisation(idCarte,idPartie,couleurJ);
             String answer = String.valueOf(listDeplacementCarte.size());
             for (int i=0 ; i<listDeplacementCarte.size() ; i++){
                 Plateau plateau = GameLibrary.getInstance().getPlateau(idPartie);
@@ -69,12 +70,11 @@ public class GameWS {
         } else {
             System.out.println("je suis dans le else");
             int fin = data.length();
-            System.out.println(data.substring(0,2));
             int idCarte = Integer.parseInt(data.substring(0,2));
-            System.out.println(data.substring(2,fin));
             String couleur = data.substring(2,fin);
+            GameLibrary.getInstance().utilisation(idCarte,idPartie,couleurJ);
             System.out.println("la voiture "+couleur+" et l'idCartes "+idCarte);
-            if (idCarte == 27 || idCarte == 28 || idCarte == 29){
+            if (idCarte == 61 || idCarte == 62 || idCarte == 63 || idCarte == 64 || idCarte == 65 || idCarte == 66){
                 String answer = "1";
                 Plateau plateau = GameLibrary.getInstance().getPlateau(idPartie);
                 Joueur joueurADeplacer = GameLibrary.getInstance().getJoueur(couleur,idPartie);
@@ -278,7 +278,7 @@ public class GameWS {
                             if (existe2 == true) {
                                 answer = "un pari aléatoire a été effectué";
                             } else {
-                                answer = "error1";
+                                answer = "error4";
                             }
                         }catch (Exception e) {
                             answer = "error4";
@@ -396,6 +396,10 @@ public class GameWS {
             finie = GameLibrary.getInstance().actionFinieParTousJoueurs(idPartie,data);
             if (finie==true){
                 answer = "true"; // oui l'action est finie par tout les joueurs
+                System.out.println("answer = "+answer+" // et data = "+data);
+                if (data.equals("pari1Effectue")){
+                    GameLibrary.getInstance().changeEtat(idPartie,"joueurBleu");  //////////////////////////////// a changer en violet !!!!!
+                }
             } else {
                 answer = "false";// non l'action n'est pas finie par tout les joueurs
             }
@@ -463,20 +467,25 @@ public class GameWS {
 
         // puis on recupère l'état actuelle de la partie
         try {
-            if(couleurJ=="Bleu" || couleurJ.equals("Bleu")){
-                GameLibrary.getInstance().changeEtat(idPartie,"joueurBlanc");
-            }else if(couleurJ=="Blanc" || couleurJ.equals("Blanc")){
-                GameLibrary.getInstance().changeEtat(idPartie,"joueurViolet");
-            }else if(couleurJ=="Violet" || couleurJ.equals("Violet")){
-                GameLibrary.getInstance().changeEtat(idPartie,"joueurVert");
-            }else if(couleurJ=="Vert" || couleurJ.equals("Vert")){
-                GameLibrary.getInstance().changeEtat(idPartie,"joueurRouge");
-            }else if(couleurJ=="Rouge" || couleurJ.equals("Rouge")){
-                GameLibrary.getInstance().changeEtat(idPartie,"joueurJaune");
-            }else if(couleurJ=="Jaune" || couleurJ.equals("Jaune")){
-                GameLibrary.getInstance().changeEtat(idPartie,"joueurBleu");
+            if(data.equals("rien")){
+                if(couleurJ=="Bleu" || couleurJ.equals("Bleu")){
+                    GameLibrary.getInstance().changeEtat(idPartie,"joueurBlanc");
+                }else if(couleurJ=="Blanc" || couleurJ.equals("Blanc")){
+                    GameLibrary.getInstance().changeEtat(idPartie,"joueurViolet");
+                }else if(couleurJ=="Violet" || couleurJ.equals("Violet")){
+                    GameLibrary.getInstance().changeEtat(idPartie,"joueurVert");
+                }else if(couleurJ=="Vert" || couleurJ.equals("Vert")){
+                    GameLibrary.getInstance().changeEtat(idPartie,"joueurRouge");
+                }else if(couleurJ=="Rouge" || couleurJ.equals("Rouge")){
+                    GameLibrary.getInstance().changeEtat(idPartie,"joueurJaune");
+                }else if(couleurJ=="Jaune" || couleurJ.equals("Jaune")){
+                    GameLibrary.getInstance().changeEtat(idPartie,"joueurBleu");
+                }
+            } else {
+                GameLibrary.getInstance().changeEtat(idPartie,data);
             }
             answer="succeed";
+
         }
         catch (Exception e) {
             answer = "error12";
@@ -487,5 +496,58 @@ public class GameWS {
         System.out.println();
         return Response.ok().entity(gsonService.toJson(answer)).build();
     }
+
+    @POST
+    @Path("/getFleche")
+    public Response getFleche(@FormParam("data") String data1 ){
+        System.out.println("data envoyé dans le GameWS au @Path(\"/getFleche\") = "+data1);
+        JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
+
+        // on recupère les variables
+        int idPartie = jsooon.getIdPartie();
+        String couleurJ = jsooon.getCouleur();
+        String data = jsooon.getData();
+
+        // on créé la réponse
+        String answer;
+
+        String idCarteString;
+        String etat;
+
+        // puis on recupère l'état actuelle de la partie
+        try {
+            etat = GameLibrary.getInstance().getEtat(idPartie);
+            etat = etat.substring(6);
+
+            String couleurrr="Bleu";
+
+            if (etat.equals("Blanc")){
+                couleurrr="Bleu";
+            } else if (etat.equals("Violet")){
+                couleurrr="Blanc";
+            } else if (etat.equals("Vert")){
+                couleurrr="Violet";
+            } else if (etat.equals("Rouge")){
+                couleurrr="Vert";
+            } else if (etat.equals("Jaune")){
+                couleurrr="Rouge";
+            } else if (etat.equals("Bleu")){
+                couleurrr="Jaune";
+            }
+            idCarteString=  GameLibrary.getInstance().getDerniereAction(idPartie,couleurrr);
+            idCarteString= idCarteString.substring(5);
+
+            answer=etat+"-"+idCarteString+"-";
+        }
+        catch (Exception e) {
+            answer = "error11";
+            System.out.println("error11");
+            System.out.println();
+        }
+        System.out.println("réponse retourné après le @Path(\"/getFleche\") du GameWS = "+answer);
+        System.out.println();
+        return Response.ok().entity(gsonService.toJson(answer)).build();
+    }
+
 
 }

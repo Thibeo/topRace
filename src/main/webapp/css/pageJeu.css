@@ -26,12 +26,30 @@
 /* ----------------------------- */
 /* --- Affichage des joueurs --- */
 /* ----------------------------- */
-
+/* flèche rouge */
+#flecheRouge{
+	position: fixed;
+	top: 52.2vh;
+	left: 34.2vh;
+	width: 2vh;
+	height: 2vh;
+	background-image: url(../img/fleche.png);
+	background-size: cover;
+}
+#lastCarte{
+	position: fixed;
+	top: 54.5vh;
+	left: 36.7vh;
+	width: 8.3vh;
+	height: 10vh;
+	background-image: url(../img/cartes/carte-de-base.png);
+	background-size: cover;
+}
 /* Colonne Joueurs */
 #joueurs{
 	position: fixed;
 	top: 27vh;
-	left: 18vh;
+	left: 14vh;
 	width: 19vh;
 	background-color: #9E9E9E;
 	border-radius: 2vh;
@@ -45,6 +63,9 @@
 	border-radius: 1.3vh;
 	padding: 0.8vh;
 	font-size: 2.5vh;
+}
+.active{
+	border: 0.4vh solid black;
 }
 .jBlanc{
 	background-color: white;
@@ -257,11 +278,10 @@ input[type="checkbox"] + label::before{
 /* ligneCartes = nav pour les cartes */
 #ligneCartes{
 	position: fixed;
-	overflow: auto;
 	top:75vh;
 	left:14vh;
 	right: 14vh;
-	height: 19vh;
+	height: 20vh;
 	background-color: #9E9E9E;
 	border-radius: 2vh;
 	border: 0.4vh solid grey;
@@ -276,36 +296,15 @@ input[type="checkbox"] + label::before{
 	height: 18vh;
 	margin: 1.35vh;
 }
-/* images pour cacher les trous des scolls barres */
-#carreHaut{
-	position: fixed;
-	top: 75.3vh;
-	right: 14vh;
-	width: 1.75vh;
-	height: 2.5vh;
-	z-index: 99;
-	background-image: url(../img/carreHaut.png);
-	background-size: cover;
-}
-#carreBas{
-	position: fixed;
-	top: 93.4vh;
-	right: 14vh;
-	width: 1.75vh;
-	height: 3vh;
-	z-index: 99;
-	background-image: url(../img/carreBas.png);
-	background-size: cover;
-}
-
 
 /* ----------------------------------- */
 /* --- Choix pour les cartes noirs --- */
 /* ----------------------------------- */
 #choixCartes{
 	 position: fixed;
-	 top:25vh;
-	 left: 75vh;
+	 left: 50%;
+	 top: 50%;
+	transform: translate(-50%, -50%);
 	 background-color: #9E9E9E;
 	 border-radius: 2vh;
 	 border: 0.4vh solid grey;
@@ -431,4 +430,63 @@ input[type="radio"] + label::before{
 	bottom: 0vh;
 	z-index: 10004;
 	background-color: transparent;
+}
+
+/* ---------------------- */
+/* --- bulle d'alerte --- */
+/* ---------------------- */
+#confirmChoixCartes{
+	font-size: 2vh;
+	position: fixed;
+	left: 50%;
+	top : 50%;
+	transform: translate(-50%, -50%);
+	padding: 1vh;
+	background-color: #9E9E9E;
+	border-radius: 2vh;
+	border: 0.4vh solid grey;
+	z-index: 100000;
+}
+#confirmChoixCartes button{
+	font-size: 2vh;
+	text-decoration: none;
+	color: #FDEE00;
+	background-color: #696969;
+	border-color:  yellow;
+	border-width: 0.3vh;
+	outline : none;
+}
+#bulleAlert{
+	font-size: 2vh;
+	position: fixed;
+	left: 50%;
+	top : 50%;
+	transform: translate(-50%, -50%);
+	padding: 1vh;
+	background-color: #9E9E9E;
+	border-radius: 2vh;
+	border: 0.4vh solid grey;
+	z-index: 100000;
+}
+#bulleAlert button{
+	font-size: 2vh;
+	padding-bottom: 0.2vh;
+	padding-top: 0.2vh;
+	padding-left: 0.6vh;
+	padding-right: 0.6vh;
+	text-decoration: none;
+	color: #FDEE00;
+	background-color: #696969;
+	border-color:  yellow;
+	border-width: 0.3vh;
+	outline : none;
+}
+#fondbulleAlert, #fondConfirmChoixCartes{
+	position: fixed;
+	top :0vh;
+	right:0vh;
+	bottom: 0vh;
+	left: 0vh;
+	z-index: 10008;
+	background-color: rgba(251, 251, 251, 0.75);
 }

@@ -32,8 +32,30 @@ public class PartieDaoImpl implements PartieDao{
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error231");
         }
         return listOfPartie;
+    }
+
+    @Override
+    public int nbDeJoueurIdPartie(int idPartie){
+        String query = "SELECT * FROM joueur WHERE idPartie=?";
+        int comp = 0;
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idPartie);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    comp ++;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("");
+            System.out.println("error232");
+        }
+        return comp;
     }
 
     @Override
@@ -51,6 +73,8 @@ public class PartieDaoImpl implements PartieDao{
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error233");
         }
         return listOfNbJoueur;
     }
@@ -73,6 +97,8 @@ public class PartieDaoImpl implements PartieDao{
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error234");
         }
         return null;
     }
@@ -90,6 +116,8 @@ public class PartieDaoImpl implements PartieDao{
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error235");
         }
         return 0;
     }
@@ -110,6 +138,8 @@ public class PartieDaoImpl implements PartieDao{
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error236");
         }
         return null;
     }
@@ -125,6 +155,8 @@ public class PartieDaoImpl implements PartieDao{
         }
         catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error237");
         }
     }
 
@@ -141,10 +173,10 @@ public class PartieDaoImpl implements PartieDao{
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("error101");
-            System.out.println();
+            System.out.println("");
+            System.out.println("error238");
         }
-        return "error101";
+        return "error238";
     }
 
 }

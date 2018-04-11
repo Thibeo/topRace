@@ -10,4 +10,6 @@ public interface CarteJoueurDao {
 
     public List<CarteJoueur> getCarteJoueur(int idPartie, String couleurJ);
 
+    public void utilisation(int idCarte, int idPartie, String couleurJ);
+
 }

@@ -27,17 +27,39 @@ public class CarteJoueurDaoImpl implements CarteJoueurDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error203");
         }
     }
 
     @Override
+    public void utilisation(int idCarte, int idPartie, String couleurJ){
+        String query = "UPDATE cartejoueur SET utilisee = ? WHERE couleurJ = ? AND idPartie = ? AND idCarte=?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setBoolean(1,true);
+            statement.setString(2,couleurJ);
+            statement.setInt(3,idPartie);
+            statement.setInt(4,idCarte);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("");
+            System.out.println("error204");
+        }
+    }
+
+
+    @Override
     public List<CarteJoueur> getCarteJoueur(int idPartie, String couleurJ){
-        String query = "SELECT * FROM cartejoueur WHERE idPartie=? AND couleurJ=?";
+        String query = "SELECT * FROM cartejoueur WHERE idPartie=? AND couleurJ=? AND utilisee=?";
         List<CarteJoueur> list = new ArrayList<>();
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, idPartie);
             statement.setString(2, couleurJ);
+            statement.setBoolean(3, false);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     list.add(
@@ -50,6 +72,8 @@ public class CarteJoueurDaoImpl implements CarteJoueurDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error205");
         }
         return list;
     }

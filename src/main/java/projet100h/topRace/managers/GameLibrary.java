@@ -44,7 +44,7 @@ public class GameLibrary {
     }
     public List listDeplacementCarte(int id){ return carteDao.listDeplacementCarte(id);}/* < <couleurVoiture, nbCase> , <couleurVoiture, nbCase> , <couleurVoiture, nbCase> > */
     public List<CarteJoueur> getCarteJoueur(int idPartie, String couleurJ){return carteJoueurDao.getCarteJoueur(idPartie,couleurJ);}
-
+    public int nbDeJoueurIdPartie(int idPartie){ return partieDao.nbDeJoueurIdPartie(idPartie);}
     public List<Integer> nbDeJoueur() {
         List<Integer> listJoueur = partieDao.nbDeJoueur(); // liste des idPartie de tous les joueurs
         List listFinal = new ArrayList<>(); //creation de la liste final qui sera composé de liste intermediaire
@@ -69,21 +69,16 @@ public class GameLibrary {
 
         return listFinal; // resultat = < <1,5>, <2,1>, <3,6> >    ( de type  < idpartie , nb de joueur présent Dans la partie > )
     }
-
     public void changerCase(Joueur joueur, PartieCase cse) {joueurDao.changerCase(joueur, cse);} // change la case actuelle du joueur dans la BDD
     public void changeEtat(int idPartie, String etat){partieDao.changeEtat(idPartie,etat);} // change l'état de la partie dans la BDD
     public void changerDernierAction(int idPartie, String couleurJ, String action){joueurDao.changerDernierAction(idPartie,couleurJ,action);} // change la dernière action d'un joueur dans la BDD
-
+    public void utilisation(int idCarte, int idPartie, String couleurJ){carteJoueurDao.utilisation(idCarte,idPartie,couleurJ);}
     public boolean actionFinieParTousJoueurs(int idPartie, String action){return joueurDao.actionFinieParTousJoueurs(idPartie,action);} // retourne si oui ou non, l'action en parametre a été effectué par tout les joueurs
-
     public void ajoutPari(int idPartie, String couleurJ, int numeroPari, boolean jaune, boolean bleue, boolean rouge, boolean violette, boolean blanche, boolean verte){pariDao.ajoutPari(idPartie, couleurJ, numeroPari, jaune, bleue, rouge, violette, blanche, verte);}
-
     public boolean pariExiste(int idPartie, String couleurJ, int numeroPari){return pariDao.pariExiste(idPartie, couleurJ, numeroPari);}
-
     public String getPari(int idPartie, String couleurJ, int numeroPari){return pariDao.getPari(idPartie,couleurJ,numeroPari);}
     public String getEtat(int idPartie){return partieDao.getEtat(idPartie);}
     public String getTopLeft(PartieCase cse){ return caseDao.getTopLeft(cse);}
-
     public Plateau getPlateau (int idPartie){
         PartieCase tableauCase[][] = new PartieCase[69][3];
         PartieCase cse;
@@ -103,18 +98,13 @@ public class GameLibrary {
         plateau.setTableauCase(tableauCase);
         return plateau;
     }
-
-
     public Joueur getJoueur(String couleur, int idPartie){
         List<String> list = joueurDao.getXYByCouleur(couleur,idPartie);
         PartieCase cse = partieCaseDao.getPartieCase(Integer.parseInt(list.get(0)), list.get(1).charAt(0), idPartie);
         return joueurDao.getJoueurByCase(couleur,idPartie,cse);
     }
-
     public void deleteJoueur (String couleurJ, int idPartie){ joueurDao.deleteJoueur(couleurJ, idPartie);}
-
     public void creationPartieCase(int idPartie){ partieCaseDao.creationPartieCase(idPartie);}
-
     public void modifierCaseException(PartieCase cse,boolean occupee) {
         int x=cse.getX();
         char y=cse.getY();
@@ -200,22 +190,13 @@ public class GameLibrary {
         partieCaseDao.modifierStatut(cse,occupee);
 
     }
-
-
-    //fonction crer partie (permet de rentrer une nouvelle partie dans la base de données:
-    public Partie creerPartie(Partie partie){
+    public Partie creerPartie(Partie partie){//fonction crer partie (permet de rentrer une nouvelle partie dans la base de données:
         return (partieDao.createPartie(partie));
     }
-
-    // fonction creerJoueur (permet de rentrer un nouveau joueur dans la base de données:
-    public void creerJoueur(Joueur joueur){ joueurDao.createJoueur(joueur); }
-
-    // fonction retournant la liste des couleurs des différentes voitures:
+    public void creerJoueur(Joueur joueur){ joueurDao.createJoueur(joueur); } // fonction creerJoueur (permet de rentrer un nouveau joueur dans la base de données:
     public ArrayList listCouleur(){
         return (voitureDao.listeCouleur());
-    }
-
-    // fonction retournant la liste des couleurs des différentes voitures déjà présentent sur la partie placé en paramètre
+    }    // fonction retournant la liste des couleurs des différentes voitures:
     public ArrayList listCouleurIdPartie(Integer idPartie){
         ArrayList listCouleurIdPartie = voitureDao.listeCouleurIdPartie(idPartie);
         ArrayList listCouleur = voitureDao.listeCouleur();
@@ -237,14 +218,9 @@ public class GameLibrary {
             }
         }
         return (listCouleurFinal);
-    }
-
-    //fonction retournant l'id correspondant à la partie dont le nom est rentré en parametre:
-
-    public int getIdPartie(String nom){ return(partieDao.getIdPartieByName(nom)); }
-
-
-
+    }// fonction retournant la liste des couleurs des différentes voitures déjà présentent sur la partie placé en paramètre
+    public int getIdPartie(String nom){ return(partieDao.getIdPartieByName(nom)); }    //fonction retournant l'id correspondant à la partie dont le nom est rentré en parametre:
+    public String getDerniereAction(int idPartie, String couleurJ){ return joueurDao.getDerniereAction(idPartie, couleurJ);}
     public void repartitionCarteJoueur(int idPartie){
         List<Carte> listofCarte = listCarte(); // on recupère toutes les cartes
         int compteurNbCoup = 0; // compteur créé pour les test

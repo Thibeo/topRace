@@ -27,6 +27,8 @@ public class PariDaoImpl implements PariDao{
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error221");
         }
     }
 
@@ -48,6 +50,8 @@ public class PariDaoImpl implements PariDao{
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error222");
         }
         return true;
     }
@@ -73,6 +77,8 @@ public class PariDaoImpl implements PariDao{
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error223");
         }
         return null;
     }

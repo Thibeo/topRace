@@ -23,4 +23,6 @@ public interface JoueurDao {
 
     public boolean actionFinieParTousJoueurs(int idPartie, String action);
 
+    public String getDerniereAction(int idPartie, String couleurJ);
+
 }

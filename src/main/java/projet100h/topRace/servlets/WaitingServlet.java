@@ -33,6 +33,9 @@ public class WaitingServlet extends GenericServlet {
         List<Joueur> listOfJoueur = GameLibrary.getInstance().listOfJoueur(idPartie);
         context.setVariable("listOfJoueur", listOfJoueur);
 
+        int nbJoueur = GameLibrary.getInstance().nbDeJoueurIdPartie(idPartie);
+        context.setVariable("nbJoueur",nbJoueur);
+
         Partie PartieById = GameLibrary.getInstance().getPartieById(idPartie);
         context.setVariable("PartieById", PartieById);
 
@@ -43,7 +46,7 @@ public class WaitingServlet extends GenericServlet {
         Integer idPartie = null;
         String pseudoJoueur = null;
 
-        pseudoJoueur = req.getParameter("nomJoueur");
+        /*pseudoJoueur = req.getParameter("nomJoueur");
         idPartie = Integer.parseInt(req.getParameter("idPartie"));
 
         // pour "ouvrir" une session correspondant à la partie:
@@ -51,11 +54,22 @@ public class WaitingServlet extends GenericServlet {
         //String sessionpartie = "sessionpartie";
         session.setAttribute("sessionIdPartie", idPartie);
         session.setAttribute("sessionNomJoueur",pseudoJoueur);
-
+        */
+        HttpSession session = req.getSession();
+        idPartie = (Integer) session.getAttribute("sessionIdPartie");
+        pseudoJoueur= (String) session.getAttribute("sessionNomJoueur");
 
         try {
 
-            GameLibrary.getInstance().repartitionCarteJoueur(idPartie);
+            List<Joueur> listOfJoueur = GameLibrary.getInstance().listOfJoueur(idPartie);
+            Partie PartieById = GameLibrary.getInstance().getPartieById(idPartie);
+            for (int i = 0 ; i < 6 ; i++){
+                if (pseudoJoueur.equals(listOfJoueur.get(i).getNomJoueur())){
+                    if (listOfJoueur.get(i).getCouleur().equals(PartieById.getCouleurDeProprio())){
+                        GameLibrary.getInstance().repartitionCarteJoueur(idPartie);
+                    }
+                }
+            }
 
             // REDIRIGE VERS LA PAGE DE JEU
             resp.sendRedirect("game");

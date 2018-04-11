@@ -31,6 +31,8 @@ public class JoueurDaoImpl implements JoueurDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error208");
         }
         return null;
     }
@@ -52,6 +54,8 @@ public class JoueurDaoImpl implements JoueurDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error209");
         }
         return null;
     }
@@ -69,6 +73,8 @@ public class JoueurDaoImpl implements JoueurDao {
         }
         catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error210");
         }
     }
 
@@ -84,6 +90,8 @@ public class JoueurDaoImpl implements JoueurDao {
         }
         catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error211");
         }
     }
 
@@ -102,13 +110,35 @@ public class JoueurDaoImpl implements JoueurDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error212");
         }
         if (list.size()==6){
             return true;
         } else {
             return false;
         }
+    }
 
+    @Override
+    public String getDerniereAction(int idPartie, String couleurJ){
+        String query = "SELECT * FROM joueur WHERE idPartie=? AND couleurJ=?";
+        List list = new ArrayList<>();
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idPartie);
+            statement.setString(2, couleurJ);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return (resultSet.getString("derniereAction"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("");
+            System.out.println("error213");
+        }
+        return null;
     }
 
     public void createJoueur(Joueur joueur){
@@ -125,6 +155,8 @@ public class JoueurDaoImpl implements JoueurDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error214");
         }
     }
 
@@ -149,6 +181,8 @@ public class JoueurDaoImpl implements JoueurDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error215");
         }
         return list;
     }
@@ -168,6 +202,8 @@ public class JoueurDaoImpl implements JoueurDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error216");
         }
         if (couleurJ.equals(couleurProprio) || couleurJ==couleurProprio){ // si le joueur est le propriétaire
             String query2 = "DELETE FROM `partie`  WHERE idPartie=?"; // on supprime la partie
@@ -178,6 +214,8 @@ public class JoueurDaoImpl implements JoueurDao {
 
             } catch (SQLException e) {
                 e.printStackTrace();
+                System.out.println("");
+                System.out.println("error217");
             }
 
             String query3 = "DELETE FROM `joueur`  WHERE idPartie=?"; // et tous les joueurs
@@ -188,6 +226,8 @@ public class JoueurDaoImpl implements JoueurDao {
 
             } catch (SQLException e) {
                 e.printStackTrace();
+                System.out.println("");
+                System.out.println("error218");
             }
 
         } else {
@@ -199,6 +239,8 @@ public class JoueurDaoImpl implements JoueurDao {
 
             } catch (SQLException e) {
                 e.printStackTrace();
+                System.out.println("");
+                System.out.println("error219");
             }
         }
 

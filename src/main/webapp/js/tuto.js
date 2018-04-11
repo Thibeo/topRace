@@ -82,12 +82,13 @@ function fermerTuto() {
     zindex("plateauParis",1);
     zindex("ligneJaune",-10);
     zindex("nomPartie",1);zindex("joueurs",1);zindex("plateau",0);
-    zindex("ligneCartes",1);zindex("carteTitre",2);zindex("carreHaut",2);zindex("carreBas",2);
+    zindex("ligneCartes",1);zindex("carteTitre",2);
     zindex("joueurJaune",1);zindex("joueurViolet",1);zindex("joueurBleu",1);
     zindex("joueurRouge",1);zindex("joueurBlanc",1);zindex("joueurVert",1);
     animationPariSortie();
 }
 function LeOnload(){
+    bulleAlert("fermer");ConfirmChoixCartes("fermer");
     Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
     Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
     Cacher("tutoPrez");
@@ -97,16 +98,16 @@ function LeOnload(){
     zindex("plateauParis",1);
     zindex("ligneJaune",-10);
     zindex("nomPartie",1);zindex("joueurs",1);zindex("plateau",0);
-    zindex("ligneCartes",1);zindex("carteTitre",2);zindex("carreHaut",2);zindex("carreBas",2);
+    zindex("ligneCartes",1);zindex("carteTitre",2);
     zindex("joueurJaune",1);zindex("joueurViolet",1);zindex("joueurBleu",1);
     zindex("joueurRouge",1);zindex("joueurBlanc",1);zindex("joueurVert",1);
     animationPariSortie();
 
     Cacher('choixCartes');Cacher('fondChoixCartes');
-    Cacher('fondPara');Cacher('fondRules');Cacher('rules');
-    Cacher('para');Cacher('quitter');Cacher('fondQuitter');
+    Cacher('fondPara');Cacher('fondRules');Cacher('fondQuitter');
+    Cacher('para');Cacher('quitter');Cacher('rules');  // on chache la section qui a pour id "para"
 
-    creationCompteur('le début de la partie commence dans ',5 , ' secondes');
+    creationCompteur('le début de la partie commence dans ',180 , ' secondes');
     compteur('début de la partie');
 
     inverse('tb', 'col0');inverse('tb', 'col1');

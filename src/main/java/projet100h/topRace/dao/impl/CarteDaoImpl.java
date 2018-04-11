@@ -27,6 +27,8 @@ public class CarteDaoImpl implements CarteDao{
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error201");
         }
         return listOfCarte;
     }
@@ -49,6 +51,8 @@ public class CarteDaoImpl implements CarteDao{
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error202");
         }
         return listDeplacemementCouleur;
     }

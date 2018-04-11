@@ -34,6 +34,8 @@ public class CaseDaoImpl implements CaseDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error206");
         }
         return listOfCase;
     }
@@ -58,6 +60,8 @@ public class CaseDaoImpl implements CaseDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error207");
         }
         return null;
     }
