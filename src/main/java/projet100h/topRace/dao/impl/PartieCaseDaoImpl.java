@@ -105,9 +105,9 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error228");
         }
-        System.out.println("");
-        System.out.println("error228");
         return listOfcases;
     }
 

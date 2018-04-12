@@ -112,6 +112,7 @@
                                 </tr>
                             </table>
                         </nav>
+
                         <nav th:each="joueur : ${listOfJoueur}" th:if="${joueur.couleur == PartieById.couleurDeProprio && joueur.nomJoueur == nomJ && nbJoueur == 6}" class="bloc">
                             <form method="post">
                                 <input type="HIDDEN" name="nomJoueur" id="nomJoueur" th:value="${nomJ}"/>

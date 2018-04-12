@@ -14,9 +14,9 @@ function parier(idPari){
         var verrte = document.getElementById("verte" + idPari);
         request.onload = function () {
             var answer = this.response;
-            if (answer == "error1"){
+            if (answer == "error102"){
                 bulleAlert("veuilliez cocher 3 couleur pour le pari "+idPari);
-            } else if (answer == "error2"){
+            } else if (answer == "error103"){
                 bulleAlert("le pari "+idPari+" a déjà été effectué");
             } else if (answer = "succeed"){
                 // on va fixer les checkbox

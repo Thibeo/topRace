@@ -40,7 +40,7 @@
 <!-- ------ -->
 <!-- REGLES -->
 <!-- ------ -->
-            <nav id="rules">
+            <nav th:fragment="rules" id="rules">
                 <nav id="carreHaut2"></nav>
                 <nav id="carreBas2"></nav>
                 <nav id="rulesScorll">
@@ -55,7 +55,7 @@
                     <p>La voiture noire n’existant pas, la couleur noir permet de faire avancer n’importe quelle voiture choisie par le joueur. </p>
                     <p>Les joueurs peuvent donc faire avancer plusieurs voitures en même temps, mais la voiture qui avance la première est celle dont le numéro est le plus grand.</p>
 
-                    <figure class="cartes"><img src="img/cartes/22.png" width="100px"><img src="img/cartes/11.png" width="100px"><img src="img/cartes/27.png" width="100px"><img src="img/cartes/43.png" width="100px"></figure>
+                    <figure class="cartes"><img src="img/cartes/22.png" width="100px"><img src="img/cartes/11.png" width="100px"><img src="img/cartes/61.png" width="100px"><img src="img/cartes/43.png" width="100px"></figure>
 
                     <u>Le système de paris :</u>
                     <p>Le circuit contient plusieurs lignes jaunes qui sont des lignes de « paris ». </p>
@@ -92,7 +92,7 @@
 <!-- ---------- -->
 <!-- PARAMETRES -->
 <!-- ---------- -->
-            <nav id="para">
+            <nav th:fragment="para" id="para">
                 <button class="x" onclick='ACPara();'>X</button>
                 <h2>Changer les paramètres</h2>
                 <table>
