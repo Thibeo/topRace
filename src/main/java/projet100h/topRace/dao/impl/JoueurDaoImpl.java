@@ -112,5 +112,36 @@ public class JoueurDaoImpl implements JoueurDao {
         return list;
     }
 
+    public int getScoreJoueur(String couleur, int idPartie){
+        String query = "SELECT score FROM joueur WHERE couleurJ=? and idPartie=?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, couleur);
+            statement.setInt(2, idPartie);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return (resultSet.getInt("score"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public void updateScoreJoueur(String couleurJoueur,int resultatJoueur){
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement("UPDATE joueur SET score=? WHERE couleur=?") ) {
+            statement.setInt(1,resultatJoueur);
+            statement.setString(2,couleurJoueur);
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
 }

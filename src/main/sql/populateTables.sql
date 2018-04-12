@@ -99,17 +99,17 @@ INSERT INTO `typeVoiture` (`couleurV`,x,y) VALUES ("Blanc",0,'b');
 
 
 /* ------------------------------------------------ */
-/* données qui sont sencées se créées toutes seules */
+/* données qui sont sensées se créer toutes seules */
 /* ------------------------------------------------ */
 
 INSERT INTO `partie` (`idPartie`, `nomDePartie`, `nomDeProprio`) VALUES (1, 'partie1test', 'proprioEstBob');
 
-INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Jaune", "BobJaune", 1, 1, 'a');
-INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Vert", "BobVert", 1, 1, 'b');
-INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Violet", "BobViolet", 1, 1, 'c');
-INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Bleu", "BobBleu", 1, 0, 'a');
-INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Blanc", "BobBlanc", 1, 0, 'b');
-INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`) VALUES ("Rouge", "BobRouge", 1, 0, 'c');
+INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`,`score`) VALUES ("Jaune", "BobJaune", 1, 1, 'a',0);
+INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`,`score`) VALUES ("Vert", "BobVert", 1, 1, 'b',0);
+INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`,`score`) VALUES ("Violet", "BobViolet", 1, 1, 'c',0);
+INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`,`score`) VALUES ("Bleu", "BobBleu", 1, 0, 'a',0);
+INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`,`score`) VALUES ("Blanc", "BobBlanc", 1, 0, 'b',0);
+INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`,`score`) VALUES ("Rouge", "BobRouge", 1, 0, 'c',0);
 
 
 INSERT INTO `partie` (`idPartie`, `nomDePartie`, `nomDeProprio`) VALUES (2, 'partie2test', 'proprioEstBob2');

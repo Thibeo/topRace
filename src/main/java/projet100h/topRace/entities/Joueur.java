@@ -262,6 +262,18 @@ public class Joueur {
         return cse;
     }
 
+    public int ligneJaune(int i){
+        int numeroLigne=1;
+        if (this.caseActuelle.getX()==14 && i>0){
+            numeroLigne=1;
+        }else if (this.caseActuelle.getX()==26 && i>0){
+            numeroLigne=2;
+        }else if (this.caseActuelle.getX()==38 && i>0){
+            numeroLigne=3;
+        }
+        return numeroLigne;
+    }
+
 
     public void deplacementOptimise(Plateau plateau, int nbreCase){
         int x=this.caseActuelle.getX();

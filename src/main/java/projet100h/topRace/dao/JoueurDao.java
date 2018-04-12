@@ -17,4 +17,8 @@ public interface JoueurDao {
 
     public List listOfJoueur(int idPartie);
 
+    public int getScoreJoueur(String couleur, int idPartie);
+
+    public void updateScoreJoueur(String couleurJoueur,int resultatJoueur);
+
 }

@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PariDaoImpl implements PariDao{
 
@@ -75,6 +77,32 @@ public class PariDaoImpl implements PariDao{
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List getListPari(int idPartie, String couleurJoueur, int idPari){
+        String query = "SELECT * FROM pari WHERE idPartie=? AND couleurJ=? AND numeroPari=?";
+        List list = new ArrayList<>();
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idPartie);
+            statement.setString(2, couleurJoueur);
+            statement.setInt(2, idPari);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    String answer="";
+                    if (resultSet.getBoolean("jaune") == true ){list.add("jaune");}
+                    if (resultSet.getBoolean("bleue") == true ){list.add("bleue");}
+                    if (resultSet.getBoolean("rouge") == true ){list.add("rouge");}
+                    if (resultSet.getBoolean("violette") == true ){list.add("violette");}
+                    if (resultSet.getBoolean("blanche") == true ){list.add("blanche");}
+                    if (resultSet.getBoolean("verte") == true ){list.add("verte");}
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
 }

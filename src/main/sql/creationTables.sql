@@ -23,6 +23,18 @@ CREATE TABLE `pari` (
   PRIMARY KEY (`idPartie`,`couleurJ`,`numeroPari`)
 );
 
+CREATE TABLE `positionPari` (
+  `idPartie` int(11) NOT NULL,
+  `couleurV` varchar(6) NOT NULL,
+  `numeroPari` int(11) NOT NULL,
+  `x` int(11) NOT NULL, /* 1,2,3,4 ... */
+  `y` char(1) NOT NULL, /* a,b ou c */
+  KEY `idPartie_fk` (`idPartie`),
+  KEY `couleurV_fk` (`couleurV`),
+  PRIMARY KEY (`idPartie`,`couleurV`,`numeroPari`)
+);
+
+
 CREATE TABLE `typeVoiture` (
   `couleurV` varchar(6) NOT NULL,
   `x` int(11) NOT NULL, /* 1,2,3,4 ... */
@@ -67,6 +79,7 @@ CREATE TABLE `joueur` (
   `idPartie` int(11) NOT NULL,
   `x` int(11) NOT NULL,
   `y` char(1) NOT NULL,
+  `score` int(11) ,
   PRIMARY KEY (`couleurJ`,`idPartie`)
 );
 

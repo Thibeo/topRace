@@ -26,6 +26,8 @@ public class GameLibrary {
     private PartieDao partieDao = new PartieDaoImpl();
     private TypeVoitureDao voitureDao = new TypeVoitureDaoImpl();
     private PariDao pariDao = new PariDaoImpl();
+    private PositionPariDao positionPariDao=new PositionPariDaoImpl();
+
 
 
     private GameLibrary() { }
@@ -208,7 +210,7 @@ public class GameLibrary {
         return (voitureDao.listeCouleur());
     }
 
-    // fonction retournant la liste des couleurs des différentes voitures déjà présentent sur la partie placé en paramètre
+    // fonction retournant la liste des couleurs des différentes voitures déjà présentes sur la partie placée en paramètre
     public ArrayList listCouleurIdPartie(Integer idPartie){
         ArrayList listCouleurIdPartie = voitureDao.listeCouleurIdPartie(idPartie);
         ArrayList listCouleur = voitureDao.listeCouleur();
@@ -236,6 +238,117 @@ public class GameLibrary {
 
     public int getIdPartie(String nom){ return(partieDao.getIdPartieByName(nom)); }
 
+    // fonction qui calcule en fonction de l'idPari,couleurJoueur, idPartie le score du joueur:
 
+    public int calcul(int idPartie, int idPari, String couleurJoueur){
+        //recupere dans la table positionPari les positions des voitures:
+        List positionPari=new ArrayList<>();
+        positionPari = positionPariDao.getPositionPari(idPartie, idPari);
+        //recupere dans la table pari le pari du joueur:
+        List pariJoueur=new ArrayList<>();
+        pariJoueur=pariDao.getListPari(idPartie,couleurJoueur,idPari);
+        // recupere le score du joueur
+        int resultatJoueur=joueurDao.getScoreJoueur(couleurJoueur, idPartie);
+
+
+        /*
+        //trie la liste positionPari en ordre decroissant (pour avoir en 1 position la couleur de la voiture la plus avancée)
+        List<String> positionPariTriee=new ArrayList<String>();
+        for (int i=1; i<positionPari.size();i++){
+            List couleurAAjouter=(List) positionPari.get(i);
+            for(int j=i;j<positionPari.size();j++){
+                List couleurAComparer=(List) positionPari.get(j);
+                // compare les positions :
+                // d'abord les x:
+                if(((int) couleurAComparer.get(1)) > ((int) couleurAAjouter.get(1))){
+                    couleurAAjouter=couleurAComparer;
+                 //si les x sont égaux, il faut comparer les y:
+                }else if (((int) couleurAComparer.get(1)) == ((int) couleurAAjouter.get(1))){
+                    if(((String) couleurAComparer.get(2)).charAt(0)=='a'){
+                        couleurAAjouter=couleurAComparer;
+                    }else if((((String) couleurAComparer.get(2)).charAt(0)=='b') && (((String) couleurAAjouter.get(2)).charAt(0)=='c')){
+                        couleurAAjouter=couleurAComparer;
+                    }
+                }
+                positionPariTriee.add((String) couleurAAjouter.get(0));
+            }
+        }
+        */
+
+
+        // une fois qu'on a trié la liste, il faut comparer les deux listes (positions et pari):
+        for(int i=0; i<pariJoueur.size();i++){
+            String couleur= (String) pariJoueur.get(i);
+            int compteur=1;
+            for (int j=0;j<positionPari.size();j++){
+                if((positionPari.get(j)).equals(couleur)){
+                    compteur = j+1;
+                }
+            }
+            //pari 1:
+            if (idPari==1){
+                if (compteur==1){
+                    resultatJoueur=resultatJoueur+9;
+                }else if (compteur==2){
+                    resultatJoueur=resultatJoueur+6;
+                }else if (compteur==3){
+                    resultatJoueur=resultatJoueur+3;
+                }else if (compteur==5){
+                    resultatJoueur=resultatJoueur-1;
+                }else if (compteur==6){
+                    resultatJoueur=resultatJoueur-3;
+                }
+            //pari 2:
+            }else if (idPari==2){
+                if (compteur==1){
+                    resultatJoueur=resultatJoueur+6;
+                }else if (compteur==2){
+                    resultatJoueur=resultatJoueur+4;
+                }else if (compteur==3){
+                    resultatJoueur=resultatJoueur+2;
+                }else if (compteur==4){
+                    resultatJoueur=resultatJoueur-1;
+                }else if (compteur==5){
+                    resultatJoueur=resultatJoueur-3;
+                }else if (compteur==6){
+                    resultatJoueur=resultatJoueur-6;
+                }
+             //pari 3:
+            }else {
+                if (compteur==1){
+                    resultatJoueur=resultatJoueur+3;
+                }else if (compteur==2){
+                    resultatJoueur=resultatJoueur+2;
+                }else if (compteur==3){
+                    resultatJoueur=resultatJoueur+1;
+                }else if (compteur==4){
+                    resultatJoueur=resultatJoueur-2;
+                }else if (compteur==5){
+                    resultatJoueur=resultatJoueur-6;
+                }else if (compteur==6){
+                    resultatJoueur=resultatJoueur-9;
+                }
+            }
+        }
+        // pour changer dans la base de données le score du joueur
+        joueurDao.updateScoreJoueur(couleurJoueur,resultatJoueur);
+        return resultatJoueur;
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
