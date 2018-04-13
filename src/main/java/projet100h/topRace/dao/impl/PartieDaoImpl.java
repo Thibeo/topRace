@@ -12,6 +12,10 @@ import java.util.List;
 
 public class PartieDaoImpl implements PartieDao{
 
+    /**
+     *
+     * @return la liste des parties existantes
+     */
     @Override
     public List listPartie(){
         String query = "SELECT * FROM partie";
@@ -38,6 +42,11 @@ public class PartieDaoImpl implements PartieDao{
         return listOfPartie;
     }
 
+    /**
+     *
+     * @param idPartie
+     * @return le nombre de joueurs déjà présents sur une partie
+     */
     @Override
     public int nbDeJoueurIdPartie(int idPartie){
         String query = "SELECT * FROM joueur WHERE idPartie=?";
@@ -58,6 +67,10 @@ public class PartieDaoImpl implements PartieDao{
         return comp;
     }
 
+    /**
+     *
+     * @return la liste des joueurs d'une partie
+     */
     @Override
     public List<Integer> nbDeJoueur(){
         String query = "SELECT * FROM joueur";
@@ -79,6 +92,11 @@ public class PartieDaoImpl implements PartieDao{
         return listOfNbJoueur;
     }
 
+    /**
+     *
+     * @param partie
+     * @return la partie créée
+     */
     @Override
     public Partie createPartie(Partie partie){
         String query = "INSERT INTO partie(nomDePartie, couleurDeProprio, etat) VALUES(?, ?, ?)";
@@ -103,6 +121,12 @@ public class PartieDaoImpl implements PartieDao{
         return null;
     }
 
+
+    /**
+     *
+     * @param nomPartie
+     * @return l'id de la partie en fonction de son nom
+     */
     @Override
     public int getIdPartieByName(String nomPartie){
         String query = "SELECT idPartie FROM partie WHERE nomDePartie=?";
@@ -122,6 +146,11 @@ public class PartieDaoImpl implements PartieDao{
         return 0;
     }
 
+    /**
+     *
+     * @param idPartie
+     * @return la partie correspondant à l'id
+     */
     @Override
     public Partie getPartieById(int idPartie){
         String query = "SELECT * FROM partie WHERE idPartie=?";
@@ -144,6 +173,11 @@ public class PartieDaoImpl implements PartieDao{
         return null;
     }
 
+    /**
+     * permet de changer l'état d'une partie
+     * @param idPartie
+     * @param etat
+     */
     @Override
     public void changeEtat(int idPartie, String etat){
         String query = "UPDATE partie SET etat=? WHERE idPartie = ?";
@@ -160,6 +194,11 @@ public class PartieDaoImpl implements PartieDao{
         }
     }
 
+    /**
+     *
+     * @param idPartie
+     * @return l'etat d'une partie
+     */
     @Override
     public String getEtat(int idPartie){
         String query = "SELECT * FROM partie WHERE idPartie=?";

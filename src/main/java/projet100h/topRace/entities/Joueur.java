@@ -46,10 +46,11 @@ public class Joueur {
     public String getDerniereAction() { return derniereAction; }
     public void setDerniereAction(String derniereAction) { this.derniereAction = derniereAction; }
 
-    /* s'applique sur un plateau
-         * permet de regarder si la case sur laquelle on arrive est une case présentant un déplacement particulier
-         *
-         */
+
+    /**
+     * permet de regarder si la case sur laquelle on arrive est une case présentant un déplacement particulier
+     * @param plateau
+     */
     public void deplacementException(Plateau plateau) {
 
 
@@ -105,7 +106,11 @@ public class Joueur {
     }
 
 
-
+    /**
+     *
+     * @param plateau
+     * @return la nouvelle position du joueur après un déplacement de 1 case
+     */
     public PartieCase deplacementSeul(Plateau plateau){
 
 

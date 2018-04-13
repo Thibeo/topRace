@@ -101,6 +101,13 @@ public class GameLibrary {
         plateau.setTableauCase(tableauCase);
         return plateau;
     }
+
+    /**
+     *
+     * @param couleur
+     * @param idPartie
+     * @return un joueur
+     */
     public Joueur getJoueur(String couleur, int idPartie){
         List<String> list = joueurDao.getXYByCouleur(couleur,idPartie);
         PartieCase cse = partieCaseDao.getPartieCase(Integer.parseInt(list.get(0)), list.get(1).charAt(0), idPartie);
@@ -108,6 +115,12 @@ public class GameLibrary {
     }
     public void deleteJoueur (String couleurJ, int idPartie){ joueurDao.deleteJoueur(couleurJ, idPartie);}
     public void creationPartieCase(int idPartie){ partieCaseDao.creationPartieCase(idPartie);}
+
+    /**
+     * permet de modifier le statut des cases présentants des exceptions
+     * @param cse
+     * @param occupee
+     */
     public void modifierCaseException(PartieCase cse,boolean occupee) {
         int x=cse.getX();
         char y=cse.getY();
@@ -197,15 +210,21 @@ public class GameLibrary {
         return (partieDao.createPartie(partie));
     }
     public void creerJoueur(Joueur joueur){ joueurDao.createJoueur(joueur); } // fonction creerJoueur (permet de rentrer un nouveau joueur dans la base de données:
+
+
+    /**
+     *
+     * @return la liste des couleurs des différentes voitures
+     */
     public ArrayList listCouleur(){
         return (voitureDao.listeCouleur());
-    }    // fonction retournant la liste des couleurs des différentes voitures:
+    }
 
-
-
-
-    // fonction retournant la liste des couleurs des différentes voitures déjà présentes sur la partie placée en paramètre
-
+    /**
+     *
+     * @param idPartie
+     * @return retournant la liste des couleurs des différentes voitures déjà présentes sur la partie placée en paramètre
+     */
     public ArrayList listCouleurIdPartie(Integer idPartie){
         ArrayList listCouleurIdPartie = voitureDao.listeCouleurIdPartie(idPartie);
         ArrayList listCouleur = voitureDao.listeCouleur();
@@ -227,11 +246,14 @@ public class GameLibrary {
             }
         }
         return (listCouleurFinal);
-    }// fonction retournant la liste des couleurs des différentes voitures déjà présentent sur la partie placé en paramètre
-
-
+    }
     public int getIdPartie(String nom){ return(partieDao.getIdPartieByName(nom)); }    //fonction retournant l'id correspondant à la partie dont le nom est rentré en parametre:
     public String getDerniereAction(int idPartie, String couleurJ){ return joueurDao.getDerniereAction(idPartie, couleurJ);}
+
+    /**
+     * fonction permettant d'attribuer à chaque joueur des cartes de manière aleatoire
+     * @param idPartie
+     */
     public void repartitionCarteJoueur(int idPartie){
 
         List<Carte> listofCarte = listCarte(); // on recupère toutes les cartes
@@ -278,12 +300,13 @@ public class GameLibrary {
         System.out.println("/////////////////////////////////////////////////");
     }
 
-
-
-
-
-    // fonction qui calcule en fonction de l'idPari,couleurJoueur, idPartie le score du joueur:
-
+    /**
+     *
+     * @param idPartie
+     * @param idPari
+     * @param couleurJoueur
+     * @return le score du joueur
+     */
     public int calcul(int idPartie, int idPari, String couleurJoueur) {
         //recupere dans la table positionPari les positions des voitures:
 

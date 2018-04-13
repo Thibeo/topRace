@@ -12,6 +12,19 @@ import java.util.List;
 
 public class PariDaoImpl implements PariDao{
 
+
+    /**
+     * permet d'ajouter un pari à la table pari
+     * @param idPartie
+     * @param couleurJ
+     * @param numeroPari
+     * @param jaune
+     * @param bleue
+     * @param rouge
+     * @param violette
+     * @param blanche
+     * @param verte
+     */
     public void ajoutPari(int idPartie, String couleurJ, int numeroPari, boolean jaune, boolean bleue, boolean rouge, boolean violette, boolean blanche, boolean verte){
         String query = "INSERT INTO pari (idPartie, CouleurJ, numeroPari, jaune, bleue, rouge, violette, blanche, verte) VALUES(?,?,?,?,?,?,?,?,?)";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -34,6 +47,13 @@ public class PariDaoImpl implements PariDao{
         }
     }
 
+    /**
+     *
+     * @param idPartie
+     * @param couleurJ
+     * @param numeroPari
+     * @return vrai si le pari existe ou faux si celui ci n'existe pas
+     */
     public boolean pariExiste(int idPartie, String couleurJ, int numeroPari){
         String query = "SELECT COUNT(*) AS compte FROM pari WHERE idPartie=? AND couleurJ=? AND numeroPari=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -58,6 +78,13 @@ public class PariDaoImpl implements PariDao{
         return true;
     }
 
+    /**
+     *
+     * @param idPartie
+     * @param couleurJ
+     * @param numeroPari
+     * @return le pari d'un joueur
+     */
     public String getPari(int idPartie, String couleurJ, int numeroPari){
         String query = "SELECT * FROM pari WHERE idPartie=? and couleurJ=? and numeroPari=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -85,6 +112,13 @@ public class PariDaoImpl implements PariDao{
         return null;
     }
 
+    /**
+     *
+     * @param idPartie
+     * @param couleurJoueur
+     * @param idPari
+     * @return la liste des couleurs sur lesquelles a parié un joueur
+     */
     public List getListPari(int idPartie, String couleurJoueur, int idPari){
         String query = "SELECT * FROM pari WHERE idPartie=? AND couleurJ=? AND numeroPari=?";
         List list = new ArrayList<>();

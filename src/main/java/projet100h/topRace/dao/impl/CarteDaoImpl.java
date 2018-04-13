@@ -10,6 +10,9 @@ import java.util.List;
 public class CarteDaoImpl implements CarteDao{
 
     @Override
+    /**
+     * retourne la liste de l'ensemble des cartes du jeu
+     */
     public List<Carte> listCarte() {
         String query = "SELECT * FROM carte WHERE NOT idCarte=0";
         List<Carte> listOfCarte = new ArrayList<>();
@@ -33,7 +36,12 @@ public class CarteDaoImpl implements CarteDao{
         return listOfCarte;
     }
 
-    // retourne une liste contenant les couleurs des voitures et le nombre de déplacements associé que la carte permet
+    /**
+     *
+     * @param id (l'id d'une carte)
+     * @return une liste contenant les couleurs des voitures et le nombre de déplacements associé que la carte permet
+     */
+
     public List listDeplacementCarte(int id) {
         String query = "SELECT * FROM nbCase WHERE idCarte=? ";
         List listDeplacemementCouleur = new ArrayList<>();

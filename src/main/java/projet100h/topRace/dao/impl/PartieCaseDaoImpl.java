@@ -9,6 +9,10 @@ import java.util.List;
 
 public class PartieCaseDaoImpl implements PartieCaseDao {
 
+    /**
+     * permet de creer les cases d'un plateau au commencement d'une partie
+     * @param idPartie
+     */
     @Override
     public void creationPartieCase(int idPartie){
         String query = "SELECT * FROM cse";
@@ -41,6 +45,13 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
         }
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @param idPartie
+     * @return une case d'une partie
+     */
     @Override
     public PartieCase getPartieCase(int x, char y, int idPartie){
         String query = "SELECT * FROM partieCase WHERE x=? and y=? and idPartie=?";
@@ -65,6 +76,11 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
         return null;
     }
 
+    /**
+     * permet de modifier le statut d'une case d'une partie
+     * @param cse
+     * @param occupe
+     */
     @Override
     public void modifierStatut(PartieCase cse,boolean occupe){
         String query = "UPDATE partieCase SET occupee=? WHERE x=? and y=? and idPartie=?";
@@ -84,6 +100,11 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
 
     }
 
+    /**
+     *
+     * @param idPartie
+     * @return la liste des cases d'une partie
+     */
     @Override
     public List<PartieCase> listPartieCase(int idPartie) {
         String query = "SELECT * FROM partieCase WHERE idPartie=?";
@@ -112,5 +133,8 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
         System.out.println("error228");
         return listOfcases;
     }
+
+
+
 
 }

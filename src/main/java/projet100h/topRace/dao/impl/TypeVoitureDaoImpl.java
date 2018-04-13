@@ -12,6 +12,10 @@ import java.util.List;
 public class TypeVoitureDaoImpl implements TypeVoitureDao {
 
 
+    /**
+     *
+     * @return la liste des couleurs des voitures
+     */
     public ArrayList listeCouleur() {
         String query = "SELECT * FROM typeVoiture";
         ArrayList listCouleur = new ArrayList<>();
@@ -38,6 +42,11 @@ public class TypeVoitureDaoImpl implements TypeVoitureDao {
 
     }
 
+    /**
+     *
+     * @param idPartie
+     * @return la liste des couleurs déjà utilisé dans la partie
+     */
     public ArrayList listeCouleurIdPartie(int idPartie){
         String query = "SELECT * FROM joueur WHERE idPartie=?";
         ArrayList listCouleur = new ArrayList<>();
