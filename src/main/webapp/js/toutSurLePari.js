@@ -1,5 +1,6 @@
 // fonction pour parier
 function parier(idPari){
+    console.log("parier("+idPari+")");
     if (idPari>0 && idPari<4) {
         var data = {};
         var request = new XMLHttpRequest();
@@ -13,10 +14,10 @@ function parier(idPari){
         var verrte = document.getElementById("verte" + idPari);
         request.onload = function () {
             var answer = this.response;
-            if (answer == "error1"){
-                alert("veuilliez cocher 3 couleur pour le pari "+idPari);
-            } else if (answer == "error2"){
-                alert("le pari "+idPari+" a déjà été effectué");
+            if (answer == "error102"){
+                bulleAlert("veuilliez cocher 3 couleur pour le pari "+idPari);
+            } else if (answer == "error103"){
+                bulleAlert("le pari "+idPari+" a déjà été effectué");
             } else if (answer = "succeed"){
                 // on va fixer les checkbox
                 jaunne.disabled = "disabled";
@@ -25,15 +26,15 @@ function parier(idPari){
                 violettte.disabled = "disabled";
                 blanchee.disabled = "disabled";
                 verrte.disabled = "disabled";
+                bulleAlert("Le pari "+idPari+" a bien été effectué");
+                derniereAction("pari1Effectue");
+
             }
         }
-        data.numeroPari = idPari;
-        data.jaune = jaunne.checked;
-        data.bleue = bleuue.checked;
-        data.rouge = roouge.checked;
-        data.violette = violettte.checked;
-        data.blanche = blanchee.checked;
-        data.verte = verrte.checked;
+        var dat = '{"numeroPari":"'+idPari+'","jaune":"'+jaunne.checked+'","bleue":"'+bleuue.checked+'","rouge":"'+roouge.checked+'","violette":"'+violettte.checked+'","blanche":"'+blanchee.checked+'","verte":"'+verrte.checked+'"}';
+        data.data= dat;
+        data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
+        data.idPartie = document.getElementById("idPartie").innerText || document.getElementById("idPartie").textContent;
         console.log(data);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send("data=" + JSON.stringify(data));
@@ -45,6 +46,7 @@ function parier(idPari){
 
 //verifie si le pari a été envoyé ou pas
 function checkPari(idPari){
+    console.log("checkPari("+idPari+")");
     if (idPari>0 && idPari<4) {
         var request = new XMLHttpRequest();
         request.open("POST", "webservices/game/checkPari", true);
@@ -54,9 +56,10 @@ function checkPari(idPari){
             console.log("réponse : "+answer);
             var textFinal = "";
             if (answer == "le pari a bien été envoyé"){
-                textFinal = 'Pari envoyé !';
+                textFinal = 'Pari '+idPari+' reçu !';
             } else if (answer == "un pari aléatoire a été effectué"){
-                textFinal = 'Un pari aléatoire a été éffectué';
+                textFinal = 'Un pari aléatoire a été éffectué pour le pari '+idPari;
+                bulleAlert("Le pari "+idPari+" a été effectué aléatoirement");
             } else {
                 textFinal = 'erreur au niveau des paris';
             }
@@ -69,10 +72,15 @@ function checkPari(idPari){
             newElt.style.display = "none";
             eltParent.appendChild(newElt); // le compteur
             window.setTimeout("compteur('"+textFinal+"');",2999);
-            getPari(1);
+            getPari(idPari);
+            derniereAction("pari"+idPari+"Effectue");
         }
+        var data = {};
+        data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
+        data.idPartie = document.getElementById("idPartie").innerText || document.getElementById("idPartie").textContent;
+        data.data = idPari;
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send("data=" + JSON.stringify(idPari));
+        request.send("data=" + JSON.stringify(data));
         /* et on l'envoit */
     } else {
         console.log("l'idPari n'est pas bon");
@@ -81,6 +89,7 @@ function checkPari(idPari){
 
 //si le pari a déjà été effectuer, retourne et affiche les selections
 function getPari(idPari){
+    console.log("getPari("+idPari+")");
     if (idPari>0 && idPari<4) {
         var request = new XMLHttpRequest();
         request.open("POST", "webservices/game/getPari", true);
@@ -153,8 +162,12 @@ function getPari(idPari){
                 console.log("pas de pari effectuer");
             }
         };
+        var data = {};
+        data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
+        data.idPartie = document.getElementById("idPartie").innerText || document.getElementById("idPartie").textContent;
+        data.data = idPari;
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send("data=" + JSON.stringify(idPari));
+        request.send("data=" + JSON.stringify(data));
         /* et on l'envoit */
     } else {
         console.log("l'idPari n'est pas bon");

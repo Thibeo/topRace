@@ -10,6 +10,7 @@
     <link rel='stylesheet' href='css/rulesParaQuitt.css'> <!-- style des div #rules et #para -->
     <link rel='stylesheet' href='css/scrollBar.css'> <!-- style de la scrollbar -->
     <link rel="shortcut icon" href="img/logo.png">
+    <script type="text/javascript" src="js/derniereAction.js"></script>
     <script type="text/javascript" src="js/rulesParaQuitt.js"></script>
 
     <script type="text/javascript">
@@ -31,19 +32,52 @@
             obj1.style.opacity = (obj1.style.opacity * 1) + (signe1 * 0.04);
             obj2.style.opacity = 0.5 ;
 
-
         };
 
         // mise en place de l appel de la fonction toutes les 0.085 secondes
         // Pour arrêter le clignotement : clearInterval(periode);
         periode = setInterval(clignotementFading, 50 );
 
+        function quitter() {
+            var request = new XMLHttpRequest();
+            var data = {};
+            data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
+            data.idPartie = document.getElementById("idPartiee").innerText || document.getElementById("idPartiee").textContent;
+            data.data = "null";
+            request.open("POST", "webservices/wait/quitt", true);
+            request.responseType = "json";
+            request.onload = function () {
+                var answer = this.response;
+                console.log(answer);
+            }
+            console.log(data);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send("data=" + JSON.stringify(data));
+        }
+
+        function rechargement(){
+            var request = new XMLHttpRequest();
+            var data = document.getElementById("idPartiee").innerText || document.getElementById("idPartiee").textContent;
+            request.open("POST", "webservices/wait/charg", true);
+            request.responseType = "json";
+            request.onload = function () {
+                var answer = this.response;
+                console.log(answer);
+                if (answer == "start"){
+                    document.getElementById("recharg").submit();
+                }
+                window.setTimeout("rechargement();",1000);
+            }
+            console.log(data);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send("data=" + JSON.stringify(data));
+        }
 
     </script>
 
     </head>
 
-    <body onload="Cacher('fondPara');Cacher('fondRules');Cacher('rules');Cacher('para');Cacher('quitter');Cacher('fondQuitter');">
+    <body onload="Cacher('fondPara');Cacher('fondRules');Cacher('rules');Cacher('para');Cacher('quitter');Cacher('fondQuitter');rechargement();">
 
 <!-- HEADER -->
         <header th:replace="~{fragments::header}"></header>
@@ -60,22 +94,45 @@
                         <nav class="bloc1">
                             <table>
                                 <tr>
-                                    <th><p>La partie de Bob le brico</p></th>
-                                    <th></th>
+                                    <th><p th:text="${PartieById.nomDePartie}">La partie de Bob le brico</p></th>
                                     <th><p>Couleur</p></th>
                                     <th><button onclick='ACQuitter();'>Quitter</button></th>
                                 </tr>
                                 <tr th:each="joueur : ${listOfJoueur}">
-                                    <td><p th:text="${joueur.nomJoueur}"></p></td>
-                                    <td align="center"><p th:if="${joueur.nomJoueur == PartieById.nomDeProprio}"
-                                                          th:text="${'Propriétaire'}"></p></td>
+                                    <td><p  th:if="${joueur.nomJoueur == nomJ}"
+                                            th:class="${'active'}"
+                                            th:text="${joueur.nomJoueur}"></p>
+                                    <p th:if="${joueur.nomJoueur != nomJ}"
+                                        th:text="${joueur.nomJoueur}">
+                                    </p>
+                                    </td>
                                     <td align="center"><p th:text="${joueur.couleur}"></p></td>
+                                    <td align="center"><p th:if="${joueur.couleur == PartieById.couleurDeProprio}"
+                                                          th:text="${'Propriétaire'}"></p></td>
                                 </tr>
                             </table>
+                        </nav>
+
+                        <nav th:each="joueur : ${listOfJoueur}" th:if="${joueur.couleur == PartieById.couleurDeProprio && joueur.nomJoueur == nomJ && nbJoueur == 6}" class="bloc">
+                            <form method="post">
+                                <input type="HIDDEN" name="nomJoueur" id="nomJoueur" th:value="${nomJ}"/>
+                                <input type="HIDDEN" name="idPartie" id="idPartie" th:value="${PartieById.idPartie}"/>
+                                <input type="submit" name="action" value="Lancer la partie"/>
+                            </form>
                         </nav>
                     </nav>
                 </nav>
             </nav>
+            <!-- section pour idPartie -->
+            <section id="idPartiee" style="display: none" th:text="${PartieById.idPartie}">1</section>
+            <!-- section pour couleurJ -->
+            <section id="couleurJ" style="display: none" th:each="joujou : ${listOfJoueur}" th:if="${joujou.nomJoueur == nomJ}" th:text="${joujou.couleur}">Vert</section>
+
+            <form id="recharg" method="post" style="visibility: hidden;">
+                <input type="HIDDEN" name="nomJoueur" id="nomJoueur" th:value="${nomJ}"/>
+                <input type="HIDDEN" name="idPartie" id="idPartie" th:value="${PartieById.idPartie}"/>
+            </form>
+
             <nav class="bande2"></nav>
 
             <section class="footer">

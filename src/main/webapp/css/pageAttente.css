@@ -1,7 +1,9 @@
 /* ------------------------------------------- */
 /* --- div et table des joueurs en attente --- */
 /* ------------------------------------------- */
-
+.active{
+    border: 0.4vh solid black;
+}
 .bloc{
     display: inline-block;
     margin-top: 30px;
@@ -98,7 +100,26 @@ button{
     border-color:  yellow;
     outline : none;
 }
-
+input[type="submit"]{
+     color: yellow;
+     background-color: #696969;
+     border: 0.3vh solid;
+     border-top-color: #fdee00;
+     border-left-color: #fdee00;
+     border-bottom-color: #a99f00;
+     border-right-color: #a99f00;
+     outline : none;
+ }
+input[type="submit"]:active{
+    color: yellow;
+    background-color: #696969;
+    border: 0.3vh solid;
+    border-right-color: #fdee00;
+    border-bottom-color: #fdee00;
+    border-top-color: #a99f00;
+    border-left-color: #a99f00;
+    outline : none;
+}
 
 /* --------------------------------------- */
 /* --- point clignotant pour l'attente --- */

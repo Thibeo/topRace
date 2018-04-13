@@ -21,15 +21,34 @@ public class GameServlet extends GenericServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-        Integer idPartie = (Integer) session.getAttribute("sessionPartie");
+        Integer idPartie = (Integer) session.getAttribute("sessionIdPartie");
         String nomJoueur= (String) session.getAttribute("sessionNomJoueur");
+        String couleurJoueur ="";
+
+        System.out.println("idPartie = "+idPartie+" // nomJoueur = "+nomJoueur);
 
         WebContext context = new WebContext(req, resp, req.getServletContext());
+
+        context.setVariable("nomJ", nomJoueur);
+
+        Partie PartieById = GameLibrary.getInstance().getPartieById(idPartie);
+        context.setVariable("PartieById", PartieById);
+
+        List<Joueur> listOfJoueur = GameLibrary.getInstance().listOfJoueur(idPartie);
+        context.setVariable("listOfJoueur", listOfJoueur);
 
         List<Case> listCase = GameLibrary.getInstance().listCase();
         context.setVariable("listCase", listCase);
 
-        List<Carte> listCarte = GameLibrary.getInstance().listCarte();
+        for (int i = 0 ; i < listOfJoueur.size() ; i++){
+            if (listOfJoueur.get(i).getNomJoueur().equals(nomJoueur)){
+                couleurJoueur=listOfJoueur.get(i).getCouleur();
+            }
+        }
+
+        context.setVariable("couleurJoueurr", couleurJoueur);
+
+        List<CarteJoueur> listCarte = GameLibrary.getInstance().getCarteJoueur(idPartie,couleurJoueur);
         context.setVariable("listCarte", listCarte);
 
         List<NbCase> listNbCase = GameLibrary.getInstance().listNbCase();

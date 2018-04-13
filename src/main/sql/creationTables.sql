@@ -68,8 +68,9 @@ CREATE TABLE `cse` (
 
 CREATE TABLE `partie` (
   `idPartie` int(11) NOT NULL AUTO_INCREMENT,
-  `nomDePartie`varchar(45) NOT NULL,
-  `nomDeProprio`varchar(45) NOT NULL,
+  `nomDePartie` varchar(45) NOT NULL,
+  `couleurDeProprio` varchar(45) NOT NULL,
+  `etat` varchar(45) NOT NULL,
   PRIMARY KEY (`idPartie`)
 );
 
@@ -79,6 +80,7 @@ CREATE TABLE `joueur` (
   `idPartie` int(11) NOT NULL,
   `x` int(11) NOT NULL,
   `y` char(1) NOT NULL,
+  `derniereAction`varchar(45) NOT NULL,
   `score` int(11) ,
   PRIMARY KEY (`couleurJ`,`idPartie`)
 );

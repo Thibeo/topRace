@@ -30,6 +30,8 @@ public class TypeVoitureDaoImpl implements TypeVoitureDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error229");
         }
 
         return listCouleur;
@@ -49,6 +51,8 @@ public class TypeVoitureDaoImpl implements TypeVoitureDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error230");
         }
 
         return listCouleur;

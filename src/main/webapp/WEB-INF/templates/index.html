@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
     <head>
     	<title>TOP RACE - Accueil</title>
@@ -20,7 +20,7 @@
         </script>
     </head>
 
-    <body onload="Afficher('index');Cacher('param');Cacher('regles');">
+    <body onload="Afficher('index');Cacher('para');Cacher('rules');">
 
 <!-- HEADER -->
     	<header>
@@ -35,8 +35,8 @@
 	    	<section class="menu">
 	    		<ul>
 	    			<li><a href="home">Accueil</a></li>
-	    			<li><a href="#" onclick="Afficher('regles');Cacher('param');Cacher('index');">Règles</a></li>
-	    			<li><a href="#" onclick="Afficher('param');Cacher('regles');Cacher('index');">Paramètres</a></li>
+	    			<li><a href="#" onclick="Afficher('rules');Cacher('para');Cacher('index');">Règles</a></li>
+	    			<li><a href="#" onclick="Afficher('para');Cacher('rules');Cacher('index');">Paramètres</a></li>
 	    			<li><a href="jouer">Jouer</a></li>
 	    		</ul>
 	    	</section>
@@ -54,93 +54,12 @@ il se joue avec des pions, un plateau et surtout des feuilles.
 Nous l'avons modernisé et remis ainsi au goût du jour.
 
 Grâce à ce site, il sera possible de jouer une partie avec 
-des personnes physiquement éloignés de nous et sans forcément 
+des personnes physiquement éloignées de nous et sans forcément
 posséder le plateau et les éléments nécessaires au jeu.</font></pre>
                 </nav>
-                <nav id="regles">
-                    <h2>Voici les règles du jeu</h2>
-                    <p>Top race est un jeu de plateau, il se joue avec des cartes, des pions de couleurs en forme de voitures et comporte un système de paris.</p>
-                    <u>Les cartes :</u>
-                    <p>Chaque joueur a une voiture (tirée au hasard) et elles sont toutes sur la ligne de départ.</p>
-                    <p>Chaque joueur a un paquet de cartes pour faire avancer les voitures.</p>
-                    <p>Les cartes contiennent un ou plusieurs numéros et chaque numéro a une couleur.</p>
-                    <p>Exemple : le numéro 5 rouge va donc faire avancer la voiture rouge de 5 cases.</p> 
-                    <p>La voiture noir n’existant pas, la couleur noir permet de faire avancer n’importe quelle voiture choisie par le joueur. </p>
-                    <p>Les joueurs peuvent donc faire avancer plusieurs voitures en même temps, mais la voiture qui avance la première est celle dont le numéro est le plus grand.</p>
+                <div th:replace="~{fragments::rules}"></div>
+                <div th:replace="~{fragments::para}"></div>
 
-                    <figure class="cartes"><img src="img/cartes/22.png" width="100px"><img src="img/cartes/11.png" width="100px"><img src="img/cartes/27.png" width="100px"><img src="img/cartes/43.png" width="100px"></figure>
-
-                    <u>Le système de paris :</u>
-                    <p>Le circuit contient plusieurs lignes jaunes qui sont des lignes de « paris ». </p>
-                    <p>Au début du jeu, chaque joueur fait un pari sur les 3 voitures qu’il pense être en tête quand la première ligne jaune sera passée par une voiture. </p>
-                    <p>(Chaque joueur a le tableau ci-dessous et met des croix dans 3 cases correspondantes aux voitures sur lesquelles il parie)</p>
-                    <p>Les paris sont donc renouvelés à chaque fois qu’une nouvelle ligne jaune est dépassée. Un nombre de points (positifs ou négatifs) et attribué en fonction du tableau.</p>
-
-                    <figure class="paris"><img src="img/paris.png" width="800px"></figure>
-
-                    <u>Ligne d’arrivée :</u>
-                    <p>Et pour finir, il y a un classement à la ligne d’arrivée.</p>
-                    <figure class="final"><img src="img/final.png" width="600px"></figure>
-                    <p>Entre la dernière ligne jaune et la ligne d’arrivée, il n’y a plus de système de pari. C’est chacun pour soi : on essaye de faire gagner NOTRE </p>
-                    <p>voiture avec les cartes qu’il nous reste. Le total des points des paris plus les points du classement à l’arrivée donne les points totaux et ainsi détermine le gagnant.</p>
-                </nav>
-                <nav id="param">
-                    <h2>Changer les paramètres</h2>
-                    <table>
-                        <th><h3>Volume</h3></th>
-                        <tr>
-                            <td align="right">Volume principal&nbsp;</td>
-                            <td>
-                                <form id='formulaire' method="post" enctype="text/plain" oninput="v.value=parseInt(volume.value)">
-                                <input type="range" id="volume" name="volume" min="0" max="100" value="50">
-                                <output name="v" for="volume"></output>
-                                </form>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td align="right">Musique&nbsp;</td>
-                            <td>
-                                <form id='formulaire' method="post" enctype="text/plain" oninput="m.value=parseInt(musique.value)">
-                                <input type="range" id="musique" name="musique" min="0" max="100" value="50">
-                                <output name="m" for="musique"></output>
-                                </form>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td align="right">Effets sonores&nbsp;</td>
-                            <td>
-                                <form id='formulaire' method="post" enctype="text/plain" oninput="e.value=parseInt(effet.value)">
-                                <input type="range" id="effet" name="effet" min="0" max="100" value="50">
-                                <output name="e" for="effet"></output>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right">Alerte&nbsp;</td>
-                            <td>
-                                <form id='formulaire' method="post" enctype="text/plain" oninput="a.value=parseInt(alerte.value)">
-                                <input type="range" id="alerte" name="alerte" min="0" max="100" value="50">
-                                <output name="a" for="alerte"></output>
-                                </form>
-                            </td>
-                        </tr>
-                        <th><h3>Langue</h3></th>
-                        <tr>
-                            <td align="right">Français&nbsp;</td>
-                            <td>
-                                <img src="img/france.png" width="75px">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right">Anglais&nbsp;</td>
-                            <td>
-                                <img src="img/anglais.png" width="75px">
-                            </td>
-                        </tr>
-                    </table>
-                </nav>
     		</nav>
     		<nav class="bande2"></nav>
 

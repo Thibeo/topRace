@@ -30,11 +30,14 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
                     statement2.executeUpdate();
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    System.out.println("error225");
                 }
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error224");
         }
     }
 
@@ -56,11 +59,13 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error226");
         }
         return null;
     }
 
-
+    @Override
     public void modifierStatut(PartieCase cse,boolean occupe){
         String query = "UPDATE partieCase SET occupee=? WHERE x=? and y=? and idPartie=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -72,6 +77,8 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error227");
         }
 
 
@@ -93,9 +100,13 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
                                            resultSet.getInt("idPartie"),
                                            resultSet.getBoolean("occupee")));
                 }
+            }catch (SQLException e) {
+                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("");
+            System.out.println("error228");
         }
         return listOfcases;
     }

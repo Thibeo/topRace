@@ -21,4 +21,12 @@ public interface JoueurDao {
 
     public void updateScoreJoueur(String couleurJoueur,int resultatJoueur);
 
+    public void deleteJoueur (String couleurJ, int idPartie);
+
+    public void changerDernierAction(int idPartie, String couleurJ, String action);
+
+    public boolean actionFinieParTousJoueurs(int idPartie, String action);
+
+    public String getDerniereAction(int idPartie, String couleurJ);
+
 }

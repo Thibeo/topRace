@@ -18,9 +18,7 @@
             document.getElementById(texte).style.display = "";
         }
         function AfficherPseudo(idPartie){
-            document.getElementById("idPartie").style.display = "inline-block";
             document.getElementById("idPartie").value = idPartie;
-            document.getElementById("idPartie").style.display = "none";
 
         }
 
@@ -62,9 +60,9 @@
                     <form method="post">
                         <tr id="trr">
                             <td>Votre pseudo pour la partie :</td>
-                            <td class="inputPseudo"><input name="nomPseudo" id="nomPseudo" type="text" size="20" maxlength="100" placeholder="Votre pseudo" required/></td>
-                            <td id="td"><input name="idPartie" id="idPartie" type="text" value="0"/></td>
-                            <td><input type="submit" name="action" value="Valider" onclick="Afficher('idPartie');"/></td>
+                            <td class="inputPseudo"><input name="nomPseudo" id="nomPseudo" type="text" size="10" maxlength="9" placeholder="Votre pseudo" required/></td>
+                            <td id="td"><input name="idPartie" id="idPartie" type="HIDDEN" value="0"/></td>
+                            <td><input type="submit" name="action" value="Valider"/></td>
                         </tr>
                     </form>
                 </table>
@@ -118,11 +116,11 @@
                             <tr th:each="list : ${listNbJoueur}">
                                 <td><p th:each="partie : ${listPartie}"
                                        th:if="${list.get(0) == partie.idPartie  && list.get(1) != 6 }"
-                                       th:text="${partie.nomDeProprio}">Meilleur partie du monde</p></td>
+                                       th:text="${partie.nomDePartie}">Meilleur partie du monde</p></td>
 
                                 <td align="center"><p th:each="partie : ${listPartie}"
                                                       th:if="${list.get(0) == partie.idPartie && list.get(1) != 6}"
-                                                      th:text="${partie.nomDePartie}">Grosse cheville</p></td>
+                                                      th:text="${partie.couleurDeProprio}">Grosse cheville</p></td>
 
                                 <td align="center"><p th:if="${list.get(1) != 6}"
                                                       th:text="${list.get(1)+'/6'}">5/6</p></td>
@@ -147,19 +145,6 @@
                             <tr >
                                 <td>
                                     <input name="pseudo" id="pseudo" type="text" size="30" maxlength="50" placeholder="Votre pseudo" required/>
-                                </td>
-                            </tr>
-                            <tr >
-                                <td>
-                                    <select id="couleurJoueur" name="couleurJoueur">
-                                        <option value="" disabled selected>Votre couleur</option>
-                                        <option value="Jaune">Jaune</option>
-                                        <option value="Vert">Vert</option>
-                                        <option value="Violet">Violet</option>
-                                        <option value="Blanc">Blanc</option>
-                                        <option value="Rouge">Rouge</option>
-                                        <option value="Bleu">Bleu</option>
-                                    </select>
                                 </td>
                             </tr>
                           <tr >

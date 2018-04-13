@@ -29,7 +29,7 @@ public class JouerServlet extends GenericServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
-        List listofPartie = GameLibrary.getInstance().listPartie();
+        List<Partie> listofPartie = GameLibrary.getInstance().listPartie();
         context.setVariable("listPartie", listofPartie);
 
         List listNbJoueur = GameLibrary.getInstance().nbDeJoueur();
@@ -54,10 +54,6 @@ public class JouerServlet extends GenericServlet {
                 nomDePartie = req.getParameter("nomPartie");
                 nomDEProprio = req.getParameter("pseudo");
 
-                // CREER PARTIE
-                Partie newPartie = new Partie(null,nomDEProprio,nomDePartie);
-                Partie createdPartie = GameLibrary.getInstance().creerPartie(newPartie);
-
                 // CREER JOUEUR
                 Random rand = new Random();
                 int nombreAleatoire = rand.nextInt(5 - 0 + 1);
@@ -70,10 +66,16 @@ public class JouerServlet extends GenericServlet {
                 char positionY=positionYString.charAt(0);
                 String couleur= (String) listeCaracteristique.get(2);
 
+                // CREER PARTIE
+                Partie newPartie = new Partie(null,nomDePartie,couleur,"attente");
+                Partie createdPartie = GameLibrary.getInstance().creerPartie(newPartie);
+
                 PartieCase caseActuelle=new PartieCase(positionX,positionY,createdPartie.getIdPartie(),true);
 
-                Joueur newJoueur = new Joueur(couleur,nomDEProprio,caseActuelle,createdPartie.getIdPartie());
+                Joueur newJoueur = new Joueur(couleur,nomDEProprio,caseActuelle,createdPartie.getIdPartie(),"rien");
                 GameLibrary.getInstance().creerJoueur(newJoueur);
+
+
 
                 // pour "ouvrir" une session correspondant à la partie:
                 HttpSession session = req.getSession();
@@ -136,7 +138,7 @@ public class JouerServlet extends GenericServlet {
 
                 PartieCase caseActuelle2=new PartieCase(positionnX,positionnY,idPartie,true);
 
-                Joueur newJoueur2 = new Joueur(couleur2,pseudoJoueur,caseActuelle2,idPartie);
+                Joueur newJoueur2 = new Joueur(couleur2,pseudoJoueur,caseActuelle2,idPartie,"rien");
                 GameLibrary.getInstance().creerJoueur(newJoueur2);
 
                 // pour "ouvrir" une session correspondant à la partie:

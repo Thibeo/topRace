@@ -72,6 +72,7 @@ function animationPariSortie() {
 }
 
 function fermerTuto() {
+    derniereAction("fermerTuto");
     Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
     Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
     Cacher("tutoPrez");
@@ -81,10 +82,42 @@ function fermerTuto() {
     zindex("plateauParis",1);
     zindex("ligneJaune",-10);
     zindex("nomPartie",1);zindex("joueurs",1);zindex("plateau",0);
-    zindex("ligneCartes",1);zindex("carteTitre",2);zindex("carreHaut",2);zindex("carreBas",2);
+    zindex("ligneCartes",1);zindex("carteTitre",2);
     zindex("joueurJaune",1);zindex("joueurViolet",1);zindex("joueurBleu",1);
     zindex("joueurRouge",1);zindex("joueurBlanc",1);zindex("joueurVert",1);
-    fermerTableau();animationPariSortie();
+    animationPariSortie();
+}
+function LeOnload(){
+    bulleAlert("fermer");ConfirmChoixCartes("fermer");
+    Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
+    Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
+    Cacher("tutoPrez");
+    Cacher("tutoTouSElmt");Cacher("tutoPlateau");Cacher("tutoCarte");
+    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoPari3");
+    Cacher("ligneJaune");
+    zindex("plateauParis",1);
+    zindex("ligneJaune",-10);
+    zindex("nomPartie",1);zindex("joueurs",1);zindex("plateau",0);
+    zindex("ligneCartes",1);zindex("carteTitre",2);
+    zindex("joueurJaune",1);zindex("joueurViolet",1);zindex("joueurBleu",1);
+    zindex("joueurRouge",1);zindex("joueurBlanc",1);zindex("joueurVert",1);
+    animationPariSortie();
+
+    Cacher('choixCartes');Cacher('fondChoixCartes');
+    Cacher('fondPara');Cacher('fondRules');Cacher('fondQuitter');
+    Cacher('para');Cacher('quitter');Cacher('rules');  // on chache la section qui a pour id "para"
+
+    creationCompteur('le début de la partie commence dans ',10 , ' secondes');
+    compteur('début de la partie');
+
+    inverse('tb', 'col0');inverse('tb', 'col1');
+    inverse('tb', 'col2');inverse('tb', 'col6');
+    inverse('tb', 'col7');inverse('tb', 'col8');
+    check();avancer(0);
+
+    Afficher('fondTuto');Afficher('tutoPrez');Afficher('tutoInclicable');
+
+    Cacher('fondNoir');
 }
 
 function ouvrirTuto() {

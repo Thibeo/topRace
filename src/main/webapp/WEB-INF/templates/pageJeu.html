@@ -14,7 +14,9 @@
     <script type="text/javascript" src="js/rulesParaQuitt.js"></script>
     <script type="text/javascript" src="js/tuto.js"></script>
     <script type="text/javascript" src="js/banderole.js"></script>
+    <script type="text/javascript" src="js/derniereAction.js"></script>
     <script type="text/javascript" src="js/toutSurLePari.js"></script>
+    <script type="text/javascript" src="js/confirmAlert.js"></script>
     <script type="text/javascript">
 
         function avancerVoiture(couleur, top, left, rotate) {
@@ -22,19 +24,39 @@
             voiture.style.top = top+"vh";
             voiture.style.left = left+"vh";
             voiture.style.transform = "rotate("+rotate+"deg)";
+            voiture.style.backgroundColor
+        }
+
+        function quitter() {
+            var request = new XMLHttpRequest();
+            var data = {};
+            data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
+            data.idPartie = document.getElementById("idPartie").innerText || document.getElementById("idPartie").textContent;
+            data.data = "null";
+            request.open("POST", "webservices/wait/quitt", true);
+            request.responseType = "json";
+            request.onload = function () {
+                var answer = this.response;
+
+            }
+
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send("data=" + JSON.stringify(data));
         }
 
         function avancer(cse){
-            if (cse != 27 && cse != 28 && cse != 29 && cse != 31 && cse != 32 && cse != 33 && cse != 34 && cse != 35 && cse != 36
+            console.log("avancer("+cse+")");
+            if (cse != 61 && cse != 62 && cse != 63 && cse != 64 && cse != 65 && cse != 66  && cse != 31 && cse != 32 && cse != 33 && cse != 34 && cse != 35 && cse != 36
                 && cse != 41 && cse != 42 && cse != 43 && cse != 44 && cse != 45 && cse != 46) {
-                var postMyOpinionRequest = new XMLHttpRequest();
-                postMyOpinionRequest.open("POST", "webservices/game/avancer", true);
-                postMyOpinionRequest.responseType = "json";
-                postMyOpinionRequest.onload = function () {
+                var request = new XMLHttpRequest();
+                var data = {};
+                data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
+                data.idPartie = document.getElementById("idPartie").innerText || document.getElementById("idPartie").textContent;
+                request.open("POST", "webservices/game/avancer", true);
+                request.responseType = "json";
+                request.onload = function () {
                     var answer = this.response;
-                    console.log("answer: " + answer);
                     var longeur = parseInt(answer[0]);
-                    console.log("nb changement = " + longeur);
                     var i = 1;
                     for (var j = 0; j < longeur; j++) {
                         var top = "";
@@ -62,15 +84,12 @@
                             }
                         }
                         rotate = comt;
-                        console.log("la voiture qui est " + couleur + " se trouve en top = " + top + " et left = " + left);
                         avancerVoiture(couleur, top, left, rotate);
-                    }
-
-                    console.log("");
-
+                    };
                 }
-                postMyOpinionRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                postMyOpinionRequest.send("data=" + JSON.stringify(cse));
+                data.data=cse;
+                request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                request.send("data=" + JSON.stringify(data));
                 /* et on l'envoit */
             } else {
                 var eltIdCartes = document.getElementById("idCarte");
@@ -110,9 +129,10 @@
 
 
         function choixCartes() {
+            console.log("choixCartes");
             var bool = false;
             var elems = document.getElementsByName("couleurCarte");
-            for (i = 0; i < elems.length; i++) {
+            for (var i = 0; i < elems.length; i++) {
                 if (elems[i].checked) {
                     bool = true;
                 }
@@ -120,11 +140,9 @@
             }
             if (bool == true){
                 var couleur = document.fromChoixCarte.couleurCarte.value;
-                console.log("couleur choisie = "+couleur);
                 var eltIdCartes = document.getElementById("idCarte");
                 var idCartes = eltIdCartes.innerText || eltIdCartes.textContent;
-                console.log("id carte = "+idCartes);
-                for (i = 0; i < elems.length; i++) {
+                for (var i = 0; i < elems.length; i++) {
                     elems[i].checked = false;
                     elems[i].disabled = false;
                 }
@@ -136,9 +154,22 @@
                 document.getElementById("verteTexte").style.textDecoration = "none";
                 AfficherCacher("choixCartes");
                 AfficherCacher("fondChoixCartes");
+                derniereAction("carte"+idCartes);
+                document.getElementById('carte'+idCartes).style.display = "none";
                 avancer(idCartes+couleur);
+                disableCarte();
+                changeEtat("rien");
+                 var eltParent = document.getElementById('navCompteur');
+                 eltParent.innerHTML='Carte jouée';
+                 var newElt = document.createElement("span"); //on crée le span (qui sert de compteur)
+                 newElt.id = "compteur"; //on met son id
+                 newElt.innerHTML = "0"; // le temps du compteur
+                 newElt.style.display = "none";
+                 eltParent.appendChild(newElt); // le compteur
+                 console.log(" je suis lancé depuis choixCartes");
+                 window.setTimeout("compteur('" + 'Carte jouée' + "');", 2999);
             }else{
-                alert("tu dois choisir une couleur !");
+                bulleAlert("tu dois choisir une couleur !");
             }
         }
 
@@ -168,6 +199,9 @@
             return cols;
         }
 
+        function classActive(coul){
+            document.getElementById(coul).classList.add("active");
+        }
 
 
 
@@ -175,19 +209,7 @@
 
 </head>
 
-<body onload="  inverse('tb', 'col0');inverse('tb', 'col1');
-                inverse('tb', 'col2');inverse('tb', 'col6');
-                inverse('tb', 'col7');inverse('tb', 'col8');
-                check();avancer(0);
-                Cacher('choixCartes');Cacher('fondChoixCartes');
-                Cacher('fondPara');Cacher('fondRules');Cacher('rules');
-                Cacher('para');Cacher('quitter');Cacher('fondQuitter');
-                fermerTuto();Afficher('fondTuto');Afficher('tutoPrez');Afficher('tutoInclicable');
-                Cacher('fondNoir');
-                creationCompteur('le début de la partie commence dans ',5 , ' secondes');
-                compteur('début de la partie');
-                getPari(1);getPari(2);getPari(3);
-"> <!-- à laisser en dernier -->
+<body th:onload="${'classActive(\''+couleurJoueurr+'\');LeOnload();'}">
 
 <!-- HEADER -->
 <header th:replace="~{fragments::header}"></header>
@@ -248,23 +270,24 @@
 
 <!-- nav afficher le nom des joueuers -->
     <nav id="joueurs">
-        <nav class="jBlanc" onclick="ouvrirTuto();">- Joueur 1</nav>
-        <nav class="jVert">- Joueur 2</nav>
-        <nav class="jBleu">- Joueur 3</nav>
-        <nav class="jRouge">- Joueur 4</nav>
-        <nav class="jViolet">- Joueur 5</nav>
-        <nav class="jJaune">- Joueur 6</nav>
+       <nav th:each="joueur : ${listOfJoueur}" th:id="${joueur.couleur}" th:class="${'j'+joueur.couleur}" th:text="${joueur.nomJoueur}"></nav>
     </nav>
 
+<!-- affichage de la fleche rouge -->
+    <section id="flecheRouge"></section>
+
+<!-- affichage de la derniere carte joué par un joueur -->
+    <section id="lastCarte"></section>
+
 <!-- section pour idPartie -->
-    <section id="idPartie" style="display: none">1</section>
+    <section id="idPartie" style="display: none" th:text="${PartieById.idPartie}">1</section>
 
 <!-- section pour couleurJ -->
-    <section id="couleurJ" style="display: none">Vert</section>
+    <section id="couleurJ" style="display: none" th:text="${couleurJoueurr}">Vert</section>
 
 <!-- nav pour le nom de la partie -->
     <nav id="nomPartie">
-        <p>Nom de la partie</p>
+        <p th:text="${PartieById.nomDePartie}">Nom de la partie</p>
     </nav>
 
 <!-- nav pour le tableau de paris a effectuer -->
@@ -347,13 +370,13 @@
             <tr class="pariReponse">
                 <td colspan="2" class="vide"></td>
                 <td class="colonnePari btnValide" name="col0" align="center">
-                    <button  type="submit" id="btnPari1" name="btnPari" onclick="console.log('test');">Valider</button>
+                    <button id="btnPari1" onclick="console.log('test');">Valider</button>
                 </td>
                 <td class="colonnePari btnValide" name="col1" align="center">
-                    <button  type="submit" id="btnPari2" name="btnPari" onclick="console.log('test');">Valider</button>
+                    <button id="btnPari2" onclick="console.log('test');">Valider</button>
                 </td>
                 <td class="colonnePari btnValide" name="col2" align="center">
-                    <button  type="submit" id="btnPari3" name="btnPari" onclick="console.log('test');">Valider</button>
+                    <button id="btnPari3" onclick="console.log('test');">Valider</button>
                 </td>
             </tr>
         </table>
@@ -380,13 +403,45 @@
     <nav id="carteTitre">
         <b> Cartes </b>
     </nav>
-<!-- nav pour les images des coins de la scrollbar de la div "ligneCartes" -->
-    <nav id="carreHaut"></nav>
-    <nav id="carreBas"></nav>
 
 <!-- nav pour les images des cartes du joueurs -->
     <nav id="ligneCartes">
-        <nav class="imagee" th:each="carte : ${listCarte}" th:style="${'background-image: url(img/cartes/'+carte.idCarte+'.png);background-size: cover;'}" th:id="${'carte'+carte.idCarte}" th:onclick="${'avancer('+carte.idCarte+');'}"></nav>
+        <nav class="imagee" th:each="carte : ${listCarte}" th:style="${'background-image: url(img/cartes/'+carte.idCarte+'.png);background-size: cover;'}" th:id="${'carte'+carte.idCarte}" th:onclick="${'ConfirmChoixCartes('+carte.idCarte+');'}"></nav>
+    </nav>
+
+<!-- section de l'alert -->
+    <nav id="fondbulleAlert" onclick='bulleAlert("fermer");'></nav>
+    <section id="bulleAlert">
+        <button class="x" onclick='bulleAlert("fermer");'>
+            X
+        </button>
+        <h2>Alerte</h2>
+        <p id="bulleAlertTexte"></p>
+    </section>
+
+<!-- -->
+    <nav id="fondConfirmChoixCartes" onclick='ConfirmChoixCartes("fermer");'></nav>
+    <nav id="confirmChoixCartes">
+        <button class="x" onclick='ConfirmChoixCartes("fermer");'>
+            X
+        </button>
+        <p id="idConfirmChoixCartes" style="visibility: hidden;position:fixed;">0</p>
+        <h2 style="text-align: center; margin-bottom: 0px;">Voulez-vous jouer cette carte ?</h2>
+        <table align="center">
+            <tr>
+                <td colspan="2">
+                    <section class="imagee" id="laCarteConfirm"  style="background-image: url(img/cartes/1.png);background-size: cover;'}"></section>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick='ConfirmChoixCartes("fermer");'>Non</button>
+                </td>
+                <td>
+                    <button onclick='ConfirmChoixCartes("fermer");suiteDeChoixCarte();'>Oui</button>
+                </td>
+            </tr>
+        </table>
     </nav>
 
 <!-- ------- -->
@@ -445,9 +500,9 @@
         <nav id="tutoPlateau">
             <h2>Tutoriel (3/7)</h2>
             <p>Ici se trouve le plateau</p>
-            <p>On peut y voire les 6 voitures</p>
+            <p>On peut y voir les 6 voitures</p>
             <p>sur la ligne de départ, que vous</p>
-            <p>allez faire avancer grace au carte</p>
+            <p>allez faire avancer grâce aux cartes</p>
             <button class="x" onclick=' Cacher("tutoPlateau");
                                         Afficher("tutoCarte");
                                         zindex("plateau",0);
@@ -458,8 +513,6 @@
                                         zindex("joueurBlanc",1);
                                         zindex("joueurVert",1);
                                         zindex("ligneCartes",10007);
-                                        zindex("carreHaut",10007);
-                                        zindex("carreBas",10007);
                                         zindex("carteTitre",10007);'>
                 Next
             </button>
@@ -469,15 +522,13 @@
             <p>En parlant des cartes :</p>
             <p>Voici les cartes à votre disposition</p>
             <p>Chaque joueurs à des cartes differentes</p>
-            <p>Les cartes avec des voitures noir font</p>
+            <p>Les cartes avec des voitures noires font</p>
             <p>avancer la voiture de votre choix</p>
             <button class="x" onclick=' Cacher("tutoCarte");
                                         Afficher("tutoNomPartieJoueurs");
                                         Cacher("tutoTouSElmt");
                                         Afficher("tutoParis");
                                         zindex("ligneCartes",1);
-                                        zindex("carreHaut",2);
-                                        zindex("carreBas",2);
                                         zindex("carteTitre",2);
                                         zindex("plateauParis",10007);
                                         Afficher("tutoParis");
@@ -494,7 +545,7 @@
         <nav id="tutoPari1">
             <h2>Tutoriel (5/7)</h2>
             <p>Le sytème de paris est la base du jeu. C'est grâce aux paris que vous gagnez des points. Il y a 3 paris à faire au total</p>
-            <p>Cliquer sur les boutons <button class="bouttonJaune">1</button> <button class="bouttonRouge">2</button> <button class="bouttonJaune">3</button> pour afficher ou cahcher les paris 1,2 et 3</p>
+            <p>Cliquer sur les boutons <button class="bouttonJaune">1</button> <button class="bouttonRouge">2</button> <button class="bouttonJaune">3</button> pour afficher ou cacher les paris 1,2 et 3</p>
             <button class="x next" onclick=' Cacher("tutoPari1");
                                         Afficher("tutoPari2");
                                         Afficher("ligneJaune");
@@ -509,8 +560,8 @@
         <nav id="tutoPari2">
             <h2>Tutoriel (6/7)</h2>
             <p>Le premier pari se fait dès le début du jeu.
-                Chaque joueur pari sur les 3 voitures qu'il pense voir en tête dès que la 1er ligne jaune sera dépassée par une voiture.
-                Une fois celle-ci dépassée, le jeu se met en pause, un nombre de points vous est attibué en fonction des voitures sur lesquelles vous avez pariez.
+                Chaque joueur parie sur les 3 voitures qu'il pense voir en tête dès que la 1er ligne jaune sera dépassée par une voiture.
+                Une fois celle-ci dépassée, le jeu se met en pause, un nombre de points vous est attibué en fonction des voitures sur lesquelles vous avez parié.
                 Il faut donc à présent faire le deuxième paris etc ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
             <button class="x next" onclick=' Cacher("tutoPari2");
                                         Afficher("tutoPari3");
@@ -525,7 +576,7 @@
         </nav>
         <nav id="tutoPari3">
             <h2>Tutoriel (7/7)</h2>
-            <p>Une fois la dernière ligne jaune dépassé, c'est du chacun pour soi. Le but est de faire arriver sa voiture en première.</p>
+            <p>Une fois la dernière ligne jaune dépassée, c'est du chacun pour soi. Le but est de faire arriver sa voiture en première.</p>
             <p>Un nombre de points est aussi ajouté en fonction du classement finale. le joueur ayant le plus de point gagne la partie !</p>
             <button class="x next" onclick='fermerTuto();'>
                 Start !

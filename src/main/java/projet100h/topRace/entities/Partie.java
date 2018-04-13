@@ -3,13 +3,15 @@ package projet100h.topRace.entities;
 public class Partie {
     Integer idPartie;
     String nomDePartie;
-    String nomDeProprio;
+    String couleurDeProprio;
+    String etat;
 
 
-    public Partie(Integer idPartie,String nomProprio, String nomPartie){
+    public Partie(Integer idPartie,String nomPartie, String couleurDeProprio, String etat){
         this.nomDePartie=nomPartie;
         this.idPartie=idPartie;
-        this.nomDeProprio=nomProprio;
+        this.couleurDeProprio=couleurDeProprio;
+        this.etat=etat;
     }
 
     public int getIdPartie() { return idPartie; }
@@ -18,6 +20,9 @@ public class Partie {
     public String getNomDePartie() { return nomDePartie; }
     public void setNomDePartie(String nomDePartie) { this.nomDePartie = nomDePartie; }
 
-    public String getNomDeProprio() { return nomDeProprio; }
-    public void setNomDeProprio(String nomDeProprio) { this.nomDeProprio = nomDeProprio; }
+    public String getCouleurDeProprio() { return couleurDeProprio; }
+    public void setCouleurDeProprio(String couleurDeProprio) { this.couleurDeProprio = couleurDeProprio; }
+
+    public String getEtat() { return etat; }
+    public void setEtat(String etat) { this.etat = etat; }
 }
