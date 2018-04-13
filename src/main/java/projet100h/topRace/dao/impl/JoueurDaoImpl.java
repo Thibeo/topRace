@@ -277,5 +277,35 @@ public class JoueurDaoImpl implements JoueurDao {
 
     }
 
+    /**
+     *
+     * @param idPartie
+     * @return la liste des postions des joueurs à un instant t
+     */
+
+    public List listOfPosition(int idPartie){
+        String query = "SELECT (x,y,couleurJ) FROM joueur WHERE idPartie=? ORDER BY x DESC";
+        PartieCase partieCse = null;
+        List list = new ArrayList<>();
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idPartie);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    List couleurPosition = new ArrayList<>();
+                    couleurPosition.add(resultSet.getString("couleurJ"));
+                    couleurPosition.add(resultSet.getInt("x"));
+                    couleurPosition.add(resultSet.getString("y"));
+                    list.add(couleurPosition);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("");
+            System.out.println("error215");
+        }
+        return list;
+    }
+
 
 }

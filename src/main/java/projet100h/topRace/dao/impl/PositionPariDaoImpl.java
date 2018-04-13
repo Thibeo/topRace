@@ -14,8 +14,14 @@ import java.util.List;
 public class PositionPariDaoImpl implements PositionPariDao {
 
 
-    //recupere dans la table positionPari les positions des voitures:
 
+
+    /**
+     * recupere dans la table positionPari les positions des voitures:
+     * @param idPartie
+     * @param numeroPari
+     * @return une liste ([couleur,x,'y'],[couleur2,x2,'y2'],etc..)
+     */
     public List getPositionPari(int idPartie, int numeroPari){
         String query = "SELECT * FROM positionpari WHERE idPartie=? AND numeroPari=? ORDER BY x,y";
         List listPosition = new ArrayList<>();
@@ -36,6 +42,31 @@ public class PositionPariDaoImpl implements PositionPariDao {
             e.printStackTrace();
         }
         return listPosition;
+    }
+
+
+    /**
+     * rempli la table positionPari avec les emplacements des voitures au moment d'un franchissement de ligne jaune
+     * @param numeroPari
+     * @param idPartie
+     */
+
+    public void nouvellePositionPari(int numeroPari,int idPartie,String couleur,int x,char y){
+        String query = "INSERT INTO positionpari(idPartie,couleurV,numeroPari,x,y) VALUES(?,?,?,?,?)";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1,idPartie);
+            statement.setString(2,couleur);
+            statement.setInt(3,numeroPari);
+            statement.setInt(4,x);
+            statement.setString(5,String.valueOf(y));
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("");
+            System.out.println("error214");
+        }
     }
 
 

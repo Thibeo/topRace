@@ -286,11 +286,11 @@ public class GameLibrary {
 
     public int calcul(int idPartie, int idPari, String couleurJoueur) {
         //recupere dans la table positionPari les positions des voitures:
-        List positionPari = new ArrayList<>();
-        positionPari = positionPariDao.getPositionPari(idPartie, idPari);
+
+        List positionPari = positionPariDao.getPositionPari(idPartie, idPari);
         //recupere dans la table pari le pari du joueur:
-        List pariJoueur = new ArrayList<>();
-        pariJoueur = pariDao.getListPari(idPartie, couleurJoueur, idPari);
+
+        List pariJoueur = pariDao.getListPari(idPartie, couleurJoueur, idPari);
         // recupere le score du joueur
         int resultatJoueur = joueurDao.getScoreJoueur(couleurJoueur, idPartie);
 

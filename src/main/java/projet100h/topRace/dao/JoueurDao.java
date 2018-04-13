@@ -29,4 +29,6 @@ public interface JoueurDao {
 
     public String getDerniereAction(int idPartie, String couleurJ);
 
+    public List listOfPosition(int idPartie);
+
 }
