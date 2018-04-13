@@ -32,9 +32,15 @@ public class WaitingWS {
                 answer="wait";
             }
         }catch (Exception e) {
+<<<<<<< Updated upstream
             System.out.println("error116");
             System.out.println();
             answer = "error116";
+=======
+            System.out.println("error8");
+            System.out.println();
+            answer = "error8";
+>>>>>>> Stashed changes
         }
 
         return Response.ok().entity(gsonService.toJson(answer)).build();
@@ -56,9 +62,15 @@ public class WaitingWS {
             GameLibrary.getInstance().deleteJoueur(couleurJ,idPartie);
             answer = "Le joueur "+couleurJ+" a bien quitter la partie "+String.valueOf(idPartie);
         } catch (Exception e) {
+<<<<<<< Updated upstream
             System.out.println("error115");
             System.out.println();
             answer = "error115";
+=======
+            System.out.println("error6");
+            System.out.println();
+            answer = "error6";
+>>>>>>> Stashed changes
         }
 
 

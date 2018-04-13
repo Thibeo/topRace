@@ -27,6 +27,7 @@ public class GameLibrary {
     private PartieDao partieDao = new PartieDaoImpl();
     private TypeVoitureDao voitureDao = new TypeVoitureDaoImpl();
     private PariDao pariDao = new PariDaoImpl();
+
     private PositionPariDao positionPariDao=new PositionPariDaoImpl();
 
     private CarteJoueurDao carteJoueurDao = new CarteJoueurDaoImpl();
@@ -199,6 +200,12 @@ public class GameLibrary {
     public ArrayList listCouleur(){
         return (voitureDao.listeCouleur());
     }    // fonction retournant la liste des couleurs des différentes voitures:
+
+
+
+
+    // fonction retournant la liste des couleurs des différentes voitures déjà présentes sur la partie placée en paramètre
+
     public ArrayList listCouleurIdPartie(Integer idPartie){
         ArrayList listCouleurIdPartie = voitureDao.listeCouleurIdPartie(idPartie);
         ArrayList listCouleur = voitureDao.listeCouleur();
@@ -221,13 +228,17 @@ public class GameLibrary {
         }
         return (listCouleurFinal);
     }// fonction retournant la liste des couleurs des différentes voitures déjà présentent sur la partie placé en paramètre
+
+
     public int getIdPartie(String nom){ return(partieDao.getIdPartieByName(nom)); }    //fonction retournant l'id correspondant à la partie dont le nom est rentré en parametre:
     public String getDerniereAction(int idPartie, String couleurJ){ return joueurDao.getDerniereAction(idPartie, couleurJ);}
-    public void repartitionCarteJoueur(int idPartie) {
+    public void repartitionCarteJoueur(int idPartie){
+
         List<Carte> listofCarte = listCarte(); // on recupère toutes les cartes
         int compteurNbCoup = 0; // compteur créé pour les test
         int compteur = 1; // on crèè un compteur qui va distribuer les carte a chaque joueur
         int taille = listofCarte.size(); // on récupère la taille de la liste pour la boucle
+
         for (int i = 0; i < taille; i++) { // on va faire autant de fois qu'il y a de carte la boucle ci dessous
             Random rand = new Random();
             int nombreAleatoire = rand.nextInt((listofCarte.size() - 1) - 0 + 1); // on créé un nombra aléatoire compris entre 0 et le nombre de cartes restante -1
@@ -268,17 +279,21 @@ public class GameLibrary {
     }
 
 
+
+
+
     // fonction qui calcule en fonction de l'idPari,couleurJoueur, idPartie le score du joueur:
 
-    public int calcul(int idPartie, int idPari, String couleurJoueur){
+    public int calcul(int idPartie, int idPari, String couleurJoueur) {
         //recupere dans la table positionPari les positions des voitures:
-        List positionPari=new ArrayList<>();
+        List positionPari = new ArrayList<>();
         positionPari = positionPariDao.getPositionPari(idPartie, idPari);
         //recupere dans la table pari le pari du joueur:
-        List pariJoueur=new ArrayList<>();
-        pariJoueur=pariDao.getListPari(idPartie,couleurJoueur,idPari);
+        List pariJoueur = new ArrayList<>();
+        pariJoueur = pariDao.getListPari(idPartie, couleurJoueur, idPari);
         // recupere le score du joueur
-        int resultatJoueur=joueurDao.getScoreJoueur(couleurJoueur, idPartie);
+        int resultatJoueur = joueurDao.getScoreJoueur(couleurJoueur, idPartie);
+
 
 
         /*
@@ -307,61 +322,61 @@ public class GameLibrary {
 
 
         // une fois qu'on a trié la liste, il faut comparer les deux listes (positions et pari):
-        for(int i=0; i<pariJoueur.size();i++){
-            String couleur= (String) pariJoueur.get(i);
-            int compteur=1;
-            for (int j=0;j<positionPari.size();j++){
-                if((positionPari.get(j)).equals(couleur)){
-                    compteur = j+1;
+        for (int i = 0; i < pariJoueur.size(); i++) {
+            String couleur = (String) pariJoueur.get(i);
+            int compteur = 1;
+            for (int j = 0; j < positionPari.size(); j++) {
+                if ((positionPari.get(j)).equals(couleur)) {
+                    compteur = j + 1;
                 }
             }
             //pari 1:
-            if (idPari==1){
-                if (compteur==1){
-                    resultatJoueur=resultatJoueur+9;
-                }else if (compteur==2){
-                    resultatJoueur=resultatJoueur+6;
-                }else if (compteur==3){
-                    resultatJoueur=resultatJoueur+3;
-                }else if (compteur==5){
-                    resultatJoueur=resultatJoueur-1;
-                }else if (compteur==6){
-                    resultatJoueur=resultatJoueur-3;
+            if (idPari == 1) {
+                if (compteur == 1) {
+                    resultatJoueur = resultatJoueur + 9;
+                } else if (compteur == 2) {
+                    resultatJoueur = resultatJoueur + 6;
+                } else if (compteur == 3) {
+                    resultatJoueur = resultatJoueur + 3;
+                } else if (compteur == 5) {
+                    resultatJoueur = resultatJoueur - 1;
+                } else if (compteur == 6) {
+                    resultatJoueur = resultatJoueur - 3;
                 }
-            //pari 2:
-            }else if (idPari==2){
-                if (compteur==1){
-                    resultatJoueur=resultatJoueur+6;
-                }else if (compteur==2){
-                    resultatJoueur=resultatJoueur+4;
-                }else if (compteur==3){
-                    resultatJoueur=resultatJoueur+2;
-                }else if (compteur==4){
-                    resultatJoueur=resultatJoueur-1;
-                }else if (compteur==5){
-                    resultatJoueur=resultatJoueur-3;
-                }else if (compteur==6){
-                    resultatJoueur=resultatJoueur-6;
+                //pari 2:
+            } else if (idPari == 2) {
+                if (compteur == 1) {
+                    resultatJoueur = resultatJoueur + 6;
+                } else if (compteur == 2) {
+                    resultatJoueur = resultatJoueur + 4;
+                } else if (compteur == 3) {
+                    resultatJoueur = resultatJoueur + 2;
+                } else if (compteur == 4) {
+                    resultatJoueur = resultatJoueur - 1;
+                } else if (compteur == 5) {
+                    resultatJoueur = resultatJoueur - 3;
+                } else if (compteur == 6) {
+                    resultatJoueur = resultatJoueur - 6;
                 }
-             //pari 3:
-            }else {
-                if (compteur==1){
-                    resultatJoueur=resultatJoueur+3;
-                }else if (compteur==2){
-                    resultatJoueur=resultatJoueur+2;
-                }else if (compteur==3){
-                    resultatJoueur=resultatJoueur+1;
-                }else if (compteur==4){
-                    resultatJoueur=resultatJoueur-2;
-                }else if (compteur==5){
-                    resultatJoueur=resultatJoueur-6;
-                }else if (compteur==6){
-                    resultatJoueur=resultatJoueur-9;
+                //pari 3:
+            } else {
+                if (compteur == 1) {
+                    resultatJoueur = resultatJoueur + 3;
+                } else if (compteur == 2) {
+                    resultatJoueur = resultatJoueur + 2;
+                } else if (compteur == 3) {
+                    resultatJoueur = resultatJoueur + 1;
+                } else if (compteur == 4) {
+                    resultatJoueur = resultatJoueur - 2;
+                } else if (compteur == 5) {
+                    resultatJoueur = resultatJoueur - 6;
+                } else if (compteur == 6) {
+                    resultatJoueur = resultatJoueur - 9;
                 }
             }
         }
         // pour changer dans la base de données le score du joueur
-        joueurDao.updateScoreJoueur(couleurJoueur,resultatJoueur);
+        joueurDao.updateScoreJoueur(couleurJoueur, resultatJoueur);
         return resultatJoueur;
     }
 
