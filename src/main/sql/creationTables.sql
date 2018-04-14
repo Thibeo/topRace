@@ -7,6 +7,7 @@ DROP TABLE joueur;
 DROP TABLE partieCase;
 DROP TABLE carteJoueur;
 DROP TABLE pari;
+DROP TABLE positionpari;
 
 CREATE TABLE `pari` (
   `idPartie` int(11) NOT NULL,
