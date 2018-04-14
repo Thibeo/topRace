@@ -107,7 +107,11 @@ function LeOnload(){
     Cacher('fondPara');Cacher('fondRules');Cacher('fondQuitter');
     Cacher('para');Cacher('quitter');Cacher('rules');  // on chache la section qui a pour id "para"
 
+<<<<<<< Updated upstream
     creationCompteur('le début de la partie commence dans ',10 , ' secondes');
+=======
+    creationCompteur('le début de la partie commence dans ',180 , ' secondes');
+>>>>>>> Stashed changes
     compteur('début de la partie');
 
     inverse('tb', 'col0');inverse('tb', 'col1');

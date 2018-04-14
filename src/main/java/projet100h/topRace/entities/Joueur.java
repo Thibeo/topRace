@@ -1,8 +1,14 @@
 package projet100h.topRace.entities;
 
+import projet100h.topRace.dao.JoueurDao;
 import projet100h.topRace.dao.PartieCaseDao;
+import projet100h.topRace.dao.PositionPariDao;
+import projet100h.topRace.dao.impl.JoueurDaoImpl;
 import projet100h.topRace.dao.impl.PartieCaseDaoImpl;
+import projet100h.topRace.dao.impl.PositionPariDaoImpl;
 import projet100h.topRace.managers.GameLibrary;
+
+import java.util.List;
 
 public class Joueur {
     private String nomJoueur;
@@ -11,6 +17,8 @@ public class Joueur {
     private int idPartie;
     private String derniereAction;
 
+
+
     public Joueur(String couleur, String nomJoueur, PartieCase caseActuelle, int idPartie, String derniereAction){
         this.nomJoueur=nomJoueur;
         this.couleur=couleur;
@@ -18,6 +26,10 @@ public class Joueur {
         this.idPartie=idPartie;
         this.derniereAction=derniereAction;
     }
+
+    private JoueurDao joueurDao = new JoueurDaoImpl();
+    private PositionPariDao positionPariDao=new PositionPariDaoImpl();
+
 
     public int getIdPartie(){ return (this.idPartie); }
     public void setIdPartie(int idPartie) { this.idPartie = idPartie; }
@@ -34,10 +46,11 @@ public class Joueur {
     public String getDerniereAction() { return derniereAction; }
     public void setDerniereAction(String derniereAction) { this.derniereAction = derniereAction; }
 
-    /* s'applique sur un plateau
-         * permet de regarder si la case sur laquelle on arrive est une case présentant un déplacement particulier
-         *
-         */
+
+    /**
+     * permet de regarder si la case sur laquelle on arrive est une case présentant un déplacement particulier
+     * @param plateau
+     */
     public void deplacementException(Plateau plateau) {
 
 
@@ -93,7 +106,11 @@ public class Joueur {
     }
 
 
-
+    /**
+     *
+     * @param plateau
+     * @return la nouvelle position du joueur après un déplacement de 1 case
+     */
     public PartieCase deplacementSeul(Plateau plateau){
 
 
@@ -202,11 +219,54 @@ public class Joueur {
 
     }
 
+    /**
+     *focntion qui permet de savoir si une ligne jaune a été franchie
+     * @param i (nombre de déplacements qu'il reste à la voiture de faire
+     * @return le numéro de la ligne qui a été franchie ou 0 si aucune n'est franchie
+     */
+    public int ligneJaune(int i){
+        int numeroLigne=0;
+        if (this.caseActuelle.getX()==14 && i>0){
+            numeroLigne=1;
+        }else if (this.caseActuelle.getX()==26 && i>0){
+            numeroLigne=2;
+        }else if (this.caseActuelle.getX()==38 && i>0){
+            numeroLigne=3;
+        }
+        return numeroLigne;
+    }
+
+    /**
+     * fonction qui permet de déplacer la voiture
+     * @param nbreCase (nombre de déplacement à effectuer)
+     * @param plateau (le plateau sur lequel evolue la voitures (avec les cases déjà occupées)
+     * @return la nouvelle case de la voiture et donc du joueur
+     */
+
     public PartieCase deplacer(int nbreCase, Plateau plateau){
         PartieCase ancienne=this.caseActuelle;
         PartieCase cse=null;
+        List listPositionJoueur=joueurDao.listOfPosition(this.idPartie);
 
+        //regarde si une ligne jaune va etre dépassée
         for(int i=0;i<nbreCase;i++){
+            if (this.ligneJaune(i)==1){
+                for(int j=0;j<listPositionJoueur.size();j++){
+                    List element=(List) listPositionJoueur.get(j);
+                    positionPariDao.nouvellePositionPari(1,this.idPartie,(String) element.get(0),(int) element.get(1), (char) element.get(2));
+                }
+            }else if (this.ligneJaune(i)==2){
+                for(int j=0;j<listPositionJoueur.size();j++){
+                    List element=(List) listPositionJoueur.get(j);
+                    positionPariDao.nouvellePositionPari(2,this.idPartie,(String) element.get(0),(int) element.get(1), (char) element.get(2));
+                }
+            }else if (this.ligneJaune(i)==3){
+                for(int j=0;j<listPositionJoueur.size();j++){
+                    List element=(List) listPositionJoueur.get(j);
+                    positionPariDao.nouvellePositionPari(3,this.idPartie,(String) element.get(0),(int) element.get(1), (char) element.get(2));
+                }
+            }
+
             // si la case suivante correspond à un rétrécissement de plateau:
             if (plateau.exception(this.caseActuelle).equals("retrecissement")) {
                 // si on est en a, on ne peut pas accèder à 'b' de la colonne suivante, on ne peut que
@@ -260,6 +320,8 @@ public class Joueur {
 
         return cse;
     }
+
+
 
 
     public void deplacementOptimise(Plateau plateau, int nbreCase){

@@ -13,9 +13,9 @@ public class DataSourceProvider {
             dataSource = new MysqlDataSource();
             dataSource.setServerName("localhost");
             dataSource.setPort(3306);
-            dataSource.setDatabaseName("projet100h");
+            dataSource.setDatabaseName("toprace");
             dataSource.setUser("root");
-            dataSource.setPassword("");
+            dataSource.setPassword("PH2Qiy8yLqRc3G3y");
         }
         return dataSource;
     }

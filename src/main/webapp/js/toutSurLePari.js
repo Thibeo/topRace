@@ -14,9 +14,15 @@ function parier(idPari){
         var verrte = document.getElementById("verte" + idPari);
         request.onload = function () {
             var answer = this.response;
+<<<<<<< Updated upstream
             if (answer == "error102"){
                 bulleAlert("veuilliez cocher 3 couleur pour le pari "+idPari);
             } else if (answer == "error103"){
+=======
+            if (answer == "error1"){
+                bulleAlert("veuilliez cocher 3 couleur pour le pari "+idPari);
+            } else if (answer == "error2"){
+>>>>>>> Stashed changes
                 bulleAlert("le pari "+idPari+" a déjà été effectué");
             } else if (answer = "succeed"){
                 // on va fixer les checkbox

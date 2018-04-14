@@ -10,6 +10,10 @@ import java.util.List;
 
 public class CaseDaoImpl implements CaseDao {
 
+    /**
+     * permet dobtenir la liste des cases formant une partie
+     * @return la liste des cases d'une partie
+     */
     @Override
     public List<Case> listCase() {
         String query = "SELECT * FROM cse";
@@ -40,6 +44,11 @@ public class CaseDaoImpl implements CaseDao {
         return listOfCase;
     }
 
+    /**
+     *
+     * @param cse
+     * @return les pixels correspondant à une case
+     */
     @Override
     public String getTopLeft(PartieCase cse) {
         String query = "SELECT * FROM cse WHERE x=? and y=?";

@@ -26,6 +26,12 @@ public class Plateau {
     }
 
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @return une case du plateau
+     */
     public PartieCase getCase(int x, char y) {
         int b=0;
         if (y=='b') {
@@ -37,6 +43,11 @@ public class Plateau {
         return this.tableauCase[x][b];
     }
 
+    /**
+     * permet de savoir si une case fait l'objet d'une exception du plateau
+     * @param cse
+     * @return l'exception correspondant à la case si il y en a une
+     */
     public String exception(PartieCase cse) {
         int x=cse.getX();
         char y=cse.getY();
@@ -69,9 +80,9 @@ public class Plateau {
 
     }
 
-    /* en entrée: la case dont le statut fait évoluer le statut d'autres cases
+    /**
      * permet de changer le statut de deux ou plusieurs cartes en meme temps
-     *
+     * @param cse (la case dont le statut fait évoluer le statut d'autres cases)
      */
     public void lierCasesException(PartieCase cse) {
         int x=cse.getX();

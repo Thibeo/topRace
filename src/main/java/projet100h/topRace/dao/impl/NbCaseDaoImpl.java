@@ -9,6 +9,10 @@ import java.util.List;
 
 public class NbCaseDaoImpl implements NbCaseDao {
 
+    /**
+     *
+     * @return la liste des cases sur lesquelles agit une carte
+     */
     @Override
     public List<NbCase> listNbCase() {
         String query = "SELECT * FROM nbCase";

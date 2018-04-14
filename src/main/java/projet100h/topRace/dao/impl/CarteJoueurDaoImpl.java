@@ -14,6 +14,11 @@ import java.util.List;
 
 public class CarteJoueurDaoImpl implements CarteJoueurDao {
 
+
+    /**
+     * permet de rentrer dans la table carteJoueur une nouvelle carte
+     * @param carteJoueur
+     */
     @Override
     public void createCarteJoueur(CarteJoueur carteJoueur){
         String query = "INSERT INTO cartejoueur(idPartie, couleurJ, idCarte, utilisee) VALUES(?,?,?,?)";
@@ -32,6 +37,12 @@ public class CarteJoueurDaoImpl implements CarteJoueurDao {
         }
     }
 
+    /**
+     * permet d'actualiser la table carteJoueur après l'usage d'une des cartes
+     * @param idCarte
+     * @param idPartie
+     * @param couleurJ
+     */
     @Override
     public void utilisation(int idCarte, int idPartie, String couleurJ){
         String query = "UPDATE cartejoueur SET utilisee = ? WHERE couleurJ = ? AND idPartie = ? AND idCarte=?";
@@ -51,6 +62,12 @@ public class CarteJoueurDaoImpl implements CarteJoueurDao {
     }
 
 
+    /**
+     *
+     * @param idPartie
+     * @param couleurJ
+     * @return la liste des cartes d'un joueur
+     */
     @Override
     public List<CarteJoueur> getCarteJoueur(int idPartie, String couleurJ){
         String query = "SELECT * FROM cartejoueur WHERE idPartie=? AND couleurJ=? AND utilisee=?";

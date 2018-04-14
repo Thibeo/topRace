@@ -27,6 +27,9 @@ public class GameLibrary {
     private PartieDao partieDao = new PartieDaoImpl();
     private TypeVoitureDao voitureDao = new TypeVoitureDaoImpl();
     private PariDao pariDao = new PariDaoImpl();
+
+    private PositionPariDao positionPariDao=new PositionPariDaoImpl();
+
     private CarteJoueurDao carteJoueurDao = new CarteJoueurDaoImpl();
 
 
@@ -98,6 +101,13 @@ public class GameLibrary {
         plateau.setTableauCase(tableauCase);
         return plateau;
     }
+
+    /**
+     *
+     * @param couleur
+     * @param idPartie
+     * @return un joueur
+     */
     public Joueur getJoueur(String couleur, int idPartie){
         List<String> list = joueurDao.getXYByCouleur(couleur,idPartie);
         PartieCase cse = partieCaseDao.getPartieCase(Integer.parseInt(list.get(0)), list.get(1).charAt(0), idPartie);
@@ -105,6 +115,12 @@ public class GameLibrary {
     }
     public void deleteJoueur (String couleurJ, int idPartie){ joueurDao.deleteJoueur(couleurJ, idPartie);}
     public void creationPartieCase(int idPartie){ partieCaseDao.creationPartieCase(idPartie);}
+
+    /**
+     * permet de modifier le statut des cases présentants des exceptions
+     * @param cse
+     * @param occupee
+     */
     public void modifierCaseException(PartieCase cse,boolean occupee) {
         int x=cse.getX();
         char y=cse.getY();
@@ -194,9 +210,21 @@ public class GameLibrary {
         return (partieDao.createPartie(partie));
     }
     public void creerJoueur(Joueur joueur){ joueurDao.createJoueur(joueur); } // fonction creerJoueur (permet de rentrer un nouveau joueur dans la base de données:
+
+
+    /**
+     *
+     * @return la liste des couleurs des différentes voitures
+     */
     public ArrayList listCouleur(){
         return (voitureDao.listeCouleur());
-    }    // fonction retournant la liste des couleurs des différentes voitures:
+    }
+
+    /**
+     *
+     * @param idPartie
+     * @return retournant la liste des couleurs des différentes voitures déjà présentes sur la partie placée en paramètre
+     */
     public ArrayList listCouleurIdPartie(Integer idPartie){
         ArrayList listCouleurIdPartie = voitureDao.listeCouleurIdPartie(idPartie);
         ArrayList listCouleur = voitureDao.listeCouleur();
@@ -218,52 +246,177 @@ public class GameLibrary {
             }
         }
         return (listCouleurFinal);
-    }// fonction retournant la liste des couleurs des différentes voitures déjà présentent sur la partie placé en paramètre
+    }
     public int getIdPartie(String nom){ return(partieDao.getIdPartieByName(nom)); }    //fonction retournant l'id correspondant à la partie dont le nom est rentré en parametre:
     public String getDerniereAction(int idPartie, String couleurJ){ return joueurDao.getDerniereAction(idPartie, couleurJ);}
+
+    /**
+     * fonction permettant d'attribuer à chaque joueur des cartes de manière aleatoire
+     * @param idPartie
+     */
     public void repartitionCarteJoueur(int idPartie){
+
         List<Carte> listofCarte = listCarte(); // on recupère toutes les cartes
         int compteurNbCoup = 0; // compteur créé pour les test
         int compteur = 1; // on crèè un compteur qui va distribuer les carte a chaque joueur
         int taille = listofCarte.size(); // on récupère la taille de la liste pour la boucle
-        for (int i = 0 ; i < taille ; i++){ // on va faire autant de fois qu'il y a de carte la boucle ci dessous
+
+        for (int i = 0; i < taille; i++) { // on va faire autant de fois qu'il y a de carte la boucle ci dessous
             Random rand = new Random();
             int nombreAleatoire = rand.nextInt((listofCarte.size() - 1) - 0 + 1); // on créé un nombra aléatoire compris entre 0 et le nombre de cartes restante -1
-            if (compteur==1){ // puis en fonction du compteur on va ajouter une carte au joueur, chacun a son tour
-                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(),idPartie,"Bleu",false ));
+            if (compteur == 1) { // puis en fonction du compteur on va ajouter une carte au joueur, chacun a son tour
+                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(), idPartie, "Bleu", false));
                 listofCarte.remove(nombreAleatoire); // puis on enlève la carte de la liste
                 compteurNbCoup++;
-            } else if (compteur==2){
-                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(),idPartie,"Blanc",false ));
+            } else if (compteur == 2) {
+                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(), idPartie, "Blanc", false));
                 listofCarte.remove(nombreAleatoire);
                 compteurNbCoup++;
-            } else if (compteur==3){
-                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(),idPartie,"Vert",false ));
+            } else if (compteur == 3) {
+                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(), idPartie, "Vert", false));
                 listofCarte.remove(nombreAleatoire);
                 compteurNbCoup++;
-            } else if (compteur==4){
-                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(),idPartie,"Rouge",false ));
+            } else if (compteur == 4) {
+                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(), idPartie, "Rouge", false));
                 listofCarte.remove(nombreAleatoire);
                 compteurNbCoup++;
-            } else if (compteur==5){
-                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(),idPartie,"Jaune",false ));
+            } else if (compteur == 5) {
+                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(), idPartie, "Jaune", false));
                 listofCarte.remove(nombreAleatoire);
                 compteurNbCoup++;
-            } else if (compteur==6){
-                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(),idPartie,"Violet",false ));
+            } else if (compteur == 6) {
+                carteJoueurDao.createCarteJoueur(new CarteJoueur(listofCarte.get(nombreAleatoire).getIdCarte(), idPartie, "Violet", false));
                 listofCarte.remove(nombreAleatoire);
                 compteurNbCoup++;
             }
-            if (compteur != 6){ // une fois fini on va augmenté le compteur pour passer au joueur suivant
+            if (compteur != 6) { // une fois fini on va augmenté le compteur pour passer au joueur suivant
                 compteur++;
-            }else{ // et si c'est le 6ème joueur, on va revenir au premier
-                compteur=1;
+            } else { // et si c'est le 6ème joueur, on va revenir au premier
+                compteur = 1;
             }
         }
         System.out.println("/////////////////////////////////////////////////");
-        System.out.println("il y a eu "+compteurNbCoup+" distribution de carte");
+        System.out.println("il y a eu " + compteurNbCoup + " distribution de carte");
         System.out.println("/////////////////////////////////////////////////");
+    }
 
+    /**
+     *
+     * @param idPartie
+     * @param idPari
+     * @param couleurJoueur
+     * @return le score du joueur
+     */
+    public int calcul(int idPartie, int idPari, String couleurJoueur) {
+        //recupere dans la table positionPari les positions des voitures:
+
+        List positionPari = positionPariDao.getPositionPari(idPartie, idPari);
+        //recupere dans la table pari le pari du joueur:
+
+        List pariJoueur = pariDao.getListPari(idPartie, couleurJoueur, idPari);
+        // recupere le score du joueur
+        int resultatJoueur = joueurDao.getScoreJoueur(couleurJoueur, idPartie);
+
+
+
+        /*
+        //trie la liste positionPari en ordre decroissant (pour avoir en 1 position la couleur de la voiture la plus avancée)
+        List<String> positionPariTriee=new ArrayList<String>();
+        for (int i=1; i<positionPari.size();i++){
+            List couleurAAjouter=(List) positionPari.get(i);
+            for(int j=i;j<positionPari.size();j++){
+                List couleurAComparer=(List) positionPari.get(j);
+                // compare les positions :
+                // d'abord les x:
+                if(((int) couleurAComparer.get(1)) > ((int) couleurAAjouter.get(1))){
+                    couleurAAjouter=couleurAComparer;
+                 //si les x sont égaux, il faut comparer les y:
+                }else if (((int) couleurAComparer.get(1)) == ((int) couleurAAjouter.get(1))){
+                    if(((String) couleurAComparer.get(2)).charAt(0)=='a'){
+                        couleurAAjouter=couleurAComparer;
+                    }else if((((String) couleurAComparer.get(2)).charAt(0)=='b') && (((String) couleurAAjouter.get(2)).charAt(0)=='c')){
+                        couleurAAjouter=couleurAComparer;
+                    }
+                }
+                positionPariTriee.add((String) couleurAAjouter.get(0));
+            }
+        }
+        */
+
+
+        // une fois qu'on a trié la liste, il faut comparer les deux listes (positions et pari):
+        for (int i = 0; i < pariJoueur.size(); i++) {
+            String couleur = (String) pariJoueur.get(i);
+            int compteur = 1;
+            for (int j = 0; j < positionPari.size(); j++) {
+                if ((positionPari.get(j)).equals(couleur)) {
+                    compteur = j + 1;
+                }
+            }
+            //pari 1:
+            if (idPari == 1) {
+                if (compteur == 1) {
+                    resultatJoueur = resultatJoueur + 9;
+                } else if (compteur == 2) {
+                    resultatJoueur = resultatJoueur + 6;
+                } else if (compteur == 3) {
+                    resultatJoueur = resultatJoueur + 3;
+                } else if (compteur == 5) {
+                    resultatJoueur = resultatJoueur - 1;
+                } else if (compteur == 6) {
+                    resultatJoueur = resultatJoueur - 3;
+                }
+                //pari 2:
+            } else if (idPari == 2) {
+                if (compteur == 1) {
+                    resultatJoueur = resultatJoueur + 6;
+                } else if (compteur == 2) {
+                    resultatJoueur = resultatJoueur + 4;
+                } else if (compteur == 3) {
+                    resultatJoueur = resultatJoueur + 2;
+                } else if (compteur == 4) {
+                    resultatJoueur = resultatJoueur - 1;
+                } else if (compteur == 5) {
+                    resultatJoueur = resultatJoueur - 3;
+                } else if (compteur == 6) {
+                    resultatJoueur = resultatJoueur - 6;
+                }
+                //pari 3:
+            } else {
+                if (compteur == 1) {
+                    resultatJoueur = resultatJoueur + 3;
+                } else if (compteur == 2) {
+                    resultatJoueur = resultatJoueur + 2;
+                } else if (compteur == 3) {
+                    resultatJoueur = resultatJoueur + 1;
+                } else if (compteur == 4) {
+                    resultatJoueur = resultatJoueur - 2;
+                } else if (compteur == 5) {
+                    resultatJoueur = resultatJoueur - 6;
+                } else if (compteur == 6) {
+                    resultatJoueur = resultatJoueur - 9;
+                }
+            }
+        }
+        // pour changer dans la base de données le score du joueur
+        joueurDao.updateScoreJoueur(couleurJoueur, resultatJoueur);
+        return resultatJoueur;
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

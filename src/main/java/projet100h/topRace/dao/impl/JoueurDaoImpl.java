@@ -13,6 +13,13 @@ import java.util.List;
 
 public class JoueurDaoImpl implements JoueurDao {
 
+    /**
+     *
+     * @param couleur
+     * @param idPartie
+     * @param cse
+     * @return un joueur d'après la postion de sa voiture sur le plateau
+     */
     @Override
     public Joueur getJoueurByCase(String couleur, int idPartie, PartieCase cse){
         String query = "SELECT * FROM joueur WHERE couleurJ=? and idPartie=?";
@@ -37,6 +44,12 @@ public class JoueurDaoImpl implements JoueurDao {
         return null;
     }
 
+    /**
+     *
+     * @param couleur
+     * @param idPartie
+     * @return la position d'une voiture d'après sa couleur
+     */
     @Override
     public List<String> getXYByCouleur(String couleur, int idPartie){
         String query = "SELECT * FROM joueur WHERE couleurJ=? and idPartie=?";
@@ -60,6 +73,11 @@ public class JoueurDaoImpl implements JoueurDao {
         return null;
     }
 
+    /**
+     * permet de changer le statut d'une case dans la base de données
+     * @param joueur
+     * @param cse
+     */
     @Override
     public void changerCase(Joueur joueur, PartieCase cse){
         String query1 = "UPDATE joueur SET x = ?, y = ? WHERE couleurJ = ? AND idPartie = ?";
@@ -78,6 +96,12 @@ public class JoueurDaoImpl implements JoueurDao {
         }
     }
 
+    /**
+     * permet de modifier la derniere action d'un joueur
+     * @param idPartie
+     * @param couleurJ
+     * @param action
+     */
     @Override
     public void changerDernierAction(int idPartie, String couleurJ, String action){
         String query1 = "UPDATE joueur SET derniereAction = ? WHERE couleurJ = ? AND idPartie = ?";
@@ -95,6 +119,12 @@ public class JoueurDaoImpl implements JoueurDao {
         }
     }
 
+    /**
+     * permet de savoir lorsqu'une action est finie par tous les joueurs
+     * @param idPartie
+     * @param action
+     * @return
+     */
     @Override
     public boolean actionFinieParTousJoueurs(int idPartie, String action){
         String query = "SELECT * FROM joueur WHERE idPartie=? AND derniereAction=?";
@@ -120,6 +150,12 @@ public class JoueurDaoImpl implements JoueurDao {
         }
     }
 
+    /**
+     *
+     * @param idPartie
+     * @param couleurJ
+     * @return la derniere action d'un joueur
+     */
     @Override
     public String getDerniereAction(int idPartie, String couleurJ){
         String query = "SELECT * FROM joueur WHERE idPartie=? AND couleurJ=?";
@@ -141,6 +177,10 @@ public class JoueurDaoImpl implements JoueurDao {
         return null;
     }
 
+    /**
+     * permet de creer un joueur
+     * @param joueur
+     */
     public void createJoueur(Joueur joueur){
         String query = "INSERT INTO joueur(couleurJ,nomDeJoueur,idPartie,x,y,derniereAction) VALUES(?,?,?,?,?,?)";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
@@ -161,6 +201,11 @@ public class JoueurDaoImpl implements JoueurDao {
     }
 
 
+    /**
+     *
+     * @param idPartie
+     * @return la liste des joueurs d'une partie
+     */
     public List listOfJoueur(int idPartie){
         String query = "SELECT * FROM joueur WHERE idPartie=? ORDER BY couleurJ DESC";
         PartieCase partieCse = null;
@@ -187,7 +232,53 @@ public class JoueurDaoImpl implements JoueurDao {
         return list;
     }
 
+    /**
+     *
+     * @param couleur
+     * @param idPartie
+     * @return le score d'un joueur
+     */
+    public int getScoreJoueur(String couleur, int idPartie){
+        String query = "SELECT score FROM joueur WHERE couleurJ=? and idPartie=?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, couleur);
+            statement.setInt(2, idPartie);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return (resultSet.getInt("score"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
+    /**
+     * permet de mettre à jour le score d'un joueur
+     * @param couleurJoueur
+     * @param resultatJoueur
+     */
+    public void updateScoreJoueur(String couleurJoueur,int resultatJoueur){
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement("UPDATE joueur SET score=? WHERE couleur=?") ) {
+            statement.setInt(1,resultatJoueur);
+            statement.setString(2,couleurJoueur);
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    /**
+     * permet de supprimer un joueur
+     * @param couleurJ
+     * @param idPartie
+     */
     @Override
     public void deleteJoueur (String couleurJ, int idPartie){
         String query = "SELECT * FROM `partie`  WHERE idPartie=?";
@@ -244,6 +335,36 @@ public class JoueurDaoImpl implements JoueurDao {
             }
         }
 
+    }
+
+    /**
+     *
+     * @param idPartie
+     * @return la liste des postions des joueurs à un instant t
+     */
+
+    public List listOfPosition(int idPartie){
+        String query = "SELECT (x,y,couleurJ) FROM joueur WHERE idPartie=? ORDER BY x DESC";
+        PartieCase partieCse = null;
+        List list = new ArrayList<>();
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idPartie);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    List couleurPosition = new ArrayList<>();
+                    couleurPosition.add(resultSet.getString("couleurJ"));
+                    couleurPosition.add(resultSet.getInt("x"));
+                    couleurPosition.add(resultSet.getString("y"));
+                    list.add(couleurPosition);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("");
+            System.out.println("error215");
+        }
+        return list;
     }
 
 
