@@ -50,6 +50,8 @@ function getEtat() {
         console.log("getEtat = "+answer);
         if (answer == "true"){
             document.getElementById('compteur').innerHTML=1;
+        } else if (answer == "ligne jaune 1"){
+
         }
     }
     data.data= "";
