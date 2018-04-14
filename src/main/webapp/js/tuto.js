@@ -75,9 +75,9 @@ function fermerTuto() {
     derniereAction("fermerTuto");
     Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
     Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
-    Cacher("tutoPrez");
+    Cacher("tutoPrez");Cacher("tutoFlecheCarte");
     Cacher("tutoTouSElmt");Cacher("tutoPlateau");Cacher("tutoCarte");
-    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoPari3");
+    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoFin");
     Cacher("ligneJaune");
     zindex("plateauParis",1);
     zindex("ligneJaune",-10);
@@ -91,9 +91,9 @@ function LeOnload(){
     bulleAlert("fermer");ConfirmChoixCartes("fermer");
     Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
     Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
-    Cacher("tutoPrez");
+    Cacher("tutoPrez");Cacher("tutoFlecheCarte");
     Cacher("tutoTouSElmt");Cacher("tutoPlateau");Cacher("tutoCarte");
-    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoPari3");
+    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoFin");
     Cacher("ligneJaune");
     zindex("plateauParis",1);
     zindex("ligneJaune",-10);
