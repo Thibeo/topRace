@@ -7,6 +7,7 @@ DELETE FROM partie;
 DELETE FROM joueur;
 DELETE FROM pari;
 DELETE FROM cartejoueur;
+DELETE FROM positionpari;
 
 /* ------------------------------------ */
 /* ------------ LES CARTES ------------ */

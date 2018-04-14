@@ -76,7 +76,7 @@ public class JouerServlet extends GenericServlet {
 
                 PartieCase caseActuelle=new PartieCase(positionX,positionY,createdPartie.getIdPartie(),true);
 
-                Joueur newJoueur = new Joueur(couleur,nomDEProprio,caseActuelle,createdPartie.getIdPartie(),"rien");
+                Joueur newJoueur = new Joueur(couleur,nomDEProprio,caseActuelle,createdPartie.getIdPartie(),"rien",0);
                 GameLibrary.getInstance().creerJoueur(newJoueur);
 
 
@@ -142,7 +142,7 @@ public class JouerServlet extends GenericServlet {
 
                 PartieCase caseActuelle2=new PartieCase(positionnX,positionnY,idPartie,true);
 
-                Joueur newJoueur2 = new Joueur(couleur2,pseudoJoueur,caseActuelle2,idPartie,"rien");
+                Joueur newJoueur2 = new Joueur(couleur2,pseudoJoueur,caseActuelle2,idPartie,"rien",0);
                 GameLibrary.getInstance().creerJoueur(newJoueur2);
 
                 // pour "ouvrir" une session correspondant à la partie:

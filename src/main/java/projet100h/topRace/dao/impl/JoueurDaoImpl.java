@@ -33,7 +33,8 @@ public class JoueurDaoImpl implements JoueurDao {
                                       resultSet.getString("nomDeJoueur"),
                                       cse,
                                       resultSet.getInt("idPartie"),
-                                      resultSet.getString("derniereAction"));
+                                      resultSet.getString("derniereAction"),
+                                      resultSet.getInt("score"));
                 }
             }
         } catch (SQLException e) {
@@ -182,7 +183,7 @@ public class JoueurDaoImpl implements JoueurDao {
      * @param joueur
      */
     public void createJoueur(Joueur joueur){
-        String query = "INSERT INTO joueur(couleurJ,nomDeJoueur,idPartie,x,y,derniereAction) VALUES(?,?,?,?,?,?)";
+        String query = "INSERT INTO joueur(couleurJ,nomDeJoueur,idPartie,x,y,derniereAction,score) VALUES(?,?,?,?,?,?,?)";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1,joueur.getCouleur());
@@ -191,6 +192,7 @@ public class JoueurDaoImpl implements JoueurDao {
             statement.setInt(4,joueur.getCaseActuelle().getX());
             statement.setString(5,String.valueOf(joueur.getCaseActuelle().getY()));
             statement.setString(6,joueur.getDerniereAction());
+            statement.setInt(7,joueur.getScore());
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -221,7 +223,8 @@ public class JoueurDaoImpl implements JoueurDao {
                             resultSet.getString("nomDeJoueur"),
                             partieCse,
                             resultSet.getInt("idPartie"),
-                            resultSet.getString("derniereAction")));
+                            resultSet.getString("derniereAction"),
+                            resultSet.getInt("score")));
                 }
             }
         } catch (SQLException e) {
@@ -344,7 +347,7 @@ public class JoueurDaoImpl implements JoueurDao {
      */
 
     public List listOfPosition(int idPartie){
-        String query = "SELECT (x,y,couleurJ) FROM joueur WHERE idPartie=? ORDER BY x DESC";
+        String query = "SELECT (x,y,couleurJ)  FROM joueur WHERE idPartie=? ORDER BY x DESC";
         PartieCase partieCse = null;
         List list = new ArrayList<>();
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();

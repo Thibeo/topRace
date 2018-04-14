@@ -409,6 +409,25 @@
         <nav class="imagee" th:each="carte : ${listCarte}" th:style="${'background-image: url(img/cartes/'+carte.idCarte+'.png);background-size: cover;'}" th:id="${'carte'+carte.idCarte}" th:onclick="${'ConfirmChoixCartes('+carte.idCarte+');'}"></nav>
     </nav>
 
+<!-- nav pour les résultats paris -->
+    <nav id="fondResultPari" class="fond"></nav>
+    <nav id="resultPari">
+        <button class="x" onclick="bullePari('fermer','','','','','','');">
+            X
+        </button>
+        <h2 id="titreResultPari"></h2>
+        <table id="tableResultPari" align="center">
+            <tr>
+                <td align="center">Joueur</td>
+                <td align="center">Score</td>
+            </tr>
+            <tr th:each="joueur : ${listOfJoueur}" >
+                <td th:id="${joueur.couleur+'Couleur'}" th:text="${joueur.nomJoueur}"></td>
+                <td align="center" th:id="${joueur.couleur+'PariJoueur'}" th:text="${joueur.score}"></td>
+            </tr>
+        </table>
+    </nav>
+
 <!-- section de l'alert -->
     <nav id="fondbulleAlert" onclick='bulleAlert("fermer");'></nav>
     <section id="bulleAlert">

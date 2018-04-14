@@ -91,6 +91,10 @@ function compteur(textFinal){
                     getEtat();
                     getFleche();
                 }
+                if (s == 980){
+                    console.log("getResult");
+                    getPariResult(1);
+                }
             }
         }
         compteur.innerHTML=s;

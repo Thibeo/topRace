@@ -102,6 +102,7 @@ public class GameLibrary {
         return plateau;
     }
 
+    public int getScoreJoueur(String couleur, int idPartie){ return joueurDao.getScoreJoueur(couleur, idPartie); }
     /**
      *
      * @param couleur

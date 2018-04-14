@@ -39,7 +39,7 @@ public class GameWS {
         }
         System.out.println("bool = "+bool);
         if (bool == true){
-            try {
+            //try {
                 int idCarte = Integer.parseInt(data);
                 List listDeplacementCarte = GameLibrary.getInstance().listDeplacementCarte(idCarte);
                 GameLibrary.getInstance().utilisation(idCarte,idPartie,couleurJ);
@@ -69,12 +69,12 @@ public class GameWS {
                 answer=answer+"-";
                 System.out.println(answer);
                 return Response.ok().entity(gsonService.toJson(answer)).build();
-            }
+            /*}
             catch (Exception e) {
                 System.out.println("error112");
                 System.out.println();
                 return Response.ok().entity(gsonService.toJson("error112")).build();
-            }
+            }*/
         } else {
             try {
                 System.out.println("je suis dans le else");
@@ -537,6 +537,41 @@ public class GameWS {
         }
         return Response.ok().entity(gsonService.toJson(answer)).build();
     }
+
+    @POST
+    @Path("/getPariResult")
+    public Response getPariResult(@FormParam("data") String data1 ){
+        JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
+
+        // on recupère les variables
+        int idPartie = jsooon.getIdPartie();
+        String couleurJ = jsooon.getCouleur();
+        String data = jsooon.getData();
+
+        // on créé la réponse
+        String answer;
+
+        String etat;
+
+        try {
+            answer = String.valueOf(GameLibrary.getInstance().getScoreJoueur("Violet",idPartie));
+            answer = answer+'-'+String.valueOf(GameLibrary.getInstance().getScoreJoueur("Vert",idPartie));
+            answer = answer+'-'+String.valueOf(GameLibrary.getInstance().getScoreJoueur("Rouge",idPartie));
+            answer = answer+'-'+String.valueOf(GameLibrary.getInstance().getScoreJoueur("Jaune",idPartie));
+            answer = answer+'-'+String.valueOf(GameLibrary.getInstance().getScoreJoueur("Bleu",idPartie));
+            answer = answer+'-'+String.valueOf(GameLibrary.getInstance().getScoreJoueur("Blanc",idPartie));
+            answer = answer+'-';
+
+        }
+        catch (Exception e) {
+            answer = "error108";///a changer
+            System.out.println("error108");///a changer
+            System.out.println();
+        }
+
+        return Response.ok().entity(gsonService.toJson(answer)).build();
+    }
+
 
 
 }

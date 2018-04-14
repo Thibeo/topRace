@@ -129,8 +129,6 @@ public class PartieCaseDaoImpl implements PartieCaseDao {
             System.out.println("");
             System.out.println("error228");
         }
-        System.out.println("");
-        System.out.println("error228");
         return listOfcases;
     }
 

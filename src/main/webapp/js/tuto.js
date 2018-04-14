@@ -88,7 +88,7 @@ function fermerTuto() {
     animationPariSortie();
 }
 function LeOnload(){
-    bulleAlert("fermer");ConfirmChoixCartes("fermer");
+    bulleAlert("fermer");ConfirmChoixCartes("fermer");bullePari('fermer','','','','','','');
     Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
     Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
     Cacher("tutoPrez");Cacher("tutoFlecheCarte");
