@@ -14,11 +14,7 @@
     background-color: transparent;
 } /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
 
-::-webkit-scrollbar-corner {
-    background-color: green;
-}
 ::-webkit-scrollbar {
     width: 1.5vh;
-    height: 20vh;
     z-index: -5;
 }
