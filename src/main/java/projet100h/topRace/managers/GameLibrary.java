@@ -305,6 +305,12 @@ public class GameLibrary {
         System.out.println("/////////////////////////////////////////////////");
     }
 
+    public List getListPari(int idPartie, String couleurJoueur, int idPari){
+        List pariJoueur = pariDao.getListPari(idPartie, couleurJoueur, idPari);
+        return pariJoueur;
+    }
+
+
     /**
      *
      * @param idPartie
@@ -326,7 +332,7 @@ public class GameLibrary {
 
 
 
-        
+
         /*
         //trie la liste positionPari en ordre decroissant (pour avoir en 1 position la couleur de la voiture la plus avancée)
         List<String> positionPariTriee=new ArrayList<String>();
