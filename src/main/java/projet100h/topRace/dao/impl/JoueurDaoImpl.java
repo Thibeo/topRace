@@ -265,7 +265,7 @@ public class JoueurDaoImpl implements JoueurDao {
      */
     public void updateScoreJoueur(String couleurJoueur,int resultatJoueur){
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("UPDATE joueur SET score=? WHERE couleur=?") ) {
+             PreparedStatement statement = connection.prepareStatement("UPDATE joueur SET score=? WHERE couleurJ=?") ) {
             statement.setInt(1,resultatJoueur);
             statement.setString(2,couleurJoueur);
             statement.executeUpdate();

@@ -324,6 +324,9 @@ public class GameLibrary {
 
 
 
+
+
+        
         /*
         //trie la liste positionPari en ordre decroissant (pour avoir en 1 position la couleur de la voiture la plus avancée)
         List<String> positionPariTriee=new ArrayList<String>();
@@ -352,13 +355,13 @@ public class GameLibrary {
         // une fois qu'on a trié la liste, il faut comparer les deux listes (positions et pari):
         for (int i = 0; i < pariJoueur.size(); i++) {
             String couleur = (String) pariJoueur.get(i);
-            int compteur = 1;
+
             int compteurF=0;
             for (int j = 0; j < positionPari.size(); j++) {
-                compteur = j + 1;
-                compteurF=2;
-                if ((positionPari.get(j)).equals(couleur)) {
-                    compteurF = compteur;
+
+                if (((List) positionPari.get(j)).get(0).equals(couleur)) {
+
+                    compteurF = j+1;
                 }
             }
             //pari 1:
@@ -371,7 +374,7 @@ public class GameLibrary {
                     resultatJoueur = resultatJoueur + 3;
                 } else if (compteurF == 5) {
                     resultatJoueur = resultatJoueur - 1;
-                } else if (compteur == 6) {
+                } else if (compteurF == 6) {
                     resultatJoueur = resultatJoueur - 3;
                 }
                 //pari 2:
