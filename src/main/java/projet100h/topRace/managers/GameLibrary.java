@@ -356,6 +356,7 @@ public class GameLibrary {
             int compteurF=0;
             for (int j = 0; j < positionPari.size(); j++) {
                 compteur = j + 1;
+                compteurF=2;
                 if ((positionPari.get(j)).equals(couleur)) {
                     compteurF = compteur;
                 }
@@ -370,7 +371,7 @@ public class GameLibrary {
                     resultatJoueur = resultatJoueur + 3;
                 } else if (compteurF == 5) {
                     resultatJoueur = resultatJoueur - 1;
-                } else if (compteurF == 6) {
+                } else if (compteur == 6) {
                     resultatJoueur = resultatJoueur - 3;
                 }
                 //pari 2:
