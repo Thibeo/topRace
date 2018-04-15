@@ -265,7 +265,7 @@ public class JoueurDaoImpl implements JoueurDao {
      */
     public void updateScoreJoueur(String couleurJoueur,int resultatJoueur){
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("UPDATE joueur SET score=? WHERE couleur=?") ) {
+             PreparedStatement statement = connection.prepareStatement("UPDATE joueur SET score=? WHERE couleurJ=?") ) {
             statement.setInt(1,resultatJoueur);
             statement.setString(2,couleurJoueur);
             statement.executeUpdate();
@@ -347,7 +347,7 @@ public class JoueurDaoImpl implements JoueurDao {
      */
 
     public List listOfPosition(int idPartie){
-        String query = "SELECT (x,y,couleurJ)  FROM joueur WHERE idPartie=? ORDER BY x DESC";
+        String query = "SELECT *  FROM joueur WHERE idPartie=? ORDER BY x DESC";
         PartieCase partieCse = null;
         List list = new ArrayList<>();
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();

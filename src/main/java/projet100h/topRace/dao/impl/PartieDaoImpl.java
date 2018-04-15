@@ -74,7 +74,7 @@ public class PartieDaoImpl implements PartieDao{
      */
     @Override
     public List<Integer> nbDeJoueur(){
-        String query = "SELECT * FROM joueur";
+        String query = "SELECT * FROM joueur ORDER BY idPartie ASC";
         List<Integer> listOfNbJoueur = new ArrayList<>();
         try (
                 Connection connection = DataSourceProvider.getDataSource().getConnection();
