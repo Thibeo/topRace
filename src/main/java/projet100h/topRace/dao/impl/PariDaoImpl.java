@@ -132,11 +132,11 @@ public class PariDaoImpl implements PariDao{
 
             while (resultSet.next()) {
                     if (resultSet.getInt("jaune") == 1 ){list.add("Jaune");}
-                    if (resultSet.getInt("bleue") == 1 ){list.add("Bleue");}
+                    if (resultSet.getInt("bleue") == 1 ){list.add("Bleu");}
                     if (resultSet.getInt("rouge") == 1 ){list.add("Rouge");}
-                    if (resultSet.getInt("violette") == 1 ){list.add("Violette");}
-                    if (resultSet.getInt("blanche") == 1 ){list.add("Blanche");}
-                    if (resultSet.getInt("verte") == 1 ){list.add("Verte");}
+                    if (resultSet.getInt("violette") == 1 ){list.add("Violet");}
+                    if (resultSet.getInt("blanche") == 1 ){list.add("Blanc");}
+                    if (resultSet.getInt("verte") == 1 ){list.add("Vert");}
 
 
             }
