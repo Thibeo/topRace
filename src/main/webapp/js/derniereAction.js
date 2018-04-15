@@ -63,7 +63,7 @@ function getEtat() {
                 timerr = window.setTimeout("compteur('Maintenant il faut effectuer le pari 3');",999); // on lance le compteur
             } else if (idPari == '3'){
                 timerr = window.setTimeout("compteur('Maintenant, chacun pour sois');",999); // on lance le compteur
-            }
+            } 
         } else if (answer == 'ligneFinale'){
             console.log('answer == ligneFinale');
             clearTimeout(timerr);
