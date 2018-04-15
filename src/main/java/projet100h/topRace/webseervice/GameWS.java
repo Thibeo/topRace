@@ -285,6 +285,7 @@ public class GameWS {
                             boolean existe2 = GameLibrary.getInstance().pariExiste(idPartie, couleurJ, data);
                             if (existe2 == true) {
                                 answer = "un pari aléatoire a été effectué";
+                                GameLibrary.getInstance().changerDernierAction(idPartie,couleurJ,"pari"+data+"Effectue");
                             } else {
                                 answer = "error104";
                             }

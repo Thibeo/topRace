@@ -21,6 +21,8 @@ function compteur(textFinal){
             checkPari(1); // si le pari est le 1er pari, on applique la fonction check pari 1
         } else if (textFinal == 'Pari 2 envoyé !'){
             checkPari(2); // si le pari est le 1er pari, on applique la fonction check pari 1
+        } else if (textFinal == 'Pari 3 envoyé !'){
+            checkPari(3); // si le pari est le 1er pari, on applique la fonction check pari 1
         } else if (textFinal == 'A vous de jouer'){
             var eltParent = document.getElementById('navCompteur'); // puis on va modifier tout le compteur pour afficher le texte
             eltParent.innerHTML=textFinal;
@@ -80,7 +82,7 @@ function compteur(textFinal){
         } else if (textFinal == 'Maintenant il faut effectuer le pari 3'){
             changeEtat("troisiemePari");
             creationCompteur('Vous avez ', 31, ' secondes pour valider votre 3ème pari');// on va créer un nouveau compteur
-            document.getElementById("btnPari3").onclick = function(){parier(2);}; // on va permettre a l'utilisateur de parier
+            document.getElementById("btnPari3").onclick = function(){parier(3);}; // on va permettre a l'utilisateur de parier
             clearTimeout(timerr);
             timerr = window.setTimeout("compteur('Pari 3 envoyé !');",999); // on lance le compteur
             bullePari('fermer','','','','','','');
