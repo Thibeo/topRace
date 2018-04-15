@@ -396,7 +396,7 @@ public class GameWS {
                 answer = "true"; // oui l'action est finie par tout les joueurs
                 System.out.println("answer = "+answer+" // et data = "+data);
                 if (data.equals("pari1Effectue")){
-                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurBleu");  //////////////////////////////// a changer en violet !!!!!
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurViolet");
                 }
             } else {
                 answer = "false";// non l'action n'est pas finie par tout les joueurs
