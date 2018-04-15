@@ -51,7 +51,7 @@ public class PositionPariDaoImpl implements PositionPariDao {
      * @param idPartie
      */
 
-    public void nouvellePositionPari(int numeroPari,int idPartie,String couleur,int x,char y){
+    public void nouvellePositionPari(int numeroPari,int idPartie,String couleur,int x,String y){
         String query = "INSERT INTO positionpari(idPartie,couleurV,numeroPari,x,y) VALUES(?,?,?,?,?)";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -59,7 +59,7 @@ public class PositionPariDaoImpl implements PositionPariDao {
             statement.setString(2,couleur);
             statement.setInt(3,numeroPari);
             statement.setInt(4,x);
-            statement.setString(5,String.valueOf(y));
+            statement.setString(5,y);
             statement.executeUpdate();
 
         } catch (SQLException e) {

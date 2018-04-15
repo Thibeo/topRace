@@ -6,5 +6,5 @@ public interface PositionPariDao {
 
     public List getPositionPari(int idPartie, int numeroPari);
 
-    public void nouvellePositionPari(int numeroPari,int idPartie,String couleur,int x,char y);
+    public void nouvellePositionPari(int numeroPari,int idPartie,String couleur,int x,String y);
 }

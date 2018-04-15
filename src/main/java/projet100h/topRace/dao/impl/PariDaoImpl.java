@@ -123,21 +123,22 @@ public class PariDaoImpl implements PariDao{
         String query = "SELECT * FROM pari WHERE idPartie=? AND couleurJ=? AND numeroPari=?";
         List list = new ArrayList<>();
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+        PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, idPartie);
             statement.setString(2, couleurJoueur);
-            statement.setInt(2, idPari);
-            try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet.next()) {
-                    String answer="";
-                    if (resultSet.getBoolean("jaune") == true ){list.add("jaune");}
-                    if (resultSet.getBoolean("bleue") == true ){list.add("bleue");}
-                    if (resultSet.getBoolean("rouge") == true ){list.add("rouge");}
-                    if (resultSet.getBoolean("violette") == true ){list.add("violette");}
-                    if (resultSet.getBoolean("blanche") == true ){list.add("blanche");}
-                    if (resultSet.getBoolean("verte") == true ){list.add("verte");}
+            statement.setInt(3, idPari);
+            ResultSet resultSet = statement.executeQuery();
 
-                }
+
+            while (resultSet.next()) {
+                    if (resultSet.getInt("jaune") == 1 ){list.add("Jaune");}
+                    if (resultSet.getInt("bleue") == 1 ){list.add("Bleue");}
+                    if (resultSet.getInt("rouge") == 1 ){list.add("Rouge");}
+                    if (resultSet.getInt("violette") == 1 ){list.add("Violette");}
+                    if (resultSet.getInt("blanche") == 1 ){list.add("Blanche");}
+                    if (resultSet.getInt("verte") == 1 ){list.add("Verte");}
+
+
             }
         } catch (SQLException e) {
             e.printStackTrace();

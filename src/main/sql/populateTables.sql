@@ -121,6 +121,11 @@ INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`, `derniere
 INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`, `derniereAction`,`score`) VALUES ("Rouge", "BobRouge", 1, 0, 'c',"pari2Effectue",0);
 INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`, `derniereAction`,`score`) VALUES ("Blanc", "BobBlanc", 1, 0, 'b',"pari2Effectue",0);
 
+INSERT INTO `pari` (`idPartie`, `couleurJ`, `numeroPari`, `jaune`, `bleue`, `rouge`, `violette`, `blanche`, `verte`) VALUES ('1', 'Jaune', '1', '0', '1', '0', '0', '1', '1');
+INSERT INTO `pari` (`idPartie`, `couleurJ`, `numeroPari`, `jaune`, `bleue`, `rouge`, `violette`, `blanche`, `verte`) VALUES ('1', 'Rouge', '1', '1', '1', '0', '0', '1', '0');
+INSERT INTO `pari` (`idPartie`, `couleurJ`, `numeroPari`, `jaune`, `bleue`, `rouge`, `violette`, `blanche`, `verte`) VALUES ('1', 'Vert', '1', '0', '1', '0', '1', '0', '1');
+INSERT INTO `pari` (`idPartie`, `couleurJ`, `numeroPari`, `jaune`, `bleue`, `rouge`, `violette`, `blanche`, `verte`) VALUES ('1', 'Blanc', '1', '0', '1', '0', '1', '0', '1');
+INSERT INTO `pari` (`idPartie`, `couleurJ`, `numeroPari`, `jaune`, `bleue`, `rouge`, `violette`, `blanche`, `verte`) VALUES ('1', 'Violet', '1', '0', '1', '0', '1', '0', '1');
 
 
 INSERT INTO `partieCase` (`x`, `y`, `idPartie`, `occupee`) VALUES (0, 'a', 1, TRUE);

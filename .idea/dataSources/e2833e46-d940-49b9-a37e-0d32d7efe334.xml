@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="toprace@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="toprace">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="devweb_javacinee"/>
+    <schema id="4" parent="1" name="information_schema"/>
+    <schema id="5" parent="1" name="mysql"/>
+    <schema id="6" parent="1" name="performance_schema"/>
+    <schema id="7" parent="1" name="quizzhei"/>
+    <schema id="8" parent="1" name="quote"/>
+    <schema id="9" parent="1" name="site-perso"/>
+    <schema id="10" parent="1" name="site-prof"/>
+    <schema id="11" parent="1" name="site-tea-test"/>
+    <schema id="12" parent="1" name="site-tea-test-test"/>
+    <schema id="13" parent="1" name="site_biere"/>
+    <schema id="14" parent="1" name="site_test"/>
+    <schema id="15" parent="1" name="test"/>
+    <schema id="16" parent="1" name="testtea"/>
+    <schema id="17" parent="1" name="tp07"/>
+    <schema id="18" parent="1" name="tp07-test"/>
+    <schema id="19" parent="1" name="tp3"/>
+    <schema id="20" parent="1" name="vente"/>
+    <schema id="21" parent="1" name="whatpeoplethink"/>
+    <table id="22" parent="2" name="carte"/>
+    <table id="23" parent="2" name="cartejoueur"/>
+    <table id="24" parent="2" name="cse"/>
+    <table id="25" parent="2" name="joueur"/>
+    <table id="26" parent="2" name="nbcase"/>
+    <table id="27" parent="2" name="pari"/>
+    <table id="28" parent="2" name="partie"/>
+    <table id="29" parent="2" name="partiecase"/>
+    <table id="30" parent="2" name="positionpari"/>
+    <table id="31" parent="2" name="typevoiture"/>
+    <column id="32" parent="22" name="idCarte">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="33" parent="22" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>idCarte</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="34" parent="23" name="idPartie">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="23" name="couleurJ">
+      <Position>2</Position>
+      <DataType>varchar(6)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="23" name="idCarte">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="37" parent="23" name="utilisee">
+      <Position>4</Position>
+      <DataType>tinyint(1)|0</DataType>
+    </column>
+    <index id="38" parent="23" name="couleurJ_fk">
+      <ColNames>couleurJ</ColNames>
+    </index>
+    <index id="39" parent="23" name="idCarte_fk">
+      <ColNames>idCarte</ColNames>
+    </index>
+    <index id="40" parent="23" name="idPartie_fk">
+      <ColNames>idPartie</ColNames>
+    </index>
+    <key id="41" parent="23" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>idPartie
+couleurJ
+idCarte</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="42" parent="24" name="x">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="43" parent="24" name="y">
+      <Position>2</Position>
+      <DataType>char(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="44" parent="24" name="occupee">
+      <Position>3</Position>
+      <DataType>tinyint(1)|0</DataType>
+    </column>
+    <column id="45" parent="24" name="top">
+      <Position>4</Position>
+      <DataType>float|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="24" name="left">
+      <Position>5</Position>
+      <DataType>float|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="47" parent="24" name="rotate">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="48" parent="24" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>x
+y</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="49" parent="25" name="couleurJ">
+      <Position>1</Position>
+      <DataType>varchar(6)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="25" name="nomDeJoueur">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="51" parent="25" name="idPartie">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="25" name="x">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="25" name="y">
+      <Position>5</Position>
+      <DataType>char(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="54" parent="25" name="derniereAction">
+      <Position>6</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="55" parent="25" name="score">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="56" parent="25" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>couleurJ
+idPartie</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="57" parent="26" name="couleurV">
+      <Position>1</Position>
+      <DataType>varchar(6)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="58" parent="26" name="idCarte">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="26" name="nbCase">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="60" parent="26" name="couleurV_fk">
+      <ColNames>couleurV</ColNames>
+    </index>
+    <index id="61" parent="26" name="idCarte_fk">
+      <ColNames>idCarte</ColNames>
+    </index>
+    <key id="62" parent="26" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>couleurV
+idCarte</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="63" parent="27" name="idPartie">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="64" parent="27" name="couleurJ">
+      <Position>2</Position>
+      <DataType>varchar(6)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="65" parent="27" name="numeroPari">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="66" parent="27" name="jaune">
+      <Position>4</Position>
+      <DataType>tinyint(1)|0</DataType>
+    </column>
+    <column id="67" parent="27" name="bleue">
+      <Position>5</Position>
+      <DataType>tinyint(1)|0</DataType>
+    </column>
+    <column id="68" parent="27" name="rouge">
+      <Position>6</Position>
+      <DataType>tinyint(1)|0</DataType>
+    </column>
+    <column id="69" parent="27" name="violette">
+      <Position>7</Position>
+      <DataType>tinyint(1)|0</DataType>
+    </column>
+    <column id="70" parent="27" name="blanche">
+      <Position>8</Position>
+      <DataType>tinyint(1)|0</DataType>
+    </column>
+    <column id="71" parent="27" name="verte">
+      <Position>9</Position>
+      <DataType>tinyint(1)|0</DataType>
+    </column>
+    <index id="72" parent="27" name="couleurJ_fk">
+      <ColNames>couleurJ</ColNames>
+    </index>
+    <index id="73" parent="27" name="idPartie_fk">
+      <ColNames>idPartie</ColNames>
+    </index>
+    <key id="74" parent="27" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>idPartie
+couleurJ
+numeroPari</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="75" parent="28" name="idPartie">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="76" parent="28" name="nomDePartie">
+      <Position>2</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="77" parent="28" name="couleurDeProprio">
+      <Position>3</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="78" parent="28" name="etatActuel">
+      <Position>4</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="79" parent="28" name="etatAncien">
+      <Position>5</Position>
+      <DataType>varchar(45)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="80" parent="28" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>idPartie</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="81" parent="29" name="x">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="82" parent="29" name="y">
+      <Position>2</Position>
+      <DataType>char(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="83" parent="29" name="idPartie">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="84" parent="29" name="occupee">
+      <Position>4</Position>
+      <DataType>tinyint(1)|0</DataType>
+    </column>
+    <index id="85" parent="29" name="idPartie_fk">
+      <ColNames>idPartie</ColNames>
+    </index>
+    <index id="86" parent="29" name="x_fk">
+      <ColNames>x</ColNames>
+    </index>
+    <index id="87" parent="29" name="y_fk">
+      <ColNames>x</ColNames>
+    </index>
+    <key id="88" parent="29" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>x
+y
+idPartie</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="89" parent="30" name="idPartie">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="90" parent="30" name="couleurV">
+      <Position>2</Position>
+      <DataType>varchar(6)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="91" parent="30" name="numeroPari">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="92" parent="30" name="x">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="93" parent="30" name="y">
+      <Position>5</Position>
+      <DataType>char(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="94" parent="30" name="couleurV_fk">
+      <ColNames>couleurV</ColNames>
+    </index>
+    <index id="95" parent="30" name="idPartie_fk">
+      <ColNames>idPartie</ColNames>
+    </index>
+    <key id="96" parent="30" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>idPartie
+couleurV
+numeroPari</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="97" parent="31" name="couleurV">
+      <Position>1</Position>
+      <DataType>varchar(6)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="98" parent="31" name="x">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="99" parent="31" name="y">
+      <Position>3</Position>
+      <DataType>char(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="100" parent="31" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>couleurV</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
