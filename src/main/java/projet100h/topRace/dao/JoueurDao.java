@@ -19,7 +19,7 @@ public interface JoueurDao {
 
     public int getScoreJoueur(String couleur, int idPartie);
 
-    public void updateScoreJoueur(String couleurJoueur,int resultatJoueur);
+    public void updateScoreJoueur(String couleurJoueur,int resultatJoueur, int idPartie);
 
     public void deleteJoueur (String couleurJ, int idPartie);
 

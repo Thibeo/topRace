@@ -99,7 +99,7 @@ function compteur(textFinal){
             textFinal=='Carte jouée' || textFinal=='Une carte aléatoire a été jouée' ||
             textFinal=='Maintenant, chacun pour sois'){
             if (textFinal == 'Pari 1 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 1'){
-                changeEtat("joueurBleu");
+                changeEtat("joueurViolet");
                 document.getElementById("btnPari1").onclick = function(){console.log('coucou je suis plus là');};
             } else if (textFinal == 'Pari 2 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 2'){
                 changeEtat("ancien");

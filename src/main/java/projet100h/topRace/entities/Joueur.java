@@ -233,7 +233,7 @@ public class Joueur {
      */
     public int ligneJaune(int i){
         int numeroLigne=0;
-        if (this.caseActuelle.getX()==2 && i>0){
+        if (this.caseActuelle.getX()==14 && i>0){
             numeroLigne=1;
         }else if (this.caseActuelle.getX()==26 && i>0){
             numeroLigne=2;
@@ -241,7 +241,7 @@ public class Joueur {
             numeroLigne=3;
         }else if (this.caseActuelle.getX()==68 && i>0){
         numeroLigne=4;
-    }
+        }
         return numeroLigne;
     }
 
@@ -292,17 +292,17 @@ public class Joueur {
                 GameLibrary.getInstance().calculPari(this.idPartie,3);
 
             }else if (this.ligneJaune(i)==4){
-            for(int j=0;j<listPositionJoueur.size();j++){
-                List element=(List) listPositionJoueur.get(j);
-                String couleur=(String) element.get(0);
-                int x=(int) element.get(1);
-                String y=(String) element.get(2);
-                positionPariDao.nouvellePositionPari(4,this.idPartie,couleur,x, y);
-            }
-                partieDao.changeEtatActuel(this.idPartie,"ligneFinale");
-                GameLibrary.getInstance().calculFinal(this.idPartie,4);
+                for(int j=0;j<listPositionJoueur.size();j++){
+                    List element=(List) listPositionJoueur.get(j);
+                    String couleur=(String) element.get(0);
+                    int x=(int) element.get(1);
+                    String y=(String) element.get(2);
+                    positionPariDao.nouvellePositionPari(4,this.idPartie,couleur,x, y);
+                }
+                    partieDao.changeEtatActuel(this.idPartie,"ligneFinale");
+                    GameLibrary.getInstance().calculFinal(this.idPartie,4);
 
-        }
+            }
 
             // si la case suivante correspond à un rétrécissement de plateau:
             if (plateau.exception(this.caseActuelle).equals("retrecissement")) {
