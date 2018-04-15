@@ -7,6 +7,7 @@ DROP TABLE joueur;
 DROP TABLE partieCase;
 DROP TABLE carteJoueur;
 DROP TABLE pari;
+DROP TABLE positionpari;
 
 CREATE TABLE `pari` (
   `idPartie` int(11) NOT NULL,
@@ -70,7 +71,8 @@ CREATE TABLE `partie` (
   `idPartie` int(11) NOT NULL AUTO_INCREMENT,
   `nomDePartie` varchar(45) NOT NULL,
   `couleurDeProprio` varchar(45) NOT NULL,
-  `etat` varchar(45) NOT NULL,
+  `etatActuel` varchar(45) NOT NULL,
+  `etatAncien` varchar(45) NOT NULL,
   PRIMARY KEY (`idPartie`)
 );
 

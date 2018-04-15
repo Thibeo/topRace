@@ -30,7 +30,8 @@ public class PartieDaoImpl implements PartieDao{
                             new Partie(resultSet.getInt("idPartie"),
                                     resultSet.getString("nomDePartie"),
                                     resultSet.getString("couleurDeProprio"),
-                                    resultSet.getString("etat"))
+                                    resultSet.getString("etatActuel"),
+                                    resultSet.getString("etatAncien"))
                     );
             }
 
@@ -99,12 +100,13 @@ public class PartieDaoImpl implements PartieDao{
      */
     @Override
     public Partie createPartie(Partie partie){
-        String query = "INSERT INTO partie(nomDePartie, couleurDeProprio, etat) VALUES(?, ?, ?)";
+        String query = "INSERT INTO partie(nomDePartie, couleurDeProprio, etatActuel, etatAncien) VALUES(?, ?, ?, ?)";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
              PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1,partie.getNomDePartie());
             statement.setString(2,partie.getCouleurDeProprio());
-            statement.setString(3,partie.getEtat());
+            statement.setString(3,partie.getEtatActuel());
+            statement.setString(4,partie.getEtatAncien());
             statement.executeUpdate();
             try (ResultSet ids = statement.getGeneratedKeys()) {
                 if(ids.next()) {
@@ -162,7 +164,8 @@ public class PartieDaoImpl implements PartieDao{
                     return (new Partie(resultSet.getInt("idPartie"),
                             resultSet.getString("nomDePartie"),
                             resultSet.getString("couleurDeProprio"),
-                            resultSet.getString("etat")));
+                            resultSet.getString("etatActuel"),
+                            resultSet.getString("etatAncien")));
                 }
             }
         } catch (SQLException e) {
@@ -176,14 +179,14 @@ public class PartieDaoImpl implements PartieDao{
     /**
      * permet de changer l'état d'une partie
      * @param idPartie
-     * @param etat
+     * @param etatActuel
      */
     @Override
-    public void changeEtat(int idPartie, String etat){
-        String query = "UPDATE partie SET etat=? WHERE idPartie = ?";
+    public void changeEtatActuel(int idPartie, String etatActuel){
+        String query = "UPDATE partie SET etatActuel=? WHERE idPartie = ?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, etat);
+            statement.setString(1, etatActuel);
             statement.setInt(2, idPartie);
             statement.executeUpdate();
         }
@@ -200,14 +203,59 @@ public class PartieDaoImpl implements PartieDao{
      * @return l'etat d'une partie
      */
     @Override
-    public String getEtat(int idPartie){
+    public String getEtatActuel(int idPartie){
         String query = "SELECT * FROM partie WHERE idPartie=?";
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, idPartie);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    return resultSet.getString("etat");
+                    return resultSet.getString("etatActuel");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("");
+            System.out.println("error238");
+        }
+        return "error238";
+    }
+
+    /**
+     * permet de changer l'état d'une partie
+     * @param idPartie
+     * @param etatAncien
+     */
+    @Override
+    public void changeEtatAncien(int idPartie, String etatAncien){
+        String query = "UPDATE partie SET etatAncien=? WHERE idPartie = ?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, etatAncien);
+            statement.setInt(2, idPartie);
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("");
+            System.out.println("error237");
+        }
+    }
+
+    /**
+     *
+     * @param idPartie
+     * @return l'etat d'une partie
+     */
+    @Override
+    public String getEtatAncien(int idPartie){
+        String query = "SELECT * FROM partie WHERE idPartie=?";
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idPartie);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("etatAncien");
                 }
             }
         } catch (SQLException e) {

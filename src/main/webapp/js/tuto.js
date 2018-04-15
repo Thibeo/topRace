@@ -75,9 +75,9 @@ function fermerTuto() {
     derniereAction("fermerTuto");
     Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
     Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
-    Cacher("tutoPrez");
+    Cacher("tutoPrez");Cacher("tutoFlecheCarte");
     Cacher("tutoTouSElmt");Cacher("tutoPlateau");Cacher("tutoCarte");
-    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoPari3");
+    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoFin");
     Cacher("ligneJaune");
     zindex("plateauParis",1);
     zindex("ligneJaune",-10);
@@ -88,12 +88,12 @@ function fermerTuto() {
     animationPariSortie();
 }
 function LeOnload(){
-    bulleAlert("fermer");ConfirmChoixCartes("fermer");
+    bulleAlert("fermer");ConfirmChoixCartes("fermer");bullePari('fermer','','','','','','');
     Afficher("tutoNomPartieJoueurs");Afficher("tutoPari1");
     Cacher("fondTuto");Cacher("tutoInclicable");Cacher("fondTuto1");Cacher("fondTuto2");
-    Cacher("tutoPrez");
+    Cacher("tutoPrez");Cacher("tutoFlecheCarte");
     Cacher("tutoTouSElmt");Cacher("tutoPlateau");Cacher("tutoCarte");
-    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoPari3");
+    Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoFin");
     Cacher("ligneJaune");
     zindex("plateauParis",1);
     zindex("ligneJaune",-10);
@@ -107,11 +107,7 @@ function LeOnload(){
     Cacher('fondPara');Cacher('fondRules');Cacher('fondQuitter');
     Cacher('para');Cacher('quitter');Cacher('rules');  // on chache la section qui a pour id "para"
 
-<<<<<<< Updated upstream
     creationCompteur('le début de la partie commence dans ',10 , ' secondes');
-=======
-    creationCompteur('le début de la partie commence dans ',180 , ' secondes');
->>>>>>> Stashed changes
     compteur('début de la partie');
 
     inverse('tb', 'col0');inverse('tb', 'col1');

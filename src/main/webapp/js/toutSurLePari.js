@@ -14,15 +14,9 @@ function parier(idPari){
         var verrte = document.getElementById("verte" + idPari);
         request.onload = function () {
             var answer = this.response;
-<<<<<<< Updated upstream
             if (answer == "error102"){
                 bulleAlert("veuilliez cocher 3 couleur pour le pari "+idPari);
             } else if (answer == "error103"){
-=======
-            if (answer == "error1"){
-                bulleAlert("veuilliez cocher 3 couleur pour le pari "+idPari);
-            } else if (answer == "error2"){
->>>>>>> Stashed changes
                 bulleAlert("le pari "+idPari+" a déjà été effectué");
             } else if (answer = "succeed"){
                 // on va fixer les checkbox
@@ -77,7 +71,8 @@ function checkPari(idPari){
             newElt.innerHTML = "0"; // le temps du compteur
             newElt.style.display = "none";
             eltParent.appendChild(newElt); // le compteur
-            window.setTimeout("compteur('"+textFinal+"');",2999);
+            clearTimeout(timerr);
+            timerr = window.setTimeout("compteur('"+textFinal+"');",2999);
             getPari(idPari);
             derniereAction("pari"+idPari+"Effectue");
         }
@@ -180,7 +175,68 @@ function getPari(idPari){
     }
 }
 
-// pour eviter qu'on puisse selectionner plus de 4 couleurs
+function bullePari(texte,violet,vert,rouge,jaune,bleu,blanc) {
+    if (texte == "fermer"){
+        document.getElementById("resultPari").style.display = "none";
+        document.getElementById("fondResultPari").style.display = "none";
+    } else{
+        document.getElementById("VioletPariJoueur").innerHTML = violet;
+        document.getElementById("VertPariJoueur").innerHTML = vert;
+        document.getElementById("RougePariJoueur").innerHTML = rouge;
+        document.getElementById("JaunePariJoueur").innerHTML = jaune;
+        document.getElementById("BleuPariJoueur").innerHTML = bleu;
+        document.getElementById("BlancPariJoueur").innerHTML = blanc;
+        document.getElementById("titreResultPari").innerHTML = texte;
+        document.getElementById("resultPari").style.display = "";
+        document.getElementById("fondResultPari").style.display = "";
+    }
+}
+
+function getPariResult(idPari){
+    console.log("getResult"+idPari);
+    var request = new XMLHttpRequest();
+    request.open("POST", "webservices/game/getPariResult", true);
+    request.responseType = "json";
+    request.onload = function () {
+        var answer = this.response;
+        var violet = "";
+        var vert = "";
+        var rouge = "";
+        var jaune = "";
+        var bleu = "";
+        var blanc = "";
+        var i = 0;
+        for (var j = 0; j < 6; j++) {
+            while (answer[i] != '-') {
+                if (j == 0) {
+                    violet = violet + answer[i];
+                } else if (j == 1) {
+                    vert = vert + answer[i];
+                } else if (j == 2) {
+                    rouge = rouge + answer[i];
+                } else if (j == 3) {
+                    jaune = jaune + answer[i];
+                } else if (j == 4) {
+                    bleu = bleu + answer[i];
+                } else if (j == 5) {
+                    blanc = blanc + answer[i];
+                }
+                i = i + 1;
+            }
+            i = i + 1;
+        }
+        bullePari("Voici les résultats du pari "+idPari,violet,vert,rouge,jaune,bleu,blanc);
+    }
+    var data = {};
+    data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;
+    data.idPartie = document.getElementById("idPartie").innerText || document.getElementById("idPartie").textContent;
+    data.data = "";
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    request.send("data=" + JSON.stringify(data));
+    /* et on l'envoit */
+}
+
+// pour eviter qu'on puisse selectionner plus de 3 couleurs
 function check(){
     var un = document.querySelectorAll(".pariUn");
     var deux = document.querySelectorAll(".pariDeux");

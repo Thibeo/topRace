@@ -23,7 +23,7 @@
     border-width: 0.3vh;
     outline : none;
 }
-#tutoParis button{
+#tutoParis button, #tutoFin button{
      font-size: 2vh;
     padding-bottom: 0.2vh;
     padding-top: 0.2vh;
@@ -63,7 +63,18 @@
     border: 0.4vh solid grey;
     z-index: 100000;
 }
-
+#tutoFin{
+    font-size: 2vh;
+    position: fixed;
+    left: 50%;
+    top : 50%;
+    transform: translate(-50%, -50%);
+    padding: 1vh;
+    background-color: #9E9E9E;
+    border-radius: 2vh;
+    border: 0.4vh solid grey;
+    z-index: 100000;
+}
 #ligneJaune{
     position: fixed;
     left: 46vh;

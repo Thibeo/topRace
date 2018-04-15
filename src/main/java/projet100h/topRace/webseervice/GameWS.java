@@ -22,7 +22,7 @@ public class GameWS {
     public Response avancer(@FormParam("data") String data1){
 
         JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
-        // on recupÃ¨re les variables
+        // on recupère les variables
         int idPartie = jsooon.getIdPartie();
         String couleurJ = jsooon.getCouleur();
         String data = jsooon.getData();
@@ -39,7 +39,7 @@ public class GameWS {
         }
         System.out.println("bool = "+bool);
         if (bool == true){
-            try {
+            //try {
                 int idCarte = Integer.parseInt(data);
                 List listDeplacementCarte = GameLibrary.getInstance().listDeplacementCarte(idCarte);
                 GameLibrary.getInstance().utilisation(idCarte,idPartie,couleurJ);
@@ -49,7 +49,7 @@ public class GameWS {
                     List carte = (List) listDeplacementCarte.get(i);
                     String couleur = (String) carte.get(1);
                     int nbCases = (int) carte.get(0);
-                    System.out.println("la voiture "+carte.get(1)+" se dÃ©place de "+nbCases+" case(s)");
+                    System.out.println("la voiture "+carte.get(1)+" se déplace de "+nbCases+" case(s)");
                     Joueur joueurADeplacer = GameLibrary.getInstance().getJoueur(couleur,idPartie);
                     System.out.println("couleur du joueur = "+joueurADeplacer.getCouleur());
                     System.out.println("sa case actuelle est : "+joueurADeplacer.getCaseActuelle().getX()+","+joueurADeplacer.getCaseActuelle().getY());
@@ -69,12 +69,12 @@ public class GameWS {
                 answer=answer+"-";
                 System.out.println(answer);
                 return Response.ok().entity(gsonService.toJson(answer)).build();
-            }
+            /*}
             catch (Exception e) {
                 System.out.println("error112");
                 System.out.println();
                 return Response.ok().entity(gsonService.toJson("error112")).build();
-            }
+            }*/
         } else {
             try {
                 System.out.println("je suis dans le else");
@@ -110,7 +110,7 @@ public class GameWS {
                     List carte = (List) listDeplacementCarte.get(0);
                     String couleur2 = (String) carte.get(1);
                     int nbCases = (int) carte.get(0);
-                    System.out.println("la voiture " + carte.get(1) + " se dÃ©place de " + nbCases + " case(s)");
+                    System.out.println("la voiture " + carte.get(1) + " se déplace de " + nbCases + " case(s)");
                     Joueur joueurADeplacer2 = GameLibrary.getInstance().getJoueur(couleur2, idPartie);
                     System.out.println("couleur du joueur = " + joueurADeplacer2.getCouleur());
                     System.out.println("sa case actuelle est : " + joueurADeplacer2.getCaseActuelle().getX() + "," + joueurADeplacer2.getCaseActuelle().getY());
@@ -132,7 +132,7 @@ public class GameWS {
                         List carte = (List) listDeplacementCarte.get(i);
                         String couleur2 = (String) carte.get(1);
                         int nbCases = (int) carte.get(0);
-                        System.out.println("la voiture " + carte.get(1) + " se dÃ©place de " + nbCases + " case(s)");
+                        System.out.println("la voiture " + carte.get(1) + " se déplace de " + nbCases + " case(s)");
                         Joueur joueurADeplacer2 = GameLibrary.getInstance().getJoueur(couleur2, idPartie);
                         System.out.println("couleur du joueur = " + joueurADeplacer2.getCouleur());
                         System.out.println("sa case actuelle est : " + joueurADeplacer2.getCaseActuelle().getX() + "," + joueurADeplacer2.getCaseActuelle().getY());
@@ -143,7 +143,7 @@ public class GameWS {
                         System.out.println(answer3);
                         answer = answer + "-" + joueurADeplacer2.getCouleur() + "#" + answer3;
                     }
-                    // avancÃ© des noirs
+                    // avancé des noirs
                     Plateau plateau = GameLibrary.getInstance().getPlateau(idPartie);
                     Joueur joueurADeplacer = GameLibrary.getInstance().getJoueur(couleur, idPartie);
                     PartieCase caseArrivee = joueurADeplacer.deplacer(2, plateau);
@@ -156,7 +156,7 @@ public class GameWS {
                     List carte = (List) listDeplacementCarte.get(2);
                     String couleur2 = (String) carte.get(1);
                     int nbCases = (int) carte.get(0);
-                    System.out.println("la voiture " + carte.get(1) + " se dÃ©place de " + nbCases + " case(s)");
+                    System.out.println("la voiture " + carte.get(1) + " se déplace de " + nbCases + " case(s)");
                     Joueur joueurADeplacer2 = GameLibrary.getInstance().getJoueur(couleur2, idPartie);
                     System.out.println("couleur du joueur = " + joueurADeplacer2.getCouleur());
                     System.out.println("sa case actuelle est : " + joueurADeplacer2.getCaseActuelle().getX() + "," + joueurADeplacer2.getCaseActuelle().getY());
@@ -187,15 +187,15 @@ public class GameWS {
     @Path("/parier")
     public Response parier(@FormParam("data") String data1 ){
         JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
-        // on recupÃ¨re les variables
+        // on recupère les variables
         int idPartie = jsooon.getIdPartie();
         String couleurJ = jsooon.getCouleur();
         String data = jsooon.getData();
 
-        // transformation du string data en class grÃ¢ce au JSON
+        // transformation du string data en class grâce au JSON
         Pari pariJsonAnswer = gsonService.fromJson(data, Pari.class);
 
-        // on recupÃ¨re les variables
+        // on recupère les variables
         int numeroPari = pariJsonAnswer.getNumeroPari();
         boolean jaune = pariJsonAnswer.isJaune();
         boolean bleue = pariJsonAnswer.isBleue();
@@ -222,12 +222,12 @@ public class GameWS {
             try {
                 boolean existe = GameLibrary.getInstance().pariExiste(idPartie, couleurJ, numeroPari);
                 if (existe == true) {
-                    answer = "error103"; //le pari est dÃ©jÃ  effectuÃ©
+                    answer = "error103"; //le pari est déjà effectué
                     System.out.println("error103");
                     System.out.println();
                 } else {
                     GameLibrary.getInstance().ajoutPari(idPartie, couleurJ, numeroPari, jaune, bleue, rouge, violette, blanche, verte);
-                    answer = "succeed"; // tout s'est bien passÃ©
+                    answer = "succeed"; // tout s'est bien passé
                 }
             }catch (Exception e) {
                 answer = "error104";
@@ -244,21 +244,21 @@ public class GameWS {
     public Response checkPari(@FormParam("data") String data1 ){
         JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
 
-        // on recupÃ¨re les variables
+        // on recupère les variables
         int idPartie = jsooon.getIdPartie();
         String couleurJ = jsooon.getCouleur();
         String data2 = jsooon.getData();
         int data = Integer.parseInt(data2);
 
-        // on crÃ©Ã© un rÃ©ponse
+        // on créé un réponse
         String answer;
 
         try {
             boolean existe = GameLibrary.getInstance().pariExiste(idPartie,couleurJ, data); // on verifie que le pari existe
 
             if (existe == true){
-                answer = "le pari a bien Ã©tÃ© envoyÃ©";
-            } else { //faire un pari alÃ©atoire pour le joueur
+                answer = "le pari a bien été envoyé";
+            } else { //faire un pari aléatoire pour le joueur
                 try {
                     List<Integer> listAlea = new ArrayList<Integer>();
                     Random rand = new Random();
@@ -284,7 +284,7 @@ public class GameWS {
                         try {
                             boolean existe2 = GameLibrary.getInstance().pariExiste(idPartie, couleurJ, data);
                             if (existe2 == true) {
-                                answer = "un pari alÃ©atoire a Ã©tÃ© effectuÃ©";
+                                answer = "un pari aléatoire a été effectué";
                             } else {
                                 answer = "error104";
                             }
@@ -319,22 +319,22 @@ public class GameWS {
     public Response getPari(@FormParam("data") String data1 ){
         JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
 
-        // on recupÃ¨re les variables
+        // on recupère les variables
         int idPartie = jsooon.getIdPartie();
         String couleurJ = jsooon.getCouleur();
         String data2 = jsooon.getData();
         int data = Integer.parseInt(data2);
 
-        // on crÃ©Ã© la rÃ©ponse
+        // on créé la réponse
         String answer;
 
         try {
             boolean existe = GameLibrary.getInstance().pariExiste(idPartie,couleurJ, data);
-            // on verifie qu'un pari a bien Ã©tÃ© effectuer
-            if (existe == true){ // soit oui, dans ce cas la on le rÃ©cupÃ¨re
+            // on verifie qu'un pari a bien été effectuer
+            if (existe == true){ // soit oui, dans ce cas la on le récupère
                 answer = GameLibrary.getInstance().getPari(idPartie,couleurJ, data);
             } else {
-                answer = "pas de pari effectuÃ©";
+                answer = "pas de pari effectué";
             }
         }
         catch (Exception e) {
@@ -351,18 +351,18 @@ public class GameWS {
     public Response derniereAction(@FormParam("data") String data1 ){
         JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
 
-        // on recupÃ¨re les variables
+        // on recupère les variables
         int idPartie = jsooon.getIdPartie();
         String couleurJ = jsooon.getCouleur();
         String data = jsooon.getData();
 
-        // on crÃ©Ã© la rÃ©ponse
+        // on créé la réponse
         String answer;
 
-        // puis on change l'action du joueur dans la BDD, et on revois une rÃ©ponse positive si cela fonctionne
+        // puis on change l'action du joueur dans la BDD, et on revois une réponse positive si cela fonctionne
         try {
             GameLibrary.getInstance().changerDernierAction(idPartie, couleurJ, data);
-            answer = "succeed"; // tout s'est bien passÃ©
+            answer = "succeed"; // tout s'est bien passé
         }
         catch (Exception e) {
             answer = "error101";
@@ -378,24 +378,24 @@ public class GameWS {
     public Response ActionFinie(@FormParam("data") String data1 ){
         JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
 
-        // on recupÃ¨re les variables
+        // on recupère les variables
         int idPartie = jsooon.getIdPartie();
         String couleurJ = jsooon.getCouleur();
         String data = jsooon.getData();
 
-        // on crÃ©Ã© la rÃ©ponse
+        // on créé la réponse
         String answer;
 
         Boolean finie;
 
-        // puis on change l'action du joueur dans la BDD, et on revois une rÃ©ponse positive si cela fonctionne
+        // puis on change l'action du joueur dans la BDD, et on revois une réponse positive si cela fonctionne
         try {
             finie = GameLibrary.getInstance().actionFinieParTousJoueurs(idPartie,data);
             if (finie==true){
                 answer = "true"; // oui l'action est finie par tout les joueurs
                 System.out.println("answer = "+answer+" // et data = "+data);
                 if (data.equals("pari1Effectue")){
-                    GameLibrary.getInstance().changeEtat(idPartie,"joueurBleu");  //////////////////////////////// a changer en violet !!!!!
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurBleu");  //////////////////////////////// a changer en violet !!!!!
                 }
             } else {
                 answer = "false";// non l'action n'est pas finie par tout les joueurs
@@ -415,22 +415,28 @@ public class GameWS {
     public Response getEtat(@FormParam("data") String data1 ){
         JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
 
-        // on recupÃ¨re les variables
+        // on recupère les variables
         int idPartie = jsooon.getIdPartie();
         String couleurJ = jsooon.getCouleur();
         String data = jsooon.getData();
 
-        // on crÃ©Ã© la rÃ©ponse
+        // on créé la réponse
         String answer;
 
-        String etat;
+        String etatActuel;
 
-        // puis on recupÃ¨re l'Ã©tat actuelle de la partie
+        // puis on recupère l'état actuelle de la partie
         try {
-            etat = GameLibrary.getInstance().getEtat(idPartie);
+            etatActuel = GameLibrary.getInstance().getEtatActuel(idPartie);
             String joueurCouleur = "joueur"+couleurJ;
-            if (etat==joueurCouleur || etat.equals(joueurCouleur)){
+            if (etatActuel==joueurCouleur || etatActuel.equals(joueurCouleur)){
                 answer = "true"; // oui c'est au tour de ce joueur
+            } else if (etatActuel=="ligneJaune1" || etatActuel.equals("ligneJaune1")){
+                answer = "ligneJaune1";
+            }  else if (etatActuel=="ligneJaune2" || etatActuel.equals("ligneJaune2")){
+                answer = "ligneJaune2";
+            } else if (etatActuel=="ligneJaune3" || etatActuel.equals("ligneJaune3")){
+                answer = "ligneJaune3";
             } else {
                 answer = "false";// non ce n'est pas au tour de ce joueur
             }
@@ -449,34 +455,57 @@ public class GameWS {
     public Response changeEtat(@FormParam("data") String data1 ){
         JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
 
-        // on recupÃ¨re les variables
+        // on recupère les variables
         int idPartie = jsooon.getIdPartie();
         String couleurJ = jsooon.getCouleur();
         String data = jsooon.getData();
 
-        // on crÃ©Ã© la rÃ©ponse
+        // on créé la réponse
         String answer;
 
         String etat;
 
-        // puis on recupÃ¨re l'Ã©tat actuelle de la partie
+        // puis on recupère l'état actuelle de la partie
         try {
             if(data.equals("rien")){
                 if(couleurJ=="Bleu" || couleurJ.equals("Bleu")){
-                    GameLibrary.getInstance().changeEtat(idPartie,"joueurBlanc");
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurBlanc");
+                    GameLibrary.getInstance().changeEtatAncien(idPartie,"joueurBleu");
                 }else if(couleurJ=="Blanc" || couleurJ.equals("Blanc")){
-                    GameLibrary.getInstance().changeEtat(idPartie,"joueurViolet");
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurViolet");
+                    GameLibrary.getInstance().changeEtatAncien(idPartie,"joueurBlanc");
                 }else if(couleurJ=="Violet" || couleurJ.equals("Violet")){
-                    GameLibrary.getInstance().changeEtat(idPartie,"joueurVert");
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurVert");
+                    GameLibrary.getInstance().changeEtatAncien(idPartie,"joueurViolet");
                 }else if(couleurJ=="Vert" || couleurJ.equals("Vert")){
-                    GameLibrary.getInstance().changeEtat(idPartie,"joueurRouge");
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurRouge");
+                    GameLibrary.getInstance().changeEtatAncien(idPartie,"joueurVert");
                 }else if(couleurJ=="Rouge" || couleurJ.equals("Rouge")){
-                    GameLibrary.getInstance().changeEtat(idPartie,"joueurJaune");
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurJaune");
+                    GameLibrary.getInstance().changeEtatAncien(idPartie,"joueurRouge");
                 }else if(couleurJ=="Jaune" || couleurJ.equals("Jaune")){
-                    GameLibrary.getInstance().changeEtat(idPartie,"joueurBleu");
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurBleu");
+                    GameLibrary.getInstance().changeEtatAncien(idPartie,"joueurJaune");
+                }
+            } else if (data.equals("ancien")) {
+                String ancien = GameLibrary.getInstance().getEtatAncien(idPartie);
+                String nouveau = GameLibrary.getInstance().getEtatActuel(idPartie);
+                GameLibrary.getInstance().changeEtatAncien(idPartie,nouveau);
+                if(ancien=="joueurBleu" || ancien.equals("joueurBleu")){
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurBlanc");
+                }else if(ancien=="joueurBlanc" || ancien.equals("joueurBlanc")){
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurViolet");
+                }else if(ancien=="joueurViolet" || ancien.equals("joueurViolet")){
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurVert");
+                }else if(ancien=="joueurVert" || ancien.equals("joueurVert")){
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurRouge");
+                }else if(ancien=="joueurRouge" || ancien.equals("joueurRouge")){
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurJaune");
+                }else if(ancien=="joueurJaune" || ancien.equals("joueurJaune")){
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurBleu");
                 }
             } else {
-                GameLibrary.getInstance().changeEtat(idPartie,data);
+                GameLibrary.getInstance().changeEtatActuel(idPartie,data);
             }
             answer="succeed";
 
@@ -494,23 +523,26 @@ public class GameWS {
     public Response getFleche(@FormParam("data") String data1 ){
         JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
 
-        // on recupÃ¨re les variables
+        // on recupère les variables
         int idPartie = jsooon.getIdPartie();
         String couleurJ = jsooon.getCouleur();
         String data = jsooon.getData();
 
-        // on crÃ©Ã© la rÃ©ponse
+        // on créé la réponse
         String answer;
 
         String idCarteString;
         String etat;
 
-        // puis on recupÃ¨re l'Ã©tat actuelle de la partie
+        // puis on recupère l'état actuelle de la partie
         try {
-            etat = GameLibrary.getInstance().getEtat(idPartie);
+            etat = GameLibrary.getInstance().getEtatActuel(idPartie);
+            if (etat.equals("ligneJaune1") || etat.equals("ligneJaune3") || etat.equals("ligneJaune2")){
+                etat = GameLibrary.getInstance().getEtatAncien(idPartie);
+            }
             etat = etat.substring(6);
 
-            String couleurrr="Bleu";
+            String couleurrr="";
 
             if (etat.equals("Blanc")){
                 couleurrr="Bleu";
@@ -537,6 +569,41 @@ public class GameWS {
         }
         return Response.ok().entity(gsonService.toJson(answer)).build();
     }
+
+    @POST
+    @Path("/getPariResult")
+    public Response getPariResult(@FormParam("data") String data1 ){
+        JsonCreatedClass jsooon = gsonService.fromJson(data1, JsonCreatedClass.class);
+
+        // on recupère les variables
+        int idPartie = jsooon.getIdPartie();
+        String couleurJ = jsooon.getCouleur();
+        String data = jsooon.getData();
+
+        // on créé la réponse
+        String answer;
+
+        String etat;
+
+        try {
+            answer = String.valueOf(GameLibrary.getInstance().getScoreJoueur("Violet",idPartie));
+            answer = answer+'-'+String.valueOf(GameLibrary.getInstance().getScoreJoueur("Vert",idPartie));
+            answer = answer+'-'+String.valueOf(GameLibrary.getInstance().getScoreJoueur("Rouge",idPartie));
+            answer = answer+'-'+String.valueOf(GameLibrary.getInstance().getScoreJoueur("Jaune",idPartie));
+            answer = answer+'-'+String.valueOf(GameLibrary.getInstance().getScoreJoueur("Bleu",idPartie));
+            answer = answer+'-'+String.valueOf(GameLibrary.getInstance().getScoreJoueur("Blanc",idPartie));
+            answer = answer+'-';
+
+        }
+        catch (Exception e) {
+            answer = "error108";///a changer
+            System.out.println("error108");///a changer
+            System.out.println();
+        }
+
+        return Response.ok().entity(gsonService.toJson(answer)).build();
+    }
+
 
 
 }

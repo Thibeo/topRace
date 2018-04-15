@@ -167,7 +167,8 @@
                  newElt.style.display = "none";
                  eltParent.appendChild(newElt); // le compteur
                  console.log(" je suis lancé depuis choixCartes");
-                 window.setTimeout("compteur('" + 'Carte jouée' + "');", 2999);
+                clearTimeout(timerr);
+                timerr = window.setTimeout("compteur('" + 'Carte jouée' + "');", 2999);
             }else{
                 bulleAlert("tu dois choisir une couleur !");
             }
@@ -409,6 +410,25 @@
         <nav class="imagee" th:each="carte : ${listCarte}" th:style="${'background-image: url(img/cartes/'+carte.idCarte+'.png);background-size: cover;'}" th:id="${'carte'+carte.idCarte}" th:onclick="${'ConfirmChoixCartes('+carte.idCarte+');'}"></nav>
     </nav>
 
+<!-- nav pour les résultats paris -->
+    <nav id="fondResultPari" class="fond"></nav>
+    <nav id="resultPari">
+        <button class="x" onclick="bullePari('fermer','','','','','','');">
+            X
+        </button>
+        <h2 id="titreResultPari"></h2>
+        <table id="tableResultPari" align="center">
+            <tr>
+                <td align="center">Joueur</td>
+                <td align="center">Score</td>
+            </tr>
+            <tr th:each="joueur : ${listOfJoueur}" >
+                <td th:id="${joueur.couleur+'Couleur'}" th:text="${joueur.nomJoueur}"></td>
+                <td align="center" th:id="${joueur.couleur+'PariJoueur'}" th:text="${joueur.score}"></td>
+            </tr>
+        </table>
+    </nav>
+
 <!-- section de l'alert -->
     <nav id="fondbulleAlert" onclick='bulleAlert("fermer");'></nav>
     <section id="bulleAlert">
@@ -459,7 +479,7 @@
         <button class="x" onclick='fermerTuto();'>
             X
         </button>
-        <h2>Tutoriel (1/7)</h2>
+        <h2>Tutoriel (1/8)</h2>
         <p>Bienvenue dans le tutoriel pour apprendre à utiliser l’interface du jeu top race.</p>
         <p>Il vous est possible de quitter le tutoriel à tout moment en appuyant sur le bouton <button>X</button> en haut à droite</p>
         <p>Dans un premier temps nous allons nous familiariser avec tous les éléments présents sur la page.</p>
@@ -479,14 +499,27 @@
             X
         </button>
         <nav id="tutoNomPartieJoueurs">
-            <h2>Tutoriel (2/7)</h2>
+            <h2>Tutoriel (2/8)</h2>
             <p>Ici se trouve le :</p>
             <p>- Le nom de la partie</p>
             <p>- le nom des joueurs par ordre de jeu</p>
             <button class="x" onclick=' Cacher("tutoNomPartieJoueurs");
-                                        Afficher("tutoPlateau");
+                                        Afficher("tutoFlecheCarte");
                                         zindex("nomPartie",1);
                                         zindex("joueurs",1);
+                                        zindex("flecheRouge",10007);
+                                        zindex("lastCarte",100007);'>
+                Next
+            </button>
+        </nav>
+        <nav id="tutoFlecheCarte">
+            <h2>Tutoriel (3/8)</h2>
+            <p>On peut voir ici une flèche indiquant qui est le prochain joueur qui doit jouer.</p>
+            <p>On y voit aussi la dernière carte jouée par un joueur. Elle apparait a coté du joueur en question. Cela vous permet de savoir quelles cartes ont déjà été joués</p>
+            <button class="x" onclick=' Cacher("tutoFlecheCarte");
+                                        Afficher("tutoPlateau");
+                                        zindex("flecheRouge",1);
+                                        zindex("lastCarte",1);
                                         zindex("plateau",10007);
                                         zindex("joueurJaune",100007);
                                         zindex("joueurViolet",100007);
@@ -498,11 +531,9 @@
             </button>
         </nav>
         <nav id="tutoPlateau">
-            <h2>Tutoriel (3/7)</h2>
+            <h2>Tutoriel (4/8)</h2>
             <p>Ici se trouve le plateau</p>
-            <p>On peut y voir les 6 voitures</p>
-            <p>sur la ligne de départ, que vous</p>
-            <p>allez faire avancer grâce aux cartes</p>
+            <p>On peut y voir les 6 voitures sur la ligne de départ, que vous allez faire avancer grâce aux cartes</p>
             <button class="x" onclick=' Cacher("tutoPlateau");
                                         Afficher("tutoCarte");
                                         zindex("plateau",0);
@@ -518,12 +549,11 @@
             </button>
         </nav>
         <nav id="tutoCarte">
-            <h2>Tutoriel (4/7)</h2>
+            <h2>Tutoriel (5/8)</h2>
             <p>En parlant des cartes :</p>
             <p>Voici les cartes à votre disposition</p>
             <p>Chaque joueurs à des cartes differentes</p>
-            <p>Les cartes avec des voitures noires font</p>
-            <p>avancer la voiture de votre choix</p>
+            <p>Les cartes avec des voitures noires font avancer la voiture de votre choix</p>
             <button class="x" onclick=' Cacher("tutoCarte");
                                         Afficher("tutoNomPartieJoueurs");
                                         Cacher("tutoTouSElmt");
@@ -543,7 +573,7 @@
             X
         </button>
         <nav id="tutoPari1">
-            <h2>Tutoriel (5/7)</h2>
+            <h2>Tutoriel (6/8)</h2>
             <p>Le sytème de paris est la base du jeu. C'est grâce aux paris que vous gagnez des points. Il y a 3 paris à faire au total</p>
             <p>Cliquer sur les boutons <button class="bouttonJaune">1</button> <button class="bouttonRouge">2</button> <button class="bouttonJaune">3</button> pour afficher ou cacher les paris 1,2 et 3</p>
             <button class="x next" onclick=' Cacher("tutoPari1");
@@ -558,13 +588,14 @@
             </button>
         </nav>
         <nav id="tutoPari2">
-            <h2>Tutoriel (6/7)</h2>
+            <h2>Tutoriel (7/8)</h2>
             <p>Le premier pari se fait dès le début du jeu.
                 Chaque joueur parie sur les 3 voitures qu'il pense voir en tête dès que la 1er ligne jaune sera dépassée par une voiture.
                 Une fois celle-ci dépassée, le jeu se met en pause, un nombre de points vous est attibué en fonction des voitures sur lesquelles vous avez parié.
                 Il faut donc à présent faire le deuxième paris etc ...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
             <button class="x next" onclick=' Cacher("tutoPari2");
-                                        Afficher("tutoPari3");
+                                        Afficher("tutoFin");
+                                        Cacher("tutoParis");
                                         Cacher("ligneJaune");
                                         zindex("ligneJaune",-10);
                                         Cacher("fondTuto1");Cacher("fondTuto2");
@@ -574,15 +605,19 @@
                 Next
             </button>
         </nav>
-        <nav id="tutoPari3">
-            <h2>Tutoriel (7/7)</h2>
-            <p>Une fois la dernière ligne jaune dépassée, c'est du chacun pour soi. Le but est de faire arriver sa voiture en première.</p>
-            <p>Un nombre de points est aussi ajouté en fonction du classement finale. le joueur ayant le plus de point gagne la partie !</p>
-            <button class="x next" onclick='fermerTuto();'>
-                Start !
-            </button>
-        </nav>
     </nav>
+    <nav id="tutoFin">
+        <button class="x" onclick='fermerTuto();'>
+            X
+        </button>
+        <h2>Tutoriel (8/8)</h2>
+        <p>Une fois la dernière ligne jaune dépassée, c'est du chacun pour soi. Le but est de faire arriver sa voiture en première.</p>
+        <p>Un nombre de points est aussi ajouté en fonction du classement finale. le joueur ayant le plus de point gagne la partie !</p>
+        <button class="x next" onclick='fermerTuto();'>
+            Start !
+        </button>
+    </nav>
+
 
 <!-- -------------------------- -->
 <!-- les banderoles et compteur -->

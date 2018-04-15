@@ -16,20 +16,24 @@ public class Joueur {
     private PartieCase caseActuelle;
     private int idPartie;
     private String derniereAction;
+    private int score;
 
 
 
-    public Joueur(String couleur, String nomJoueur, PartieCase caseActuelle, int idPartie, String derniereAction){
+    public Joueur(String couleur, String nomJoueur, PartieCase caseActuelle, int idPartie, String derniereAction, int score){
         this.nomJoueur=nomJoueur;
         this.couleur=couleur;
         this.caseActuelle=caseActuelle;
         this.idPartie=idPartie;
         this.derniereAction=derniereAction;
+        this.score=score;
     }
 
     private JoueurDao joueurDao = new JoueurDaoImpl();
     private PositionPariDao positionPariDao=new PositionPariDaoImpl();
 
+    public int getScore() { return score; }
+    public void setScore(int score) { this.score = score; }
 
     public int getIdPartie(){ return (this.idPartie); }
     public void setIdPartie(int idPartie) { this.idPartie = idPartie; }

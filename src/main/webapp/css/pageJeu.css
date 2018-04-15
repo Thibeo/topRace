@@ -490,3 +490,57 @@ input[type="radio"] + label::before{
 	z-index: 10008;
 	background-color: rgba(251, 251, 251, 0.75);
 }
+
+/* ---------------------- */
+/* --- resultat pari  --- */
+/* ---------------------- */
+
+#resultPari button{
+	font-size: 2vh;
+	text-decoration: none;
+	color: #FDEE00;
+	background-color: #696969;
+	border-color:  yellow;
+	border-width: 0.3vh;
+	outline : none;
+}
+#resultPari{
+	font-size: 3vh;
+	position: fixed;
+	left: 50%;
+	top : 50%;
+	transform: translate(-50%, -50%);
+	padding: 1vh;
+	background-color: #9E9E9E;
+	border-radius: 2vh;
+	border: 0.4vh solid grey;
+	z-index: 100000;
+	padding: 3vh;
+}
+#tableResultPari td{
+	padding: 1vh;
+}
+#BlancCouleur{
+	background-color: white;
+	color: black;
+}
+#VertCouleur{
+	background-color: #2fb129;
+	color: white;
+}
+#BleuCouleur{
+	background-color: #2551d9;
+	color: white;
+}
+#RougeCouleur{
+	background-color: #fb2b2b;
+	color: white;
+}
+#VioletCouleur{
+	background-color: #864daf;
+	color: white;
+}
+#JauneCouleur{
+	background-color: #ffd800;
+	color: white;
+}

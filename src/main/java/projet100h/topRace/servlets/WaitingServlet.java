@@ -76,8 +76,8 @@ public class WaitingServlet extends GenericServlet {
             session.removeAttribute("error");
             req.setAttribute("sessionIdPartie", idPartie);
             req.setAttribute("sessionNomJoueur", pseudoJoueur);
-            GameLibrary.getInstance().changeEtat(idPartie,"lancerTuto");
-
+            GameLibrary.getInstance().changeEtatActuel(idPartie,"lancerTuto");
+            GameLibrary.getInstance().changeEtatAncien(idPartie,"attente");
 
 
         } catch (IllegalArgumentException e) {
