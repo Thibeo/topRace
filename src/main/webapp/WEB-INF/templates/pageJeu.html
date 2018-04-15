@@ -10,6 +10,7 @@
     <link rel='stylesheet' href='css/menu.css'> <!-- style du menu, du body, et du background -->
     <link rel='stylesheet' href='css/rulesParaQuitt.css'> <!-- style des div #rules et #para -->
     <link rel='stylesheet' href='css/scrollBar.css'> <!-- style de la scrollbar -->
+    <link rel="stylesheet" href="css/print.css" media="print" /> <!-- style de l'impression -->
     <link rel="shortcut icon" href="img/logo.png">
     <script type="text/javascript" src="js/rulesParaQuitt.js"></script>
     <script type="text/javascript" src="js/tuto.js"></script>
@@ -203,8 +204,6 @@
         function classActive(coul){
             document.getElementById(coul).classList.add("active");
         }
-
-
 
     </script>
 
@@ -411,9 +410,10 @@
     </nav>
 
 <!-- nav pour les résultats paris -->
-    <nav id="fondResultPari" class="fond"></nav>
+    <nav id="fondResultPari" class="fond" onclick="bullePari('fermer','','','','','','');"></nav>
     <nav id="resultPari">
-        <button class="x" onclick="bullePari('fermer','','','','','','');">
+        <section id="impression" style="display: none">Résulats de la partie : <span th:text="${PartieById.nomDePartie}"></span> </section>
+        <button id="impressionFermer" class="x" onclick="bullePari('fermer','','','','','','');">
             X
         </button>
         <h2 id="titreResultPari"></h2>
@@ -427,6 +427,8 @@
                 <td align="center" th:id="${joueur.couleur+'PariJoueur'}" th:text="${joueur.score}"></td>
             </tr>
         </table>
+        <button id="btnImpression" style="display: none;" onclick="document.getElementById('impression').style.display='block';window.print();document.getElementById('impression').style.display='none';">imprimer</button>
+
     </nav>
 
 <!-- section de l'alert -->
@@ -632,6 +634,7 @@
     <section class="footer">
         <p></p> <!--le footer est vide -->
     </section>
+
 
 </section>
 

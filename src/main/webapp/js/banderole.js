@@ -50,7 +50,7 @@ function compteur(textFinal){
             ConfirmChoixCartes("fermer");
             changeEtat("rien");
             console.log("je suis ligne 45");
-        } else if (textFinal == 'Maintenant il faut effectuer le pari 2' || textFinal == 'Maintenant il faut effectuer le pari 3' ){
+        } else if (textFinal == 'Maintenant il faut effectuer le pari 2' || textFinal == 'Maintenant il faut effectuer le pari 3' || textFinal=='Maintenant, chacun pour sois'){
             var eltParent = document.getElementById('navCompteur'); // puis on va modifier tout le compteur pour afficher le texte
             eltParent.innerHTML=textFinal;
             var newElt = document.createElement("span"); //on crée le span (qui sert de compteur)
@@ -96,7 +96,8 @@ function compteur(textFinal){
         } else if (textFinal == 'Pari 1 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 1' ||
             textFinal == 'Pari 2 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 2' ||
             textFinal == 'Pari 3 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 3' ||
-            textFinal=='Carte jouée' || textFinal=='Une carte aléatoire a été jouée'){
+            textFinal=='Carte jouée' || textFinal=='Une carte aléatoire a été jouée' ||
+            textFinal=='Maintenant, chacun pour sois'){
             if (textFinal == 'Pari 1 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 1'){
                 changeEtat("joueurBleu");
                 document.getElementById("btnPari1").onclick = function(){console.log('coucou je suis plus là');};
@@ -106,11 +107,14 @@ function compteur(textFinal){
             } else if (textFinal == 'Pari 3 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 3'){
                 changeEtat("ancien");
                 document.getElementById("btnPari3").onclick = function(){console.log('coucou je suis plus là');};
+            } else if (textFinal=='Maintenant, chacun pour sois'){
+                changeEtat("ancien");
+                bullePari('fermer','','','','','','');
             }
             bulleAlert("fermer");
             creationCompteur('En attente de votre tour', 999, '');// on va créer un nouveau compteur
-            //document.getElementById("compteur").style.position = "fixed";
-            //document.getElementById("compteur").style.top= "-40vh";
+            document.getElementById("compteur").style.position = "fixed";
+            document.getElementById("compteur").style.top= "-40vh";
             clearTimeout(timerr);
             timerr = window.setTimeout("compteur('A vous de jouer');",999); // on lance le compteur
             console.log("je suis ligne 72");

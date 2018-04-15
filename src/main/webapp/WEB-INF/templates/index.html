@@ -18,6 +18,27 @@
         }
 
         </script>
+        <style>
+            /* --------------------------------------- */
+            /* --- animation chargement de la page --- */
+            /* --------------------------------------- */
+
+            .haut .voitureOrange{
+                animation-name:voitureOrange;
+                animation-duration:2.5s;
+            }
+            @keyframes voitureOrange{
+                50% {left:35vh;}
+            }
+            /* Mise en place de l'animation */
+            @keyframes voitureRouge{
+                50% {right:35vh;}
+            }
+            .haut .voitureRouge{
+                animation-name:voitureRouge;
+                animation-duration:2.5s;
+            }
+        </style>
     </head>
 
     <body onload="Afficher('index');Cacher('para');Cacher('rules');">

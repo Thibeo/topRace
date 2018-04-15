@@ -438,6 +438,8 @@ public class GameWS {
                 answer = "ligneJaune2";
             } else if (etatActuel=="ligneJaune3" || etatActuel.equals("ligneJaune3")){
                 answer = "ligneJaune3";
+            } else if (etatActuel=="ligneFinale" || etatActuel.equals("ligneFinale")){
+                answer = "ligneFinale";
             } else {
                 answer = "false";// non ce n'est pas au tour de ce joueur
             }
@@ -538,7 +540,7 @@ public class GameWS {
         // puis on recupère l'état actuelle de la partie
         try {
             etat = GameLibrary.getInstance().getEtatActuel(idPartie);
-            if (etat.equals("ligneJaune1") || etat.equals("ligneJaune3") || etat.equals("ligneJaune2")){
+            if (etat.equals("ligneJaune1") || etat.equals("ligneJaune3") || etat.equals("ligneJaune2") || etat.equals("ligneFinale")){
                 etat = GameLibrary.getInstance().getEtatAncien(idPartie);
             }
             etat = etat.substring(6);

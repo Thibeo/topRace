@@ -72,16 +72,8 @@ header{
     z-index: 121;
     background-image: url(../img/voitureOrange.png);
     background-size: cover;
-    animation-name:voitureOrange;
-    animation-duration:2.5s;
 }
-@keyframes voitureOrange{
-    50% {left:35vh;}
-}
-/* Mise en place de l'animation */
-@keyframes voitureRouge{
-    50% {right:35vh;}
-}
+
 .haut .voitureRouge{
     top: -0.2vh;
     right: -27vh;
@@ -91,8 +83,6 @@ header{
     height: 6.5vh;
     background-image: url(../img/voitureRouge.png);
     background-size: cover;
-    animation-name:voitureRouge;
-    animation-duration:2.5s;
 }
 .haut h1{
     width: 100%;
