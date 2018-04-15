@@ -416,7 +416,7 @@ public class GameLibrary {
             }
         }
         // pour changer dans la base de données le score du joueur
-        joueurDao.updateScoreJoueur(couleurJoueur, resultatJoueur);
+        joueurDao.updateScoreJoueur(couleurJoueur, resultatJoueur, idPartie);
         return resultatJoueur;
     }
 
@@ -445,7 +445,7 @@ public class GameLibrary {
                 }
             }
         }
-        joueurDao.updateScoreJoueur(couleurJoueur, resultatJoueur);
+        joueurDao.updateScoreJoueur(couleurJoueur, resultatJoueur,idPartie);
     }
 
     public void calculPari(int idPartie, int numeroPari){

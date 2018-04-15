@@ -263,11 +263,12 @@ public class JoueurDaoImpl implements JoueurDao {
      * @param couleurJoueur
      * @param resultatJoueur
      */
-    public void updateScoreJoueur(String couleurJoueur,int resultatJoueur){
+    public void updateScoreJoueur(String couleurJoueur,int resultatJoueur, int idPartie){
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("UPDATE joueur SET score=? WHERE couleurJ=?") ) {
+             PreparedStatement statement = connection.prepareStatement("UPDATE joueur SET score=? WHERE couleurJ=? and idPartie=?") ) {
             statement.setInt(1,resultatJoueur);
             statement.setString(2,couleurJoueur);
+            statement.setInt(3,idPartie);
             statement.executeUpdate();
         }
         catch (SQLException e) {

@@ -132,19 +132,19 @@ function getFleche() {
             document.getElementById("flecheRouge").style.top = "29.8vh";
             document.getElementById("lastCarte").style.top = "54.5vh";
         } else if (couleur == "Vert"){
-            document.getElementById("flecheRouge").style.top = "35.5vh";
+            document.getElementById("flecheRouge").style.top = "36vh";
             document.getElementById("lastCarte").style.top = "26vh";
         } else if (couleur == "Rouge"){
-            document.getElementById("flecheRouge").style.top = "41.1vh";
+            document.getElementById("flecheRouge").style.top = "42.1vh";
             document.getElementById("lastCarte").style.top = "31.6vh";
         } else if (couleur == "Jaune"){
-            document.getElementById("flecheRouge").style.top = "46.7vh";
+            document.getElementById("flecheRouge").style.top = "47.7vh";
             document.getElementById("lastCarte").style.top = "37.3vh";
         } else if (couleur == "Bleu"){
-            document.getElementById("flecheRouge").style.top = "52.3vh";
+            document.getElementById("flecheRouge").style.top = "53.3vh";
             document.getElementById("lastCarte").style.top = "43vh";
         } else if (couleur == "Blanc"){
-            document.getElementById("flecheRouge").style.top = "58vh";
+            document.getElementById("flecheRouge").style.top = "59vh";
             document.getElementById("lastCarte").style.top = "48.6vh";
         }
 
