@@ -82,13 +82,13 @@ function compteur(textFinal){
             creationCompteur('Vous avez ', 31, ' secondes pour valider votre 3ème pari');// on va créer un nouveau compteur
             document.getElementById("btnPari3").onclick = function(){parier(2);}; // on va permettre a l'utilisateur de parier
             clearTimeout(timerr);
-            timerr = window.setTimeout("compteur('Pari 2 envoyé !');",999); // on lance le compteur
+            timerr = window.setTimeout("compteur('Pari 3 envoyé !');",999); // on lance le compteur
             bullePari('fermer','','','','','','');
         } else if (textFinal == 'A vous de jouer'){
+            clearTimeout(timerr);
             avancer(0);
             getFleche();
             creationCompteur('Vous avez ', 31, ' secondes pour jouer une carte');// on va créer un nouveau compteur
-            clearTimeout(timerr);
             timerr = window.setTimeout("compteur('Carte jouée');",999); // on lance le compteur
             console.log("je suis ligne 72");
         } else if (textFinal == 'Pari 1 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 1' ||
@@ -98,10 +98,10 @@ function compteur(textFinal){
             if (textFinal == 'Pari 1 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 1'){
                 changeEtat("joueurBleu");
                 document.getElementById("btnPari1").onclick = function(){console.log('coucou je suis plus là');};
-            } if (textFinal == 'Pari 2 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 2'){
+            } else if (textFinal == 'Pari 2 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 2'){
                 changeEtat("ancien");
                 document.getElementById("btnPari2").onclick = function(){console.log('coucou je suis plus là');};
-            } if (textFinal == 'Pari 3 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 3'){
+            } else if (textFinal == 'Pari 3 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 3'){
                 changeEtat("ancien");
                 document.getElementById("btnPari3").onclick = function(){console.log('coucou je suis plus là');};
             }
@@ -129,15 +129,19 @@ function compteur(textFinal){
                     getFleche();
                     getEtat();
                 } else if (s== 997){
+                    clearTimeout(timerr);
                     avancer(0);
                     getFleche();
                     getEtat();
                 }
             }
         }
-        compteur.innerHTML=s;
-        clearTimeout(timerr);
-        timerr = window.setTimeout("compteur('"+textFinal+"');",999);
+        if (textFinal == 'Carte jouée' && s>100){
+
+        } else {
+            compteur.innerHTML = s;
+            timerr = window.setTimeout("compteur('" + textFinal + "');", 999);
+        }
     }
 }
 

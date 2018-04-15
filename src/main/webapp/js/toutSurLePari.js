@@ -27,7 +27,7 @@ function parier(idPari){
                 blanchee.disabled = "disabled";
                 verrte.disabled = "disabled";
                 bulleAlert("Le pari "+idPari+" a bien été effectué");
-                derniereAction("pari1Effectue");
+                derniereAction("pari"+idPari+"Effectue");
 
             }
         }
@@ -225,7 +225,7 @@ function getPariResult(idPari){
             }
             i = i + 1;
         }
-        bullePari("Voici les résultats du pari "+idPari,violet,vert,rouge,jaune,bleu,blanc);
+        bullePari("Voici les scores après le pari "+idPari,violet,vert,rouge,jaune,bleu,blanc);
     }
     var data = {};
     data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;

@@ -26,9 +26,7 @@ function ActionFinie(txt, texteFinal) {
         var answer = this.response;
         console.log(answer);
         if (answer == "true"){
-            if (texteFinal == 'début de la partie'){
-                document.getElementById('compteur').innerHTML=1;
-            } else if (texteFinal == 'Pari 1 envoyé !'){
+            if (texteFinal == 'début de la partie' || texteFinal == 'Pari 1 envoyé !' || texteFinal == 'Pari 2 envoyé !' || texteFinal == 'Pari 3 envoyé !'){
                 document.getElementById('compteur').innerHTML=1;
             }
         }
