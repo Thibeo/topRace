@@ -36,8 +36,6 @@ header{
 	height: 6.5vh;
 	background-image: url(../img/voitureOrange.png);
 	background-size: cover;
-	animation-name:voitureOrange;
-	animation-duration:2.5s;
 }
 
 .haut .voitureRouge{
@@ -48,16 +46,6 @@ header{
 	height: 6.5vh;
 	background-image: url(../img/voitureRouge.png);
 	background-size: cover;
-	animation-name:voitureRouge;
-	animation-duration:2.5s;
-}
-
-/* animation des voiture */
-@keyframes voitureOrange{
-	50% {left:35vh;}
-}
-@keyframes voitureRouge{
-	50% {right:35vh;}
 }
 
 .haut h1{

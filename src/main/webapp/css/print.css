@@ -1,0 +1,23 @@
+header .menu li, #navCompteur,#resultPari button, #resultPari h2 {
+    display: none;
+    position: fixed;
+    top: -50vh;
+}
+#resultPari{
+    display: block;
+    color: black;
+    border: none;
+    width: 100%;
+}
+#impression{
+    padding-bottom: 10%;
+    padding-left: 10%;
+}
+#resultPari table{
+    border: medium solid black;
+    border-collapse: collapse;
+}
+#resultPari td{
+    border: medium solid black;
+    color: black;
+}

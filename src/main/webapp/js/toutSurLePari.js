@@ -225,7 +225,11 @@ function getPariResult(idPari){
             }
             i = i + 1;
         }
-        bullePari("Voici les scores après le pari "+idPari,violet,vert,rouge,jaune,bleu,blanc);
+        if (idPari== "finale"){
+            bullePari("Voici les résultats finaux",violet,vert,rouge,jaune,bleu,blanc);
+        } else {
+            bullePari("Voici les scores après le pari "+idPari,violet,vert,rouge,jaune,bleu,blanc);
+        }
     }
     var data = {};
     data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;

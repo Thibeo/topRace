@@ -53,19 +53,27 @@ function getEtat() {
             console.log("idPari gâce au substr = "+idPari);
             clearTimeout(timerr);
             creationCompteur('La ligne Jaune n° '+idPari+' à été dépassé !', 10, '');// on va créer un nouveau compteur
+            document.getElementById("compteur").style.position = "fixed";
+            document.getElementById("compteur").style.top= "-40vh";
             disableCarte();
             getPariResult(idPari);
             if (idPari == '1'){
-                console.log("idPari == 2");
                 timerr = window.setTimeout("compteur('Maintenant il faut effectuer le pari 2');",999); // on lance le compteur
             }else if (idPari == '2'){
-                console.log("idPari == 3");
                 timerr = window.setTimeout("compteur('Maintenant il faut effectuer le pari 3');",999); // on lance le compteur
-            } else{
-                console.log("idPari == plop");
+            } else if (idPari == '3'){
+                timerr = window.setTimeout("compteur('Maintenant, chacun pour sois');",999); // on lance le compteur
             }
-
-
+        } else if (answer == 'ligneFinale'){
+            console.log('answer == ligneFinale');
+            clearTimeout(timerr);
+            getPariResult("finale");
+            creationCompteur('Fin','','');// on va créer un nouveau compteur
+            document.getElementById("btnImpression").style.display = 'block';
+            document.getElementById("btnImpression").style.marginTop = '3vh';
+            document.getElementById("btnImpression").style.marginLeft = '10vh';
+            document.getElementById("impressionFermer").onclick = function(){ Afficher('compteurInclicable');bullePari('fermer','','','','','','');};
+            document.getElementById("fondResultPari").onclick = function(){ Afficher('compteurInclicable');bullePari('fermer','','','','','','');};
         }
     }
     data.data= "";
@@ -116,8 +124,10 @@ function getFleche() {
         }
         console.log("couleur = "+couleur);
         console.log("idCare = "+idCarte);
-        var bkgd = "url(img/cartes/"+idCarte+".png)";
-        document.getElementById("lastCarte").style.backgroundImage = bkgd;
+        if (idCarte != 'Effectue'){
+            var bkgd = "url(img/cartes/"+idCarte+".png)";
+            document.getElementById("lastCarte").style.backgroundImage = bkgd;
+        }
         if (couleur == "Violet"){
             document.getElementById("flecheRouge").style.top = "29.8vh";
             document.getElementById("lastCarte").style.top = "54.5vh";
