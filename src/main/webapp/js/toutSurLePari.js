@@ -71,7 +71,8 @@ function checkPari(idPari){
             newElt.innerHTML = "0"; // le temps du compteur
             newElt.style.display = "none";
             eltParent.appendChild(newElt); // le compteur
-            window.setTimeout("compteur('"+textFinal+"');",2999);
+            clearTimeout(timerr);
+            timerr = window.setTimeout("compteur('"+textFinal+"');",2999);
             getPari(idPari);
             derniereAction("pari"+idPari+"Effectue");
         }
@@ -224,8 +225,7 @@ function getPariResult(idPari){
             }
             i = i + 1;
         }
-        console.log("Voici les résultats du pari"+idPari+violet+vert+rouge+jaune+bleu+blanc);
-        bullePari("Voici les résultats du pari"+idPari,violet,vert,rouge,jaune,bleu,blanc);
+        bullePari("Voici les résultats du pari "+idPari,violet,vert,rouge,jaune,bleu,blanc);
     }
     var data = {};
     data.couleurJ = document.getElementById("couleurJ").innerText || document.getElementById("couleurJ").textContent;

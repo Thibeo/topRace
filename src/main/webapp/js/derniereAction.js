@@ -50,7 +50,23 @@ function getEtat() {
         console.log("getEtat = "+answer);
         if (answer == "true"){
             document.getElementById('compteur').innerHTML=1;
-        } else if (answer == "ligne jaune 1"){
+        } else if (answer == "ligneJaune1" || answer == "ligneJaune2" || answer == "ligneJaune3" ){
+            var idPari = answer.substr(10);
+            console.log("idPari gâce au substr = "+idPari);
+            clearTimeout(timerr);
+            creationCompteur('La ligne Jaune n° '+idPari+' à été dépassé !', 10, '');// on va créer un nouveau compteur
+            disableCarte();
+            getPariResult(idPari);
+            if (idPari == '1'){
+                console.log("idPari == 2");
+                timerr = window.setTimeout("compteur('Maintenant il faut effectuer le pari 2');",999); // on lance le compteur
+            }else if (idPari == '2'){
+                console.log("idPari == 3");
+                timerr = window.setTimeout("compteur('Maintenant il faut effectuer le pari 3');",999); // on lance le compteur
+            } else{
+                console.log("idPari == plop");
+            }
+
 
         }
     }

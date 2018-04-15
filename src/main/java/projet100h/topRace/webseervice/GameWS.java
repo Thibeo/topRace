@@ -395,7 +395,7 @@ public class GameWS {
                 answer = "true"; // oui l'action est finie par tout les joueurs
                 System.out.println("answer = "+answer+" // et data = "+data);
                 if (data.equals("pari1Effectue")){
-                    GameLibrary.getInstance().changeEtat(idPartie,"joueurBleu");  //////////////////////////////// a changer en violet !!!!!
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurBleu");  //////////////////////////////// a changer en violet !!!!!
                 }
             } else {
                 answer = "false";// non l'action n'est pas finie par tout les joueurs
@@ -423,14 +423,20 @@ public class GameWS {
         // on créé la réponse
         String answer;
 
-        String etat;
+        String etatActuel;
 
         // puis on recupère l'état actuelle de la partie
         try {
-            etat = GameLibrary.getInstance().getEtat(idPartie);
+            etatActuel = GameLibrary.getInstance().getEtatActuel(idPartie);
             String joueurCouleur = "joueur"+couleurJ;
-            if (etat==joueurCouleur || etat.equals(joueurCouleur)){
+            if (etatActuel==joueurCouleur || etatActuel.equals(joueurCouleur)){
                 answer = "true"; // oui c'est au tour de ce joueur
+            } else if (etatActuel=="ligneJaune1" || etatActuel.equals("ligneJaune1")){
+                answer = "ligneJaune1";
+            }  else if (etatActuel=="ligneJaune2" || etatActuel.equals("ligneJaune2")){
+                answer = "ligneJaune2";
+            } else if (etatActuel=="ligneJaune3" || etatActuel.equals("ligneJaune3")){
+                answer = "ligneJaune3";
             } else {
                 answer = "false";// non ce n'est pas au tour de ce joueur
             }
@@ -463,20 +469,43 @@ public class GameWS {
         try {
             if(data.equals("rien")){
                 if(couleurJ=="Bleu" || couleurJ.equals("Bleu")){
-                    GameLibrary.getInstance().changeEtat(idPartie,"joueurBlanc");
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurBlanc");
+                    GameLibrary.getInstance().changeEtatAncien(idPartie,"joueurBleu");
                 }else if(couleurJ=="Blanc" || couleurJ.equals("Blanc")){
-                    GameLibrary.getInstance().changeEtat(idPartie,"joueurViolet");
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurViolet");
+                    GameLibrary.getInstance().changeEtatAncien(idPartie,"joueurBlanc");
                 }else if(couleurJ=="Violet" || couleurJ.equals("Violet")){
-                    GameLibrary.getInstance().changeEtat(idPartie,"joueurVert");
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurVert");
+                    GameLibrary.getInstance().changeEtatAncien(idPartie,"joueurViolet");
                 }else if(couleurJ=="Vert" || couleurJ.equals("Vert")){
-                    GameLibrary.getInstance().changeEtat(idPartie,"joueurRouge");
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurRouge");
+                    GameLibrary.getInstance().changeEtatAncien(idPartie,"joueurVert");
                 }else if(couleurJ=="Rouge" || couleurJ.equals("Rouge")){
-                    GameLibrary.getInstance().changeEtat(idPartie,"joueurJaune");
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurJaune");
+                    GameLibrary.getInstance().changeEtatAncien(idPartie,"joueurRouge");
                 }else if(couleurJ=="Jaune" || couleurJ.equals("Jaune")){
-                    GameLibrary.getInstance().changeEtat(idPartie,"joueurBleu");
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurBleu");
+                    GameLibrary.getInstance().changeEtatAncien(idPartie,"joueurJaune");
+                }
+            } else if (data.equals("ancien")) {
+                String ancien = GameLibrary.getInstance().getEtatAncien(idPartie);
+                String nouveau = GameLibrary.getInstance().getEtatActuel(idPartie);
+                GameLibrary.getInstance().changeEtatAncien(idPartie,nouveau);
+                if(ancien=="joueurBleu" || ancien.equals("joueurBleu")){
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurBlanc");
+                }else if(ancien=="joueurBlanc" || ancien.equals("joueurBlanc")){
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurViolet");
+                }else if(ancien=="joueurViolet" || ancien.equals("joueurViolet")){
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurVert");
+                }else if(ancien=="joueurVert" || ancien.equals("joueurVert")){
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurRouge");
+                }else if(ancien=="joueurRouge" || ancien.equals("joueurRouge")){
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurJaune");
+                }else if(ancien=="joueurJaune" || ancien.equals("joueurJaune")){
+                    GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurBleu");
                 }
             } else {
-                GameLibrary.getInstance().changeEtat(idPartie,data);
+                GameLibrary.getInstance().changeEtatActuel(idPartie,data);
             }
             answer="succeed";
 
@@ -507,10 +536,13 @@ public class GameWS {
 
         // puis on recupère l'état actuelle de la partie
         try {
-            etat = GameLibrary.getInstance().getEtat(idPartie);
+            etat = GameLibrary.getInstance().getEtatActuel(idPartie);
+            if (etat.equals("ligneJaune1") || etat.equals("ligneJaune3") || etat.equals("ligneJaune2")){
+                etat = GameLibrary.getInstance().getEtatAncien(idPartie);
+            }
             etat = etat.substring(6);
 
-            String couleurrr="Bleu";
+            String couleurrr="";
 
             if (etat.equals("Blanc")){
                 couleurrr="Bleu";

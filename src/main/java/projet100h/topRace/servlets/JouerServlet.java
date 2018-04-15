@@ -68,7 +68,7 @@ public class JouerServlet extends GenericServlet {
 
                 // CREER PARTIE
 
-                Partie newPartie = new Partie(null,nomDePartie,couleur,"attente");
+                Partie newPartie = new Partie(null,nomDePartie,couleur,"attente","rien");
 
 
 

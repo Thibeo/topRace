@@ -167,7 +167,8 @@
                  newElt.style.display = "none";
                  eltParent.appendChild(newElt); // le compteur
                  console.log(" je suis lancé depuis choixCartes");
-                 window.setTimeout("compteur('" + 'Carte jouée' + "');", 2999);
+                clearTimeout(timerr);
+                timerr = window.setTimeout("compteur('" + 'Carte jouée' + "');", 2999);
             }else{
                 bulleAlert("tu dois choisir une couleur !");
             }

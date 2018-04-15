@@ -25,7 +25,7 @@ public class WaitingWS {
 
         try{
             Partie partie = GameLibrary.getInstance().getPartieById(data);
-            etat = partie.getEtat();
+            etat = partie.getEtatActuel();
             if (!etat.equals("attente") || etat == "attente"){
                 answer="start";
             } else{

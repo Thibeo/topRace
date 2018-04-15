@@ -15,9 +15,12 @@ function compteur(textFinal){
             newElt.innerHTML = s.toString(); // le temps du compteur
             newElt.style.display = "none"; // on le cache
             eltParent.appendChild(newElt); // le compteur
-            window.setTimeout("compteur('"+textFinal+"');",2999);
+            clearTimeout(timerr);
+            timerr = window.setTimeout("compteur('"+textFinal+"');",2999);
         } else if (textFinal == 'Pari 1 envoyé !'){
             checkPari(1); // si le pari est le 1er pari, on applique la fonction check pari 1
+        } else if (textFinal == 'Pari 2 envoyé !'){
+            checkPari(2); // si le pari est le 1er pari, on applique la fonction check pari 1
         } else if (textFinal == 'A vous de jouer'){
             var eltParent = document.getElementById('navCompteur'); // puis on va modifier tout le compteur pour afficher le texte
             eltParent.innerHTML=textFinal;
@@ -27,7 +30,8 @@ function compteur(textFinal){
             newElt.style.display = "none"; // on le cache
             eltParent.appendChild(newElt); // le compteur
             enableCarte();
-            window.setTimeout("compteur('"+textFinal+"');",2999);
+            clearTimeout(timerr);
+            timerr = window.setTimeout("compteur('"+textFinal+"');",2999);
         } else if (textFinal == 'Carte jouée'){
             var eltParent = document.getElementById('navCompteur'); // puis on va modifier tout le compteur pour afficher le texte
             eltParent.innerHTML='Une carte aléatoire a été jouée';
@@ -37,12 +41,23 @@ function compteur(textFinal){
             newElt.innerHTML = s.toString(); // le temps du compteur
             newElt.style.display = "none"; // on le cache
             eltParent.appendChild(newElt); // le compteur
-            window.setTimeout("compteur('"+'Une carte aléatoire a été jouée'+"');",2999);
+            clearTimeout(timerr);
+            timerr = window.setTimeout("compteur('"+'Une carte aléatoire a été jouée'+"');",2999);
             Cacher("choixCartes");
             Cacher("fondChoixCartes");
             ConfirmChoixCartes("fermer");
             changeEtat("rien");
             console.log("je suis ligne 45");
+        } else if (textFinal == 'Maintenant il faut effectuer le pari 2' || textFinal == 'Maintenant il faut effectuer le pari 3' ){
+            var eltParent = document.getElementById('navCompteur'); // puis on va modifier tout le compteur pour afficher le texte
+            eltParent.innerHTML=textFinal;
+            var newElt = document.createElement("span"); //on crée le span (qui sert de compteur)
+            newElt.id = "compteur"; //on met son id
+            newElt.innerHTML = s.toString(); // le temps du compteur
+            newElt.style.display = "none"; // on le cache
+            eltParent.appendChild(newElt); // le compteur
+            clearTimeout(timerr);
+            timerr = window.setTimeout("compteur('"+textFinal+"');",2999);
         }
     } else if (s == -1 ){
         document.getElementById('navCompteur').innerHTML=""; //on vide l'élément nav compteur
@@ -51,14 +66,30 @@ function compteur(textFinal){
             changeEtat("premierPari");
             creationCompteur('Vous avez ', 31, ' secondes pour valider votre 1er pari');// on va créer un nouveau compteur
             document.getElementById("btnPari1").onclick = function(){parier(1);}; // on va permettre a l'utilisateur de parier
-            window.setTimeout("compteur('Pari 1 envoyé !');",999); // on lance le compteur
+            clearTimeout(timerr);
+            timerr = window.setTimeout("compteur('Pari 1 envoyé !');",999); // on lance le compteur
             disableCarte();
             fermerTuto(); // et on ferme le tutoriel si il est encore ouvert
-        }else if (textFinal == 'A vous de jouer'){
+        } else if (textFinal == 'Maintenant il faut effectuer le pari 2'){
+            changeEtat("deuxiemePari");
+            creationCompteur('Vous avez ', 31, ' secondes pour valider votre 2ème pari');// on va créer un nouveau compteur
+            document.getElementById("btnPari2").onclick = function(){parier(2);}; // on va permettre a l'utilisateur de parier
+            clearTimeout(timerr);
+            timerr = window.setTimeout("compteur('Pari 2 envoyé !');",999); // on lance le compteur
+            bullePari('fermer','','','','','','');
+        } else if (textFinal == 'Maintenant il faut effectuer le pari 3'){
+            changeEtat("troisiemePari");
+            creationCompteur('Vous avez ', 31, ' secondes pour valider votre 3ème pari');// on va créer un nouveau compteur
+            document.getElementById("btnPari3").onclick = function(){parier(2);}; // on va permettre a l'utilisateur de parier
+            clearTimeout(timerr);
+            timerr = window.setTimeout("compteur('Pari 2 envoyé !');",999); // on lance le compteur
+            bullePari('fermer','','','','','','');
+        } else if (textFinal == 'A vous de jouer'){
             avancer(0);
             getFleche();
             creationCompteur('Vous avez ', 31, ' secondes pour jouer une carte');// on va créer un nouveau compteur
-            window.setTimeout("compteur('Carte jouée');",999); // on lance le compteur
+            clearTimeout(timerr);
+            timerr = window.setTimeout("compteur('Carte jouée');",999); // on lance le compteur
             console.log("je suis ligne 72");
         } else if (textFinal == 'Pari 1 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 1' ||
             textFinal == 'Pari 2 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 2' ||
@@ -67,12 +98,19 @@ function compteur(textFinal){
             if (textFinal == 'Pari 1 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 1'){
                 changeEtat("joueurBleu");
                 document.getElementById("btnPari1").onclick = function(){console.log('coucou je suis plus là');};
+            } if (textFinal == 'Pari 2 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 2'){
+                changeEtat("ancien");
+                document.getElementById("btnPari2").onclick = function(){console.log('coucou je suis plus là');};
+            } if (textFinal == 'Pari 3 reçu !' || textFinal == 'Un pari aléatoire a été éffectué pour le pari 3'){
+                changeEtat("ancien");
+                document.getElementById("btnPari3").onclick = function(){console.log('coucou je suis plus là');};
             }
             bulleAlert("fermer");
             creationCompteur('En attente de votre tour', 999, '');// on va créer un nouveau compteur
             //document.getElementById("compteur").style.position = "fixed";
-            //document.getElementById("compteur").style.top= "40vh";
-            window.setTimeout("compteur('A vous de jouer');",999); // on lance le compteur
+            //document.getElementById("compteur").style.top= "-40vh";
+            clearTimeout(timerr);
+            timerr = window.setTimeout("compteur('A vous de jouer');",999); // on lance le compteur
             console.log("je suis ligne 72");
         }
     } else {
@@ -81,31 +119,29 @@ function compteur(textFinal){
                 ActionFinie("fermerTuto",'début de la partie');
             } else if (textFinal == 'Pari 1 envoyé !'){
                 ActionFinie("pari1Effectue",'Pari 1 envoyé !');
+            } else if (textFinal == 'Pari 2 envoyé !'){
+                ActionFinie("pari2Effectue",'Pari 2 envoyé !');
+            } else if (textFinal == 'Pari 3 envoyé !'){
+                ActionFinie("pari3Effectue",'Pari 3 envoyé !');
             } else if (textFinal == 'A vous de jouer'){
                 if (s%5 == 0 ){
                     avancer(0);
-                    getEtat();
                     getFleche();
+                    getEtat();
                 } else if (s== 997){
                     avancer(0);
-                    getEtat();
                     getFleche();
-                }
-                if (s == 980){
-                    console.log("getResult");
-                    getPariResult(1);
+                    getEtat();
                 }
             }
         }
         compteur.innerHTML=s;
-        if (textFinal == 'Carte jouée' && s >= 100){
-
-        }else{
-            window.setTimeout("compteur('"+textFinal+"');",999);
-            console.log("je suis ligne 90");
-        }
+        clearTimeout(timerr);
+        timerr = window.setTimeout("compteur('"+textFinal+"');",999);
     }
 }
+
+var timerr;
 
 function creationCompteur(texte1, temps, texte2) {
     console.log("creationCompteur("+texte1+","+temps+","+texte2+")");

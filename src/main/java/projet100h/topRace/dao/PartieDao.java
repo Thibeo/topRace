@@ -18,7 +18,11 @@ public interface PartieDao {
 
     public Partie getPartieById(int idPartie);
 
-    public void changeEtat(int idPartie, String etat);
+    public void changeEtatActuel(int idPartie, String etatActuel);
 
-    public String getEtat(int idPartie);
+    public String getEtatActuel(int idPartie);
+
+    public void changeEtatAncien(int idPartie, String etatAncien);
+
+    public String getEtatAncien(int idPartie);
 }

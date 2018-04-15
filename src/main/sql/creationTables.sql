@@ -71,7 +71,8 @@ CREATE TABLE `partie` (
   `idPartie` int(11) NOT NULL AUTO_INCREMENT,
   `nomDePartie` varchar(45) NOT NULL,
   `couleurDeProprio` varchar(45) NOT NULL,
-  `etat` varchar(45) NOT NULL,
+  `etatActuel` varchar(45) NOT NULL,
+  `etatAncien` varchar(45) NOT NULL,
   PRIMARY KEY (`idPartie`)
 );
 

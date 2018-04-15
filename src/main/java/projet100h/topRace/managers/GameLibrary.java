@@ -73,14 +73,16 @@ public class GameLibrary {
         return listFinal; // resultat = < <1,5>, <2,1>, <3,6> >    ( de type  < idpartie , nb de joueur présent Dans la partie > )
     }
     public void changerCase(Joueur joueur, PartieCase cse) {joueurDao.changerCase(joueur, cse);} // change la case actuelle du joueur dans la BDD
-    public void changeEtat(int idPartie, String etat){partieDao.changeEtat(idPartie,etat);} // change l'état de la partie dans la BDD
+    public void changeEtatActuel(int idPartie, String etatActuel){partieDao.changeEtatActuel(idPartie,etatActuel);} // change l'état actuel de la partie dans la BDD
+    public void changeEtatAncien(int idPartie, String etatAncien){partieDao.changeEtatAncien(idPartie,etatAncien);} // change l'état de la partie dans la BDD
     public void changerDernierAction(int idPartie, String couleurJ, String action){joueurDao.changerDernierAction(idPartie,couleurJ,action);} // change la dernière action d'un joueur dans la BDD
     public void utilisation(int idCarte, int idPartie, String couleurJ){carteJoueurDao.utilisation(idCarte,idPartie,couleurJ);}
     public boolean actionFinieParTousJoueurs(int idPartie, String action){return joueurDao.actionFinieParTousJoueurs(idPartie,action);} // retourne si oui ou non, l'action en parametre a été effectué par tout les joueurs
     public void ajoutPari(int idPartie, String couleurJ, int numeroPari, boolean jaune, boolean bleue, boolean rouge, boolean violette, boolean blanche, boolean verte){pariDao.ajoutPari(idPartie, couleurJ, numeroPari, jaune, bleue, rouge, violette, blanche, verte);}
     public boolean pariExiste(int idPartie, String couleurJ, int numeroPari){return pariDao.pariExiste(idPartie, couleurJ, numeroPari);}
     public String getPari(int idPartie, String couleurJ, int numeroPari){return pariDao.getPari(idPartie,couleurJ,numeroPari);}
-    public String getEtat(int idPartie){return partieDao.getEtat(idPartie);}
+    public String getEtatActuel(int idPartie){return partieDao.getEtatActuel(idPartie);}
+    public String getEtatAncien(int idPartie){return partieDao.getEtatAncien(idPartie);}
     public String getTopLeft(PartieCase cse){ return caseDao.getTopLeft(cse);}
     public Plateau getPlateau (int idPartie){
         PartieCase tableauCase[][] = new PartieCase[69][3];
