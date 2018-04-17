@@ -128,25 +128,80 @@ function getFleche() {
             var bkgd = "url(img/cartes/"+idCarte+".png)";
             document.getElementById("lastCarte").style.backgroundImage = bkgd;
         }
+        var topFleche;
+        var topCarte;
         if (couleur == "Violet"){
-            document.getElementById("flecheRouge").style.top = "29.8vh";
-            document.getElementById("lastCarte").style.top = "54.5vh";
+            topFleche = 29.8;
+            topCarte = 54.5;
+            if (couleur == document.getElementById("couleurJ").innerText ){
+                topFleche = topFleche + 0.4;
+                topCarte = topCarte + 0.4;
+            }
         } else if (couleur == "Vert"){
-            document.getElementById("flecheRouge").style.top = "36vh";
-            document.getElementById("lastCarte").style.top = "26vh";
+            topFleche = 35.1;
+            topCarte = 26;
+            if (couleur == document.getElementById("couleurJ").innerText ){
+                topFleche = topFleche + 0.4;
+                topCarte = topCarte + 0.4;
+            } else if ("Violet" == document.getElementById("couleurJ").innerText ){
+                topFleche = topFleche + 0.8;
+                topCarte = topCarte + 0.8;
+            }
         } else if (couleur == "Rouge"){
-            document.getElementById("flecheRouge").style.top = "42.1vh";
-            document.getElementById("lastCarte").style.top = "31.6vh";
+            topFleche = 41.1;
+            topCarte = 31.6;
+            if (couleur == document.getElementById("couleurJ").innerText ){
+                topFleche = topFleche + 0.4;
+                topCarte = topCarte + 0.4;
+            } else if ("Violet" == document.getElementById("couleurJ").innerText ||
+                       "Vert" == document.getElementById("couleurJ").innerText){
+                topFleche = topFleche + 0.8;
+                topCarte = topCarte + 0.8;
+            }
         } else if (couleur == "Jaune"){
-            document.getElementById("flecheRouge").style.top = "47.7vh";
-            document.getElementById("lastCarte").style.top = "37.3vh";
+            topFleche = 46.7;
+            topCarte = 37.3;
+            if (couleur == document.getElementById("couleurJ").innerText ){
+                topFleche = topFleche + 0.4;
+                topCarte = topCarte + 0.4;
+            } else if ("Violet" == document.getElementById("couleurJ").innerText ||
+                       "Vert" == document.getElementById("couleurJ").innerText ||
+                       "Rouge" == document.getElementById("couleurJ").innerText){
+                topFleche = topFleche + 0.8;
+                topCarte = topCarte + 0.8;
+            }
         } else if (couleur == "Bleu"){
-            document.getElementById("flecheRouge").style.top = "53.3vh";
-            document.getElementById("lastCarte").style.top = "43vh";
+            topFleche = 52.3;
+            topCarte = 43;
+            if (couleur == document.getElementById("couleurJ").innerText ){
+                topFleche = topFleche + 0.4;
+                topCarte = topCarte + 0.4;
+            } else if ("Violet" == document.getElementById("couleurJ").innerText ||
+                       "Vert" == document.getElementById("couleurJ").innerText ||
+                       "Rouge" == document.getElementById("couleurJ").innerText ||
+                       "Jaune" == document.getElementById("couleurJ").innerText){
+                topFleche = topFleche + 0.8;
+                topCarte = topCarte + 0.8;
+            }
         } else if (couleur == "Blanc"){
-            document.getElementById("flecheRouge").style.top = "59vh";
-            document.getElementById("lastCarte").style.top = "48.6vh";
+            topFleche = 58;
+            topCarte = 48.6;
+            if (couleur == document.getElementById("couleurJ").innerText ){
+                topFleche = topFleche + 0.4;
+                topCarte = topCarte + 0.4;
+            } else if ("Violet" == document.getElementById("couleurJ").innerText ||
+                       "Vert" == document.getElementById("couleurJ").innerText ||
+                       "Rouge" == document.getElementById("couleurJ").innerText ||
+                       "Jaune" == document.getElementById("couleurJ").innerText ||
+                       "Bleu" == document.getElementById("couleurJ").innerText){
+                topFleche = topFleche + 0.8;
+                topCarte = topCarte + 0.8;
+            }
         }
+        var topFlecheString = topFleche.toString()+"vh";
+        var topCarteString = topCarte.toString()+"vh";
+        document.getElementById("flecheRouge").style.top = topFlecheString;
+        document.getElementById("lastCarte").style.top = topCarteString;
 
 
     }
