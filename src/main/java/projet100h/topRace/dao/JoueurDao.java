@@ -31,4 +31,6 @@ public interface JoueurDao {
 
     public List listOfPosition(int idPartie);
 
+    public List<PartieCase> getXYByIdPartie(int idPartie);
+
 }

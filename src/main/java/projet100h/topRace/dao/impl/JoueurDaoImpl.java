@@ -47,6 +47,36 @@ public class JoueurDaoImpl implements JoueurDao {
 
     /**
      *
+     * @param idPartie
+     * @return la position d'une voiture d'après sa couleur
+     */
+    @Override
+    public List<PartieCase> getXYByIdPartie(int idPartie){
+        String query = "SELECT * FROM joueur WHERE idPartie=?";
+        List<PartieCase> list = new ArrayList<>();
+        try (Connection connection = DataSourceProvider.getDataSource().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, idPartie);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    list.add(
+                            new PartieCase(
+                                    resultSet.getInt("x"),
+                                    resultSet.getString("y").charAt(0),
+                                    idPartie,
+                                    true));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("");
+            System.out.println("error209");
+        }
+        return list;
+    }
+
+    /**
+     *
      * @param couleur
      * @param idPartie
      * @return la position d'une voiture d'après sa couleur

@@ -48,7 +48,7 @@ public class GameLibrary {
     public List listDeplacementCarte(int id){ return carteDao.listDeplacementCarte(id);}/* < <couleurVoiture, nbCase> , <couleurVoiture, nbCase> , <couleurVoiture, nbCase> > */
     public List<CarteJoueur> getCarteJoueur(int idPartie, String couleurJ){return carteJoueurDao.getCarteJoueur(idPartie,couleurJ);}
     public int nbDeJoueurIdPartie(int idPartie){ return partieDao.nbDeJoueurIdPartie(idPartie);}
-
+    public List<PartieCase> getXYByIdPartie(int idPartie){return joueurDao.getXYByIdPartie(idPartie);}
 
     public List<Integer> nbDeJoueur() {
         List<Integer> listJoueur = partieDao.nbDeJoueur(); // liste des idPartie de tous les joueurs
@@ -87,7 +87,7 @@ public class GameLibrary {
     public String getEtatAncien(int idPartie){return partieDao.getEtatAncien(idPartie);}
     public String getTopLeft(PartieCase cse){ return caseDao.getTopLeft(cse);}
     public Plateau getPlateau (int idPartie){
-        PartieCase tableauCase[][] = new PartieCase[69][3];
+        PartieCase tableauCase[][] = new PartieCase[70][3];
         PartieCase cse;
         List<PartieCase> listPartieCase = listPartieCase(idPartie);
         for (int i=0 ; i< listPartieCase.size() ; i++){
