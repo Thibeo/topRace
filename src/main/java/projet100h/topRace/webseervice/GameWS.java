@@ -509,7 +509,7 @@ public class GameWS {
                 }else if(ancien=="joueurJaune" || ancien.equals("joueurJaune")){
                     GameLibrary.getInstance().changeEtatActuel(idPartie,"joueurBleu");
                 }
-            } else {
+            } else if (!data.equals("ancien")){
                 GameLibrary.getInstance().changeEtatActuel(idPartie,data);
             }
             answer="succeed";
@@ -536,7 +536,7 @@ public class GameWS {
         // on créé la réponse
         String answer;
 
-        String idCarteString;
+        String idCarteString="Effectue";
         String etat;
 
         // puis on recupère l'état actuelle de la partie
@@ -547,25 +547,27 @@ public class GameWS {
             }
             if (etat.length() > 6){
                 etat = etat.substring(6);
-            }
+                String couleurrr="";
 
-            String couleurrr="";
+                if (etat.equals("Blanc")){
+                    couleurrr="Bleu";
+                } else if (etat.equals("Violet")){
+                    couleurrr="Blanc";
+                } else if (etat.equals("Vert")){
+                    couleurrr="Violet";
+                } else if (etat.equals("Rouge")){
+                    couleurrr="Vert";
+                } else if (etat.equals("Jaune")){
+                    couleurrr="Rouge";
+                } else if (etat.equals("Bleu")){
+                    couleurrr="Jaune";
+                }
+                idCarteString=  GameLibrary.getInstance().getDerniereAction(idPartie,couleurrr);
+                if (idCarteString.length() > 5){
+                    idCarteString= idCarteString.substring(5);
+                }
 
-            if (etat.equals("Blanc")){
-                couleurrr="Bleu";
-            } else if (etat.equals("Violet")){
-                couleurrr="Blanc";
-            } else if (etat.equals("Vert")){
-                couleurrr="Violet";
-            } else if (etat.equals("Rouge")){
-                couleurrr="Vert";
-            } else if (etat.equals("Jaune")){
-                couleurrr="Rouge";
-            } else if (etat.equals("Bleu")){
-                couleurrr="Jaune";
             }
-            idCarteString=  GameLibrary.getInstance().getDerniereAction(idPartie,couleurrr);
-            idCarteString= idCarteString.substring(5);
 
             answer=etat+"-"+idCarteString+"-";
         }catch (Exception e) {
