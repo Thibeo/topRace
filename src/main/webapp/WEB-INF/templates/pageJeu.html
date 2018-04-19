@@ -56,6 +56,7 @@
                 request.open("POST", "webservices/game/avancer", true);
                 request.responseType = "json";
                 request.onload = function () {
+                    console.log("answer = "+answer);
                     var answer = this.response;
                     var longeur = parseInt(answer[0]);
                     var i = 1;
@@ -100,32 +101,121 @@
                 var bkgd = "url(img/cartes/"+cse+".png)";
                 eltLaCarte.style.backgroundImage= bkgd;
                 if (cse == 31){ document.getElementById("jaune").disabled = true;
-                    document.getElementById("jauneTexte").style.textDecoration = "line-through";}
+                    document.getElementById("jauneTexte").style.textDecoration = "line-through";
+                    document.getElementById("nombreNoir").innerHTML = 5;}
                 if (cse == 32){ document.getElementById("rouge").disabled = true;
-                    document.getElementById("rougeTexte").style.textDecoration = "line-through";}
+                    document.getElementById("rougeTexte").style.textDecoration = "line-through";
+                    document.getElementById("nombreNoir").innerHTML = 5;}
                 if (cse == 33){ document.getElementById("violette").disabled = true;
-                    document.getElementById("violetteTexte").style.textDecoration = "line-through";}
+                    document.getElementById("violetteTexte").style.textDecoration = "line-through";
+                    document.getElementById("nombreNoir").innerHTML = 5;}
                 if (cse == 34){ document.getElementById("bleue").disabled = true;
-                    document.getElementById("bleueTexte").style.textDecoration = "line-through";}
+                    document.getElementById("bleueTexte").style.textDecoration = "line-through";
+                    document.getElementById("nombreNoir").innerHTML = 5;}
                 if (cse == 35){ document.getElementById("verte").disabled = true;
-                    document.getElementById("verteTexte").style.textDecoration = "line-through";}
+                    document.getElementById("verteTexte").style.textDecoration = "line-through";
+                    document.getElementById("nombreNoir").innerHTML = 5;}
                 if (cse == 36){ document.getElementById("blanche").disabled = true
-                    document.getElementById("blancheTexte").style.textDecoration = "line-through";}
+                    document.getElementById("blancheTexte").style.textDecoration = "line-through";
+                    document.getElementById("nombreNoir").innerHTML = 5;}
                 if (cse == 41 || cse == 42 || cse == 43){ document.getElementById("jaune").disabled = true;
                     document.getElementById("jauneTexte").style.textDecoration = "line-through";
                     document.getElementById("bleue").disabled = true;
                     document.getElementById("bleueTexte").style.textDecoration = "line-through";
                     document.getElementById("blanche").disabled = true;
-                    document.getElementById("blancheTexte").style.textDecoration = "line-through";}
+                    document.getElementById("blancheTexte").style.textDecoration = "line-through";
+                    document.getElementById("nombreNoir").innerHTML = 2;}
                 if (cse == 44 || cse == 45 || cse == 46){ document.getElementById("violette").disabled = true;
                     document.getElementById("violetteTexte").style.textDecoration = "line-through";
                     document.getElementById("rouge").disabled = true;
                     document.getElementById("rougeTexte").style.textDecoration = "line-through";
                     document.getElementById("verte").disabled = true;
-                    document.getElementById("verteTexte").style.textDecoration = "line-through"; }
+                    document.getElementById("verteTexte").style.textDecoration = "line-through";
+                    document.getElementById("nombreNoir").innerHTML = 2;}
+                if (cse == 61 || cse == 62 || cse == 63 || cse == 64 || cse == 65 || cse == 66 ){
+                    document.getElementById("nombreNoir").innerHTML = 5;
+                }
                 AfficherCacher("choixCartes");
                 AfficherCacher("fondChoixCartes");
             }
+        }
+
+        function avancerAleatoirement(cse){
+            if (cse != 61 && cse != 62 && cse != 63 && cse != 64 && cse != 65 && cse != 66  && cse != 31 && cse != 32 && cse != 33 && cse != 34 && cse != 35 && cse != 36
+                && cse != 41 && cse != 42 && cse != 43 && cse != 44 && cse != 45 && cse != 46) {
+                avancer(cse);
+            } else {
+                if (cse == 31){
+                    var nbAlea = getRandomInt(5);
+                    if (nbAlea == 0 ){avancer(cse+"Violet");}
+                    else if (nbAlea == 1 ){avancer(cse+"Vert");}
+                    else if (nbAlea == 2 ){avancer(cse+"Rouge");}
+                    else if (nbAlea == 3 ){avancer(cse+"Bleu");}
+                    else if (nbAlea == 4 ){avancer(cse+"Blanc");}
+                }
+                else if (cse == 32){
+                    var nbAlea = getRandomInt(5);
+                    if (nbAlea == 0 ){avancer(cse+"Violet");}
+                    else if (nbAlea == 1 ){avancer(cse+"Vert");}
+                    else if (nbAlea == 2 ){avancer(cse+"Jaune");}
+                    else if (nbAlea == 3 ){avancer(cse+"Bleu");}
+                    else if (nbAlea == 4 ){avancer(cse+"Blanc");}
+                }
+                else if (cse == 33){
+                    var nbAlea = getRandomInt(5);
+                    if (nbAlea == 0 ){avancer(cse+"Rouge");}
+                    else if (nbAlea == 1 ){avancer(cse+"Vert");}
+                    else if (nbAlea == 2 ){avancer(cse+"Jaune");}
+                    else if (nbAlea == 3 ){avancer(cse+"Bleu");}
+                    else if (nbAlea == 4 ){avancer(cse+"Blanc");}
+                }
+                else if (cse == 34){
+                    var nbAlea = getRandomInt(5);
+                    if (nbAlea == 0 ){avancer(cse+"Rouge");}
+                    else if (nbAlea == 1 ){avancer(cse+"Vert");}
+                    else if (nbAlea == 2 ){avancer(cse+"Jaune");}
+                    else if (nbAlea == 3 ){avancer(cse+"Violet");}
+                    else if (nbAlea == 4 ){avancer(cse+"Blanc");}
+                }
+                else if (cse == 35){
+                    var nbAlea = getRandomInt(5);
+                    if (nbAlea == 0 ){avancer(cse+"Rouge");}
+                    else if (nbAlea == 1 ){avancer(cse+"Bleu");}
+                    else if (nbAlea == 2 ){avancer(cse+"Jaune");}
+                    else if (nbAlea == 3 ){avancer(cse+"Violet");}
+                    else if (nbAlea == 4 ){avancer(cse+"Blanc");}
+                }
+                else if (cse == 36){
+                    var nbAlea = getRandomInt(5);
+                    if (nbAlea == 0 ){avancer(cse+"Rouge");}
+                    else if (nbAlea == 1 ){avancer(cse+"Bleu");}
+                    else if (nbAlea == 2 ){avancer(cse+"Jaune");}
+                    else if (nbAlea == 3 ){avancer(cse+"Violet");}
+                    else if (nbAlea == 4 ){avancer(cse+"Vert");}
+                }
+                else if (cse == 41 || cse == 42 || cse == 43){
+                    var nbAlea = getRandomInt(3);
+                    if (nbAlea == 0 ){avancer(cse+"Rouge");}
+                    else if (nbAlea == 1 ){avancer(cse+"Violet");}
+                    else if (nbAlea == 2 ){avancer(cse+"Vert");}
+                }
+                else if (cse == 44 || cse == 45 || cse == 46){
+                    var nbAlea = getRandomInt(3);
+                    if (nbAlea == 0 ){avancer(cse+"Bleu");}
+                    else if (nbAlea == 1 ){avancer(cse+"Jaune");}
+                    else if (nbAlea == 2 ){avancer(cse+"Blanc");}
+                }
+                else if (cse == 61 || cse == 62 || cse == 63 || cse == 64 || cse == 65 || cse == 66){
+                    var nbAlea = getRandomInt(6);
+                    if (nbAlea == 0 ){avancer(cse+"Rouge");}
+                    else if (nbAlea == 1 ){avancer(cse+"Bleu");}
+                    else if (nbAlea == 2 ){avancer(cse+"Jaune");}
+                    else if (nbAlea == 3 ){avancer(cse+"Violet");}
+                    else if (nbAlea == 4 ){avancer(cse+"Vert");}
+                    else if (nbAlea == 5 ){avancer(cse+"Blanc");}
+                }
+            }
+            document.getElementById("ligneCartes").removeChild(document.getElementById('carte'+cse));
         }
 
 
@@ -156,7 +246,7 @@
                 AfficherCacher("choixCartes");
                 AfficherCacher("fondChoixCartes");
                 derniereAction("carte"+idCartes);
-                document.getElementById('carte'+idCartes).style.display = "none";
+                document.getElementById("ligneCartes").removeChild(document.getElementById('carte'+idCartes));
                 avancer(idCartes+couleur);
                 disableCarte();
                 changeEtat("rien");
@@ -225,7 +315,7 @@
     <nav id="choixCartes">
         <p id="idCarte" style="visibility: hidden;position:fixed;">0</p>
         <h2 style="text-align: center; margin-bottom: 0px;">Choix de la couleur de la voiture</h2>
-        <h2 style="text-align: center; margin-top: 0px;">à faire avancer de 5 cases</h2>
+        <h2 style="text-align: center; margin-top: 0px;">à faire avancer de <span id="nombreNoir" >5</span> cases</h2>
         <p style="text-align: center; margin-bottom: 0px;">(Vous ne pouvez pas choisir une</p>
         <p style="text-align: center; margin-top: 0px;">couleur déjà présente sur la carte)</p>
         <form name='fromChoixCarte'><table align="center" style="margin-top: 40px">
@@ -406,7 +496,7 @@
 
 <!-- nav pour les images des cartes du joueurs -->
     <nav id="ligneCartes">
-        <nav class="imagee" th:each="carte : ${listCarte}" th:style="${'background-image: url(img/cartes/'+carte.idCarte+'.png);background-size: cover;'}" th:id="${'carte'+carte.idCarte}" th:onclick="${'ConfirmChoixCartes('+carte.idCarte+');'}"></nav>
+        <nav class="imagee carteAJouer" th:each="carte : ${listCarte}" th:style="${'background-image: url(img/cartes/'+carte.idCarte+'.png);background-size: cover;'}" th:id="${'carte'+carte.idCarte}" th:onclick="${'ConfirmChoixCartes('+carte.idCarte+');'}"></nav>
     </nav>
 
 <!-- nav pour les résultats paris -->

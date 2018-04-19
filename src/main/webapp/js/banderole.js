@@ -110,6 +110,19 @@ function compteur(textFinal){
             } else if (textFinal=='Maintenant, chacun pour sois'){
                 changeEtat("ancien");
                 bullePari('fermer','','','','','','');
+            } else if (textFinal=='Une carte aléatoire a été jouée' ){
+                var touteCarte = document.querySelectorAll(".carteAJouer");
+                console.log(touteCarte);
+                var long = touteCarte.length;
+                console.log(long);
+                console.log(getRandomInt(long));
+                var carte = touteCarte[getRandomInt(long)];
+                console.log(carte);
+                var stringIdCarte = carte.id;
+                console.log(stringIdCarte);
+                var idCarte = stringIdCarte.substr(5);
+                console.log(idCarte);
+                avancerAleatoirement(idCarte);
             }
             bulleAlert("fermer");
             creationCompteur('En attente de votre tour', 999, '');// on va créer un nouveau compteur
@@ -177,4 +190,8 @@ function enableCarte() {
     console.log("enableCarte");
     var ligneCartes = document.getElementById('ligneCartes');
         ligneCartes.style.pointerEvents = 'auto';
+}
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
 }

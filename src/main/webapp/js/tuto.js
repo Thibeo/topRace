@@ -83,6 +83,7 @@ function fermerTuto() {
     zindex("ligneJaune",-10);
     zindex("nomPartie",1);zindex("joueurs",1);zindex("plateau",0);
     zindex("ligneCartes",1);zindex("carteTitre",2);
+    zindex("lastCarte",1);zindex("flecheRouge",1);
     zindex("joueurJaune",1);zindex("joueurViolet",1);zindex("joueurBleu",1);
     zindex("joueurRouge",1);zindex("joueurBlanc",1);zindex("joueurVert",1);
     animationPariSortie();
@@ -96,7 +97,7 @@ function LeOnload(){
     Cacher("tutoParis");Cacher("tutoPari2");Cacher("tutoFin");
     Cacher("ligneJaune");
     zindex("plateauParis",1);
-    zindex("ligneJaune",-10);
+    zindex("ligneJaune",-10);zindex("lastCarte",1);zindex("flecheRouge",1);
     zindex("nomPartie",1);zindex("joueurs",1);zindex("plateau",0);
     zindex("ligneCartes",1);zindex("carteTitre",2);
     zindex("joueurJaune",1);zindex("joueurViolet",1);zindex("joueurBleu",1);

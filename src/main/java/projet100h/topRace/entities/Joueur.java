@@ -1,5 +1,6 @@
 package projet100h.topRace.entities;
 
+import com.sun.org.glassfish.gmbal.GmbalException;
 import projet100h.topRace.dao.JoueurDao;
 import projet100h.topRace.dao.PartieCaseDao;
 import projet100h.topRace.dao.PartieDao;
@@ -231,16 +232,44 @@ public class Joueur {
      * @param i (nombre de déplacements qu'il reste à la voiture de faire
      * @return le numéro de la ligne qui a été franchie ou 0 si aucune n'est franchie
      */
-    public int ligneJaune(int i){
+    public int ligneJaune(int idPartie, String couleurJ){
         int numeroLigne=0;
-        if (this.caseActuelle.getX()==14 && i>0){
+        List<PartieCase> listPosJoueur = GameLibrary.getInstance().getXYByIdPartie(idPartie);
+        int voiturePassee=0; //position de la voiture la plus loin
+        int compteur=0; //nb de gens qui on déjà passé le ligne d'arrivé
+        for (int j = 0 ; j < 6 ; j++){
+            if (listPosJoueur.get(j).getX() > voiturePassee){
+                voiturePassee = listPosJoueur.get(j).getX();
+            }
+            if (listPosJoueur.get(j).getX() == 69){
+                compteur++;
+            }
+        }
+        if (this.caseActuelle.getX()==14 && voiturePassee<15){
             numeroLigne=1;
-        }else if (this.caseActuelle.getX()==26 && i>0){
+        } else if (this.caseActuelle.getX()==26 && voiturePassee<27){
             numeroLigne=2;
-        }else if (this.caseActuelle.getX()==38 && i>0){
+        } else if (this.caseActuelle.getX()==38 && voiturePassee<38){
             numeroLigne=3;
-        }else if (this.caseActuelle.getX()==68 && i>0){
-        numeroLigne=4;
+        } else if (this.caseActuelle.getX()==68){ // la voiture à dépassé la ligne d'arrivée
+            int posFinal = 6-compteur;
+            positionPariDao.nouvellePositionPari(4, idPartie,couleurJ,posFinal,"a");
+
+            //changer la case du joueur dans la bdd
+            Joueur joujou = new Joueur(couleurJ,"bob",caseActuelle,idPartie,"caca",10);
+            PartieCase paCse = new PartieCase(69,'a',idPartie,false);
+            GameLibrary.getInstance().changerCase(joujou,paCse);
+
+            List<PartieCase> listPosJoueur2 = GameLibrary.getInstance().getXYByIdPartie(idPartie);
+            boolean toutesArrivées = true;
+            for (int j = 0 ; j < 6 ; j++){
+                if (listPosJoueur2.get(j).getX() != 69){
+                    toutesArrivées = false;
+                }
+            }
+            if (toutesArrivées == true){// toute les voitures ont dépassés la ligne d'arrivée
+                numeroLigne = 4;
+            }
         }
         return numeroLigne;
     }
@@ -257,9 +286,14 @@ public class Joueur {
         PartieCase cse=null;
         List listPositionJoueur=joueurDao.listOfPosition(this.idPartie);
 
-        //regarde si une ligne jaune va etre dépassée
+
         for(int i=0;i<nbreCase;i++){
-            if (this.ligneJaune(i)==1){
+            if (this.caseActuelle.getX()==69){
+                return caseActuelle;
+            }
+
+            //regarde si une ligne jaune va etre dépassée
+            if (this.ligneJaune(this.idPartie, this.couleur)==1){
                 for(int j=0;j<listPositionJoueur.size();j++){
                     List element=(List) listPositionJoueur.get(j);
                     String couleur=(String) element.get(0);
@@ -270,7 +304,7 @@ public class Joueur {
                 partieDao.changeEtatActuel(this.idPartie,"ligneJaune1");
                 GameLibrary.getInstance().calculPari(this.idPartie,1);
 
-            }else if (this.ligneJaune(i)==2){
+            }else if (this.ligneJaune( this.idPartie, this.couleur)==2){
                 for(int j=0;j<listPositionJoueur.size();j++){
                     List element=(List) listPositionJoueur.get(j);
                     String couleur=(String) element.get(0);
@@ -280,7 +314,7 @@ public class Joueur {
                 }
                 partieDao.changeEtatActuel(this.idPartie,"ligneJaune2");
                 GameLibrary.getInstance().calculPari(this.idPartie,2);
-            }else if (this.ligneJaune(i)==3){
+            }else if (this.ligneJaune(this.idPartie, this.couleur)==3){
                 for(int j=0;j<listPositionJoueur.size();j++){
                     List element=(List) listPositionJoueur.get(j);
                     String couleur=(String) element.get(0);
@@ -291,7 +325,7 @@ public class Joueur {
                 partieDao.changeEtatActuel(this.idPartie,"ligneJaune3");
                 GameLibrary.getInstance().calculPari(this.idPartie,3);
 
-            }else if (this.ligneJaune(i)==4){
+            }else if (this.ligneJaune(this.idPartie, this.couleur)==4){
                 for(int j=0;j<listPositionJoueur.size();j++){
                     List element=(List) listPositionJoueur.get(j);
                     String couleur=(String) element.get(0);
@@ -343,7 +377,14 @@ public class Joueur {
                     }
                 }
             }else{
-                this.deplacementSeul(plateau);
+                if (this.caseActuelle.getX()==68){
+                    this.caseActuelle.setX(69);
+                    this.caseActuelle.setY('a');
+                    return caseActuelle;
+                }else{
+                    this.deplacementSeul(plateau);
+                }
+
             }
 
             if (i == nbreCase-1){
@@ -353,7 +394,7 @@ public class Joueur {
 
         GameLibrary.getInstance().modifierCaseException(ancienne,false);
         GameLibrary.getInstance().modifierCaseException(cse,true);
-        System.out.println("case d'arrivé de la fonction est "+cse.getX()+","+cse.getY());
+        //System.out.println("case d'arrivé de la fonction est "+cse.getX()+","+cse.getY());
 
         return cse;
     }

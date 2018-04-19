@@ -75,6 +75,7 @@ public class JouerServlet extends GenericServlet {
                 Partie createdPartie = GameLibrary.getInstance().creerPartie(newPartie);
 
                 PartieCase caseActuelle=new PartieCase(positionX,positionY,createdPartie.getIdPartie(),true);
+                GameLibrary.getInstance().creationPartieCase(createdPartie.getIdPartie());
 
                 Joueur newJoueur = new Joueur(couleur,nomDEProprio,caseActuelle,createdPartie.getIdPartie(),"rien",0);
                 GameLibrary.getInstance().creerJoueur(newJoueur);

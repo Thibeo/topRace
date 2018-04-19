@@ -23,7 +23,7 @@ public class PositionPariDaoImpl implements PositionPariDao {
      * @return une liste ([couleur,x,'y'],[couleur2,x2,'y2'],etc..)
      */
     public List getPositionPari(int idPartie, int numeroPari){
-        String query = "SELECT * FROM positionpari WHERE idPartie=? AND numeroPari=? ORDER BY x,y";
+        String query = "SELECT * FROM positionpari WHERE idPartie=? AND numeroPari=? ORDER BY `x` DESC, `y` ASC";
         List listPosition = new ArrayList<>();
         try (Connection connection = DataSourceProvider.getDataSource().getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
