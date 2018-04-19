@@ -1,8 +1,9 @@
 package projet100h.topRace.dao.impl;
 
-import junit.framework.TestCase;
+
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.Before;
+import org.junit.Test;
 import projet100h.topRace.entities.CarteJoueur;
 import projet100h.topRace.managers.GameLibrary;
 
@@ -10,10 +11,12 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.tuple;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class PariDaoImplTest extends TestCase {
+import static org.assertj.core.api.AssertionsForClassTypes.tuple;
+
+
+public class PariDaoImplTest {
 
     private CarteDaoImpl carteDao = new CarteDaoImpl();
 
@@ -55,35 +58,29 @@ public class PariDaoImplTest extends TestCase {
 
             //creation de paris
             stmt.executeUpdate("INSERT INTO `pari` (`idPartie`, `couleurJ`, `numeroPari`, `jaune`, `bleue`, `rouge`, `violette`, `blanche`, `verte`) VALUES ('1', 'Blanc', '1', '0', '1', '0', '1', '0', '1');");
-            stmt.executeUpdate("INSERT INTO `pari` (`idPartie`, `couleurJ`, `numeroPari`, `jaune`, `bleue`, `rouge`, `violette`, `blanche`, `verte`) VALUES ('1', 'Violet', '1', '0', '0', '0', '1', '0', '1');");
+            stmt.executeUpdate("INSERT INTO `pari` (`idPartie`, `couleurJ`, `numeroPari`, `jaune`, `bleue`, `rouge`, `violette`, `blanche`, `verte`) VALUES ('1', 'Violet', '1', '1', '0', '0', '1', '0', '1');");
 
         }
     }
 
-    public void testAjoutPari() throws Exception {
+    @Test
+    public void testAjoutPari() {
     }
-
-    public void testPariExiste() throws Exception {
+    @Test
+    public void testPariExiste(){
         Boolean res=GameLibrary.getInstance().pariExiste(1,"Violet",1);
-        assertThat(res).isEqualTo(false);
+        assertThat(res).isEqualTo(true);
     }
 
-    public void testGetPari() throws Exception {
-        String answer=GameLibrary.getInstance().getPari(1,"Violet",1);
-        assertThat(answer).isEqualTo("jaune-violette-verte-");
-    }
 
-    public void testGetListPari() throws Exception {
-        List pariList = GameLibrary.getInstance().getListPari(1,"Violet",1);
+    @Test
+    public void testGetListPari() {
+        List pariList = GameLibrary.getInstance().getListPari(1, "Violet", 1);
 
         assertThat(pariList).hasSize(3);
-        assertThat(pariList).extracting("idCarte", "idPartie", "CouleurJ", "utilisee").containsOnly(
-                tuple(1, 1, "Jaune",false),
-                tuple(23, 1, "Jaune",false),
-                tuple(35, 1, "Jaune",false),
-                tuple(42, 1, "Jaune",false),
-                tuple(62, 1, "Jaune",false),
-                tuple(63, 1, "Jaune",false));
-    }
+        AssertionsForClassTypes.assertThat((pariList.get(0))).isEqualTo("Jaune");
+        AssertionsForClassTypes.assertThat((pariList.get(1))).isEqualTo("Violet");
+        AssertionsForClassTypes.assertThat((pariList.get(2))).isEqualTo("Vert");
 
+    }
 }

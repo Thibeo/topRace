@@ -1,22 +1,24 @@
 package projet100h.topRace.dao.impl;
 
-import junit.framework.TestCase;
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.Before;
+import org.junit.Test;
+
+import java.sql.Connection;
+import java.sql.Statement;
 import projet100h.topRace.entities.Carte;
 import projet100h.topRace.entities.CarteJoueur;
 import projet100h.topRace.managers.GameLibrary;
 
-import java.sql.Connection;
-import java.sql.Statement;
+
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.tuple;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class CarteJoueurDaoImplTest extends TestCase {
+public class CarteJoueurDaoImplTest {
 
     private CarteDaoImpl carteDao = new CarteDaoImpl();
+    private CarteJoueurDaoImpl carteJoueur= new CarteJoueurDaoImpl();
 
     @Before
     public void initDb() throws Exception {
@@ -28,6 +30,7 @@ public class CarteJoueurDaoImplTest extends TestCase {
             stmt.executeUpdate("DELETE FROM carte;");
             stmt.executeUpdate("DELETE FROM nbcase;");
             stmt.executeUpdate("DELETE FROM typeVoiture;");
+            stmt.executeUpdate("DELETE FROM cartejoueur;");
             //creation de joueurs
             stmt.executeUpdate("INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`, `derniereAction`,`score`) VALUES ('Jaune','BobJaune', 1, 1, 'a','pari2Effectue',0);");
             stmt.executeUpdate("INSERT INTO `joueur` (`couleurJ`, `nomDeJoueur`, `idPartie`, `x`, `y`, `derniereAction`,`score`) VALUES ('Vert', 'BobVert', 1, 1, 'b','pari2Effectue',0);");
@@ -46,6 +49,10 @@ public class CarteJoueurDaoImplTest extends TestCase {
             stmt.executeUpdate("INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ('Bleu',2,6),('Blanc',2,4),('Vert',2,2),('Rouge',2,1);");
             stmt.executeUpdate("INSERT INTO `nbCase` (`couleurV`, `idCarte`, `nbCase`) VALUES ('Jaune',3,5),('Violet',3,2);");
 
+            //initialisation des cartes des joueurs
+            stmt.executeUpdate("INSERT INTO `cartejoueur` (`idPartie`,`couleurJ`,`idCarte`,`utilisee`) VALUES (1,'Jaune',1,0), (1,'Jaune',2,0);");
+
+
             //les voitures
             stmt.executeUpdate("INSERT INTO `typeVoiture` (`couleurV`,x,y) VALUES ('Jaune',1,'a');");
             stmt.executeUpdate("INSERT INTO `typeVoiture` (`couleurV`,x,y) VALUES ('Rouge',0,'c');");
@@ -56,24 +63,41 @@ public class CarteJoueurDaoImplTest extends TestCase {
         }
     }
 
+    @Test
+    public void testCreateCarteJoueur() {
+        CarteJoueur carte=new CarteJoueur(3,1,"Violet",false);
+        carteJoueur.createCarteJoueur(carte);
+        List<CarteJoueur> carteList = GameLibrary.getInstance().getCarteJoueur(1,"Violet");
 
-    public void testCreateCarteJoueur() throws Exception {
+        assertThat(carteList).hasSize(1);
+        assertThat(carteList).extracting("idCarte", "idPartie", "CouleurJ", "utilisee").containsOnly(
+                tuple(3, 1, "Violet",false)
+
+        );
+
     }
 
-    public void testUtilisation() throws Exception {
-    }
-
-    public void testGetCarteJoueur() throws Exception {
+    @Test
+    public void testUtilisation(){
+        GameLibrary.getInstance().utilisation(2,1,"Jaune");
         List<CarteJoueur> carteList = GameLibrary.getInstance().getCarteJoueur(1,"Jaune");
 
-        assertThat(carteList).hasSize(6);
+        assertThat(carteList).hasSize(1);
+        assertThat(carteList).extracting("idCarte", "idPartie", "CouleurJ", "utilisee").containsOnly(
+                tuple(1, 1, "Jaune",false)
+
+        );
+
+    }
+    @Test
+    public void testGetCarteJoueur(){
+        List<CarteJoueur> carteList = GameLibrary.getInstance().getCarteJoueur(1,"Jaune");
+
+        assertThat(carteList).hasSize(2);
         assertThat(carteList).extracting("idCarte", "idPartie", "CouleurJ", "utilisee").containsOnly(
                 tuple(1, 1, "Jaune",false),
-                tuple(23, 1, "Jaune",false),
-                tuple(35, 1, "Jaune",false),
-                tuple(42, 1, "Jaune",false),
-                tuple(62, 1, "Jaune",false),
-                tuple(63, 1, "Jaune",false));
+                tuple(2, 1, "Jaune",false)
+                );
 
 
     }
